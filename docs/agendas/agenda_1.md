@@ -5,7 +5,7 @@
 Date:           2/15/2022 \
 Main focus:     Code of conduct\
 Chair:          Uleia Elena\
-Note taker:     !!
+Note taker:     Petkova Kat
 
 # Opening
  - Checking if everybody is present.
