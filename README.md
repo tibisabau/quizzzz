@@ -12,7 +12,7 @@ Add your own name (do not add the names for others!) to the section below.
 |---|---|---|
 | ![](https://eu.ui-avatars.com/api/?name=OOPP&length=4&size=50&color=DDD&background=777&font-size=0.325) | Your Name Here | Y.NameHere@student.tudelft.nl |
 | <img src ="docs/profile_pictures/picture_Franciszek_Latala.jfif" width = "80"> | Franciszek Latała | F.J.Latala@student.tudelft.nl |
-| <img src ="docs/profile_pictures/Kat picture" width = "80"> | Kat Petkova | k.h.petkova@student.tudelft.nl |
+| <img src ="docs/profile_pictures/Kat_profile.jpg" width = "80"> | Kat Petkova | k.h.petkova@student.tudelft.nl |
 | <img src ="docs/profile_pictures/tiberiu_sabau.jpg" width = "80"> | Tiberiu Sabău | T.Sabau@student.tudelft.nl |
 
 <!-- Instructions (remove once assignment has been completed -->
