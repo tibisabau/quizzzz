@@ -11,7 +11,6 @@ Add your own name (do not add the names for others!) to the section below.
 | Profile Picture | Name | Email |
 |---|---|---|
 | ![](https://eu.ui-avatars.com/api/?name=OOPP&length=4&size=50&color=DDD&background=777&font-size=0.325) | Your Name Here | Y.NameHere@student.tudelft.nl |
-<<<<<<< README.md
 | <img src ="docs/profile_pictures/franciszek_latala.jpg" width = "80"> | Franciszek Latała | F.J.Latala@student.tudelft.nl |
 | <img src ="docs/profile_pictures/Kat_profile.jpg" width = "80"> | Kat Petkova | k.h.petkova@student.tudelft.nl |
 | <img src ="docs/profile_pictures/Bart_Coster.jpg" width = "80"> | Bart Coster | B.i.coster@student.tudelft.nl |
