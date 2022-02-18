@@ -1,4 +1,4 @@
-# Starting template
+> > # Starting template
 
 This README will need to contain a description of your project, how to run it, how to set up the development environment, and who worked on it.
 This information can be added throughout the course, except for the names of the group members.
@@ -11,8 +11,10 @@ Add your own name (do not add the names for others!) to the section below.
 | Profile Picture | Name | Email |
 |---|---|---|
 | ![](https://eu.ui-avatars.com/api/?name=OOPP&length=4&size=50&color=DDD&background=777&font-size=0.325) | Your Name Here | Y.NameHere@student.tudelft.nl |
-|<img src ="docs/profile_pictures/Bart_Coster.jpg" width = "80">| Bart Coster | B.i.coster@student.tudelft.nl |
-| <img src ="docs/profile_pictures/picture_Franciszek_Latala.jfif" width = "80"> | Franciszek Latała | F.J.Latala@student.tudelft.nl |
+<<<<<<< README.md
+| <img src ="docs/profile_pictures/franciszek_latala.jpg" width = "80"> | Franciszek Latała | F.J.Latala@student.tudelft.nl |
+| <img src ="docs/profile_pictures/Kat_profile.jpg" width = "80"> | Kat Petkova | k.h.petkova@student.tudelft.nl |
+| <img src ="docs/profile_pictures/Bart_Coster.jpg" width = "80"> | Bart Coster | B.i.coster@student.tudelft.nl |
 | <img src ="docs/profile_pictures/tiberiu_sabau.jpg" width = "80"> | Tiberiu Sabău | T.Sabau@student.tudelft.nl |
 | <img src ="docs/profile_pictures/Alex_Dimakos.jpg" width = "80"> | Stavros Alexandros Dimakos | S.A.Dimakos@student.tudelft.nl |
 
