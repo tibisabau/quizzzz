@@ -16,6 +16,7 @@ Add your own name (do not add the names for others!) to the section below.
 | <img src ="docs/profile_pictures/Bart_Coster.jpg" width = "80"> | Bart Coster | B.i.coster@student.tudelft.nl |
 | <img src ="docs/profile_pictures/tiberiu_sabau.jpg" width = "80"> | Tiberiu Sabău | T.Sabau@student.tudelft.nl |
 | <img src ="docs/profile_pictures/Alex_Dimakos.jpg" width = "80"> | Stavros Alexandros Dimakos | S.A.Dimakos@student.tudelft.nl |
+| <img src ="docs/profile_pictures/Elena_Uleia.jpg" width = "80"> | Elena Uleia | E.Uleia@student.tudelft.nl |
 
 
 <!-- Instructions (remove once assignment has been completed -->
