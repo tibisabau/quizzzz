@@ -6,14 +6,21 @@ import java.util.Random;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 import commons.Person;
 import server.database.PersonRepository;
 
 @RestController
 @RequestMapping("/api/person")
-
 public class PersonController {
 
     private final Random random;
@@ -61,11 +68,11 @@ public class PersonController {
     }
 
 
-    @DeleteMapping("delete/{id}")
+   /** @DeleteMapping("delete/{id}")
     public ResponseEntity<Person> deleteById(@PathVariable("id") long id ){
         repo.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
+    }**/
 
     @PutMapping("put/{id}")
     public Person updateById(@RequestBody Person newPerson, @PathVariable("id") long id) {

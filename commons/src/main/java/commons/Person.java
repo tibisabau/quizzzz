@@ -41,6 +41,11 @@ public class Person {
         // for object mapper
     }
 
+    public Person(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public long getId() {
         return id;
     }
@@ -62,11 +67,6 @@ public class Person {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Person(String firstName, String lastName) {
-        this.firstName = firstName;
         this.lastName = lastName;
     }
 
