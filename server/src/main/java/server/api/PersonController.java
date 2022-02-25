@@ -4,9 +4,7 @@ package server.api;
 import java.util.List;
 import java.util.Random;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,7 +66,7 @@ public class PersonController {
     }
 
 
-   /** @DeleteMapping("delete/{id}")
+  /** @DeleteMapping("delete/{id}")
     public ResponseEntity<Person> deleteById(@PathVariable("id") long id ){
         repo.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
