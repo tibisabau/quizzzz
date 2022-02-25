@@ -4,6 +4,8 @@ package server.api;
 import java.util.List;
 import java.util.Random;
 
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 
 import commons.Person;
@@ -33,14 +36,7 @@ public class PersonController {
     public List<Person> getAll() {
         return repo.findAll();
     }
-
-    @GetMapping("{id}")
-    public ResponseEntity<Person> getById(@PathVariable("id") long id) {
-        if (id < 0 || !repo.existsById(id)) {
-            return ResponseEntity.badRequest().build();
-        }
-        return ResponseEntity.ok(repo.getById(id));
-    }
+    
 
     @PostMapping(path = "post")
     public ResponseEntity<Person> add(@RequestBody Person person) {
@@ -66,11 +62,11 @@ public class PersonController {
     }
 
 
-  /** @DeleteMapping("delete/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Person> deleteById(@PathVariable("id") long id ){
         repo.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
-    }**/
+    }
 
     @PutMapping("put/{id}")
     public Person updateById(@RequestBody Person newPerson, @PathVariable("id") long id) {
