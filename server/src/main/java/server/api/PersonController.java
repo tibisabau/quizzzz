@@ -50,7 +50,6 @@ public class PersonController {
     }
 
 
-
     private static boolean isNullOrEmpty(String s) {
         return s == null || s.isEmpty();
     }
@@ -61,6 +60,10 @@ public class PersonController {
         return ResponseEntity.ok(repo.getById((long) idx));
     }
 
+    @GetMapping(path = "helloWorld")
+    public String getHelloWorld() {
+        return "Hello World!";
+    }
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Person> deleteById(@PathVariable("id") long id ){
