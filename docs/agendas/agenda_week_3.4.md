@@ -9,17 +9,18 @@ Note taker:     Franciszek Latała, Stavros Alexandros Dimakos
 
 # Opening
  - Attendance check
- - Progress check for the past week.
+ - Progress check for the past week - 3 minutes
 
 # Action points for the coming week
- - Scenes
- - Distribute the first issues
- - Personal feedback
+ - Scenes - 7 minutes
+ - Distribute the first issues - 5 minutes
+ - Testing - 10 minutes
+ - Personal feedback - 6 minutes
 
 # Questions for the TA
- - Checking revised code of conduct
- - Checking API end points
- - Checking HCI report draft - detailed feedback
+ - Checking revised code of conduct - 4 minutes
+ - Checking API end points - 5 minutes
+ - Checking HCI report draft - detailed feedback - 10 minutes
 
 # Question round
 Any questions not yet raised?
