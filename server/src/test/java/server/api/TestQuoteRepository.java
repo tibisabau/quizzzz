@@ -111,6 +111,7 @@ public class TestQuoteRepository implements QuoteRepository {
     }
 
     private Optional<Quote> find(Long id) {
+
         return quotes.stream().filter(q -> q.id == id).findFirst();
     }
 
@@ -212,7 +213,8 @@ public class TestQuoteRepository implements QuoteRepository {
     }
 
     @Override
-    public <S extends Quote, R> R findBy(Example<S> example, Function<FetchableFluentQuery<S>, R> queryFunction) {
+    public <S extends Quote, R> R findBy(Example<S> example
+            ,Function<FetchableFluentQuery<S>, R> queryFunction) {
         // TODO Auto-generated method stub
         return null;
     }
