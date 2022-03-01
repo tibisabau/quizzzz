@@ -36,7 +36,7 @@ public class PersonController {
     public List<Person> getAll() {
         return repo.findAll();
     }
-    
+
 
     @PostMapping(path = "post")
     public ResponseEntity<Person> add(@RequestBody Person person) {
