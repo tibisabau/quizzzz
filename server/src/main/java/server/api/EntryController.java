@@ -55,4 +55,26 @@ public class EntryController {
         return s == null || s.isEmpty();
     }
 
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Entry> deleteById(@PathVariable("id") long id ){
+        repo.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PutMapping("put/{id}")
+    public Entry updateById(@RequestBody Entry newEntry, @PathVariable("id") long id) {
+
+        return repo.findById(id)
+                .map(entry -> {
+                    entry.description = newEntry.description;
+                    entry.answer = newEntry.answer;
+                    entry.image = newEntry.image;
+                    entry.id = newEntry.id;
+                    return repo.save(entry);
+                })
+                .orElseGet(() -> {
+                    newEntry.id = id;
+                    return repo.save(newEntry);
+                });
+    }
+
 }
