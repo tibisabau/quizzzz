@@ -30,7 +30,7 @@ import commons.Quote;
 import server.database.QuoteRepository;
 
 @RestController
-@RequestMapping("/api/quotes")
+@RequestMapping("api/quotes")
 public class QuoteController {
 
     private final Random random;
@@ -41,7 +41,7 @@ public class QuoteController {
         this.repo = repo;
     }
 
-    @GetMapping(path = { "", "/" })
+    @GetMapping(path = "getAll")
     public List<Quote> getAll() {
         return repo.findAll();
     }

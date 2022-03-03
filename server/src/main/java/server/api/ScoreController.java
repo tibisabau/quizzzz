@@ -29,9 +29,6 @@ public class ScoreController {
     }
 
 
-
-
-
     @PostMapping(path = "post")
     public ResponseEntity<Score> add(@RequestBody Score score) {
 

@@ -4,7 +4,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.awt.image.BufferedImage;
+//import java.awt.image.BufferedImage;
 
 @Entity
 public class Entry {
@@ -14,13 +14,13 @@ public class Entry {
 
     public String description;
     public int answer;
-    public BufferedImage image;
+   // public BufferedImage image;
 
-    public Entry(long id, String description, int answer, BufferedImage image){
+    public Entry(long id, String description, int answer/**, BufferedImage image**/){
         this.id = id;
         this.description = description;
         this.answer = answer;
-        this.image = image;
+       // this.image = image;
     }
 
     @Override
