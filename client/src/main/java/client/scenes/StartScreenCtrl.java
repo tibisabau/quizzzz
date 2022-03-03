@@ -16,9 +16,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 
 
-
-
-
+/**
+ * The type Start screen ctrl.
+ */
 public class StartScreenCtrl extends Application {
 
 
@@ -40,6 +40,12 @@ public class StartScreenCtrl extends Application {
     @FXML
     private Button instructionsButton;
 
+    /**
+     * Instantiates a new Start screen ctrl.
+     *
+     * @param server   the server
+     * @param mainCtrl the main ctrl
+     */
     @Inject
     public StartScreenCtrl(ServerUtils server, MainCtrl mainCtrl) {
         this.mainCtrl = mainCtrl;
@@ -51,14 +57,29 @@ public class StartScreenCtrl extends Application {
         nicknameField.clear();
     }
 
+    /**
+     * Quit button clicked.
+     *
+     * @param mouseEvent the mouse event
+     */
     public void quitButtonClicked(MouseEvent mouseEvent) {
         System.exit(0);
     }
 
+    /**
+     * Set nickname field.
+     *
+     * @param keyEvent the key event
+     */
     public void setNicknameField(KeyEvent keyEvent){
 
     }
 
+    /**
+     * Key pressed.
+     *
+     * @param e the e
+     */
     public void keyPressed(KeyEvent e) {
         switch (e.getCode()) {
             case ENTER:
@@ -72,6 +93,9 @@ public class StartScreenCtrl extends Application {
         }
     }
 
+    /**
+     * Ok.
+     */
     public void ok() {
         try {
             server.addScore(getNewScore());
@@ -87,6 +111,11 @@ public class StartScreenCtrl extends Application {
         mainCtrl.showStartScreen();
     }
 
+    /**
+     * Get new score score.
+     *
+     * @return the score
+     */
     public Score getNewScore(){
             Score score = new Score(nicknameField.getText(), 0);
             return score;
