@@ -43,7 +43,7 @@ public class EntryController {
     @PostMapping(path = "post")
     public ResponseEntity<Entry> add(@RequestBody Entry entry) {
 
-        if (isNullOrEmpty(entry.description) /**|| entry.image == null**/) {
+        if (isNullOrEmpty(entry.title) /**|| entry.image == null**/) {
             return ResponseEntity.badRequest().build();
         }
         Entry saved = repo.save(entry);
@@ -64,8 +64,8 @@ public class EntryController {
 
         return repo.findById(id)
                 .map(entry -> {
-                    entry.description = newEntry.description;
-                    entry.answer = newEntry.answer;
+                    entry.title = newEntry.title;
+                    entry.consumption_in_wh = newEntry.consumption_in_wh;
                    // entry.image = newEntry.image;
                     entry.id = newEntry.id;
                     return repo.save(entry);

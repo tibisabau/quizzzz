@@ -2,23 +2,15 @@ package commons;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import commons.EntryRead;
-//import java.awt.image.BufferedImage;
-
-@Entity
-public class Entry {
-
-    @Id
-    public long id;
+public class EntryRead {
+    public String id;
     public String title;
     public String image_path;
     public String source;
     public int consumption_in_wh;
 
 
-    public Entry(long id, String image_path, String title, int consumption_in_wh, String source){
+    public EntryRead(String id, String image_path, String title, int consumption_in_wh, String source){
         this.id = id;
         this.image_path = image_path;
         this.title = title;
@@ -31,7 +23,7 @@ public class Entry {
         return EqualsBuilder.reflectionEquals(this, obj);
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -51,7 +43,7 @@ public class Entry {
         this.consumption_in_wh = consumption_in_wh;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
@@ -70,5 +62,4 @@ public class Entry {
     public int getConsumption_in_wh() {
         return consumption_in_wh;
     }
-
 }
