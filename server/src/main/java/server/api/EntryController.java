@@ -66,7 +66,8 @@ public class EntryController {
                 .map(entry -> {
                     entry.title = newEntry.title;
                     entry.consumption_in_wh = newEntry.consumption_in_wh;
-                   // entry.image = newEntry.image;
+                    entry.source = newEntry.source;
+                    entry.image_path = newEntry.image_path;
                     entry.id = newEntry.id;
                     return repo.save(entry);
                 })

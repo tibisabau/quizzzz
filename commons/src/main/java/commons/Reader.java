@@ -1,8 +1,9 @@
-package server;
+package commons;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -11,17 +12,15 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import commons.EntryRead;
 import commons.Entry;
-import server.api.EntryController;
-import server.database.EntryRepository;
 
 
-public class Reader {
+public class Reader{
     public static void main(String[] args){
 
         read("activities.json");
 
     }
-    public static void read(String path){
+    public static ArrayList<Entry> read(String path){
         try {
             // create Gson instance
             Gson gson = new Gson();
@@ -35,15 +34,18 @@ public class Reader {
             // close reader
             reader.close();
 
+            ArrayList<Entry> convertedEntries = new ArrayList<>();
             for(int i = 0; i < entries.size(); i++){
                 Random random = new Random();
                 Entry entry = convert(entries.get(i),(long) i);
-                EntryController entryController = new EntryController(random, );
+                convertedEntries.add(entry);
             }
+            return convertedEntries;
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return null;
     }
 
     public static Entry convert(EntryRead entryRead, long id){
