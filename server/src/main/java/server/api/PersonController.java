@@ -50,7 +50,6 @@ public class PersonController {
     }
 
 
-
     private static boolean isNullOrEmpty(String s) {
         return s == null || s.isEmpty();
     }
@@ -58,9 +57,21 @@ public class PersonController {
     @GetMapping(path = "get/rnd")
     public ResponseEntity<Person> getRandom() {
         var idx = random.nextInt((int) repo.count());
-        return ResponseEntity.ok(repo.getById((long) idx));
+        return ResponseEntity.ok(repo.findById((long) idx).get());
     }
 
+    @GetMapping("get/{id}")
+    public ResponseEntity<Person> getById(@PathVariable("id") long id ){
+        if (id < 0 || !repo.existsById(id)) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(repo.findById(id).get());
+    }
+
+    @GetMapping(path = "helloWorld")
+    public String getHelloWorld() {
+        return "Hello World!";
+    }
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Person> deleteById(@PathVariable("id") long id ){

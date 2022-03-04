@@ -23,6 +23,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
 
+import commons.Score;
 import org.glassfish.jersey.client.ClientConfig;
 
 import commons.Quote;
@@ -58,5 +59,21 @@ public class ServerUtils {
                 .request(APPLICATION_JSON) //
                 .accept(APPLICATION_JSON) //
                 .post(Entity.entity(quote, APPLICATION_JSON), Quote.class);
+    }
+
+    public List<Score> getScore(){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/score")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .get(new GenericType<List<Score>>() {});
+    }
+
+    public Score addScore(Score score){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/score/post")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .post(Entity.entity(score, APPLICATION_JSON), Score.class);
     }
 }
