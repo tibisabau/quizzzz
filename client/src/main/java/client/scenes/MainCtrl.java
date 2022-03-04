@@ -20,6 +20,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+/**
+ * The type Main ctrl.
+ */
 public class MainCtrl {
 
     private Stage primaryStage;
@@ -30,6 +33,13 @@ public class MainCtrl {
     private AddQuoteCtrl addCtrl;
     private Scene add;
 
+    /**
+     * Initialize.
+     *
+     * @param primaryStage the primary stage
+     * @param startScreen  the start screen
+     * @param add          the add
+     */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl, Parent> startScreen,
             Pair<AddQuoteCtrl, Parent> add) {
         this.primaryStage = primaryStage;
@@ -43,12 +53,18 @@ public class MainCtrl {
         primaryStage.show();
     }
 
+    /**
+     * Show start screen.
+     */
     public void showStartScreen() {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(startScreen);
 
     }
 
+    /**
+     * Show add.
+     */
     public void showAdd() {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(add);
