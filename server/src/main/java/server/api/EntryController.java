@@ -40,6 +40,14 @@ public class EntryController {
         return repo.findAll();
     }
 
+    @GetMapping(path = "get/{id}")
+    public ResponseEntity<Entry1> getById (@PathVariable("id") long id ){
+        if (id < 0 || !repo.existsById(id)) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(repo.findById(id).get());
+    }
+
     @PostMapping(path = "post")
     public ResponseEntity<Entry1> add(@RequestBody Entry1 entry1) {
 
