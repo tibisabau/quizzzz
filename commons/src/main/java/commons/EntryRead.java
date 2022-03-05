@@ -7,10 +7,10 @@ public class EntryRead {
     public String title;
     public String image_path;
     public String source;
-    public int consumption_in_wh;
+    public long consumption_in_wh;
 
 
-    public EntryRead(String id, String image_path, String title, int consumption_in_wh, String source){
+    public EntryRead(String id, String image_path, String title, long consumption_in_wh, String source){
         this.id = id;
         this.image_path = image_path;
         this.title = title;
@@ -59,7 +59,7 @@ public class EntryRead {
         return source;
     }
 
-    public int getConsumption_in_wh() {
+    public long getConsumption_in_wh() {
         return consumption_in_wh;
     }
 }

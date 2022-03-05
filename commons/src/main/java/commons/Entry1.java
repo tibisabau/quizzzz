@@ -2,24 +2,30 @@ package commons;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 import commons.EntryRead;
 //import java.awt.image.BufferedImage;
 
 @Entity
-public class Entry {
+public class Entry1 {
+
 
     @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "generator")
+    @SequenceGenerator(name="generator", sequenceName = "seq", allocationSize=1)
     public long id;
     public String title;
     public String image_path;
     public String source;
-    public int consumption_in_wh;
+    public long consumption_in_wh;
 
+    public Entry1(){
 
-    public Entry(long id, String image_path, String title, int consumption_in_wh, String source){
-        this.id = id;
+    }
+
+    public Entry1(long id, String image_path, String title, long consumption_in_wh, String source){
+//        this.id = id;
         this.image_path = image_path;
         this.title = title;
         this.consumption_in_wh = consumption_in_wh;
@@ -67,7 +73,7 @@ public class Entry {
         return source;
     }
 
-    public int getConsumption_in_wh() {
+    public long getConsumption_in_wh() {
         return consumption_in_wh;
     }
 

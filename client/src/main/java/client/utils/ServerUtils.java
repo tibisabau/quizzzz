@@ -24,7 +24,7 @@ import java.net.URL;
 import java.util.List;
 
 import commons.Score;
-import commons.Entry;
+import commons.Entry1;
 import org.glassfish.jersey.client.ClientConfig;
 
 import commons.Quote;
@@ -78,11 +78,11 @@ public class ServerUtils {
                 .post(Entity.entity(score, APPLICATION_JSON), Score.class);
     }
 
-    public Entry addEntry(Entry entry){
+    public Entry1 addEntry(Entry1 entry1){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/entry/post")
                 .request(APPLICATION_JSON)
                 .accept(APPLICATION_JSON)
-                .post(Entity.entity(entry, APPLICATION_JSON), Entry.class);
+                .post(Entity.entity(entry1, APPLICATION_JSON), Entry1.class);
     }
 }
