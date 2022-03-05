@@ -20,38 +20,56 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+/**
+ * The type Main ctrl.
+ */
 public class MainCtrl {
 
     private Stage primaryStage;
 
-    private QuoteOverviewCtrl overviewCtrl;
-    private Scene overview;
+    private StartScreenCtrl startScreenCtrl;
+    private Scene startScreen;
 
     private AddQuoteCtrl addCtrl;
     private Scene add;
 
-    public void initialize(Stage primaryStage, Pair<QuoteOverviewCtrl, Parent> overview,
+    /**
+     * Initialize.
+     *
+     * @param primaryStage the primary stage
+     * @param startScreen  the start screen
+     * @param add          the add
+     */
+    public void initialize(Stage primaryStage, Pair<StartScreenCtrl, Parent> startScreen,
             Pair<AddQuoteCtrl, Parent> add) {
         this.primaryStage = primaryStage;
-        this.overviewCtrl = overview.getKey();
-        this.overview = new Scene(overview.getValue());
+        this.startScreenCtrl = startScreen.getKey();
+        this.startScreen = new Scene(startScreen.getValue());
 
         this.addCtrl = add.getKey();
         this.add = new Scene(add.getValue());
 
-        showOverview();
+        showStartScreen();
         primaryStage.show();
     }
 
-    public void showOverview() {
-        primaryStage.setTitle("Quotes: Overview");
-        primaryStage.setScene(overview);
-        overviewCtrl.refresh();
+    /**
+     * Show start screen.
+     */
+    public void showStartScreen() {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(startScreen);
+
     }
 
+    /**
+     * Show add.
+     */
     public void showAdd() {
-        primaryStage.setTitle("Quotes: Adding Quote");
+        primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(add);
         add.setOnKeyPressed(e -> addCtrl.keyPressed(e));
     }
+
+
 }
