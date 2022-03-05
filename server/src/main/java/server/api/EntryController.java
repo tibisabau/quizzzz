@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 
+import commons.Person;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +48,12 @@ public class EntryController {
         }
         return ResponseEntity.ok(repo.findById(id).get());
     }
+    @GetMapping(path = "get/rnd")
+    public ResponseEntity<Entry1> getRandom() {
+        var idx = random.nextInt((int) repo.count());
+        return ResponseEntity.ok(repo.findById((long) idx).get());
+    }
+
 
     @PostMapping(path = "post")
     public ResponseEntity<Entry1> add(@RequestBody Entry1 entry1) {
