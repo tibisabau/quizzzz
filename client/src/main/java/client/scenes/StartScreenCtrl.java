@@ -10,9 +10,9 @@ import jakarta.ws.rs.core.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 
 
@@ -58,22 +58,33 @@ public class StartScreenCtrl extends Application {
     }
 
     /**
-     * Quit button clicked.
+     * Display message that check
+     * if the user really wants to exit the application.
      *
-     * @param mouseEvent the mouse event
      */
-    public void quitButtonClicked(MouseEvent mouseEvent) {
-        System.exit(0);
+    public void quitButtonClicked() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Quit");
+        alert.setHeaderText("You are about to quit the quizzzzz.");
+        alert.setContentText("Are you sure you want to exit?");
+        if(alert.showAndWait().get() == ButtonType.OK){
+            System.exit(0);
+        }else {
+            alert.close();
+        }
+    }
+    public static void quitClicked() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Quit");
+        alert.setHeaderText("You are about to quit the quizzzzz.");
+        alert.setContentText("Are you sure you want to exit?");
+        if(alert.showAndWait().get() == ButtonType.OK){
+            System.exit(0);
+        }else {
+            alert.close();
+        }
     }
 
-    /**
-     * Set nickname field.
-     *
-     * @param keyEvent the key event
-     */
-    public void setNicknameField(KeyEvent keyEvent){
-
-    }
 
     /**
      * Key pressed.
@@ -94,7 +105,7 @@ public class StartScreenCtrl extends Application {
     }
 
     /**
-     * Ok.
+     * Adds the new player with score 0 to the database.
      */
     public void ok() {
         try {
@@ -112,13 +123,17 @@ public class StartScreenCtrl extends Application {
     }
 
     /**
-     * Get new score score.
+     * Get new score .
      *
      * @return the score
      */
     public Score getNewScore(){
             Score score = new Score(nicknameField.getText(), 0);
             return score;
+    }
+
+    public void instructionButtonClick(){
+        mainCtrl.showInstructionScreen();
     }
 
 
