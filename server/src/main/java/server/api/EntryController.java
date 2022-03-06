@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 
-import commons.Person;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,7 +57,7 @@ public class EntryController {
     @PostMapping(path = "post")
     public ResponseEntity<Entry1> add(@RequestBody Entry1 entry1) {
 
-        if (isNullOrEmpty(entry1.title) /**|| entry.image == null**/) {
+        if (isNullOrEmpty(entry1.title) || isNullOrEmpty(entry1.source) || isNullOrEmpty(entry1.image_path)) {
             return ResponseEntity.badRequest().build();
         }
         Entry1 saved = repo.save(entry1);

@@ -38,7 +38,7 @@ public class Reader implements ApplicationRunner {
             BufferedReader reader = Files.newBufferedReader(Paths.get("activities.json"));
 
             // convert JSON array to list of users
-            List<EntryRead> entries = new Gson().fromJson(reader, new TypeToken<List<EntryRead>>() {}.getType());
+            List<EntryRead> entries = gson.fromJson(reader, new TypeToken<List<EntryRead>>() {}.getType());
 
             // close reader
             reader.close();

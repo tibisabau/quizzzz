@@ -4,11 +4,13 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import javax.persistence.*;
 
-import commons.EntryRead;
-//import java.awt.image.BufferedImage;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 
 @Entity
-public class Entry1 {
+public class Entry1{
 
 
     @Id
@@ -77,4 +79,13 @@ public class Entry1 {
         return consumption_in_wh;
     }
 
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, MULTI_LINE_STYLE);
+    }
 }
