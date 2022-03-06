@@ -4,8 +4,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import javax.persistence.*;
 
-import commons.EntryRead;
-//import java.awt.image.BufferedImage;
 
 @Entity
 public class Entry1 {
@@ -25,7 +23,6 @@ public class Entry1 {
     }
 
     public Entry1(long id, String image_path, String title, long consumption_in_wh, String source){
-//        this.id = id;
         this.image_path = image_path;
         this.title = title;
         this.consumption_in_wh = consumption_in_wh;
