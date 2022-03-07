@@ -30,6 +30,10 @@ public class MainCtrl {
     private StartScreenCtrl startScreenCtrl;
     private Scene startScreen;
 
+
+    private GameScreenCtrl GameScreenCtrl;
+    private Scene GameScreenScene;
+
     private AddQuoteCtrl addCtrl;
     private Scene add;
 
@@ -41,10 +45,13 @@ public class MainCtrl {
      * @param add          the add
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl, Parent> startScreen,
-            Pair<AddQuoteCtrl, Parent> add) {
+            Pair<AddQuoteCtrl, Parent> add, Pair<GameScreenCtrl, Parent> gameScreen) {
         this.primaryStage = primaryStage;
         this.startScreenCtrl = startScreen.getKey();
         this.startScreen = new Scene(startScreen.getValue());
+
+        this.GameScreenCtrl = gameScreen.getKey();
+        this.GameScreenScene = new Scene(gameScreen.getValue());
 
         this.addCtrl = add.getKey();
         this.add = new Scene(add.getValue());
@@ -72,4 +79,8 @@ public class MainCtrl {
     }
 
 
+    public void showGameScreen() {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(GameScreenScene);
+    }
 }
