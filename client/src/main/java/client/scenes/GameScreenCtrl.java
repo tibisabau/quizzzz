@@ -5,21 +5,12 @@ import com.google.inject.Inject;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 
 public class GameScreenCtrl {
 
     private final ServerUtils server;
     private final MainCtrl mainCtrl;
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
     @FXML
     public Button QuitButton;
