@@ -25,7 +25,7 @@ public class GameScreenCtrl {
     public Button AnswerC;
 
     /**
-     * Instantiates a new Start screen ctrl.
+     * Instantiates a new Game screen ctrl.
      *
      * @param server   the server
      * @param mainCtrl the main ctrl
