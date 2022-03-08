@@ -12,6 +12,9 @@ public class Entry1 {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "generator")
     @SequenceGenerator(name="generator", sequenceName = "seq", allocationSize=1)
+
+
+
     public long id;
     public String title;
     public String image_path;

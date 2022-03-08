@@ -52,6 +52,7 @@ public class EntryController {
     public ResponseEntity<Entry1> getRandom() {
         var idx = random.nextInt((int) repo.count());
         return ResponseEntity.ok(repo.findById((long) idx).get());
+
     }
 
 

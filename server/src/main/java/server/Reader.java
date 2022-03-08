@@ -22,8 +22,12 @@ public class Reader implements ApplicationRunner {
 
     @Autowired
     private EntryRepository entryRepository;
+
     @Autowired
     private EntryController entryController;
+
+    public Reader() {
+    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception{
@@ -31,11 +35,18 @@ public class Reader implements ApplicationRunner {
             return;
         }
         try {
-            // create Gson instance
-            Gson gson = new Gson();
 
-            // create a reader
-            BufferedReader reader = Files.newBufferedReader(Paths.get("activities.json"));
+            BufferedReader reader = null;
+            boolean assign = false;
+            try {
+                reader = Files.newBufferedReader(Paths.get("activities.json"));
+            } catch (Exception e){
+                assign = true;
+            } finally {
+                if(assign == true){
+                    reader = Files.newBufferedReader(Paths.get("repository-template/server/activities.json"));
+                }
+            }
 
             // convert JSON array to list of users
             List<EntryRead> entries = new Gson().fromJson(reader, new TypeToken<List<EntryRead>>() {}.getType());
@@ -43,6 +54,7 @@ public class Reader implements ApplicationRunner {
             // close reader
             reader.close();
             entryController.deleteAll();
+
             for(int i = 0; i < entries.size(); i++){
                 Entry1 entry1 = convert(entries.get(i),(long) i);
                 entryController.add(entry1);
