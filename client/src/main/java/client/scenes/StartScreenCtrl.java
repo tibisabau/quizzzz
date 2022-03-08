@@ -121,6 +121,11 @@ public class StartScreenCtrl extends Application {
             return score;
     }
 
-
+    /**
+     * Change screen to GameScreen
+     */
+    public void goToGameScreen(){
+        mainCtrl.showGameScreen();
+    }
 
 }
