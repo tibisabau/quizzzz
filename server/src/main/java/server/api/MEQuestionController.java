@@ -2,31 +2,28 @@ package server.api;
 import commons.MostEnergyQuestion;
 import commons.Entry1;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import server.database.EntryRepository;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 
 @RestController
 @RequestMapping("/api/me/question")
 public class MEQuestionController {
 
-    private final Random random;
-    private final EntryRepository repo;
-
-    public MEQuestionController(Random random, EntryRepository repo) {
-        this.random = random;
-        this.repo = repo;
-    }
+    @Autowired
+    private EntryController ctrl;
 
     @GetMapping(path = "")
     public MostEnergyQuestion getAll() {
-        List<Entry1> activities = repo.findAll();
-        Collections.shuffle(activities);
-        return new MostEnergyQuestion(activities.get(0), activities.get(1), activities.get(2));
+        Entry1 firstOption = ctrl.getRandom().getBody();
+        Entry1 secondOption = firstOption;
+        Entry1 thirdOption = firstOption;
+        while(secondOption.getId() == firstOption.getId())
+            secondOption = ctrl.getRandom().getBody();
+        while(thirdOption.getId() == firstOption.getId() || thirdOption.getId() == secondOption.getId())
+            thirdOption = ctrl.getRandom().getBody();
+
+        return new MostEnergyQuestion(firstOption, secondOption, thirdOption);
     }
 }
