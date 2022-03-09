@@ -32,10 +32,18 @@ import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.core.GenericType;
 
+/**
+ * The type Server utils.
+ */
 public class ServerUtils {
 
     private static final String SERVER = "http://localhost:8080/";
 
+    /**
+     * Gets quotes the hard way.
+     *
+     * @throws IOException the io exception
+     */
     public void getQuotesTheHardWay() throws IOException {
         var url = new URL("http://localhost:8080/api/quotes");
         var is = url.openConnection().getInputStream();
@@ -46,6 +54,11 @@ public class ServerUtils {
         }
     }
 
+    /**
+     * Gets quotes.
+     *
+     * @return the quotes
+     */
     public List<Quote> getQuotes() {
         return ClientBuilder.newClient(new ClientConfig()) //
                 .target(SERVER).path("api/quotes") //
@@ -54,6 +67,12 @@ public class ServerUtils {
                 .get(new GenericType<List<Quote>>() {});
     }
 
+    /**
+     * Add quote quote.
+     *
+     * @param quote the quote
+     * @return the quote
+     */
     public Quote addQuote(Quote quote) {
         return ClientBuilder.newClient(new ClientConfig()) //
                 .target(SERVER).path("api/quotes") //
@@ -62,6 +81,11 @@ public class ServerUtils {
                 .post(Entity.entity(quote, APPLICATION_JSON), Quote.class);
     }
 
+    /**
+     * Get score list.
+     *
+     * @return the list
+     */
     public List<Score> getScore(){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/score")
@@ -70,6 +94,12 @@ public class ServerUtils {
                 .get(new GenericType<List<Score>>() {});
     }
 
+    /**
+     * Add score score.
+     *
+     * @param score the score
+     * @return the score
+     */
     public Score addScore(Score score){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/score/post")
