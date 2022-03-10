@@ -61,4 +61,5 @@ public class MostEnergyQuestion {
         return ToStringBuilder.reflectionToString(this, MULTI_LINE_STYLE);
     }
 
+
 }
