@@ -23,12 +23,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
 
-import commons.MostEnergyQuestion;
-import commons.Score;
-import commons.Entry1;
+import commons.*;
 import org.glassfish.jersey.client.ClientConfig;
 
-import commons.Quote;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.core.GenericType;
@@ -123,5 +120,21 @@ public class ServerUtils {
                 .request(APPLICATION_JSON)
                 .accept(APPLICATION_JSON)
                 .get(MostEnergyQuestion.class);
+    }
+
+    public HowMuchQuestion getHMQuestion(){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/hm/question")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .get(HowMuchQuestion.class);
+    }
+
+    public Integer getQuestionType(){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/type/question")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .get(Integer.class);
     }
 }
