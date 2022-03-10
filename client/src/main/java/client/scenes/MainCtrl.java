@@ -32,6 +32,9 @@ public class MainCtrl {
     private InstructionSceneCtrl instructionSceneCtrl;
     private Scene instructionScene;
 
+    private GameScreenCtrl GameScreenCtrl;
+    private Scene GameScreenScene;
+
     /**
      * Initialize.
      *
@@ -39,12 +42,16 @@ public class MainCtrl {
      * @param startScreen  the start screen
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl, Parent> startScreen
-            , Pair<InstructionSceneCtrl, Parent> instructionScene) {
+            , Pair<InstructionSceneCtrl, Parent> instructionScene, Pair<GameScreenCtrl, Parent> gameScreen) {
         this.primaryStage = primaryStage;
         this.startScreenCtrl = startScreen.getKey();
         this.startScreen = new Scene(startScreen.getValue());
         this.instructionScene = new Scene(instructionScene.getValue());
         this.instructionSceneCtrl = instructionScene.getKey();
+
+        this.GameScreenCtrl = gameScreen.getKey();
+        this.GameScreenScene = new Scene(gameScreen.getValue());
+
         showStartScreen();
         primaryStage.show();
     }
@@ -58,16 +65,18 @@ public class MainCtrl {
     }
 
     /**
-     * Show add.
+     * Show instruction screen.
      */
- /**   public void showAdd() {
-        primaryStage.setTitle("Quizzzz");
-        primaryStage.setScene(add);
-        add.setOnKeyPressed(e -> addCtrl.keyPressed(e));
-    }
-**/
     public void showInstructionScreen() {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(instructionScene);
+    }
+
+    /**
+     * Show game screen
+     */
+    public void showGameScreen() {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(GameScreenScene);
     }
 }
