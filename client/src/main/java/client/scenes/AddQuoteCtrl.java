@@ -27,6 +27,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 
+/**
+ * The type Add quote ctrl.
+ */
 public class AddQuoteCtrl {
 
     private final ServerUtils server;
@@ -41,6 +44,12 @@ public class AddQuoteCtrl {
     @FXML
     private TextField quote;
 
+    /**
+     * Instantiates a new Add quote ctrl.
+     *
+     * @param server   the server
+     * @param mainCtrl the main ctrl
+     */
     @Inject
     public AddQuoteCtrl(ServerUtils server, MainCtrl mainCtrl) {
         this.mainCtrl = mainCtrl;
@@ -48,11 +57,17 @@ public class AddQuoteCtrl {
 
     }
 
+    /**
+     * Cancel.
+     */
     public void cancel() {
         clearFields();
         mainCtrl.showStartScreen();
     }
 
+    /**
+     * Ok.
+     */
     public void ok() {
         try {
             server.addQuote(getQuote());
@@ -80,6 +95,11 @@ public class AddQuoteCtrl {
         quote.clear();
     }
 
+    /**
+     * Key pressed.
+     *
+     * @param e the e
+     */
     public void keyPressed(KeyEvent e) {
         switch (e.getCode()) {
         case ENTER:

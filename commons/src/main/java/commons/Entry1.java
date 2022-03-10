@@ -16,6 +16,9 @@ public class Entry1{
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "generator")
     @SequenceGenerator(name="generator", sequenceName = "seq", allocationSize=1)
+
+
+
     public long id;
     public String title;
     public String image_path;
@@ -27,7 +30,6 @@ public class Entry1{
     }
 
     public Entry1(long id, String image_path, String title, long consumption_in_wh, String source){
-//        this.id = id;
         this.image_path = image_path;
         this.title = title;
         this.consumption_in_wh = consumption_in_wh;
