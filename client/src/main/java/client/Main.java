@@ -46,9 +46,6 @@ public class Main extends Application {
         var start = FXML.load(StartScreenCtrl.class, "client",
                 "scenes", "StartScreen.fxml");
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
-        primaryStage.setOnCloseRequest(e-> {
-            StartScreenCtrl.quitClicked();
-        });
         mainCtrl.initialize(primaryStage, start , instruction);
     }
 }

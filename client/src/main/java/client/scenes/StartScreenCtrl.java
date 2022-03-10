@@ -70,18 +70,7 @@ public class StartScreenCtrl extends Application {
         if(alert.showAndWait().get() == ButtonType.OK){
             System.exit(0);
         }else {
-            alert.close();
-        }
-    }
-    public static void quitClicked() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Quit");
-        alert.setHeaderText("You are about to quit the quizzzzz.");
-        alert.setContentText("Are you sure you want to exit?");
-        if(alert.showAndWait().get() == ButtonType.OK){
-            System.exit(0);
-        }else {
-            alert.close();
+            mainCtrl.showStartScreen();
         }
     }
 
