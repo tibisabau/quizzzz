@@ -81,6 +81,11 @@ public class Entry1{
         return consumption_in_wh;
     }
 
+
+    public String toStringAnswer(){
+        return this.title;
+    }
+
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
