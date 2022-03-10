@@ -121,10 +121,18 @@ public class StartScreenCtrl extends Application {
             return score;
     }
 
+    /**
+     * Change screen to instruction screen
+     */
     public void instructionButtonClick(){
         mainCtrl.showInstructionScreen();
     }
 
-
+    /**
+     * Change screen to GameScreen
+     */
+    public void goToGameScreen(){
+        mainCtrl.showGameScreen();
+    }
 
 }
