@@ -86,8 +86,8 @@ public class MainCtrl {
 
     public void showLeaderboard(){
         primaryStage.setTitle("Quizzzz");
-        primaryStage.setScene((leaderboardScene));
         leaderboardSceneCtrl.load();
+        primaryStage.setScene((leaderboardScene));
     }
 
 
