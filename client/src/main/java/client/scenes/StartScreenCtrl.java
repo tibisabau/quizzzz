@@ -24,6 +24,7 @@ public class StartScreenCtrl extends Application {
 
     private final ServerUtils server;
     private final MainCtrl mainCtrl;
+    private boolean isCompleted;
 
     @FXML
     private TextField nicknameField;
@@ -50,7 +51,7 @@ public class StartScreenCtrl extends Application {
     public StartScreenCtrl(ServerUtils server, MainCtrl mainCtrl) {
         this.mainCtrl = mainCtrl;
         this.server = server;
-
+        this.isCompleted = false;
     }
 
     private void cancel() {
@@ -118,6 +119,7 @@ public class StartScreenCtrl extends Application {
      */
     public Score getNewScore(){
             Score score = new Score(nicknameField.getText(), 0);
+            isCompleted = true;
             return score;
     }
 
@@ -132,7 +134,13 @@ public class StartScreenCtrl extends Application {
      * Change screen to GameScreen
      */
     public void goToGameScreen(){
-        mainCtrl.showGameScreen();
+        if(isCompleted == true){
+            mainCtrl.showGameScreen();
+            isCompleted = false;
+        }else{
+            return;
+        }
+
     }
 
 }
