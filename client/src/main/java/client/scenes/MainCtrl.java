@@ -82,6 +82,7 @@ public class MainCtrl {
     public void showGameScreen() {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(GameScreenScene);
+        GameScreenCtrl.setAnswer();
     }
 
     public void showLeaderboard(){
