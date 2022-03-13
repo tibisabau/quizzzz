@@ -35,6 +35,9 @@ public class MainCtrl {
     private GameScreenCtrl GameScreenCtrl;
     private Scene GameScreenScene;
 
+    private Scene leaderboardScene;
+    private leaderboardSceneCtrl leaderboardSceneCtrl;
+
     /**
      * Initialize.
      *
@@ -42,13 +45,14 @@ public class MainCtrl {
      * @param startScreen  the start screen
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl, Parent> startScreen
-            , Pair<InstructionSceneCtrl, Parent> instructionScene, Pair<GameScreenCtrl, Parent> gameScreen) {
+            , Pair<InstructionSceneCtrl, Parent> instructionScene, Pair<GameScreenCtrl, Parent> gameScreen, Pair<leaderboardSceneCtrl, Parent> leaderboardScreen) {
         this.primaryStage = primaryStage;
         this.startScreenCtrl = startScreen.getKey();
         this.startScreen = new Scene(startScreen.getValue());
         this.instructionScene = new Scene(instructionScene.getValue());
         this.instructionSceneCtrl = instructionScene.getKey();
-
+        this.leaderboardScene = new Scene(leaderboardScreen.getValue());
+        this.leaderboardSceneCtrl = leaderboardScreen.getKey();
         this.GameScreenCtrl = gameScreen.getKey();
         this.GameScreenScene = new Scene(gameScreen.getValue());
 
@@ -79,4 +83,12 @@ public class MainCtrl {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(GameScreenScene);
     }
+
+    public void showLeaderboard(){
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene((leaderboardScene));
+        leaderboardSceneCtrl.load();
+    }
+
+
 }

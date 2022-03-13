@@ -124,4 +124,12 @@ public class ServerUtils {
                 .accept(APPLICATION_JSON)
                 .get(MostEnergyQuestion.class);
     }
+
+    public List<Score> getTopScores(){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/score/get/top")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .get(new GenericType<List<Score>>() {});
+    }
 }

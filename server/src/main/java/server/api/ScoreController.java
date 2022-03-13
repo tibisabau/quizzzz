@@ -2,6 +2,7 @@ package server.api;
 
 
 import commons.Score;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +51,12 @@ public class ScoreController {
     public ResponseEntity<Score> getRandom() {
         var idx = random.nextInt((int) repo.count());
         return ResponseEntity.ok(repo.getById((long) idx));
+    }
+
+    @GetMapping(path = "get/top")
+    public List<Score> getSorted(){
+        //to be improved, good enough for now
+        return repo.findAll(Sort.by(Sort.Direction.DESC, "score"));
     }
 
 

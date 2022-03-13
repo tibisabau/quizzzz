@@ -67,6 +67,7 @@ public class GameScreenCtrl {
      * Change screen to StartScene
      */
     public void goToStartScene(){
+//        mainCtrl.showLeaderboard();
         mainCtrl.showStartScreen();
     }
 

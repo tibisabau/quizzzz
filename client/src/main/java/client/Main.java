@@ -23,6 +23,7 @@ import java.net.URISyntaxException;
 import client.scenes.GameScreenCtrl;
 import client.scenes.InstructionSceneCtrl;
 import client.scenes.StartScreenCtrl;
+import client.scenes.leaderboardSceneCtrl;
 import com.google.inject.Injector;
 import client.scenes.MainCtrl;
 
@@ -48,6 +49,7 @@ public class Main extends Application {
                 "scenes", "StartScreen.fxml");
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
         var gameScreen = FXML.load(GameScreenCtrl.class, "client", "scenes", "GameScreen.fxml");
-        mainCtrl.initialize(primaryStage, start , instruction, gameScreen);
+        var leaderboard = FXML.load(leaderboardSceneCtrl.class, "client", "scenes", "leaderboardScene.fxml");
+        mainCtrl.initialize(primaryStage, start , instruction, gameScreen, leaderboard);
     }
 }
