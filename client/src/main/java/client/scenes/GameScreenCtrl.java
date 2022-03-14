@@ -3,6 +3,7 @@ package client.scenes;
 import client.utils.ServerUtils;
 import com.google.inject.Inject;
 
+import commons.MostEnergyQuestion;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -68,6 +69,27 @@ public class GameScreenCtrl {
      */
     public void goToStartScene(){
         mainCtrl.showStartScreen();
+    }
+
+    public boolean AnswerCorrect (MostEnergyQuestion question, int answer){
+        switch (answer){
+            case 1:
+                if (question.getFirstOption() == question.getFirstOption()){
+                    return true;
+                }
+                break;
+            case 2:
+                if (question.getSecondOption() == question.getSecondOption()){
+                    return true;
+                }
+                break;
+            case 3:
+                if (question.getThirdOption() == question.getThirdOption()){
+                    return true;
+                }
+                break;
+        }
+        return false;
     }
 
 }
