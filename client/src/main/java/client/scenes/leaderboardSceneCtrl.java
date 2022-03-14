@@ -4,12 +4,13 @@ import client.utils.ServerUtils;
 import com.google.inject.Inject;
 
 import commons.Score;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 import java.util.List;
 
@@ -19,13 +20,10 @@ public class leaderboardSceneCtrl {
     private final MainCtrl mainCtrl;
 
     @FXML
-    public Button QuitButton;
-
-    @FXML
     public TableView table;
 
     @FXML
-    public TableColumn<Score, Integer> rank;
+    public TableColumn<Score,String> rank;
 
     @FXML
     public TableColumn<Score, String> name;
@@ -40,22 +38,29 @@ public class leaderboardSceneCtrl {
         this.mainCtrl = mainCtrl;
     }
 
+
+    /**
+     * Fills the leaderboard with scores queried from the database.
+     */
     public void load(){
-//        for(int i = 0; i < 15; i++){
-//            Score score = new Score("Player " + i, i);
-//            server.addScore(score);
-//        }
         name.setCellValueFactory(new PropertyValueFactory<>("userName"));
         value.setCellValueFactory(new PropertyValueFactory<>("score"));
-//        Score score = new Score("name",2137);
-//        table.getItems().add(score);
+        rank.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Score, String>, ObservableValue<String>>() {
+            @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Score, String> p) {
+                return new ReadOnlyObjectWrapper((table.getItems().indexOf(p.getValue()) + 1) + "");
+            }
+        });
+        rank.setSortable(false);
+
         List<Score> scores = server.getTopScores();
         for(int i = 0; i < scores.size(); i++){
             table.getItems().add((scores.get(i)));
         }
-
-
     }
+
+    /**
+     * Return to start scene.
+     */
     public void goToStartScene(){
         mainCtrl.showStartScreen();
     }

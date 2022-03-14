@@ -85,6 +85,9 @@ public class MainCtrl {
         GameScreenCtrl.setAnswer();
     }
 
+    /**
+     * Show leaderboard screen.
+     */
     public void showLeaderboard(){
         primaryStage.setTitle("Quizzzz");
         leaderboardSceneCtrl.load();
