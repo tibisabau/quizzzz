@@ -2,6 +2,6 @@ package server.database;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import commons.Entry1;
+import commons.Activity;
 
-public interface EntryRepository extends JpaRepository<Entry1, Long> {}
+public interface EntryRepository extends JpaRepository<Activity, Long> {}

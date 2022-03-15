@@ -8,8 +8,8 @@ import java.util.List;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
-import commons.EntryRead;
-import commons.Entry1;
+import commons.ActivityParse;
+import commons.Activity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -54,15 +54,15 @@ public class Reader implements ApplicationRunner {
             }
 
             // convert JSON array to list of users
-            List<EntryRead> entries = new Gson().fromJson(reader, new TypeToken<List<EntryRead>>() {}.getType());
+            List<ActivityParse> entries = new Gson().fromJson(reader, new TypeToken<List<ActivityParse>>() {}.getType());
 
             // close reader
             reader.close();
             entryController.deleteAll();
 
             for(int i = 0; i < entries.size(); i++){
-                Entry1 entry1 = convert(entries.get(i));
-                entryController.add(entry1);
+                Activity activity = convert(entries.get(i));
+                entryController.add(activity);
             }
 
 
@@ -73,17 +73,17 @@ public class Reader implements ApplicationRunner {
     }
 
     /**
-     * Converts entryRead to entry1
-     * @param entryRead Takes an entryREad as input
-     * @returns an entry1 object converted from the entryRead object
+     * Converts activityParse to activity
+     * @param activityParse Takes an activityParse object as an input
+     * @returns an activity object converted from the activityParse object
      */
-    public static Entry1 convert(EntryRead entryRead){
-        String title = entryRead.title;
-        String image_path = entryRead.image_path;
-        String source = entryRead.source;
-        long consumption_in_wh = entryRead.consumption_in_wh;
-        Entry1 entry1 = new Entry1(image_path,title,consumption_in_wh,source);
-        return entry1;
+    public static Activity convert(ActivityParse activityParse){
+        String title = activityParse.title;
+        String image_path = activityParse.image_path;
+        String source = activityParse.source;
+        long consumption_in_wh = activityParse.consumption_in_wh;
+        Activity activity = new Activity(image_path,title,consumption_in_wh,source);
+        return activity;
     }
 
 }

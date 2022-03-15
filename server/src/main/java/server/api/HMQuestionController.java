@@ -1,6 +1,6 @@
 package server.api;
 
-import commons.Entry1;
+import commons.Activity;
 import commons.HowMuchQuestion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,15 +20,15 @@ import java.util.List;
 
         @GetMapping(path = "")
         public HowMuchQuestion getAll() {
-            Entry1 correctOption = ctrl.getRandom().getBody();
-            Entry1 firstOption = correctOption;
+            Activity correctOption = ctrl.getRandom().getBody();
+            Activity firstOption = correctOption;
             double random = Math.random() * (2) + 0.1;
             double random2 = Math.random() * (2) + 0.1;
-            Entry1 secondOption = new Entry1(correctOption.getImage_path(), correctOption.getTitle()
+            Activity secondOption = new Activity(correctOption.getImage_path(), correctOption.getTitle()
             , (int)(correctOption.getConsumption_in_wh() * random) / 10 * 10, correctOption.getSource());
-            Entry1 thirdOption = new Entry1(correctOption.getImage_path(), correctOption.getTitle()
+            Activity thirdOption = new Activity(correctOption.getImage_path(), correctOption.getTitle()
                     , (int)(correctOption.getConsumption_in_wh() * random2) / 10 * 10, correctOption.getSource());
-            List<Entry1> options = new ArrayList<>();
+            List<Activity> options = new ArrayList<>();
 
             options.add(firstOption);
             options.add(secondOption);

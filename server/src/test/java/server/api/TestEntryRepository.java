@@ -26,12 +26,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
-import commons.Entry1;
+import commons.Activity;
 import server.database.EntryRepository;
 
 public class TestEntryRepository implements EntryRepository {
 
-    public final List<Entry1> entries = new ArrayList<>();
+    public final List<Activity> entries = new ArrayList<>();
     public final List<String> calledMethods = new ArrayList<>();
 
     private void call(String name) {
@@ -39,25 +39,25 @@ public class TestEntryRepository implements EntryRepository {
     }
 
     @Override
-    public List<Entry1> findAll() {
+    public List<Activity> findAll() {
         calledMethods.add("findAll");
         return entries;
     }
 
     @Override
-    public List<Entry1> findAll(Sort sort) {
+    public List<Activity> findAll(Sort sort) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<Entry1> findAllById(Iterable<Long> ids) {
+    public List<Activity> findAllById(Iterable<Long> ids) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public <S extends Entry1> List<S> saveAll(Iterable<S> entities) {
+    public <S extends Activity> List<S> saveAll(Iterable<S> entities) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -69,19 +69,19 @@ public class TestEntryRepository implements EntryRepository {
     }
 
     @Override
-    public <S extends Entry1> S saveAndFlush(S entity) {
+    public <S extends Activity> S saveAndFlush(S entity) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public <S extends Entry1> List<S> saveAllAndFlush(Iterable<S> entities) {
+    public <S extends Activity> List<S> saveAllAndFlush(Iterable<S> entities) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void deleteAllInBatch(Iterable<Entry1> entities) {
+    public void deleteAllInBatch(Iterable<Activity> entities) {
         // TODO Auto-generated method stub
 
     }
@@ -99,42 +99,42 @@ public class TestEntryRepository implements EntryRepository {
     }
 
     @Override
-    public Entry1 getOne(Long id) {
+    public Activity getOne(Long id) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Entry1 getById(Long id) {
+    public Activity getById(Long id) {
         call("getById");
         return find(id).get();
     }
 
-    private Optional<Entry1> find(Long id) {
+    private Optional<Activity> find(Long id) {
 
         return entries.stream().filter(q -> q.id == id).findFirst();
     }
 
     @Override
-    public <S extends Entry1> List<S> findAll(Example<S> example) {
+    public <S extends Activity> List<S> findAll(Example<S> example) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public <S extends Entry1> List<S> findAll(Example<S> example, Sort sort) {
+    public <S extends Activity> List<S> findAll(Example<S> example, Sort sort) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Page<Entry1> findAll(Pageable pageable) {
+    public Page<Activity> findAll(Pageable pageable) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public <S extends Entry1> S save(S entity) {
+    public <S extends Activity> S save(S entity) {
         call("save");
         entity.id = (long) entries.size();
         entries.add(entity);
@@ -142,7 +142,7 @@ public class TestEntryRepository implements EntryRepository {
     }
 
     @Override
-    public Optional<Entry1> findById(Long id) {
+    public Optional<Activity> findById(Long id) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -165,7 +165,7 @@ public class TestEntryRepository implements EntryRepository {
     }
 
     @Override
-    public void delete(Entry1 entity) {
+    public void delete(Activity entity) {
         // TODO Auto-generated method stub
 
     }
@@ -177,7 +177,7 @@ public class TestEntryRepository implements EntryRepository {
     }
 
     @Override
-    public void deleteAll(Iterable<? extends Entry1> entities) {
+    public void deleteAll(Iterable<? extends Activity> entities) {
         // TODO Auto-generated method stub
 
     }
@@ -189,32 +189,32 @@ public class TestEntryRepository implements EntryRepository {
     }
 
     @Override
-    public <S extends Entry1> Optional<S> findOne(Example<S> example) {
+    public <S extends Activity> Optional<S> findOne(Example<S> example) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public <S extends Entry1> Page<S> findAll(Example<S> example, Pageable pageable) {
+    public <S extends Activity> Page<S> findAll(Example<S> example, Pageable pageable) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public <S extends Entry1> long count(Example<S> example) {
+    public <S extends Activity> long count(Example<S> example) {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    public <S extends Entry1> boolean exists(Example<S> example) {
+    public <S extends Activity> boolean exists(Example<S> example) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public <S extends Entry1, R> R findBy(Example<S> example
-            ,Function<FetchableFluentQuery<S>, R> queryFunction) {
+    public <S extends Activity, R> R findBy(Example<S> example
+            , Function<FetchableFluentQuery<S>, R> queryFunction) {
         // TODO Auto-generated method stub
         return null;
     }
