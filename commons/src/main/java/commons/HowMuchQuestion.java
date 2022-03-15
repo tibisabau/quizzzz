@@ -6,18 +6,19 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 
-public class MostEnergyQuestion {
+public class HowMuchQuestion {
+
 
     private Entry1 firstOption;
     private Entry1 secondOption;
     private Entry1 thirdOption;
     private Entry1 correctOption;
 
-    public MostEnergyQuestion(){
+    public HowMuchQuestion(){
 
     }
 
-    public MostEnergyQuestion(Entry1 firstOption, Entry1 secondOption, Entry1 thirdOption, Entry1 correctOption) {
+    public HowMuchQuestion(Entry1 firstOption, Entry1 secondOption, Entry1 thirdOption, Entry1 correctOption) {
         this.firstOption = firstOption;
         this.secondOption = secondOption;
         this.thirdOption = thirdOption;
@@ -70,6 +71,4 @@ public class MostEnergyQuestion {
     public String toString() {
         return ToStringBuilder.reflectionToString(this, MULTI_LINE_STYLE);
     }
-
-
 }
