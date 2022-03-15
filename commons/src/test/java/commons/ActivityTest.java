@@ -22,6 +22,7 @@ class ActivityTest {
         activity1.setId(0);
         activity2.setId(0);
         assertEquals(activity1, activity2);
+        assertNotEquals(activity1,activity3);
     }
 
     @Test
@@ -80,6 +81,7 @@ class ActivityTest {
     @Test
     void testHashCode() {
         assertNotNull(activity1.hashCode());
+        assertNotEquals(activity1.hashCode(), activity3.hashCode());
     }
 
     @Test
