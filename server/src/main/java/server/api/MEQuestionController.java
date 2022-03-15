@@ -1,4 +1,5 @@
 package server.api;
+
 import commons.MostEnergyQuestion;
 import commons.Activity;
 
@@ -20,17 +21,27 @@ public class MEQuestionController {
         Activity secondOption = firstOption;
         Activity thirdOption = firstOption;
 
-        while(secondOption.getId() == firstOption.getId())
+        while(secondOption.getId() == firstOption.getId()){
             secondOption = ctrl.getRandom().getBody();
-        while(thirdOption.getId() == firstOption.getId() || thirdOption.getId() == secondOption.getId())
+
+        }
+        while(thirdOption.getId() == firstOption.getId()
+                || thirdOption.getId() == secondOption.getId()){
             thirdOption = ctrl.getRandom().getBody();
+        }
+
 
         Activity answer = firstOption;
-        if(answer.getConsumption_in_wh() < secondOption.getConsumption_in_wh())
+        if(answer.getConsumption_in_wh() < secondOption.getConsumption_in_wh()){
             answer = secondOption;
-        if(answer.getConsumption_in_wh() < thirdOption.getConsumption_in_wh())
-            answer = thirdOption;
+        }
 
-        return new MostEnergyQuestion(firstOption, secondOption, thirdOption, answer);
+        if(answer.getConsumption_in_wh() < thirdOption.getConsumption_in_wh()){
+            answer = thirdOption;
+        }
+
+
+        return new MostEnergyQuestion(firstOption,
+                secondOption, thirdOption, answer);
     }
 }

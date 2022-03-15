@@ -9,6 +9,7 @@ import java.awt.*;
 
 public class InstructionSceneCtrl {
     private final ServerUtils server;
+
     private final MainCtrl mainCtrl;
 
     @FXML

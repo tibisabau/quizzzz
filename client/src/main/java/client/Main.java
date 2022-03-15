@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package client;
 
 import static com.google.inject.Guice.createInjector;
@@ -33,23 +34,27 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private static final Injector INJECTOR = createInjector(new MyModule());
+
     private static final MyFXML FXML = new MyFXML(INJECTOR);
 
-    public static void main(String[] args) throws URISyntaxException, IOException {
+    public static void main(String[] args) throws URISyntaxException,
+            IOException {
         launch();
     }
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-       // var overview = FXML.load(StartScreenCtrl.class, "client", "scenes", "StartScreen.fxml");
-       // var add = FXML.load(AddQuoteCtrl.class, "client", "scenes", "AddQuote.fxml");
         var instruction = FXML.load(InstructionSceneCtrl.class,
                 "client", "scenes", "InstructionPageScreen.fxml");
         var start = FXML.load(StartScreenCtrl.class, "client",
                 "scenes", "StartScreen.fxml");
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
-        var gameScreen = FXML.load(GameScreenCtrl.class, "client", "scenes", "GameScreen.fxml");
-        var leaderboard = FXML.load(leaderboardSceneCtrl.class, "client", "scenes", "leaderboardScene.fxml");
-        mainCtrl.initialize(primaryStage, start , instruction, gameScreen, leaderboard);
+        var gameScreen = FXML.load(GameScreenCtrl.class,
+                "client", "scenes", "GameScreen.fxml");
+        var leaderboard = FXML.load(
+                leaderboardSceneCtrl.class, "client", "scenes",
+                "leaderboardScene.fxml");
+        mainCtrl.initialize(primaryStage, start ,
+                instruction, gameScreen, leaderboard);
     }
 }
