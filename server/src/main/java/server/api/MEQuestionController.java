@@ -19,11 +19,18 @@ public class MEQuestionController {
         Entry1 firstOption = ctrl.getRandom().getBody();
         Entry1 secondOption = firstOption;
         Entry1 thirdOption = firstOption;
+
         while(secondOption.getId() == firstOption.getId())
             secondOption = ctrl.getRandom().getBody();
         while(thirdOption.getId() == firstOption.getId() || thirdOption.getId() == secondOption.getId())
             thirdOption = ctrl.getRandom().getBody();
 
-        return new MostEnergyQuestion(firstOption, secondOption, thirdOption);
+        Entry1 answer = firstOption;
+        if(answer.getConsumption_in_wh() < secondOption.getConsumption_in_wh())
+            answer = secondOption;
+        if(answer.getConsumption_in_wh() < thirdOption.getConsumption_in_wh())
+            answer = thirdOption;
+
+        return new MostEnergyQuestion(firstOption, secondOption, thirdOption, answer);
     }
 }
