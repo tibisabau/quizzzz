@@ -25,7 +25,7 @@ public class StartScreenCtrl extends Application {
     private final ServerUtils server;
     private final MainCtrl mainCtrl;
     private boolean isCompleted;
-
+    private static Score ownScore;
     @FXML
     private TextField nicknameField;
 
@@ -99,7 +99,8 @@ public class StartScreenCtrl extends Application {
      */
     public void ok() {
         try {
-            server.addScore(getNewScore());
+            ownScore = getNewScore();
+            server.addScore(ownScore);
         } catch (WebApplicationException e) {
 
             var alert = new Alert(Alert.AlertType.ERROR);
@@ -143,4 +144,11 @@ public class StartScreenCtrl extends Application {
 
     }
 
+    /**
+     * getter for ownScore
+     * @return
+     */
+    public static Score getOwnScore() {
+        return ownScore;
+    }
 }

@@ -4,6 +4,7 @@ import client.utils.ServerUtils;
 import com.google.inject.Inject;
 
 import commons.MostEnergyQuestion;
+import commons.Score;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -152,20 +153,29 @@ public class GameScreenCtrl {
         timer.schedule(timerTask,1500);
 
     }
+    public void AnswerPoints(MostEnergyQuestion question, int answer){
+        if(AnswerCorrect(question,answer)) {
+            Score score = StartScreenCtrl.getOwnScore();
+            score.setScore(score.getScore() + 100);
+        }
+    }
+
+
+
     public boolean AnswerCorrect (MostEnergyQuestion question, int answer){
         switch (answer){
             case 1:
-                if (question.getFirstOption() == question.getFirstOption()){
+                if (question.getFirstOption().equals(question.getCorrectOption())){
                     return true;
                 }
                 break;
             case 2:
-                if (question.getSecondOption() == question.getSecondOption()){
+                if (question.getSecondOption().equals(question.getCorrectOption())){
                     return true;
                 }
                 break;
             case 3:
-                if (question.getThirdOption() == question.getThirdOption()){
+                if (question.getThirdOption().equals(question.getCorrectOption())){
                     return true;
                 }
                 break;
