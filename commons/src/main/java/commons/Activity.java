@@ -32,7 +32,7 @@ public class Activity {
      * @param consumption_in_wh
      * @param source
      */
-    public Activity(String image_path, String title, long consumption_in_wh, String source){
+    public Activity(String image_path, String title, long consumption_in_wh){
         this.image_path = image_path;
         this.title = title;
         this.consumption_in_wh = consumption_in_wh;
