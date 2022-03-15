@@ -19,7 +19,6 @@ public class Activity {
     public long id;
     public String title;
     public String image_path;
-    public String source;
     public long consumption_in_wh;
 
     public Activity(){
@@ -37,7 +36,6 @@ public class Activity {
         this.image_path = image_path;
         this.title = title;
         this.consumption_in_wh = consumption_in_wh;
-        this.source = source;
     }
 
     @Override
@@ -57,10 +55,6 @@ public class Activity {
         this.image_path = image_path;
     }
 
-    public void setSource(String source) {
-        this.source = source;
-    }
-
     public void setConsumption_in_wh(int consumption_in_wh) {
         this.consumption_in_wh = consumption_in_wh;
     }
@@ -75,10 +69,6 @@ public class Activity {
 
     public String getImage_path() {
         return image_path;
-    }
-
-    public String getSource() {
-        return source;
     }
 
     public long getConsumption_in_wh() {

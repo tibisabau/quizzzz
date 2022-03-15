@@ -155,4 +155,8 @@ public class GameScreenCtrl {
         timer.schedule(timerTask,1500);
 
     }
+
+    public void setCounter(int value){
+        this.counter = value;
+    }
 }

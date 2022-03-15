@@ -58,7 +58,7 @@ public class EntryController {
     @PostMapping(path = "post")
     public ResponseEntity<Activity> add(@RequestBody Activity activity) {
 
-        if (isNullOrEmpty(activity.title) || isNullOrEmpty(activity.source) || isNullOrEmpty(activity.image_path)) {
+        if (isNullOrEmpty(activity.title) || isNullOrEmpty(activity.image_path)) {
             return ResponseEntity.badRequest().build();
         }
         Activity saved = repo.save(activity);
@@ -85,7 +85,6 @@ public class EntryController {
                 .map(entry1 -> {
                     entry1.title = newActivity.title;
                     entry1.consumption_in_wh = newActivity.consumption_in_wh;
-                    entry1.source = newActivity.source;
                     entry1.image_path = newActivity.image_path;
                     entry1.id = newActivity.id;
                     return repo.save(entry1);

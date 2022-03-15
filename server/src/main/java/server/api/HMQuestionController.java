@@ -25,9 +25,9 @@ import java.util.List;
             double random = Math.random() * (2) + 0.1;
             double random2 = Math.random() * (2) + 0.1;
             Activity secondOption = new Activity(correctOption.getImage_path(), correctOption.getTitle()
-            , (int)(correctOption.getConsumption_in_wh() * random) / 10 * 10, correctOption.getSource());
+            , (int)(correctOption.getConsumption_in_wh() * random) / 10 * 10, "");
             Activity thirdOption = new Activity(correctOption.getImage_path(), correctOption.getTitle()
-                    , (int)(correctOption.getConsumption_in_wh() * random2) / 10 * 10, correctOption.getSource());
+                    , (int)(correctOption.getConsumption_in_wh() * random2) / 10 * 10, "");
             List<Activity> options = new ArrayList<>();
 
             options.add(firstOption);
