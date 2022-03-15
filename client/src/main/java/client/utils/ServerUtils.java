@@ -125,6 +125,7 @@ public class ServerUtils {
                 .get(MostEnergyQuestion.class);
     }
 
+    
     public List<Score> getTopScores(){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/score/get/top")

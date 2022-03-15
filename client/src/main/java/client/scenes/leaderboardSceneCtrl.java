@@ -31,7 +31,11 @@ public class leaderboardSceneCtrl {
     @FXML
     public TableColumn<Score, String> value;
 
-
+    /**
+     * A constructor for the leaderboardSceneCtrl class.
+     * @param server
+     * @param mainCtrl
+     */
     @Inject
     public leaderboardSceneCtrl(ServerUtils server, MainCtrl mainCtrl) {
         this.server = server;
