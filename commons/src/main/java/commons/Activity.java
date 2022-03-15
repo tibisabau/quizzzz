@@ -2,16 +2,38 @@ package commons;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
-public class EntryRead {
-    public String id;
+import javax.persistence.*;
+
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
+
+@Entity
+public class Activity {
+
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "generator")
+    @SequenceGenerator(name="generator", sequenceName = "seq", allocationSize=1)
+    public long id;
     public String title;
     public String image_path;
     public String source;
     public long consumption_in_wh;
 
+    public Activity(){
 
-    public EntryRead(String id, String image_path, String title, long consumption_in_wh, String source){
-        this.id = id;
+    }
+
+    /**
+     * Constructor method for activity
+     * @param image_path
+     * @param title
+     * @param consumption_in_wh
+     * @param source
+     */
+    public Activity(String image_path, String title, long consumption_in_wh, String source){
         this.image_path = image_path;
         this.title = title;
         this.consumption_in_wh = consumption_in_wh;
@@ -23,7 +45,7 @@ public class EntryRead {
         return EqualsBuilder.reflectionEquals(this, obj);
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -43,7 +65,7 @@ public class EntryRead {
         this.consumption_in_wh = consumption_in_wh;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
@@ -61,5 +83,20 @@ public class EntryRead {
 
     public long getConsumption_in_wh() {
         return consumption_in_wh;
+    }
+
+
+    public String toStringAnswer(){
+        return this.title;
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, MULTI_LINE_STYLE);
     }
 }

@@ -2,34 +2,26 @@ package commons;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
-import javax.persistence.*;
-
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
-
-@Entity
-public class Entry1{
-
-
-    @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "generator")
-    @SequenceGenerator(name="generator", sequenceName = "seq", allocationSize=1)
-
-
-
-    public long id;
+/**
+ * This class is used to parse JSON from the provided file containing activities.
+ */
+public class ActivityParse {
+    public String id;
     public String title;
     public String image_path;
     public String source;
     public long consumption_in_wh;
 
-    public Entry1(){
-
-    }
-
-    public Entry1(long id, String image_path, String title, long consumption_in_wh, String source){
+    /**
+     * Constructor method for ActivityParse
+     * @param id
+     * @param image_path
+     * @param title
+     * @param consumption_in_wh
+     * @param source
+     */
+    public ActivityParse(String id, String image_path, String title, long consumption_in_wh, String source){
+        this.id = id;
         this.image_path = image_path;
         this.title = title;
         this.consumption_in_wh = consumption_in_wh;
@@ -41,7 +33,7 @@ public class Entry1{
         return EqualsBuilder.reflectionEquals(this, obj);
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -61,7 +53,7 @@ public class Entry1{
         this.consumption_in_wh = consumption_in_wh;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
@@ -79,20 +71,5 @@ public class Entry1{
 
     public long getConsumption_in_wh() {
         return consumption_in_wh;
-    }
-
-
-    public String toStringAnswer(){
-        return this.title;
-    }
-
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
-
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, MULTI_LINE_STYLE);
     }
 }

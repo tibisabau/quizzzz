@@ -75,6 +75,7 @@ public class GameScreenCtrl {
 
         }else{
             //showLeaderBoardScreen()  - TO BE IMPLEMENTED
+            mainCtrl.showLeaderboard();
         }
     }
 
@@ -93,6 +94,7 @@ public class GameScreenCtrl {
             this.createTimer();
         }else{
             //showLeaderBoardScreen()  - TO BE IMPLEMENTED
+            mainCtrl.showLeaderboard();
         }
     }
 
@@ -111,6 +113,7 @@ public class GameScreenCtrl {
             this.createTimer();
         }else{
             //showLeaderBoardScreen()  - TO BE IMPLEMENTED
+            mainCtrl.showLeaderboard();
         }
     }
 
