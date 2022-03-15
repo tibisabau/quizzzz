@@ -2,6 +2,9 @@ package commons;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
+/**
+ * This class is used to parse JSON from the provided file containing activities.
+ */
 public class EntryRead {
     public String id;
     public String title;
@@ -9,7 +12,14 @@ public class EntryRead {
     public String source;
     public long consumption_in_wh;
 
-
+    /**
+     * Constructor method for entryRead
+     * @param id
+     * @param image_path
+     * @param title
+     * @param consumption_in_wh
+     * @param source
+     */
     public EntryRead(String id, String image_path, String title, long consumption_in_wh, String source){
         this.id = id;
         this.image_path = image_path;

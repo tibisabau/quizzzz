@@ -24,9 +24,9 @@ import java.util.List;
             Entry1 firstOption = correctOption;
             double random = Math.random() * (2) + 0.1;
             double random2 = Math.random() * (2) + 0.1;
-            Entry1 secondOption = new Entry1(correctOption.getId(), correctOption.getImage_path(), correctOption.getTitle()
+            Entry1 secondOption = new Entry1(correctOption.getImage_path(), correctOption.getTitle()
             , (int)(correctOption.getConsumption_in_wh() * random) / 10 * 10, correctOption.getSource());
-            Entry1 thirdOption = new Entry1(correctOption.getId(), correctOption.getImage_path(), correctOption.getTitle()
+            Entry1 thirdOption = new Entry1(correctOption.getImage_path(), correctOption.getTitle()
                     , (int)(correctOption.getConsumption_in_wh() * random2) / 10 * 10, correctOption.getSource());
             List<Entry1> options = new ArrayList<>();
 

@@ -122,7 +122,10 @@ public class ServerUtils {
                 .get(MostEnergyQuestion.class);
     }
 
-    
+    /**
+     * Get a sorted list of scores from the database.
+     * @returns a sorted list of type Score
+     */
     public List<Score> getTopScores(){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/score/get/top")

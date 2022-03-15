@@ -16,9 +16,6 @@ public class Entry1{
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "generator")
     @SequenceGenerator(name="generator", sequenceName = "seq", allocationSize=1)
-
-
-
     public long id;
     public String title;
     public String image_path;
@@ -29,7 +26,14 @@ public class Entry1{
 
     }
 
-    public Entry1(long id, String image_path, String title, long consumption_in_wh, String source){
+    /**
+     * Constructor method for entry1
+     * @param image_path
+     * @param title
+     * @param consumption_in_wh
+     * @param source
+     */
+    public Entry1(String image_path, String title, long consumption_in_wh, String source){
         this.image_path = image_path;
         this.title = title;
         this.consumption_in_wh = consumption_in_wh;
@@ -86,13 +90,4 @@ public class Entry1{
         return this.title;
     }
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
-
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, MULTI_LINE_STYLE);
-    }
 }
