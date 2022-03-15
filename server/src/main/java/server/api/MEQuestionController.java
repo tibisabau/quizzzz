@@ -32,11 +32,11 @@ public class MEQuestionController {
 
 
         Activity answer = firstOption;
-        if(answer.getConsumption_in_wh() < secondOption.getConsumption_in_wh()){
+        if(answer.getConsumptionInWh() < secondOption.getConsumptionInWh()){
             answer = secondOption;
         }
 
-        if(answer.getConsumption_in_wh() < thirdOption.getConsumption_in_wh()){
+        if(answer.getConsumptionInWh() < thirdOption.getConsumptionInWh()){
             answer = thirdOption;
         }
 

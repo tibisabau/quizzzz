@@ -9,15 +9,20 @@ import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 public class MostEnergyQuestion {
 
     private Activity firstOption;
+
     private Activity secondOption;
+
     private Activity thirdOption;
+
     private Activity correctOption;
 
     public MostEnergyQuestion(){
 
     }
 
-    public MostEnergyQuestion(Activity firstOption, Activity secondOption, Activity thirdOption, Activity correctOption) {
+    public MostEnergyQuestion(Activity firstOption,
+                              Activity secondOption, Activity thirdOption,
+                              Activity correctOption) {
         this.firstOption = firstOption;
         this.secondOption = secondOption;
         this.thirdOption = thirdOption;

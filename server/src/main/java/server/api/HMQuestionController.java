@@ -26,13 +26,13 @@ import java.util.List;
             double random = Math.random() * 2 + 0.1;
             double random2 = Math.random() * 2 + 0.1;
 
-            Activity secondOption = new Activity(correctOption.getImage_path(),
+            Activity secondOption = new Activity(correctOption.getImagePath(),
                     correctOption.getTitle()
-            , (int)(correctOption.getConsumption_in_wh() * random) / 10 * 10,
+            , (int)(correctOption.getConsumptionInWh() * random) / 10 * 10,
                     correctOption.getSource());
-            Activity thirdOption = new Activity(correctOption.getImage_path(),
+            Activity thirdOption = new Activity(correctOption.getImagePath(),
                     correctOption.getTitle()
-                    , (int)(correctOption.getConsumption_in_wh()
+                    , (int)(correctOption.getConsumptionInWh()
                     * random2) / 10 * 10, correctOption.getSource());
             List<Activity> options = new ArrayList<>();
 

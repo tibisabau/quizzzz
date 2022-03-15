@@ -17,9 +17,13 @@ public class Activity {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "generator")
     @SequenceGenerator(name="generator", sequenceName = "seq", allocationSize=1)
     public long id;
+
     public String title;
+
     public String image_path;
+
     public String source;
+
     public long consumption_in_wh;
 
     public Activity(){
@@ -33,7 +37,8 @@ public class Activity {
      * @param consumption_in_wh
      * @param source
      */
-    public Activity(String image_path, String title, long consumption_in_wh, String source){
+    public Activity(String image_path, String title,
+                    long consumption_in_wh, String source){
         this.image_path = image_path;
         this.title = title;
         this.consumption_in_wh = consumption_in_wh;
@@ -53,7 +58,7 @@ public class Activity {
         this.title = title;
     }
 
-    public void setImage_path(String image_path) {
+    public void setImagePath(String image_path) {
         this.image_path = image_path;
     }
 
@@ -61,7 +66,7 @@ public class Activity {
         this.source = source;
     }
 
-    public void setConsumption_in_wh(int consumption_in_wh) {
+    public void setConsumptionInWh(int consumption_in_wh) {
         this.consumption_in_wh = consumption_in_wh;
     }
 
@@ -73,7 +78,7 @@ public class Activity {
         return title;
     }
 
-    public String getImage_path() {
+    public String getImagePath() {
         return image_path;
     }
 
@@ -81,7 +86,7 @@ public class Activity {
         return source;
     }
 
-    public long getConsumption_in_wh() {
+    public long getConsumptionInWh() {
         return consumption_in_wh;
     }
 
