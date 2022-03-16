@@ -162,6 +162,9 @@ public class GameScreenCtrl {
         mainCtrl.showStartScreen();
     }
 
+    /**
+     * Sets the answer for a new question and adds this question to the question list.
+     */
     public void setAnswer(){
         Answer1.setDisable(false);
         Answer2.setDisable(false);
@@ -181,6 +184,10 @@ public class GameScreenCtrl {
         Answer2.setText(answerText2);
         Answer3.setText(answerText3);
     }
+
+    /**
+     * It creates a pause between 2 questions
+     */
 
     public void createTimer(){
         Timer timer = new Timer();
