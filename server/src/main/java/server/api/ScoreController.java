@@ -2,6 +2,7 @@ package server.api;
 
 
 import commons.Score;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.Random;
 
 public class ScoreController {
     private final Random random;
+
     private final ScoreRepository repo;
 
     public ScoreController(Random random, ScoreRepository repo) {
@@ -52,6 +54,12 @@ public class ScoreController {
         return ResponseEntity.ok(repo.getById((long) idx));
     }
 
+    @GetMapping(path = "get/top")
+    public List<Score> getSorted(){
+        //to be improved, good enough for now
+        return repo.findAll(Sort.by(Sort.Direction.DESC, "score"));
+    }
+
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Score> deleteById(@PathVariable("id") long id ){
@@ -60,7 +68,8 @@ public class ScoreController {
     }
 
     @PutMapping("put/{id}")
-    public Score updateById(@RequestBody Score newScore, @PathVariable("id") long id) {
+    public Score updateById(@RequestBody Score newScore,
+                            @PathVariable("id") long id) {
 
         return repo.findById(id)
                 .map(score -> {
@@ -74,7 +83,5 @@ public class ScoreController {
                     return repo.save(newScore);
                 });
     }
-
-
 
 }

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package client.utils;
 
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
@@ -106,12 +107,13 @@ public class ServerUtils {
                 .post(Entity.entity(score, APPLICATION_JSON), Score.class);
     }
 
-    public Entry1 addEntry(Entry1 entry1){
+    public Activity addEntry(Activity activity){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/entry/post")
                 .request(APPLICATION_JSON)
                 .accept(APPLICATION_JSON)
-                .post(Entity.entity(entry1, APPLICATION_JSON), Entry1.class);
+                .post(Entity.entity(activity, APPLICATION_JSON),
+                        Activity.class);
     }
 
     public MostEnergyQuestion getMEQuestion(){
@@ -121,6 +123,18 @@ public class ServerUtils {
                 .accept(APPLICATION_JSON)
                 .get(MostEnergyQuestion.class);
     }
+
+    /**
+     * Get a sorted list of scores from the database.
+     * @return a sorted list of type Score
+     */
+    public List<Score> getTopScores(){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/score/get/top")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .get(new GenericType<List<Score>>() {});
+    }            
 
     public HowMuchQuestion getHMQuestion(){
         return ClientBuilder.newClient(new ClientConfig())

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package client.scenes;
 
 import java.net.URL;
@@ -33,16 +34,20 @@ import javafx.scene.control.TableView;
 public class QuoteOverviewCtrl implements Initializable {
 
     private final ServerUtils server;
+
     private final MainCtrl mainCtrl;
 
     private ObservableList<Quote> data;
 
     @FXML
     private TableView<Quote> table;
+
     @FXML
     private TableColumn<Quote, String> colFirstName;
+
     @FXML
     private TableColumn<Quote, String> colLastName;
+
     @FXML
     private TableColumn<Quote, String> colQuote;
 
@@ -54,9 +59,12 @@ public class QuoteOverviewCtrl implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        colFirstName.setCellValueFactory(q -> new SimpleStringProperty(q.getValue().person.firstName));
-        colLastName.setCellValueFactory(q -> new SimpleStringProperty(q.getValue().person.lastName));
-        colQuote.setCellValueFactory(q -> new SimpleStringProperty(q.getValue().quote));
+        colFirstName.setCellValueFactory(q ->
+                new SimpleStringProperty(q.getValue().person.firstName));
+        colLastName.setCellValueFactory(q ->
+                new SimpleStringProperty(q.getValue().person.lastName));
+        colQuote.setCellValueFactory(q ->
+                new SimpleStringProperty(q.getValue().quote));
     }
 
   /**  public void addQuote() {

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package client.scenes;
 
 import javafx.scene.Parent;
@@ -28,27 +29,43 @@ public class MainCtrl {
     private Stage primaryStage;
 
     private StartScreenCtrl startScreenCtrl;
+
     private Scene startScreen;
+
     private InstructionSceneCtrl instructionSceneCtrl;
+
     private Scene instructionScene;
 
     private GameScreenCtrl GameScreenCtrl;
+
     private Scene GameScreenScene;
+
+    private Scene leaderboardScene;
+
+    private leaderboardSceneCtrl leaderboardSceneCtrl;
 
     /**
      * Initialize.
      *
      * @param primaryStage the primary stage
      * @param startScreen  the start screen
+     * @param instructionScene
+     * @param gameScreen
+     * @param leaderboardScreen
      */
-    public void initialize(Stage primaryStage, Pair<StartScreenCtrl, Parent> startScreen
-            , Pair<InstructionSceneCtrl, Parent> instructionScene, Pair<GameScreenCtrl, Parent> gameScreen) {
+    public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
+            Parent> startScreen
+            , Pair<InstructionSceneCtrl, Parent> instructionScene,
+                           Pair<GameScreenCtrl, Parent> gameScreen,
+                           Pair<leaderboardSceneCtrl,
+                                   Parent> leaderboardScreen) {
         this.primaryStage = primaryStage;
         this.startScreenCtrl = startScreen.getKey();
         this.startScreen = new Scene(startScreen.getValue());
         this.instructionScene = new Scene(instructionScene.getValue());
         this.instructionSceneCtrl = instructionScene.getKey();
-
+        this.leaderboardScene = new Scene(leaderboardScreen.getValue());
+        this.leaderboardSceneCtrl = leaderboardScreen.getKey();
         this.GameScreenCtrl = gameScreen.getKey();
         this.GameScreenScene = new Scene(gameScreen.getValue());
 
@@ -80,4 +97,15 @@ public class MainCtrl {
         primaryStage.setScene(GameScreenScene);
         GameScreenCtrl.setAnswer();
     }
+
+    /**
+     * Show leaderboard screen.
+     */
+    public void showLeaderboard(){
+        primaryStage.setTitle("Quizzzz");
+        leaderboardSceneCtrl.load();
+        primaryStage.setScene(leaderboardScene);
+    }
+
+
 }

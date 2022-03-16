@@ -1,6 +1,6 @@
 package server.api;
 
-import commons.Entry1;
+import commons.Activity;
 import commons.HowMuchQuestion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,21 +20,28 @@ import java.util.List;
 
         @GetMapping(path = "")
         public HowMuchQuestion getAll() {
-            Entry1 correctOption = ctrl.getRandom().getBody();
-            Entry1 firstOption = correctOption;
-            double random = Math.random() * (2) + 0.1;
-            double random2 = Math.random() * (2) + 0.1;
-            Entry1 secondOption = new Entry1(correctOption.getId(), correctOption.getImage_path(), correctOption.getTitle()
-            , (int)(correctOption.getConsumption_in_wh() * random) / 10 * 10, correctOption.getSource());
-            Entry1 thirdOption = new Entry1(correctOption.getId(), correctOption.getImage_path(), correctOption.getTitle()
-                    , (int)(correctOption.getConsumption_in_wh() * random2) / 10 * 10, correctOption.getSource());
-            List<Entry1> options = new ArrayList<>();
+            Activity correctOption = ctrl.getRandom().getBody();
+            Activity firstOption = correctOption;
+
+            double random = Math.random() * 2 + 0.1;
+            double random2 = Math.random() * 2 + 0.1;
+
+            Activity secondOption = new Activity(correctOption.getImagePath(),
+                    correctOption.getTitle()
+            , (int)(correctOption.getConsumptionInWh() * random) / 10 * 10,
+                    correctOption.getSource());
+            Activity thirdOption = new Activity(correctOption.getImagePath(),
+                    correctOption.getTitle()
+                    , (int)(correctOption.getConsumptionInWh()
+                    * random2) / 10 * 10, correctOption.getSource());
+            List<Activity> options = new ArrayList<>();
 
             options.add(firstOption);
             options.add(secondOption);
             options.add(thirdOption);
 
             Collections.shuffle(options);
-            return new HowMuchQuestion(options.get(0), options.get(1), options.get(2), correctOption);
+            return new HowMuchQuestion(options.get(0), options.get(1),
+                    options.get(2), correctOption);
         }
 }

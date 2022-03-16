@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.leaderboardSceneCtrl">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #b9f6caff;" VBox.vgrow="ALWAYS">
+      <children>
+        <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </Label>
+            <Button layoutX="227.0" layoutY="342.0" mnemonicParsing="false" onAction="#goToStartScene" prefHeight="42.0" prefWidth="146.0" style="-fx-border-color: #1b5e20; -fx-background-color: #fff; -fx-border-width: 1px;" text="PLAY AGAIN" textAlignment="CENTER" textFill="#1b5e20">
+               <font>
+                  <Font name="Candara Bold" size="17.0" />
+               </font>
+            </Button>
+            <TableView fx:id="table" layoutX="100.0" layoutY="57.0" prefHeight="266.0" prefWidth="400.0" style="-fx-border-color: #1b5e20; -fx-background-color: #fff;">
+              <columns>
+                <TableColumn fx:id="rank" prefWidth="50.0" text="RANK" />
+                <TableColumn fx:id="name" prefWidth="170.0" text="NAME" />
+                  <TableColumn fx:id="value" prefWidth="160.0" text="SCORE" />
+              </columns>
+            </TableView>
+            <Text fill="#1b5e20" layoutX="183.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEADERBOARD" textAlignment="CENTER" wrappingWidth="241.97894287109375">
+               <font>
+                  <Font name="Candara Bold" size="33.0" />
+               </font>
+            </Text>
+      </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+    </AnchorPane>
+  </children>
+</VBox>

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 
-import commons.Entry1;
+import commons.Activity;
 import server.database.EntryRepository;
 
 
@@ -28,6 +28,7 @@ import server.database.EntryRepository;
 public class EntryController {
 
     private final Random random;
+
     private final EntryRepository repo;
 
     public EntryController(Random random, EntryRepository repo) {
@@ -36,19 +37,20 @@ public class EntryController {
     }
 
     @GetMapping(path = "get")
-    public List<Entry1> getAll() {
+    public List<Activity> getAll() {
         return repo.findAll();
     }
 
     @GetMapping(path = "get/{id}")
-    public ResponseEntity<Entry1> getById (@PathVariable("id") long id ){
+    public ResponseEntity<Activity> getById (@PathVariable("id") long id ){
         if (id < 0 || !repo.existsById(id)) {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(repo.findById(id).get());
     }
+
     @GetMapping(path = "get/rnd")
-    public ResponseEntity<Entry1> getRandom() {
+    public ResponseEntity<Activity> getRandom() {
         var idx = random.nextInt((int) repo.count()) + 1;
         return ResponseEntity.ok(repo.findById((long) idx).get());
 
@@ -56,12 +58,13 @@ public class EntryController {
 
 
     @PostMapping(path = "post")
-    public ResponseEntity<Entry1> add(@RequestBody Entry1 entry1) {
+    public ResponseEntity<Activity> add(@RequestBody Activity activity) {
 
-        if (isNullOrEmpty(entry1.title) || isNullOrEmpty(entry1.source) || isNullOrEmpty(entry1.image_path)) {
+        if (isNullOrEmpty(activity.title) || isNullOrEmpty(activity.source)
+                || isNullOrEmpty(activity.image_path)) {
             return ResponseEntity.badRequest().build();
         }
-        Entry1 saved = repo.save(entry1);
+        Activity saved = repo.save(activity);
         return ResponseEntity.ok(saved);
     }
 
@@ -70,29 +73,32 @@ public class EntryController {
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<Entry1> deleteById(@PathVariable("id") long id ){
+    public ResponseEntity<Activity> deleteById(@PathVariable("id") long id ){
         repo.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @DeleteMapping("delete/all")
     public void deleteAll(){
         repo.deleteAll();
     }
+
     @PutMapping("put/{id}")
-    public Entry1 updateById(@RequestBody Entry1 newEntry1, @PathVariable("id") long id) {
+    public Activity updateById(@RequestBody Activity newActivity,
+                               @PathVariable("id") long id) {
 
         return repo.findById(id)
                 .map(entry1 -> {
-                    entry1.title = newEntry1.title;
-                    entry1.consumption_in_wh = newEntry1.consumption_in_wh;
-                    entry1.source = newEntry1.source;
-                    entry1.image_path = newEntry1.image_path;
-                    entry1.id = newEntry1.id;
+                    entry1.title = newActivity.title;
+                    entry1.consumption_in_wh = newActivity.consumption_in_wh;
+                    entry1.source = newActivity.source;
+                    entry1.image_path = newActivity.image_path;
+                    entry1.id = newActivity.id;
                     return repo.save(entry1);
                 })
                 .orElseGet(() -> {
-                    newEntry1.id = id;
-                    return repo.save(newEntry1);
+                    newActivity.id = id;
+                    return repo.save(newActivity);
                 });
     }
 

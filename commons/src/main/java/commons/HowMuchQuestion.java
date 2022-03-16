@@ -9,51 +9,56 @@ import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 public class HowMuchQuestion {
 
 
-    private Entry1 firstOption;
-    private Entry1 secondOption;
-    private Entry1 thirdOption;
-    private Entry1 correctOption;
+    private Activity firstOption;
+
+    private Activity secondOption;
+
+    private Activity thirdOption;
+
+    private Activity correctOption;
 
     public HowMuchQuestion(){
 
     }
 
-    public HowMuchQuestion(Entry1 firstOption, Entry1 secondOption, Entry1 thirdOption, Entry1 correctOption) {
+    public HowMuchQuestion(Activity firstOption,
+                           Activity secondOption, Activity thirdOption,
+                           Activity correctOption) {
         this.firstOption = firstOption;
         this.secondOption = secondOption;
         this.thirdOption = thirdOption;
         this.correctOption = correctOption;
     }
 
-    public Entry1 getFirstOption() {
+    public Activity getFirstOption() {
         return firstOption;
     }
 
-    public void setFirstOption(Entry1 firstOption) {
+    public void setFirstOption(Activity firstOption) {
         this.firstOption = firstOption;
     }
 
-    public Entry1 getSecondOption() {
+    public Activity getSecondOption() {
         return secondOption;
     }
 
-    public void setSecondOption(Entry1 secondOption) {
+    public void setSecondOption(Activity secondOption) {
         this.secondOption = secondOption;
     }
 
-    public Entry1 getThirdOption() {
+    public Activity getThirdOption() {
         return thirdOption;
     }
 
-    public void setThirdOption(Entry1 thirdOption) {
+    public void setThirdOption(Activity thirdOption) {
         this.thirdOption = thirdOption;
     }
 
-    public Entry1 getCorrectOption() {
+    public Activity getCorrectOption() {
         return correctOption;
     }
 
-    public void setCorrectOption(Entry1 correctOption) {
+    public void setCorrectOption(Activity correctOption) {
         this.correctOption = correctOption;
     }
 

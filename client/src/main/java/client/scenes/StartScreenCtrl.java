@@ -23,7 +23,9 @@ public class StartScreenCtrl extends Application {
 
 
     private final ServerUtils server;
+
     private final MainCtrl mainCtrl;
+
     private boolean isCompleted;
     private static Score ownScore;
     @FXML

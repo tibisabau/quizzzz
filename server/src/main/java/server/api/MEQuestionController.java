@@ -1,6 +1,7 @@
 package server.api;
+
 import commons.MostEnergyQuestion;
-import commons.Entry1;
+import commons.Activity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,21 +17,31 @@ public class MEQuestionController {
 
     @GetMapping(path = "")
     public MostEnergyQuestion getAll() {
-        Entry1 firstOption = ctrl.getRandom().getBody();
-        Entry1 secondOption = firstOption;
-        Entry1 thirdOption = firstOption;
+        Activity firstOption = ctrl.getRandom().getBody();
+        Activity secondOption = firstOption;
+        Activity thirdOption = firstOption;
 
-        while(secondOption.getId() == firstOption.getId())
+        while(secondOption.getId() == firstOption.getId()){
             secondOption = ctrl.getRandom().getBody();
-        while(thirdOption.getId() == firstOption.getId() || thirdOption.getId() == secondOption.getId())
+
+        }
+        while(thirdOption.getId() == firstOption.getId()
+                || thirdOption.getId() == secondOption.getId()){
             thirdOption = ctrl.getRandom().getBody();
+        }
 
-        Entry1 answer = firstOption;
-        if(answer.getConsumption_in_wh() < secondOption.getConsumption_in_wh())
+
+        Activity answer = firstOption;
+        if(answer.getConsumptionInWh() < secondOption.getConsumptionInWh()){
             answer = secondOption;
-        if(answer.getConsumption_in_wh() < thirdOption.getConsumption_in_wh())
-            answer = thirdOption;
+        }
 
-        return new MostEnergyQuestion(firstOption, secondOption, thirdOption, answer);
+        if(answer.getConsumptionInWh() < thirdOption.getConsumptionInWh()){
+            answer = thirdOption;
+        }
+
+
+        return new MostEnergyQuestion(firstOption,
+                secondOption, thirdOption, answer);
     }
 }
