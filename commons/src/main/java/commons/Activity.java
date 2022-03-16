@@ -19,7 +19,9 @@ public class Activity {
     public long id;
 
     public String title;
+
     public String imagePath;
+
     public long consumptionInWh;
 
     public Activity(){}
