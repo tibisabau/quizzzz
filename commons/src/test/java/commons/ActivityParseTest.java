@@ -9,14 +9,17 @@ class ActivityParseTest {
     ActivityParse activityParse1;
 
     ActivityParse activityParse2;
-    
+
     ActivityParse activityParse3;
 
     @BeforeEach
     void setUp() {
-        activityParse1 = new ActivityParse("id","image_path","title",1000,"source");
-        activityParse2 = new ActivityParse("id","image_path","title",1000,"source");
-        activityParse3 = new ActivityParse("new_id","new_image_path","new_title",2000,"new_source");
+        activityParse1 = new ActivityParse("id","image_path",
+                "title",1000,"source");
+        activityParse2 = new ActivityParse("id","image_path",
+                "title",1000,"source");
+        activityParse3 = new ActivityParse("new_id","new_image_path",
+                "new_title",2000,"new_source");
     }
 
     @Test
@@ -72,7 +75,8 @@ class ActivityParseTest {
 
     @Test
     void getSource() {
-        assertEquals("source", activityParse1.getSource());
+        assertEquals("source",
+                activityParse1.getSource());
     }
 
     @Test
