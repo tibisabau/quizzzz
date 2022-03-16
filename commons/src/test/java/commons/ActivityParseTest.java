@@ -7,7 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ActivityParseTest {
     ActivityParse activityParse1;
+
     ActivityParse activityParse2;
+    
     ActivityParse activityParse3;
 
     @BeforeEach
@@ -36,7 +38,7 @@ class ActivityParseTest {
     }
 
     @Test
-    void setImage_path() {
+    void setImagePath() {
         activityParse1.setImagePath("test_path");
         assertEquals("test_path", activityParse1.imagePath);
     }
@@ -48,7 +50,7 @@ class ActivityParseTest {
     }
 
     @Test
-    void setConsumption_in_wh() {
+    void setConsumptionInWh() {
         activityParse1.setConsumptionInWh(7000);
         assertEquals(7000, activityParse1.consumptionInWh);
     }
@@ -64,7 +66,7 @@ class ActivityParseTest {
     }
 
     @Test
-    void getImage_path() {
+    void getImagePath() {
         assertEquals("image_path",activityParse1.getImagePath());
     }
 
@@ -74,7 +76,7 @@ class ActivityParseTest {
     }
 
     @Test
-    void getConsumption_in_wh() {
+    void getConsumptionInWh() {
         assertEquals(1000, activityParse1.getConsumptionInWh());
     }
 }
