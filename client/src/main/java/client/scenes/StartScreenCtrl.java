@@ -21,6 +21,7 @@ import javafx.stage.Modality;
  */
 public class StartScreenCtrl extends Application {
 
+    private static Score ownScore;
 
     private final ServerUtils server;
 
@@ -28,7 +29,6 @@ public class StartScreenCtrl extends Application {
 
     private boolean isCompleted;
 
-    private static Score ownScore;
 
     @FXML
     private TextField nicknameField;
@@ -150,7 +150,7 @@ public class StartScreenCtrl extends Application {
 
     /**
      * getter for ownScore
-     * @return
+     * @return ownScore
      */
     public static Score getOwnScore() {
         return ownScore;

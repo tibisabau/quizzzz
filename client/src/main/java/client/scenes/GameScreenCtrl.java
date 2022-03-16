@@ -3,6 +3,7 @@ package client.scenes;
 import client.utils.ServerUtils;
 import com.google.inject.Inject;
 
+import commons.Activity;
 import commons.MostEnergyQuestion;
 import commons.Score;
 import javafx.fxml.FXML;
@@ -17,21 +18,6 @@ import java.util.TimerTask;
 
 
 public class GameScreenCtrl {
-
-    private final ServerUtils server;
-
-    private final MainCtrl mainCtrl;
-
-    private int counter;
-
-    private List<MostEnergyQuestion> questionList;
-
-    private String correctColor = "-fx-background-color: Green";
-
-    private String incorrectColor = "-fx-background-color: Red";
-
-    private MostEnergyQuestion currentQuestion;
-
     @FXML
     public Label questionLabel;
 
@@ -55,6 +41,21 @@ public class GameScreenCtrl {
 
     @FXML
     public Text Answer3;
+
+    private final ServerUtils server;
+
+    private final MainCtrl mainCtrl;
+
+    private int counter;
+
+    private List<MostEnergyQuestion> questionList;
+
+    private String correctColor = "-fx-background-color: Green";
+
+    private String incorrectColor = "-fx-background-color: Red";
+
+    private MostEnergyQuestion currentQuestion;
+
 
 
 
@@ -165,7 +166,8 @@ public class GameScreenCtrl {
     }
 
     /**
-     * Sets the answer for a new question and adds this question to the question list.
+     * Sets the answer for a new question
+     * and adds this question to the question list.
      */
     public void setAnswer(){
         Answer1.setDisable(false);
@@ -227,19 +229,20 @@ public class GameScreenCtrl {
      * @return boolean if the answer is correct
      */
     public boolean answerCorrect (MostEnergyQuestion question, int answer){
+        Activity correct = question.getCorrectOption();
         switch (answer){
             case 1:
-                if (question.getFirstOption().equals(question.getCorrectOption())){
+                if (question.getFirstOption().equals(correct)){
                     return true;
                 }
                 break;
             case 2:
-                if (question.getSecondOption().equals(question.getCorrectOption())){
+                if (question.getSecondOption().equals(correct)){
                     return true;
                 }
                 break;
             case 3:
-                if (question.getThirdOption().equals(question.getCorrectOption())){
+                if (question.getThirdOption().equals(correct)){
                     return true;
                 }
                 break;
