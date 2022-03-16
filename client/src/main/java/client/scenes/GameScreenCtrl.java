@@ -49,6 +49,12 @@ public class GameScreenCtrl {
 
     private List<MostEnergyQuestion> questionList;
 
+    private String correctColor = "-fx-background-color: Green";
+
+    private String incorrectColor = "-fx-background-color: Red";
+
+    private MostEnergyQuestion currentQuestion;
+
 
 
     /**
@@ -74,6 +80,7 @@ public class GameScreenCtrl {
         Answer2.setDisable(true);
         Answer3.setDisable(true);
         AnswerC.setDisable(true);
+        answerPoints(currentQuestion, 1);
         --counter;
         if(counter > 0) {
             //showLoadingPage  - TO BE IMPLEMENTED
@@ -81,6 +88,7 @@ public class GameScreenCtrl {
 
         }else{
             //showLeaderBoardScreen()  - TO BE IMPLEMENTED
+
             mainCtrl.showLeaderboard();
         }
     }
@@ -94,6 +102,7 @@ public class GameScreenCtrl {
         Answer1.setDisable(true);
         AnswerC.setDisable(true);
         Answer3.setDisable(true);
+        answerPoints(currentQuestion,2);
         --counter;
         if(counter > 0) {
             //showLoading() - TO BE IMPLEMENTED
@@ -113,6 +122,7 @@ public class GameScreenCtrl {
         Answer2.setDisable(true);
         Answer1.setDisable(true);
         AnswerA.setDisable(true);
+        answerPoints(currentQuestion, 3 );
         --counter;
         if(counter > 0) {
             //showLoadingPage  - TO BE IMPLEMENTED
@@ -120,6 +130,23 @@ public class GameScreenCtrl {
         }else{
             //showLeaderBoardScreen()  - TO BE IMPLEMENTED
             mainCtrl.showLeaderboard();
+        }
+    }
+    public void showAnswers(){
+        if(answerCorrect(currentQuestion, 1 )){
+            AnswerA.setStyle(correctColor);
+            AnswerB.setStyle(incorrectColor);
+            AnswerC.setStyle(incorrectColor);
+        }
+        else if(answerCorrect(currentQuestion, 2)){
+            AnswerA.setStyle(incorrectColor);
+            AnswerB.setStyle(correctColor);
+            AnswerC.setStyle(incorrectColor);
+        }
+        else {
+            AnswerA.setStyle(incorrectColor);
+            AnswerB.setStyle(incorrectColor);
+            AnswerC.setStyle(correctColor);
         }
     }
 
@@ -140,11 +167,11 @@ public class GameScreenCtrl {
         AnswerA.setStyle("-fx-background-color: WHITE");
         AnswerB.setStyle("-fx-background-color: WHITE");
         AnswerC.setStyle("-fx-background-color: WHITE");
-        MostEnergyQuestion question = server.getMEQuestion();
-        questionList.add(question);
-        String answerText1 = question.getFirstOption().toStringAnswer();
-        String answerText2 = question.getSecondOption().toStringAnswer();
-        String answerText3 = question.getThirdOption().toStringAnswer();
+        currentQuestion = server.getMEQuestion();
+        questionList.add(currentQuestion);
+        String answerText1 = currentQuestion.getFirstOption().toStringAnswer();
+        String answerText2 = currentQuestion.getSecondOption().toStringAnswer();
+        String answerText3 = currentQuestion.getThirdOption().toStringAnswer();
         Answer1.setText(answerText1);
         Answer2.setText(answerText2);
         Answer3.setText(answerText3);
@@ -161,16 +188,18 @@ public class GameScreenCtrl {
         timer.schedule(timerTask,1500);
 
     }
-    public void AnswerPoints(MostEnergyQuestion question, int answer){
-        if(AnswerCorrect(question,answer)) {
-            Score score = StartScreenCtrl.getOwnScore();
+    public void answerPoints(MostEnergyQuestion question, int answer){
+        Score score = StartScreenCtrl.getOwnScore();
+        if(answerCorrect(question,answer)) {
             score.setScore(score.getScore() + 100);
         }
+        showAnswers();
+        System.out.println(score.getScore());
     }
 
 
 
-    public boolean AnswerCorrect (MostEnergyQuestion question, int answer){
+    public boolean answerCorrect (MostEnergyQuestion question, int answer){
         switch (answer){
             case 1:
                 if (question.getFirstOption().equals(question.getCorrectOption())){
