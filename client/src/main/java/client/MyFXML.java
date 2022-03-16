@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package client;
 
 import java.io.IOException;
@@ -39,7 +40,8 @@ public class MyFXML {
 
     public <T> Pair<T, Parent> load(Class<T> c, String... parts) {
         try {
-            var loader = new FXMLLoader(getLocation(parts), null, null, new MyFactory(), StandardCharsets.UTF_8);
+            var loader = new FXMLLoader(getLocation(parts),
+                    null, null, new MyFactory(), StandardCharsets.UTF_8);
             Parent parent = loader.load();
             T ctrl = loader.getController();
             return new Pair<>(ctrl, parent);
@@ -53,7 +55,8 @@ public class MyFXML {
         return MyFXML.class.getClassLoader().getResource(path);
     }
 
-    private class MyFactory implements BuilderFactory, Callback<Class<?>, Object> {
+    private class MyFactory implements BuilderFactory,
+            Callback<Class<?>, Object> {
 
         @Override
         @SuppressWarnings("rawtypes")

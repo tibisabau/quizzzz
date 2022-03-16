@@ -17,6 +17,7 @@ public class Activity {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "generator")
     @SequenceGenerator(name="generator", sequenceName = "seq", allocationSize=1)
     public long id;
+
     public String title;
     public String imagePath;
     public long consumptionInWh;

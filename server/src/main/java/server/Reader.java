@@ -30,7 +30,8 @@ public class Reader implements ApplicationRunner {
     }
 
     /**
-     * Reads the provided JSON file and puts the entries in the database on application startup.
+     * Reads the provided JSON file and puts the
+     * entries in the database on application startup.
      * @param args
      * @throws Exception
      */
@@ -49,12 +50,14 @@ public class Reader implements ApplicationRunner {
                 assign = true;
             } finally {
                 if(assign == true){
-                    reader = Files.newBufferedReader(Paths.get("repository-template/server/activities.json"));
+                    reader = Files.newBufferedReader(Paths.
+                            get("repository-template/server/activities.json"));
                 }
             }
 
             // convert JSON array to list of users
-            List<ActivityParse> entries = new Gson().fromJson(reader, new TypeToken<List<ActivityParse>>() {}.getType());
+            List<ActivityParse> entries = new Gson().fromJson(reader,
+                    new TypeToken<List<ActivityParse>>() {}.getType());
 
             // close reader
             reader.close();
@@ -75,7 +78,7 @@ public class Reader implements ApplicationRunner {
     /**
      * Converts activityParse to activity
      * @param activityParse Takes an activityParse object as an input
-     * @returns an activity object converted from the activityParse object
+     * @return an activity object converted from the activityParse object
      */
     public static Activity convert(ActivityParse activityParse){
         String title = activityParse.title;

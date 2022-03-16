@@ -3,10 +3,12 @@ package commons;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
 /**
- * This class is used to parse JSON from the provided file containing activities.
+ * This class is used to parse JSON from
+ * the provided file containing activities.
  */
 public class ActivityParse {
     public String id;
+
     public String title;
     public String imagePath;
     public String source;
@@ -30,7 +32,8 @@ public class ActivityParse {
 
     @Override
     public boolean equals(Object obj) {
-        return EqualsBuilder.reflectionEquals(this, obj);
+        return EqualsBuilder.
+                reflectionEquals(this, obj);
     }
 
     public void setId(String id) {

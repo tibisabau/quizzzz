@@ -10,15 +10,20 @@ public class HowMuchQuestion {
 
 
     private Activity firstOption;
+
     private Activity secondOption;
+
     private Activity thirdOption;
+
     private Activity correctOption;
 
     public HowMuchQuestion(){
 
     }
 
-    public HowMuchQuestion(Activity firstOption, Activity secondOption, Activity thirdOption, Activity correctOption) {
+    public HowMuchQuestion(Activity firstOption,
+                           Activity secondOption, Activity thirdOption,
+                           Activity correctOption) {
         this.firstOption = firstOption;
         this.secondOption = secondOption;
         this.thirdOption = thirdOption;

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package server.api;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ import server.database.EntryRepository;
 public class TestEntryRepository implements EntryRepository {
 
     public final List<Activity> entries = new ArrayList<>();
+
     public final List<String> calledMethods = new ArrayList<>();
 
     private void call(String name) {
@@ -195,7 +197,8 @@ public class TestEntryRepository implements EntryRepository {
     }
 
     @Override
-    public <S extends Activity> Page<S> findAll(Example<S> example, Pageable pageable) {
+    public <S extends Activity> Page<S> findAll(Example<S> example,
+                                                Pageable pageable) {
         // TODO Auto-generated method stub
         return null;
     }

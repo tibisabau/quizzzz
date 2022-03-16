@@ -16,9 +16,6 @@ import java.util.List;
 
 public class leaderboardSceneCtrl {
 
-    private final ServerUtils server;
-    private final MainCtrl mainCtrl;
-
     @FXML
     public TableView table;
 
@@ -30,6 +27,11 @@ public class leaderboardSceneCtrl {
 
     @FXML
     public TableColumn<Score, String> value;
+
+    private final ServerUtils server;
+
+    private final MainCtrl mainCtrl;
+
 
     /**
      * A constructor for the leaderboardSceneCtrl class.
@@ -49,16 +51,20 @@ public class leaderboardSceneCtrl {
     public void load(){
         name.setCellValueFactory(new PropertyValueFactory<>("userName"));
         value.setCellValueFactory(new PropertyValueFactory<>("score"));
-        rank.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Score, String>, ObservableValue<String>>() {
-            @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<Score, String> p) {
-                return new ReadOnlyObjectWrapper((table.getItems().indexOf(p.getValue()) + 1) + "");
+        rank.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<Score, String>,
+                        ObservableValue<String>>() {
+                    @Override public ObservableValue<String>
+                    call(TableColumn.CellDataFeatures<Score, String> p) {
+                return new ReadOnlyObjectWrapper(
+                        (table.getItems().indexOf(p.getValue()) + 1) + "");
             }
         });
         rank.setSortable(false);
 
         List<Score> scores = server.getTopScores();
         for(int i = 0; i < scores.size(); i++){
-            table.getItems().add((scores.get(i)));
+            table.getItems().add(scores.get(i));
         }
     }
 
