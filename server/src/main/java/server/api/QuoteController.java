@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package server.api;
 
 import java.util.List;
@@ -34,6 +35,7 @@ import server.database.QuoteRepository;
 public class QuoteController {
 
     private final Random random;
+
     private final QuoteRepository repo;
 
     public QuoteController(Random random, QuoteRepository repo) {

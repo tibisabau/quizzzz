@@ -27,6 +27,7 @@ public class Score {
 
 
     private String userName;
+
     private int score;
 
     @SuppressWarnings("unused")
@@ -102,10 +103,15 @@ public class Score {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
         Score score1 = (Score) o;
-        return userId == score1.userId && score == score1.score && Objects.equals(userName, score1.userName);
+        return userId == score1.userId && score == score1.score
+                && Objects.equals(userName, score1.userName);
     }
 
     @Override

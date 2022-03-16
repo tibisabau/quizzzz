@@ -17,6 +17,7 @@ import java.util.Random;
 
 public class ScoreController {
     private final Random random;
+
     private final ScoreRepository repo;
 
     public ScoreController(Random random, ScoreRepository repo) {
@@ -67,7 +68,8 @@ public class ScoreController {
     }
 
     @PutMapping("put/{id}")
-    public Score updateById(@RequestBody Score newScore, @PathVariable("id") long id) {
+    public Score updateById(@RequestBody Score newScore,
+                            @PathVariable("id") long id) {
 
         return repo.findById(id)
                 .map(score -> {

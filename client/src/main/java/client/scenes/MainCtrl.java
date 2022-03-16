@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package client.scenes;
 
 import javafx.scene.Parent;
@@ -28,14 +29,19 @@ public class MainCtrl {
     private Stage primaryStage;
 
     private StartScreenCtrl startScreenCtrl;
+
     private Scene startScreen;
+
     private InstructionSceneCtrl instructionSceneCtrl;
+
     private Scene instructionScene;
 
     private GameScreenCtrl GameScreenCtrl;
+
     private Scene GameScreenScene;
 
     private Scene leaderboardScene;
+
     private leaderboardSceneCtrl leaderboardSceneCtrl;
 
     /**
@@ -43,9 +49,16 @@ public class MainCtrl {
      *
      * @param primaryStage the primary stage
      * @param startScreen  the start screen
+     * @param instructionScene
+     * @param gameScreen
+     * @param leaderboardScreen
      */
-    public void initialize(Stage primaryStage, Pair<StartScreenCtrl, Parent> startScreen
-            , Pair<InstructionSceneCtrl, Parent> instructionScene, Pair<GameScreenCtrl, Parent> gameScreen, Pair<leaderboardSceneCtrl, Parent> leaderboardScreen) {
+    public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
+            Parent> startScreen
+            , Pair<InstructionSceneCtrl, Parent> instructionScene,
+                           Pair<GameScreenCtrl, Parent> gameScreen,
+                           Pair<leaderboardSceneCtrl,
+                                   Parent> leaderboardScreen) {
         this.primaryStage = primaryStage;
         this.startScreenCtrl = startScreen.getKey();
         this.startScreen = new Scene(startScreen.getValue());
@@ -91,7 +104,7 @@ public class MainCtrl {
     public void showLeaderboard(){
         primaryStage.setTitle("Quizzzz");
         leaderboardSceneCtrl.load();
-        primaryStage.setScene((leaderboardScene));
+        primaryStage.setScene(leaderboardScene);
     }
 
 

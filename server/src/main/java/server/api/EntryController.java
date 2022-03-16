@@ -28,6 +28,7 @@ import server.database.EntryRepository;
 public class EntryController {
 
     private final Random random;
+
     private final EntryRepository repo;
 
     public EntryController(Random random, EntryRepository repo) {
@@ -47,6 +48,7 @@ public class EntryController {
         }
         return ResponseEntity.ok(repo.findById(id).get());
     }
+
     @GetMapping(path = "get/rnd")
     public ResponseEntity<Activity> getRandom() {
         var idx = random.nextInt((int) repo.count()) + 1;
@@ -58,7 +60,8 @@ public class EntryController {
     @PostMapping(path = "post")
     public ResponseEntity<Activity> add(@RequestBody Activity activity) {
 
-        if (isNullOrEmpty(activity.title) || isNullOrEmpty(activity.source) || isNullOrEmpty(activity.image_path)) {
+        if (isNullOrEmpty(activity.title) || isNullOrEmpty(activity.source)
+                || isNullOrEmpty(activity.image_path)) {
             return ResponseEntity.badRequest().build();
         }
         Activity saved = repo.save(activity);
@@ -74,12 +77,15 @@ public class EntryController {
         repo.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @DeleteMapping("delete/all")
     public void deleteAll(){
         repo.deleteAll();
     }
+
     @PutMapping("put/{id}")
-    public Activity updateById(@RequestBody Activity newActivity, @PathVariable("id") long id) {
+    public Activity updateById(@RequestBody Activity newActivity,
+                               @PathVariable("id") long id) {
 
         return repo.findById(id)
                 .map(entry1 -> {

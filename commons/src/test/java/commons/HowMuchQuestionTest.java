@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HowMuchQuestionTest {
     private HowMuchQuestion p;
+
     @BeforeEach
     public void setup() {
         Activity e1 = new Activity("", "", 1, "");
@@ -15,6 +16,7 @@ class HowMuchQuestionTest {
         Activity e4 = new Activity("", "", 1, "");
         p = new HowMuchQuestion(e1, e2, e3, e4);
     }
+
     @Test
     public void checkConstructor() {
         assertNotNull(p);
