@@ -17,6 +17,21 @@ import java.util.TimerTask;
 
 
 public class GameScreenCtrl {
+
+    private final ServerUtils server;
+
+    private final MainCtrl mainCtrl;
+
+    private int counter;
+
+    private List<MostEnergyQuestion> questionList;
+
+    private String correctColor = "-fx-background-color: Green";
+
+    private String incorrectColor = "-fx-background-color: Red";
+
+    private MostEnergyQuestion currentQuestion;
+
     @FXML
     public Label questionLabel;
 
@@ -41,19 +56,6 @@ public class GameScreenCtrl {
     @FXML
     public Text Answer3;
 
-    private final ServerUtils server;
-
-    private final MainCtrl mainCtrl;
-
-    private int counter;
-
-    private List<MostEnergyQuestion> questionList;
-
-    private String correctColor = "-fx-background-color: Green";
-
-    private String incorrectColor = "-fx-background-color: Red";
-
-    private MostEnergyQuestion currentQuestion;
 
 
 

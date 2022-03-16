@@ -27,7 +27,9 @@ public class StartScreenCtrl extends Application {
     private final MainCtrl mainCtrl;
 
     private boolean isCompleted;
+
     private static Score ownScore;
+
     @FXML
     private TextField nicknameField;
 
