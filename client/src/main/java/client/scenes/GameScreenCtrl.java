@@ -132,6 +132,11 @@ public class GameScreenCtrl {
             mainCtrl.showLeaderboard();
         }
     }
+
+    /**
+     * Shows answers green for the correct ones and red for incorrect
+     */
+
     public void showAnswers(){
         if(answerCorrect(currentQuestion, 1 )){
             AnswerA.setStyle(correctColor);
@@ -188,6 +193,14 @@ public class GameScreenCtrl {
         timer.schedule(timerTask,1500);
 
     }
+
+    /**
+     * Gives points if correct answer is given
+     * @param question question to check if correct
+     * @param answer answer number from 1 to 3, 1 is for a, 2 for b, 3 for c
+     *
+     */
+
     public void answerPoints(MostEnergyQuestion question, int answer){
         Score score = StartScreenCtrl.getOwnScore();
         if(answerCorrect(question,answer)) {
@@ -198,7 +211,12 @@ public class GameScreenCtrl {
     }
 
 
-
+    /**
+     *
+     * @param question question to check if correct
+     * @param answer Answer given
+     * @return boolean if the answer is correct
+     */
     public boolean answerCorrect (MostEnergyQuestion question, int answer){
         switch (answer){
             case 1:
