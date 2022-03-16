@@ -168,4 +168,16 @@ public class ServerUtils {
                 .accept(APPLICATION_JSON)
                 .get(Integer.class);
     }
+
+    /**
+     * generates a "Guess The Amount Of Energy" question
+     * @return a "Guess The Amount Of Energy" question
+     */
+    public GuessXQuestion getGXQuestion(){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/gx/question")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .get(GuessXQuestion.class);
+    }
 }

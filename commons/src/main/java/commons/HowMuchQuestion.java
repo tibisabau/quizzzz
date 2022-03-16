@@ -17,6 +17,9 @@ public class HowMuchQuestion {
 
     private Activity correctOption;
 
+    /**
+     * default constructor for ObjectMapper
+     */
     public HowMuchQuestion(){
 
     }

@@ -16,6 +16,9 @@ public class MostEnergyQuestion {
 
     private Activity correctOption;
 
+    /**
+     * default constructor for ObjectMapper
+     */
     public MostEnergyQuestion(){
 
     }
