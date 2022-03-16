@@ -79,8 +79,8 @@ public class Reader implements ApplicationRunner {
      */
     public static Activity convert(ActivityParse activityParse){
         String title = activityParse.title;
-        String image_path = activityParse.image_path;
-        long consumption_in_wh = activityParse.consumption_in_wh;
+        String image_path = activityParse.imagePath;
+        long consumption_in_wh = activityParse.consumptionInWh;
         Activity activity = new Activity(image_path,title,consumption_in_wh);
         return activity;
     }

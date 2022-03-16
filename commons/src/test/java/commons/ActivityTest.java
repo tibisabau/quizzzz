@@ -39,14 +39,14 @@ class ActivityTest {
 
     @Test
     void setImage_path() {
-        activity1.setImage_path("some_path");
-        assertEquals("some_path",activity1.image_path);
+        activity1.setImagePath("some_path");
+        assertEquals("some_path",activity1.imagePath);
     }
 
     @Test
     void setConsumption_in_wh() {
-        activity1.setConsumption_in_wh(1234);
-        assertEquals(1234, activity1.consumption_in_wh);
+        activity1.setConsumptionInWh(1234);
+        assertEquals(1234, activity1.consumptionInWh);
     }
 
     @Test
@@ -63,14 +63,14 @@ class ActivityTest {
 
     @Test
     void getImage_path() {
-        activity1.image_path = "test_path";
-        assertEquals("test_path", activity1.getImage_path());
+        activity1.imagePath = "test_path";
+        assertEquals("test_path", activity1.getImagePath());
     }
 
     @Test
     void getConsumption_in_wh() {
-        activity1.consumption_in_wh = 7000;
-        assertEquals(7000, activity1.getConsumption_in_wh());
+        activity1.consumptionInWh = 7000;
+        assertEquals(7000, activity1.getConsumptionInWh());
     }
 
     @Test

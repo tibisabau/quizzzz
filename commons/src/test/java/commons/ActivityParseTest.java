@@ -37,8 +37,8 @@ class ActivityParseTest {
 
     @Test
     void setImage_path() {
-        activityParse1.setImage_path("test_path");
-        assertEquals("test_path", activityParse1.image_path);
+        activityParse1.setImagePath("test_path");
+        assertEquals("test_path", activityParse1.imagePath);
     }
 
     @Test
@@ -49,8 +49,8 @@ class ActivityParseTest {
 
     @Test
     void setConsumption_in_wh() {
-        activityParse1.setConsumption_in_wh(7000);
-        assertEquals(7000, activityParse1.consumption_in_wh);
+        activityParse1.setConsumptionInWh(7000);
+        assertEquals(7000, activityParse1.consumptionInWh);
     }
 
     @Test
@@ -65,7 +65,7 @@ class ActivityParseTest {
 
     @Test
     void getImage_path() {
-        assertEquals("image_path",activityParse1.getImage_path());
+        assertEquals("image_path",activityParse1.getImagePath());
     }
 
     @Test
@@ -75,6 +75,6 @@ class ActivityParseTest {
 
     @Test
     void getConsumption_in_wh() {
-        assertEquals(1000, activityParse1.getConsumption_in_wh());
+        assertEquals(1000, activityParse1.getConsumptionInWh());
     }
 }

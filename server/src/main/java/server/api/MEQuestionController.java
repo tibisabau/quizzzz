@@ -26,9 +26,9 @@ public class MEQuestionController {
             thirdOption = ctrl.getRandom().getBody();
 
         Activity answer = firstOption;
-        if(answer.getConsumption_in_wh() < secondOption.getConsumption_in_wh())
+        if(answer.getConsumptionInWh() < secondOption.getConsumptionInWh())
             answer = secondOption;
-        if(answer.getConsumption_in_wh() < thirdOption.getConsumption_in_wh())
+        if(answer.getConsumptionInWh() < thirdOption.getConsumptionInWh())
             answer = thirdOption;
 
         return new MostEnergyQuestion(firstOption, secondOption, thirdOption, answer);
