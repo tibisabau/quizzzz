@@ -60,7 +60,8 @@ public class EntryController {
     @PostMapping(path = "post")
     public ResponseEntity<Activity> add(@RequestBody Activity activity) {
 
-        if (isNullOrEmpty(activity.title) || isNullOrEmpty(activity.imagePath)) {
+        if (isNullOrEmpty(activity.title) ||
+                isNullOrEmpty(activity.imagePath)) {
             return ResponseEntity.badRequest().build();
         }
         Activity saved = repo.save(activity);
