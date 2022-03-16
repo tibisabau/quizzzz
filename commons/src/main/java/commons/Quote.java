@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package commons;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
@@ -37,6 +38,7 @@ public class Quote {
 
     @OneToOne(cascade = CascadeType.PERSIST)
     public Person person;
+
     public String quote;
 
     @SuppressWarnings("unused")

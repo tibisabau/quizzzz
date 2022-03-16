@@ -35,6 +35,7 @@ import java.util.List;
             options.add(thirdOption);
 
             Collections.shuffle(options);
-            return new HowMuchQuestion(options.get(0), options.get(1), options.get(2), correctOption);
+            return new HowMuchQuestion(options.get(0), options.get(1),
+                    options.get(2), correctOption);
         }
 }

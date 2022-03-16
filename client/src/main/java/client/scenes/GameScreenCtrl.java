@@ -16,11 +16,6 @@ import java.util.TimerTask;
 
 
 public class GameScreenCtrl {
-
-    private final ServerUtils server;
-    private final MainCtrl mainCtrl;
-    private int counter;
-    private List<MostEnergyQuestion> questionList;
     @FXML
     public Label questionLabel;
 
@@ -45,6 +40,16 @@ public class GameScreenCtrl {
     @FXML
     public Text Answer3;
 
+    private final ServerUtils server;
+
+    private final MainCtrl mainCtrl;
+
+    private int counter;
+
+    private List<MostEnergyQuestion> questionList;
+
+
+
     /**
      * Instantiates a new Game screen ctrl.
      *
@@ -62,7 +67,7 @@ public class GameScreenCtrl {
     /**
      * Selecting answer A
      */
-    public void SelectAnswerA() throws InterruptedException {
+    public void selectAnswerA() throws InterruptedException {
         AnswerA.setStyle("-fx-background-color: #f6b26b");
         AnswerB.setDisable(true);
         Answer2.setDisable(true);
@@ -82,7 +87,7 @@ public class GameScreenCtrl {
     /**
      * Selecting answer B
      */
-    public void SelectAnswerB() throws InterruptedException {
+    public void selectAnswerB() throws InterruptedException {
         AnswerB.setStyle("-fx-background-color: #f6b26b");
         AnswerA.setDisable(true);
         Answer1.setDisable(true);
@@ -101,7 +106,7 @@ public class GameScreenCtrl {
     /**
      * Selecting answer C
      */
-    public void SelectAnswerC() throws InterruptedException {
+    public void selectAnswerC() throws InterruptedException {
         AnswerC.setStyle("-fx-background-color: #f6b26b");
         AnswerB.setDisable(true);
         Answer2.setDisable(true);

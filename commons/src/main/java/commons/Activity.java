@@ -17,7 +17,9 @@ public class Activity {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "generator")
     @SequenceGenerator(name="generator", sequenceName = "seq", allocationSize=1)
     public long id;
+
     public String title;
+
     public String image_path;
     public long consumption_in_wh;
 
@@ -50,7 +52,7 @@ public class Activity {
         this.title = title;
     }
 
-    public void setImage_path(String image_path) {
+    public void setImagePath(String image_path) {
         this.image_path = image_path;
     }
 
@@ -66,7 +68,7 @@ public class Activity {
         return title;
     }
 
-    public String getImage_path() {
+    public String getImagePath() {
         return image_path;
     }
 

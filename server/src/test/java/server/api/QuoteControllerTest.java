@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package server.api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,7 +31,9 @@ import commons.Quote;
 public class QuoteControllerTest {
 
     public int nextInt;
+
     private MyRandom random;
+
     private TestQuoteRepository repo;
 
     private QuoteController sut;
