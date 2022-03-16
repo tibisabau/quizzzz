@@ -107,6 +107,11 @@ public class ServerUtils {
                 .post(Entity.entity(score, APPLICATION_JSON), Score.class);
     }
 
+    /**
+     * Adds an Activity to the database
+     * @param activity
+     * @return a new Activity
+     */
     public Activity addEntry(Activity activity){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/entry/post")
@@ -116,6 +121,10 @@ public class ServerUtils {
                         Activity.class);
     }
 
+    /**
+     * generates a "Which activity takes more energy" question
+     * @return a "Which activity takes more energy" question
+     */
     public MostEnergyQuestion getMEQuestion(){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/me/question")
@@ -134,8 +143,12 @@ public class ServerUtils {
                 .request(APPLICATION_JSON)
                 .accept(APPLICATION_JSON)
                 .get(new GenericType<List<Score>>() {});
-    }            
+    }
 
+    /**
+     * generates a "How much energy does it take" question
+     * @return a "How much energy does it take" question
+     */
     public HowMuchQuestion getHMQuestion(){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/hm/question")
@@ -144,6 +157,10 @@ public class ServerUtils {
                 .get(HowMuchQuestion.class);
     }
 
+    /**
+     * generates a way to randomise between question types
+     * @return a random integer
+     */
     public Integer getQuestionType(){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/type/question")

@@ -20,6 +20,13 @@ public class MostEnergyQuestion {
 
     }
 
+    /**
+     * constructor for the "Which activity takes more energy" question type
+     * @param firstOption
+     * @param secondOption
+     * @param thirdOption
+     * @param correctOption
+     */
     public MostEnergyQuestion(Activity firstOption,
                               Activity secondOption, Activity thirdOption,
                               Activity correctOption) {
