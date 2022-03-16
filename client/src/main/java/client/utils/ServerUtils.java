@@ -107,6 +107,20 @@ public class ServerUtils {
                 .post(Entity.entity(score, APPLICATION_JSON), Score.class);
     }
 
+    /**
+     * Update Score score
+     * @param score score you want to update as an updated version
+     * @return the updated score
+     */
+    public Score updateScore(Score score){
+        Long id = score.getUserId();
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/score/put/" + id.toString())
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .put(Entity.entity(score, APPLICATION_JSON), Score.class);
+    }
+
     public Activity addEntry(Activity activity){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/entry/post")

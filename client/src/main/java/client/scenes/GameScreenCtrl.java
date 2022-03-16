@@ -91,7 +91,7 @@ public class GameScreenCtrl {
 
         }else{
             //showLeaderBoardScreen()  - TO BE IMPLEMENTED
-
+            server.updateScore(StartScreenCtrl.getOwnScore());
             mainCtrl.showLeaderboard();
         }
     }
@@ -112,6 +112,7 @@ public class GameScreenCtrl {
             this.createTimer();
         }else{
             //showLeaderBoardScreen()  - TO BE IMPLEMENTED
+            server.updateScore(StartScreenCtrl.getOwnScore());
             mainCtrl.showLeaderboard();
         }
     }
@@ -132,6 +133,7 @@ public class GameScreenCtrl {
             this.createTimer();
         }else{
             //showLeaderBoardScreen()  - TO BE IMPLEMENTED
+            server.updateScore(StartScreenCtrl.getOwnScore());
             mainCtrl.showLeaderboard();
         }
     }
