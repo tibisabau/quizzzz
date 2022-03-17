@@ -79,6 +79,7 @@ public class MainCtrl {
     public void showStartScreen() {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(startScreen);
+        GameScreenCtrl.setCounter(20);
     }
 
     /**
