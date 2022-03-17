@@ -78,7 +78,7 @@ public class GameScreenCtrl {
      * Selecting answer A
      */
     public void selectAnswerA() throws InterruptedException {
-        AnswerA.setStyle("-fx-background-color: #f6b26b");
+        AnswerA.setDisable(true);
         AnswerB.setDisable(true);
         Answer2.setDisable(true);
         Answer3.setDisable(true);
@@ -100,7 +100,7 @@ public class GameScreenCtrl {
      * Selecting answer B
      */
     public void selectAnswerB() throws InterruptedException {
-        AnswerB.setStyle("-fx-background-color: #f6b26b");
+        AnswerB.setDisable(true);
         AnswerA.setDisable(true);
         Answer1.setDisable(true);
         AnswerC.setDisable(true);
@@ -121,7 +121,7 @@ public class GameScreenCtrl {
      * Selecting answer C
      */
     public void selectAnswerC() throws InterruptedException {
-        AnswerC.setStyle("-fx-background-color: #f6b26b");
+        AnswerC.setDisable(true);
         AnswerB.setDisable(true);
         Answer2.setDisable(true);
         Answer1.setDisable(true);
@@ -220,7 +220,6 @@ public class GameScreenCtrl {
             score.setScore(score.getScore() + 100);
         }
         showAnswers();
-        System.out.println(score.getScore());
     }
 
 
