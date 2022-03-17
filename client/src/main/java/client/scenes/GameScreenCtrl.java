@@ -205,9 +205,10 @@ public class GameScreenCtrl {
      */
 
     public void createTimer(){
+        Score score = StartScreenCtrl.getOwnScore();
         Timeline timeline = new Timeline
                 (new KeyFrame(Duration.seconds(1), ev -> {
-            mainCtrl.showInBetweenScreen(21-counter, 0);
+            mainCtrl.showInBetweenScreen(21-counter, score.getScore());
             setAnswer();
         }));
         timeline.play();
