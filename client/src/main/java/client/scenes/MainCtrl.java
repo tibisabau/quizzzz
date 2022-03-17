@@ -44,6 +44,10 @@ public class MainCtrl {
 
     private leaderboardSceneCtrl leaderboardSceneCtrl;
 
+    private InBetweenScreenCtrl inBetweenCtrl;
+
+    private Scene inBetweenScene;
+
     /**
      * Initialize.
      *
@@ -58,7 +62,8 @@ public class MainCtrl {
             , Pair<InstructionSceneCtrl, Parent> instructionScene,
                            Pair<GameScreenCtrl, Parent> gameScreen,
                            Pair<leaderboardSceneCtrl,
-                                   Parent> leaderboardScreen) {
+                                   Parent> leaderboardScreen,
+                           Pair<InBetweenScreenCtrl, Parent> inBetweenScreen) {
         this.primaryStage = primaryStage;
         this.startScreenCtrl = startScreen.getKey();
         this.startScreen = new Scene(startScreen.getValue());
@@ -68,6 +73,8 @@ public class MainCtrl {
         this.leaderboardSceneCtrl = leaderboardScreen.getKey();
         this.GameScreenCtrl = gameScreen.getKey();
         this.GameScreenScene = new Scene(gameScreen.getValue());
+        this.inBetweenCtrl = inBetweenScreen.getKey();
+        this.inBetweenScene = new Scene(inBetweenScreen.getValue());
 
         showStartScreen();
         primaryStage.show();
@@ -107,5 +114,12 @@ public class MainCtrl {
         primaryStage.setScene(leaderboardScene);
     }
 
-
+    /**
+     * Show inBetween screen.
+     */
+    public void showInBetweenScreen() {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(inBetweenScene);
+        inBetweenCtrl.StartTimer();
+    }
 }

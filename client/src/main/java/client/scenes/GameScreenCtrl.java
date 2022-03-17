@@ -4,15 +4,17 @@ import client.utils.ServerUtils;
 import com.google.inject.Inject;
 
 import commons.MostEnergyQuestion;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+
 
 
 public class GameScreenCtrl {
@@ -39,6 +41,9 @@ public class GameScreenCtrl {
 
     @FXML
     public Text Answer3;
+
+    @FXML
+    public Text Qcounter;
 
     private final ServerUtils server;
 
@@ -147,17 +152,17 @@ public class GameScreenCtrl {
         Answer1.setText(answerText1);
         Answer2.setText(answerText2);
         Answer3.setText(answerText3);
+        int x = 21 - counter;
+        Qcounter.setText("Question: " + x + "/20");
+
     }
 
     public void createTimer(){
-        Timer timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                setAnswer();
-            }
-        };
-        timer.schedule(timerTask,1500);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
+            mainCtrl.showInBetweenScreen();
+            setAnswer();
+        }));
+        timeline.play();
 
     }
 }
