@@ -20,29 +20,22 @@ public class Activity {
 
     public String title;
 
-    public String image_path;
+    public String imagePath;
 
-    public String source;
+    public long consumptionInWh;
 
-    public long consumption_in_wh;
-
-    public Activity(){
-
-    }
+    public Activity(){}
 
     /**
      * Constructor method for activity
-     * @param image_path
+     * @param imagePath
      * @param title
-     * @param consumption_in_wh
-     * @param source
+     * @param consumptionInWh
      */
-    public Activity(String image_path, String title,
-                    long consumption_in_wh, String source){
-        this.image_path = image_path;
+    public Activity(String imagePath, String title, long consumptionInWh){
+        this.imagePath = imagePath;
         this.title = title;
-        this.consumption_in_wh = consumption_in_wh;
-        this.source = source;
+        this.consumptionInWh = consumptionInWh;
     }
 
     @Override
@@ -59,15 +52,11 @@ public class Activity {
     }
 
     public void setImagePath(String image_path) {
-        this.image_path = image_path;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
+        this.imagePath = image_path;
     }
 
     public void setConsumptionInWh(int consumption_in_wh) {
-        this.consumption_in_wh = consumption_in_wh;
+        this.consumptionInWh = consumption_in_wh;
     }
 
     public long getId() {
@@ -79,17 +68,12 @@ public class Activity {
     }
 
     public String getImagePath() {
-        return image_path;
-    }
-
-    public String getSource() {
-        return source;
+        return imagePath;
     }
 
     public long getConsumptionInWh() {
-        return consumption_in_wh;
+        return consumptionInWh;
     }
-
 
     public String toStringAnswer(){
         return this.title;
@@ -102,6 +86,7 @@ public class Activity {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                MULTI_LINE_STYLE);
     }
 }

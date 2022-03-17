@@ -24,11 +24,11 @@
                   <Font name="Candara Bold" size="17.0" />
                </font>
             </Button>
-            <TableView fx:id="table" layoutX="100.0" layoutY="57.0" prefHeight="266.0" prefWidth="400.0" style="-fx-border-color: #1b5e20; -fx-background-color: #fff;">
+            <TableView fx:id="table" layoutX="100.0" layoutY="68.0" prefHeight="266.0" prefWidth="400.0" style="-fx-border-color: #1b5e20; -fx-padding: -0.3;" stylesheets="@tableViewStyle.css">
               <columns>
-                <TableColumn fx:id="rank" prefWidth="50.0" text="RANK" />
-                <TableColumn fx:id="name" prefWidth="170.0" text="NAME" />
-                  <TableColumn fx:id="value" prefWidth="160.0" text="SCORE" />
+                <TableColumn fx:id="rank" editable="false" prefWidth="50.0" sortable="false" text="RANK" />
+                <TableColumn fx:id="name" editable="false" prefWidth="170.0" sortable="false" text="NAME" />
+                  <TableColumn fx:id="value" editable="false" prefWidth="160.0" sortable="false" text="SCORE" />
               </columns>
             </TableView>
             <Text fill="#1b5e20" layoutX="183.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEADERBOARD" textAlignment="CENTER" wrappingWidth="241.97894287109375">

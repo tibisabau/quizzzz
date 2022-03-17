@@ -208,6 +208,7 @@ public class GameScreenCtrl {
 
     }
 
+
     /**
      * Gives points if correct answer is given
      * @param question question to check if correct
@@ -252,4 +253,9 @@ public class GameScreenCtrl {
         return false;
     }
 
+}
+
+    public void setCounter(int value){
+        this.counter = value;
+    }
 }
