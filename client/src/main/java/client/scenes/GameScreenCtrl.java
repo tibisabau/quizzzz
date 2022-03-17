@@ -242,6 +242,7 @@ public class GameScreenCtrl {
     public void setCounter(int value){
         this.counter = value;
     }
+
     /**
      * Checks if new question needs te be show otherwise go to leaderboard.
      */
