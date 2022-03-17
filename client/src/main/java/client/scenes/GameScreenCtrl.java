@@ -253,8 +253,6 @@ public class GameScreenCtrl {
         return false;
     }
 
-}
-
     public void setCounter(int value){
         this.counter = value;
     }
