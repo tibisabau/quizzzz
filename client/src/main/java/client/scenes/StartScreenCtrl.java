@@ -21,12 +21,14 @@ import javafx.stage.Modality;
  */
 public class StartScreenCtrl extends Application {
 
+    private static Score ownScore;
 
     private final ServerUtils server;
 
     private final MainCtrl mainCtrl;
 
     private boolean isCompleted;
+
 
     @FXML
     private TextField nicknameField;
@@ -101,7 +103,8 @@ public class StartScreenCtrl extends Application {
      */
     public void ok() {
         try {
-            server.addScore(getNewScore());
+            ownScore = getNewScore();
+            server.addScore(ownScore);
         } catch (WebApplicationException e) {
 
             var alert = new Alert(Alert.AlertType.ERROR);
@@ -145,4 +148,11 @@ public class StartScreenCtrl extends Application {
 
     }
 
+    /**
+     * getter for ownScore
+     * @return ownScore
+     */
+    public static Score getOwnScore() {
+        return ownScore;
+    }
 }
