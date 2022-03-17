@@ -120,6 +120,6 @@ public class MainCtrl {
     public void showInBetweenScreen(int question, int score) {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(inBetweenScene);
-        inBetweenCtrl.StartTimer(question, score);
+        inBetweenCtrl.startTimer(question, score);
     }
 }

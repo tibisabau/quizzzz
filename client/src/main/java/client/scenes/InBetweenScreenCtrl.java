@@ -13,6 +13,7 @@ import javafx.util.Duration;
 public class InBetweenScreenCtrl {
 
     private final ServerUtils server;
+
     private final MainCtrl mainCtrl;
 
     @FXML
@@ -38,17 +39,18 @@ public class InBetweenScreenCtrl {
         this.server = server;
         this.mainCtrl = mainCtrl;
     }
+
     public void showGameScreen(){
         mainCtrl.showGameScreen();
 
     }
 
-    public synchronized void StartTimer(int question, int score) {
+    public synchronized void startTimer(int question, int score) {
         qcounter2.setText("Question " + question + " out of 20");
         cscore.setText("Score: " + score);
         progress = 0;
         progressbar.setStyle("-fx-accent: #1b5e20");
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2), ev -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2), ev ->{
             progress += 0.001;
             progressbar.setProgress(progress);
             if (progress >= 1){
