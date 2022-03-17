@@ -23,7 +23,6 @@ public class MEQuestionController {
 
         while(secondOption.getId() == firstOption.getId()){
             secondOption = ctrl.getRandom().getBody();
-
         }
         while(thirdOption.getId() == firstOption.getId()
                 || thirdOption.getId() == secondOption.getId()){

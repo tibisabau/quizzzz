@@ -84,6 +84,7 @@ public class GameScreenCtrl {
      * Selecting answer A
      */
     public void selectAnswerA() throws InterruptedException {
+        Answer1.setDisable(true);
         AnswerA.setDisable(true);
         AnswerB.setDisable(true);
         Answer2.setDisable(true);
@@ -97,6 +98,7 @@ public class GameScreenCtrl {
      * Selecting answer B
      */
     public void selectAnswerB() throws InterruptedException {
+        Answer2.setDisable(true);
         AnswerB.setDisable(true);
         AnswerA.setDisable(true);
         Answer1.setDisable(true);
@@ -115,6 +117,7 @@ public class GameScreenCtrl {
         Answer2.setDisable(true);
         Answer1.setDisable(true);
         AnswerA.setDisable(true);
+        Answer3.setDisable(true);
         answerPoints(currentQuestion, 3 );
         nextQuestion();
     }
@@ -190,6 +193,7 @@ public class GameScreenCtrl {
 
     }
 
+
     /**
      * Gives points if correct answer is given
      * @param question question to check if correct
@@ -235,6 +239,9 @@ public class GameScreenCtrl {
         return false;
     }
 
+    public void setCounter(int value){
+        this.counter = value;
+    }
     /**
      * Checks if new question needs te be show otherwise go to leaderboard.
      */
