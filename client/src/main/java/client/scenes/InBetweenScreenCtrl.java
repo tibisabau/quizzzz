@@ -12,10 +12,6 @@ import javafx.util.Duration;
 
 public class InBetweenScreenCtrl {
 
-    private final ServerUtils server;
-
-    private final MainCtrl mainCtrl;
-
     @FXML
     public ProgressBar progressbar;
 
@@ -25,7 +21,11 @@ public class InBetweenScreenCtrl {
     @FXML
     public Text cscore;
 
-    double progress;
+    private final ServerUtils server;
+
+    private final MainCtrl mainCtrl;
+
+    private double progress;
 
 
     /**

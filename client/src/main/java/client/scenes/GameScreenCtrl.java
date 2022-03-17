@@ -158,7 +158,8 @@ public class GameScreenCtrl {
     }
 
     public void createTimer(){
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
+        Timeline timeline = new Timeline
+                (new KeyFrame(Duration.seconds(1), ev -> {
             mainCtrl.showInBetweenScreen(21-counter, 0);
             setAnswer();
         }));

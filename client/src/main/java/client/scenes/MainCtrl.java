@@ -56,6 +56,7 @@ public class MainCtrl {
      * @param instructionScene
      * @param gameScreen
      * @param leaderboardScreen
+     * @param inBetweenScreen
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
@@ -115,7 +116,9 @@ public class MainCtrl {
     }
 
     /**
-     * Show inBetween screen.
+     * show inBetween Screen
+     * @param question
+     * @param score
      */
     public void showInBetweenScreen(int question, int score) {
         primaryStage.setTitle("Quizzzz");
