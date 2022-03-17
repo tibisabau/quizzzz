@@ -235,6 +235,9 @@ public class GameScreenCtrl {
         return false;
     }
 
+    /**
+     * Checks if new question needs te be show otherwise go to leaderboard.
+     */
     public void nextQuestion (){
         --counter;
         if(counter > 0) {
