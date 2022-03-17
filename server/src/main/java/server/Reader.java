@@ -45,7 +45,8 @@ public class Reader implements ApplicationRunner {
             BufferedReader reader = null;
             boolean assign = false;
             try {
-                reader = Files.newBufferedReader(Paths.get("activity_bank/activities.json"));
+                reader = Files.newBufferedReader(Paths.
+                        get("activity_bank/activities.json"));
             } catch (Exception e){
                 assign = true;
             } finally {
