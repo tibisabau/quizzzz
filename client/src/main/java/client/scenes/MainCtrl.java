@@ -117,9 +117,9 @@ public class MainCtrl {
     /**
      * Show inBetween screen.
      */
-    public void showInBetweenScreen() {
+    public void showInBetweenScreen(int question, int score) {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(inBetweenScene);
-        inBetweenCtrl.StartTimer();
+        inBetweenCtrl.StartTimer(question, score);
     }
 }

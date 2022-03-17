@@ -19,11 +19,13 @@ public class InBetweenScreenCtrl {
     public ProgressBar progressbar;
 
     @FXML
-    public Text Qcounter2;
+    public Text qcounter2;
+
+    @FXML
+    public Text cscore;
 
     double progress;
 
-    public int counter;
 
     /**
      * Instantiates a new Game screen ctrl.
@@ -35,19 +37,15 @@ public class InBetweenScreenCtrl {
     public InBetweenScreenCtrl(ServerUtils server, MainCtrl mainCtrl) {
         this.server = server;
         this.mainCtrl = mainCtrl;
-        counter = 2;
     }
     public void showGameScreen(){
         mainCtrl.showGameScreen();
 
     }
 
-    public synchronized void StartTimer() {
-        Qcounter2.setText("Question " + counter + " out of 20");
-        counter++;
-        if (counter == 21){
-            counter = 1;
-        }
+    public synchronized void StartTimer(int question, int score) {
+        qcounter2.setText("Question " + question + " out of 20");
+        cscore.setText("Score: " + score);
         progress = 0;
         progressbar.setStyle("-fx-accent: #1b5e20");
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2), ev -> {

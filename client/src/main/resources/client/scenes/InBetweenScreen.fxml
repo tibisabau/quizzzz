@@ -23,7 +23,7 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
          <children>
-            <Text fx:id="Qcounter2" fill="#1b5e20" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question x out of 20" textAlignment="CENTER" wrappingWidth="372.79999999999995">
+            <Text fx:id="qcounter2" fill="#1b5e20" layoutX="-10.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question x out of 20" textAlignment="CENTER" wrappingWidth="388.79997522830945">
                <font>
                   <Font size="40.0" />
                </font>
@@ -33,7 +33,7 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
             <Ellipse fill="#1b5e20" layoutX="187.0" layoutY="78.0" radiusX="233.0" radiusY="80.0" stroke="BLACK" strokeType="INSIDE" />
-            <Text fill="WHITE" layoutX="-1.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 300" textAlignment="CENTER" wrappingWidth="372.79999999999995">
+            <Text fx:id="cscore" fill="WHITE" layoutX="-1.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 300" textAlignment="CENTER" wrappingWidth="372.79999999999995">
                <font>
                   <Font size="40.0" />
                </font>
