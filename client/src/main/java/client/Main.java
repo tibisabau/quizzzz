@@ -21,12 +21,8 @@ import static com.google.inject.Guice.createInjector;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import client.scenes.GameScreenCtrl;
-import client.scenes.InstructionSceneCtrl;
-import client.scenes.StartScreenCtrl;
-import client.scenes.leaderboardSceneCtrl;
+import client.scenes.*;
 import com.google.inject.Injector;
-import client.scenes.MainCtrl;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -49,12 +45,16 @@ public class Main extends Application {
         var start = FXML.load(StartScreenCtrl.class, "client",
                 "scenes", "StartScreen.fxml");
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
-        var gameScreen = FXML.load(GameScreenCtrl.class,
-                "client", "scenes", "GameScreen.fxml");
+        var meQuestion = FXML.load(QuestionController.class,
+                "client", "scenes", "MEQuestion.fxml");
+        var hmQuestion = FXML.load(QuestionController.class,
+                "client", "scenes", "HMQuestion.fxml");
+        var gxQuestion = FXML.load(QuestionController.class,
+                "client", "scenes", "GXQuestion.fxml");
         var leaderboard = FXML.load(
                 leaderboardSceneCtrl.class, "client", "scenes",
                 "leaderboardScene.fxml");
         mainCtrl.initialize(primaryStage, start ,
-                instruction, gameScreen, leaderboard);
+                instruction, meQuestion, leaderboard, hmQuestion, gxQuestion);
     }
 }

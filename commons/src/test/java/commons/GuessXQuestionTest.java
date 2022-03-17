@@ -10,7 +10,7 @@ class GuessXQuestionTest {
 
     @BeforeEach
     public void setup() {
-        Activity e1 = new Activity("", "", 1, "");
+        Activity e1 = new Activity("", "", 1);
         p = new GuessXQuestion(e1);
     }
 
@@ -21,7 +21,7 @@ class GuessXQuestionTest {
 
     @Test
     public void equalsHashCode() {
-        Activity e1 = new Activity("", "", 1, "");
+        Activity e1 = new Activity("", "", 1);
         GuessXQuestion me = new GuessXQuestion(e1);
         assertEquals(me, p);
         assertEquals(p.hashCode(), me.hashCode());
@@ -29,7 +29,7 @@ class GuessXQuestionTest {
 
     @Test
     public void notEqualsHashCode() {
-        Activity e2 = new Activity("", "", 2, "");
+        Activity e2 = new Activity("", "", 2);
         GuessXQuestion me = new GuessXQuestion(e2);
         assertNotEquals(me, p);
         assertNotEquals(p.hashCode(), me.hashCode());

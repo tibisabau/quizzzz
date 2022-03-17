@@ -36,9 +36,17 @@ public class MainCtrl {
 
     private Scene instructionScene;
 
-    private GameScreenCtrl GameScreenCtrl;
+    private QuestionController meQuestion;
 
-    private Scene GameScreenScene;
+    private Scene meQuestionScene;
+
+    private QuestionController hmQuestion;
+
+    private Scene hmQuestionScene;
+
+    private QuestionController gxQuestion;
+
+    private Scene gxQuestionScene;
 
     private Scene leaderboardScene;
 
@@ -50,15 +58,19 @@ public class MainCtrl {
      * @param primaryStage the primary stage
      * @param startScreen  the start screen
      * @param instructionScene
-     * @param gameScreen
+     * @param meQuestion
+     * @param hmQuestion
+     * @param gxQuestion
      * @param leaderboardScreen
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
             , Pair<InstructionSceneCtrl, Parent> instructionScene,
-                           Pair<GameScreenCtrl, Parent> gameScreen,
+                           Pair<QuestionController, Parent> meQuestion,
                            Pair<leaderboardSceneCtrl,
-                                   Parent> leaderboardScreen) {
+                                   Parent> leaderboardScreen,
+                           Pair<QuestionController, Parent> hmQuestion,
+                           Pair<QuestionController, Parent> gxQuestion) {
         this.primaryStage = primaryStage;
         this.startScreenCtrl = startScreen.getKey();
         this.startScreen = new Scene(startScreen.getValue());
@@ -66,8 +78,12 @@ public class MainCtrl {
         this.instructionSceneCtrl = instructionScene.getKey();
         this.leaderboardScene = new Scene(leaderboardScreen.getValue());
         this.leaderboardSceneCtrl = leaderboardScreen.getKey();
-        this.GameScreenCtrl = gameScreen.getKey();
-        this.GameScreenScene = new Scene(gameScreen.getValue());
+        this.meQuestion = meQuestion.getKey();
+        this.meQuestionScene = new Scene(meQuestion.getValue());
+        this.hmQuestion = hmQuestion.getKey();
+        this.hmQuestionScene = new Scene(hmQuestion.getValue());
+        this.gxQuestion = gxQuestion.getKey();
+        this.gxQuestionScene = new Scene(gxQuestion.getValue());
 
         showStartScreen();
         primaryStage.show();
@@ -79,6 +95,7 @@ public class MainCtrl {
     public void showStartScreen() {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(startScreen);
+        meQuestion.setCounter(20);
     }
 
     /**
@@ -90,12 +107,32 @@ public class MainCtrl {
     }
 
     /**
-     * Show game screen
+     * Show QuestionController
+     * @param questionType
      */
-    public void showGameScreen() {
+    public void showMEQuestion(int questionType) {
         primaryStage.setTitle("Quizzzz");
-        primaryStage.setScene(GameScreenScene);
-        GameScreenCtrl.setAnswer();
+        primaryStage.setScene(meQuestionScene);
+        meQuestion.setAnswer(questionType);
+    }
+
+    /**
+     * Show HMQuestion
+     * @param questionType
+     */
+    public void showHMQuestion(int questionType) {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(hmQuestionScene);
+        hmQuestion.setAnswer(questionType);
+    }
+
+    /**
+     * Show GXQuestion
+     */
+    public void showGXQuestion() {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(gxQuestionScene);
+        gxQuestion.guessAnswer.setText("");
     }
 
     /**

@@ -56,7 +56,7 @@ public class ActivityParse {
         this.source = source;
     }
 
-    public void setConsumptionInWh(int consumption_in_wh) {
+    public void setConsumptionInWh(long consumption_in_wh) {
         this.consumption_in_wh = consumption_in_wh;
     }
 
@@ -68,10 +68,6 @@ public class ActivityParse {
         return title;
     }
 
-    public String getImagePath() {
-        return image_path;
-    }
-
     public String getSource() {
         return source;
     }
@@ -79,4 +75,9 @@ public class ActivityParse {
     public long getConsumptionInWh() {
         return consumption_in_wh;
     }
+
+    public String getImagePath() {
+        return image_path;
+    }
+
 }
