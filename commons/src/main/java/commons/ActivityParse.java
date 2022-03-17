@@ -25,8 +25,8 @@ public class ActivityParse {
      * @param consumption_in_wh
      * @param source
      */
-    public ActivityParse(String id, String image_path,
-                         String title, long consumption_in_wh, String source){
+    public ActivityParse(String id, String image_path, String title,
+                         long consumption_in_wh, String source){
         this.id = id;
         this.image_path = image_path;
         this.title = title;
@@ -48,7 +48,7 @@ public class ActivityParse {
         this.title = title;
     }
 
-    public void setImagePath(String image_path) {
+    public void setImage_path(String image_path) {
         this.image_path = image_path;
     }
 
@@ -56,7 +56,7 @@ public class ActivityParse {
         this.source = source;
     }
 
-    public void setConsumptionInWh(int consumption_in_wh) {
+    public void setConsumption_in_wh(int consumption_in_wh) {
         this.consumption_in_wh = consumption_in_wh;
     }
 
@@ -68,7 +68,7 @@ public class ActivityParse {
         return title;
     }
 
-    public String getImagePath() {
+    public String getImage_path() {
         return image_path;
     }
 
@@ -76,7 +76,7 @@ public class ActivityParse {
         return source;
     }
 
-    public long getConsumptionInWh() {
+    public long getConsumption_in_wh() {
         return consumption_in_wh;
     }
 }

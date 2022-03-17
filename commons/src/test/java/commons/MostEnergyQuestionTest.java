@@ -11,10 +11,10 @@ class MostEnergyQuestionTest {
 
     @BeforeEach
     public void setup() {
-        Activity e1 = new Activity( "", "", 1, "");
-        Activity e2 = new Activity( "", "", 1, "");
-        Activity e3 = new Activity( "", "", 1, "");
-        Activity e4 = new Activity( "", "", 1, "");
+        Activity e1 = new Activity( "", "", 1);
+        Activity e2 = new Activity( "", "", 1);
+        Activity e3 = new Activity( "", "", 1);
+        Activity e4 = new Activity( "", "", 1);
         p = new MostEnergyQuestion(e1, e2, e3, e4);
     }
 
@@ -25,10 +25,10 @@ class MostEnergyQuestionTest {
 
     @Test
     public void equalsHashCode() {
-        Activity e1 = new Activity("", "", 1, "");
-        Activity e2 = new Activity("", "", 1, "");
-        Activity e3 = new Activity("", "", 1, "");
-        Activity e4 = new Activity("", "", 1, "");
+        Activity e1 = new Activity("", "", 1);
+        Activity e2 = new Activity("", "", 1);
+        Activity e3 = new Activity("", "", 1);
+        Activity e4 = new Activity("", "", 1);
         MostEnergyQuestion me = new MostEnergyQuestion(e1, e2, e3, e4);
         assertEquals(me, p);
         assertEquals(p.hashCode(), me.hashCode());
@@ -36,10 +36,10 @@ class MostEnergyQuestionTest {
 
     @Test
     public void notEqualsHashCode() {
-        Activity e1 = new Activity("", "", 1, "");
-        Activity e2 = new Activity("", "", 2, "");
-        Activity e3 = new Activity("", "", 1, "");
-        Activity e4 = new Activity("", "", 2, "");
+        Activity e1 = new Activity("", "", 1);
+        Activity e2 = new Activity("", "", 2);
+        Activity e3 = new Activity("", "", 1);
+        Activity e4 = new Activity("", "", 2);
         MostEnergyQuestion me = new MostEnergyQuestion(e1, e2, e3, e4);
         assertNotEquals(me, p);
         assertNotEquals(p.hashCode(), me.hashCode());
