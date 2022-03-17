@@ -21,10 +21,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+import java.util.Set;
+
 /**
  * The type Main ctrl.
  */
 public class MainCtrl {
+
+    public int counter;
+
+    public Set<Object> questionList;
 
     private Stage primaryStage;
 
@@ -96,6 +102,7 @@ public class MainCtrl {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(startScreen);
         meQuestion.setCounter(20);
+        meQuestion.setQuestionList();
     }
 
     /**
@@ -132,7 +139,7 @@ public class MainCtrl {
     public void showGXQuestion() {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(gxQuestionScene);
-        gxQuestion.guessAnswer.setText("");
+        gxQuestion.createGXQuestion();
     }
 
     /**
@@ -143,6 +150,5 @@ public class MainCtrl {
         leaderboardSceneCtrl.load();
         primaryStage.setScene(leaderboardScene);
     }
-
 
 }

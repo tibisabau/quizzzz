@@ -17,7 +17,6 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.util.HashSet;
-import java.util.Set;
 
 
 public class QuestionController {
@@ -52,9 +51,6 @@ public class QuestionController {
 
     private final MainCtrl mainCtrl;
 
-    private int counter;
-
-    private Set<Object> questionList;
 
     /**
      * Instantiates a new Game screen ctrl.
@@ -66,8 +62,6 @@ public class QuestionController {
     public QuestionController(ServerUtils server, MainCtrl mainCtrl) {
         this.server = server;
         this.mainCtrl = mainCtrl;
-        this.counter = 20;
-        questionList = new HashSet<>();
     }
 
     /**
@@ -79,8 +73,8 @@ public class QuestionController {
         Answer2.setDisable(true);
         Answer3.setDisable(true);
         AnswerC.setDisable(true);
-        --counter;
-        if(counter > 0) {
+        --mainCtrl.counter;
+        if(mainCtrl.counter > 0) {
             //showLoadingPage  - TO BE IMPLEMENTED
             this.createTimer();
 
@@ -99,8 +93,8 @@ public class QuestionController {
         Answer1.setDisable(true);
         AnswerC.setDisable(true);
         Answer3.setDisable(true);
-        --counter;
-        if(counter > 0) {
+        --mainCtrl.counter;
+        if(mainCtrl.counter > 0) {
             //showLoading() - TO BE IMPLEMENTED
             this.createTimer();
         }else{
@@ -118,8 +112,8 @@ public class QuestionController {
         Answer2.setDisable(true);
         Answer1.setDisable(true);
         AnswerA.setDisable(true);
-        --counter;
-        if(counter > 0) {
+        --mainCtrl.counter;
+        if(mainCtrl.counter > 0) {
             //showLoadingPage  - TO BE IMPLEMENTED
             this.createTimer();
         }else{
@@ -164,10 +158,10 @@ public class QuestionController {
      */
     public void createMEQuestion() {
         MostEnergyQuestion question = server.getMEQuestion();
-        while(questionList.contains(question)) {
+        while(mainCtrl.questionList.contains(question)) {
             question = server.getMEQuestion();
         }
-        questionList.add(question);
+        mainCtrl.questionList.add(question);
         Answer1.setText(question.getFirstOption().toStringAnswer());
         Answer2.setText(question.getSecondOption().toStringAnswer());
         Answer3.setText(question.getThirdOption().toStringAnswer());
@@ -179,10 +173,10 @@ public class QuestionController {
      */
     public void createHMQuestion() {
         HowMuchQuestion question = server.getHMQuestion();
-        while(questionList.contains(question)) {
+        while(mainCtrl.questionList.contains(question)) {
             question = server.getHMQuestion();
         }
-        questionList.add(question);
+        mainCtrl.questionList.add(question);
         Answer1.setText(String.valueOf
                 (question.getFirstOption().getConsumptionInWh()));
         Answer2.setText(String.valueOf
@@ -197,7 +191,11 @@ public class QuestionController {
      */
     public void createGXQuestion() {
         GuessXQuestion question = server.getGXQuestion();
-
+        while(mainCtrl.questionList.contains(question)) {
+            question = server.getGXQuestion();
+        }
+        mainCtrl.questionList.add(question);
+        guessAnswer.setDisable(false);
     }
 
     /**
@@ -206,7 +204,8 @@ public class QuestionController {
     public void keyPressed(KeyEvent e) {
         switch (e.getCode()) {
             case ENTER:
-                ok();
+            {ok();
+                guessAnswer.setDisable(true);}
                 break;
             default:
                 break;
@@ -214,8 +213,8 @@ public class QuestionController {
     }
 
     public void ok() {
-        --counter;
-        if(counter > 0) {
+        --mainCtrl.counter;
+        if(mainCtrl.counter > 0) {
             //showLoadingPage  - TO BE IMPLEMENTED
             this.createTimer();
         }else{
@@ -233,7 +232,6 @@ public class QuestionController {
             changeQuestion();
         }));
         timeline.play();
-
     }
 
     /**
@@ -241,7 +239,7 @@ public class QuestionController {
      * @param value
      */
     public void setCounter(int value){
-        this.counter = value;
+        mainCtrl.counter = value;
     }
 
     public void changeQuestion() {
@@ -253,5 +251,9 @@ public class QuestionController {
         } else {
             mainCtrl.showGXQuestion();
         }
+    }
+
+    public void setQuestionList() {
+        mainCtrl.questionList = new HashSet<>();
     }
 }
