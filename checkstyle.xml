@@ -12,7 +12,6 @@
         <module name="NeedBraces"/>
         <module name="JavadocParagraph"/>
         <module name="UnnecessaryParentheses"/>
-        <module name="MethodName"/>
 
     </module>
     <module name="LineLength"/>
