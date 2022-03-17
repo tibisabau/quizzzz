@@ -42,6 +42,12 @@ public class GameScreenCtrl {
     @FXML
     public Text Answer3;
 
+    @FXML
+    private Label scoreId;
+
+    @FXML
+    private Label questionNumber;
+
     private final ServerUtils server;
 
     private final MainCtrl mainCtrl;
@@ -84,16 +90,7 @@ public class GameScreenCtrl {
         Answer3.setDisable(true);
         AnswerC.setDisable(true);
         answerPoints(currentQuestion, 1);
-        --counter;
-        if(counter > 0) {
-            //showLoadingPage  - TO BE IMPLEMENTED
-            this.createTimer();
-
-        }else{
-            //showLeaderBoardScreen()  - TO BE IMPLEMENTED
-            server.updateScore(StartScreenCtrl.getOwnScore());
-            mainCtrl.showLeaderboard();
-        }
+        nextQuestion();
     }
 
     /**
@@ -106,15 +103,7 @@ public class GameScreenCtrl {
         AnswerC.setDisable(true);
         Answer3.setDisable(true);
         answerPoints(currentQuestion,2);
-        --counter;
-        if(counter > 0) {
-            //showLoading() - TO BE IMPLEMENTED
-            this.createTimer();
-        }else{
-            //showLeaderBoardScreen()  - TO BE IMPLEMENTED
-            server.updateScore(StartScreenCtrl.getOwnScore());
-            mainCtrl.showLeaderboard();
-        }
+        nextQuestion();
     }
 
     /**
@@ -127,15 +116,7 @@ public class GameScreenCtrl {
         Answer1.setDisable(true);
         AnswerA.setDisable(true);
         answerPoints(currentQuestion, 3 );
-        --counter;
-        if(counter > 0) {
-            //showLoadingPage  - TO BE IMPLEMENTED
-            this.createTimer();
-        }else{
-            //showLeaderBoardScreen()  - TO BE IMPLEMENTED
-            server.updateScore(StartScreenCtrl.getOwnScore());
-            mainCtrl.showLeaderboard();
-        }
+        nextQuestion();
     }
 
     /**
@@ -189,6 +170,8 @@ public class GameScreenCtrl {
         Answer1.setText(answerText1);
         Answer2.setText(answerText2);
         Answer3.setText(answerText3);
+
+
     }
 
     /**
@@ -220,6 +203,7 @@ public class GameScreenCtrl {
             score.setScore(score.getScore() + 100);
         }
         showAnswers();
+        scoreId.setText(Integer.toString(score.getScore()));
     }
 
 
@@ -249,6 +233,19 @@ public class GameScreenCtrl {
                 break;
         }
         return false;
+    }
+
+    public void nextQuestion (){
+        --counter;
+        if(counter > 0) {
+            //showLoadingPage  - TO BE IMPLEMENTED
+            questionNumber.setText(Integer.toString(21-counter)+"/20");
+            this.createTimer();
+        }else{
+            //showLeaderBoardScreen()  - TO BE IMPLEMENTED
+            server.updateScore(StartScreenCtrl.getOwnScore());
+            mainCtrl.showLeaderboard();
+        }
     }
 
 }
