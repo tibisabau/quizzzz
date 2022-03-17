@@ -11,26 +11,26 @@ public class ActivityParse {
 
     public String title;
 
-    public String imagePath;
+    public String image_path;
 
     public String source;
 
-    public long consumptionInWh;
+    public long consumption_in_wh;
 
     /**
      * Constructor method for ActivityParse
      * @param id
-     * @param imagePath
+     * @param image_path
      * @param title
-     * @param consumptionInWh
+     * @param consumption_in_wh
      * @param source
      */
-    public ActivityParse(String id, String imagePath, String title,
-                         long consumptionInWh, String source){
+    public ActivityParse(String id, String image_path, String title,
+                         long consumption_in_wh, String source){
         this.id = id;
-        this.imagePath = imagePath;
+        this.image_path = image_path;
         this.title = title;
-        this.consumptionInWh = consumptionInWh;
+        this.consumption_in_wh = consumption_in_wh;
         this.source = source;
     }
 
@@ -48,16 +48,16 @@ public class ActivityParse {
         this.title = title;
     }
 
-    public void setImagePath(String image_path) {
-        this.imagePath = image_path;
+    public void setImage_path(String image_path) {
+        this.image_path = image_path;
     }
 
     public void setSource(String source) {
         this.source = source;
     }
 
-    public void setConsumptionInWh(int consumption_in_wh) {
-        this.consumptionInWh = consumption_in_wh;
+    public void setConsumption_in_wh(int consumption_in_wh) {
+        this.consumption_in_wh = consumption_in_wh;
     }
 
     public String getId() {
@@ -68,15 +68,15 @@ public class ActivityParse {
         return title;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public String getImage_path() {
+        return image_path;
     }
 
     public String getSource() {
         return source;
     }
 
-    public long getConsumptionInWh() {
-        return consumptionInWh;
+    public long getConsumption_in_wh() {
+        return consumption_in_wh;
     }
 }
