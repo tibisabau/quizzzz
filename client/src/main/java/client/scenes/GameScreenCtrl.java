@@ -249,7 +249,8 @@ public class GameScreenCtrl {
         Timeline wait = new Timeline
                 (new KeyFrame(Duration.seconds(1.5), ev -> {
                     if (counter > 0) {
-                        mainCtrl.showInBetweenScreen(21-counter, score.getScore());
+                        mainCtrl.showInBetweenScreen(21-counter,
+                                score.getScore());
                     } else {
                         mainCtrl.showLeaderboard();
                     }
