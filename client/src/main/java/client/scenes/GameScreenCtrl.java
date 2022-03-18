@@ -11,6 +11,7 @@ import commons.Score;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -47,6 +48,9 @@ public class GameScreenCtrl {
     @FXML
     public Text Qcounter;
 
+    @FXML
+    public ProgressBar time;
+
     private final ServerUtils server;
 
     private final MainCtrl mainCtrl;
@@ -61,8 +65,9 @@ public class GameScreenCtrl {
 
     private MostEnergyQuestion currentQuestion;
 
+    private double timer;
 
-
+    private Timeline bar;
 
 
     /**
@@ -83,12 +88,8 @@ public class GameScreenCtrl {
      * Selecting answer A
      */
     public void selectAnswerA() throws InterruptedException {
-        Answer1.setDisable(true);
-        AnswerA.setDisable(true);
-        AnswerB.setDisable(true);
-        Answer2.setDisable(true);
-        Answer3.setDisable(true);
-        AnswerC.setDisable(true);
+        stoptime();
+        disableAnswers();
         answerPoints(currentQuestion, 1);
         --counter;
         if(counter > 0) {
@@ -106,12 +107,8 @@ public class GameScreenCtrl {
      * Selecting answer B
      */
     public void selectAnswerB() throws InterruptedException {
-        Answer2.setDisable(true);
-        AnswerB.setDisable(true);
-        AnswerA.setDisable(true);
-        Answer1.setDisable(true);
-        AnswerC.setDisable(true);
-        Answer3.setDisable(true);
+        stoptime();
+        disableAnswers();
         answerPoints(currentQuestion,2);
         --counter;
         if(counter > 0) {
@@ -127,12 +124,8 @@ public class GameScreenCtrl {
      * Selecting answer C
      */
     public void selectAnswerC() throws InterruptedException {
-        AnswerC.setDisable(true);
-        AnswerB.setDisable(true);
-        Answer2.setDisable(true);
-        Answer1.setDisable(true);
-        AnswerA.setDisable(true);
-        Answer3.setDisable(true);
+        stoptime();
+        disableAnswers();
         answerPoints(currentQuestion, 3 );
         --counter;
         if(counter > 0) {
@@ -195,9 +188,66 @@ public class GameScreenCtrl {
         Answer1.setText(answerText1);
         Answer2.setText(answerText2);
         Answer3.setText(answerText3);
+        startTimer();
         int x = 21 - counter;
         Qcounter.setText("Question: " + x + "/20");
 
+    }
+
+    public void stoptime(){
+        if (bar != null){
+            bar.stop();
+        }
+    }
+
+    public void startTimer(){
+        time.setStyle("-fx-accent: #00FF01");
+        timer = 1;
+        bar = new Timeline(new KeyFrame(Duration.millis(8), ev ->{
+            timer -= 0.002;
+            time.setProgress(timer);
+            if (timer < 0.8){
+                time.setStyle("-fx-accent: #74FF00");
+            }
+            if (timer < 0.7){
+                time.setStyle("-fx-accent: #81FE00");
+            }
+            if (timer < 0.6){
+                time.setStyle("-fx-accent: #D6FE01");
+            }
+            if (timer < 0.5){
+                time.setStyle("-fx-accent: #FFEB01");
+            }
+            if (timer < 0.4){
+                time.setStyle("-fx-accent: #FFCB00");
+            }
+            if (timer < 0.3){
+                time.setStyle("-fx-accent: #FD5C02");
+            }
+            if (timer < 0.2){
+                time.setStyle("-fx-accent: #FE5600");
+            }
+            if (timer < 0.1){
+                time.setStyle("-fx-accent: #FF0100");
+            }
+            if (timer <= 0.002){
+                disableAnswers();
+                showAnswers();
+                counter--;
+                createTimer();
+            }
+        }));
+        bar.setCycleCount(499);
+        bar.play();
+    }
+
+    private void disableAnswers() {
+        Answer1.setDisable(true);
+        AnswerA.setDisable(true);
+        AnswerB.setDisable(true);
+        Answer2.setDisable(true);
+        Answer3.setDisable(true);
+        AnswerC.setDisable(true);
     }
 
     /**
@@ -206,12 +256,11 @@ public class GameScreenCtrl {
 
     public void createTimer(){
         Score score = StartScreenCtrl.getOwnScore();
-        Timeline timeline = new Timeline
-                (new KeyFrame(Duration.seconds(1), ev -> {
+        Timeline wait = new Timeline
+                (new KeyFrame(Duration.seconds(1.5), ev -> {
             mainCtrl.showInBetweenScreen(21-counter, score.getScore());
-            setAnswer();
         }));
-        timeline.play();
+        wait.play();
 
     }
 
