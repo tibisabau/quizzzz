@@ -89,9 +89,9 @@
             <children>
                 <Label layoutX="-8.0" layoutY="14.0" prefHeight="18.0" prefWidth="38.0" text="Time:" />
                 <Label layoutX="-8.0" layoutY="34.0" prefHeight="18.0" prefWidth="38.0" text="Score:" />
-                <Label layoutX="-8.0" layoutY="52.0" prefHeight="18.0" prefWidth="90.0" text="Question: 5/20" />
                 <Label layoutX="37.0" layoutY="14.0" text="00:00" />
                 <Label layoutX="37.0" layoutY="35.0" prefHeight="18.0" prefWidth="29.0" text="300" />
+            <Text fx:id="Qcounter" layoutX="-8.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="83.20000000000005" />
             </children>
         </AnchorPane>
     </children>

@@ -21,12 +21,8 @@ import static com.google.inject.Guice.createInjector;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import client.scenes.GameScreenCtrl;
-import client.scenes.InstructionSceneCtrl;
-import client.scenes.StartScreenCtrl;
-import client.scenes.leaderboardSceneCtrl;
+import client.scenes.*;
 import com.google.inject.Injector;
-import client.scenes.MainCtrl;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -54,7 +50,10 @@ public class Main extends Application {
         var leaderboard = FXML.load(
                 leaderboardSceneCtrl.class, "client", "scenes",
                 "leaderboardScene.fxml");
+        var inBetweenScreen = FXML.load(InBetweenScreenCtrl.class,
+                "client", "scenes", "InBetweenScreen.fxml");
+
         mainCtrl.initialize(primaryStage, start ,
-                instruction, gameScreen, leaderboard);
+                instruction, gameScreen, leaderboard, inBetweenScreen);
     }
 }
