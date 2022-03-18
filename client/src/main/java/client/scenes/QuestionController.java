@@ -198,7 +198,8 @@ public class QuestionController {
         guessAnswer.setDisable(false);
     }
 
-    /**
+    /**pressing ENTER submits the answer to
+     * the "Guess X" question type
      *@param e the e
      */
     public void keyPressed(KeyEvent e) {
@@ -212,6 +213,11 @@ public class QuestionController {
         }
     }
 
+    /**
+     * confirms the answer to the "Guess X" question
+     * checks if the client can load a different
+     * question
+     */
     public void ok() {
         --mainCtrl.counter;
         if(mainCtrl.counter > 0) {
@@ -224,7 +230,7 @@ public class QuestionController {
     }
 
     /**
-     * creates a 1.5 sec delay in-between questions
+     * creates a 1 sec delay in-between questions
      */
     public void createTimer(){
         Timeline timeline = new Timeline
@@ -242,6 +248,11 @@ public class QuestionController {
         mainCtrl.counter = value;
     }
 
+    /**
+     * selects at random a question type
+     * to load the scene of that specific
+     * type
+     */
     public void changeQuestion() {
         int questionType = server.getQuestionType();
         if (questionType == 1) {
@@ -253,6 +264,10 @@ public class QuestionController {
         }
     }
 
+    /**
+     * resets the current question list
+     * to start a new single player game
+     */
     public void setQuestionList() {
         mainCtrl.questionList = new HashSet<>();
     }

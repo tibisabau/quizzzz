@@ -133,7 +133,7 @@ public class StartScreenCtrl extends Application {
     }
 
     /**
-     * Change screen to GameScreen
+     * Change screen to Single Player GameScreen
      */
     public void goToGameScreen(){
         if(isCompleted == true){
