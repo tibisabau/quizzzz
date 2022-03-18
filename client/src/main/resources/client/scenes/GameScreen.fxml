@@ -95,7 +95,8 @@
         </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
          <children>
-            <ProgressBar fx:id="time" layoutX="-54.0" layoutY="16.0" prefHeight="16.0" prefWidth="259.0" progress="0.0" />
+            <ProgressBar fx:id="time" layoutX="-54.0" layoutY="20.0" prefHeight="18.0" prefWidth="259.0" progress="0.0" />
+            <Text fx:id="countdown" layoutX="-68.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="83.20000000000005" />
          </children>
       </AnchorPane>
     </children>
