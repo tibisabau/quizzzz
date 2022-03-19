@@ -15,12 +15,22 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
 
 
 public class GameScreenCtrl {
+    @FXML
+    public ImageView imageView1;
+
+    @FXML
+    public ImageView imageView2;
+
+    @FXML
+    public ImageView imageView3;
+
     @FXML
     public Label questionLabel;
 
@@ -148,11 +158,12 @@ public class GameScreenCtrl {
         mainCtrl.showStartScreen();
     }
 
+
     /**
      * Sets the answer for a new question
      * and adds this question to the question list.
      */
-    public void setAnswer(){
+    public void setAnswer() {
         Answer1.setDisable(false);
         Answer2.setDisable(false);
         Answer3.setDisable(false);
@@ -164,6 +175,7 @@ public class GameScreenCtrl {
         AnswerC.setStyle("-fx-background-color: WHITE");
         currentQuestion = server.getMEQuestion();
         questionList.add(currentQuestion);
+        setImages(currentQuestion);
         String answerText1 = currentQuestion.getFirstOption().toStringAnswer();
         String answerText2 = currentQuestion.getSecondOption().toStringAnswer();
         String answerText3 = currentQuestion.getThirdOption().toStringAnswer();
@@ -175,6 +187,16 @@ public class GameScreenCtrl {
         Qcounter.setText("Question: " + x + "/20");
 
     }
+
+    public void setImages(MostEnergyQuestion question){
+        String path1 = question.getFirstOption().getImagePath();
+        String path2 = question.getSecondOption().getImagePath();
+        String path3 = question.getThirdOption().getImagePath();
+        imageView1.setImage(mainCtrl.getImage(path1));
+        imageView2.setImage(mainCtrl.getImage(path2));
+        imageView3.setImage(mainCtrl.getImage(path3));
+    }
+
 
     /**
      * Stops the time bar
@@ -310,4 +332,6 @@ public class GameScreenCtrl {
     public void setCounter(int value){
         this.counter = value;
     }
+
+
 }
