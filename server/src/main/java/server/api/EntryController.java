@@ -1,6 +1,11 @@
 package server.api;
 
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.util.Base64;
 import java.util.List;
 import java.util.Random;
 
@@ -20,7 +25,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import commons.Activity;
 import server.database.EntryRepository;
 
-
+import javax.imageio.ImageIO;
 
 
 @RestController
@@ -99,6 +104,23 @@ public class EntryController {
                     newActivity.id = id;
                     return repo.save(newActivity);
                 });
+    }
+
+    @PostMapping("photo/get")
+    public ResponseEntity<String> getImage(@RequestBody String path) {
+        try {
+            BufferedImage img = ImageIO.read(
+                    new File("./activity_bank/" + path));
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ImageIO.write(img, path.split("\\.")[1], outputStream);
+            Base64.Encoder encoder = Base64.getEncoder();
+            String encodedImage = encoder.
+                    encodeToString(outputStream.toByteArray());
+            return ResponseEntity.ok(encodedImage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.badRequest().build();
     }
 
 }
