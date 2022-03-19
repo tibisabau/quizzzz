@@ -94,15 +94,7 @@ public class GameScreenCtrl {
         disableAnswers();
         answerPoints(currentQuestion, 1);
         --counter;
-        if(counter > 0) {
-            //showLoadingPage  - TO BE IMPLEMENTED
-            this.createTimer();
-
-        }else{
-            //showLeaderBoardScreen()  - TO BE IMPLEMENTED
-
-            mainCtrl.showLeaderboard();
-        }
+        this.createTimer();
     }
 
     /**
@@ -113,13 +105,7 @@ public class GameScreenCtrl {
         disableAnswers();
         answerPoints(currentQuestion,2);
         --counter;
-        if(counter > 0) {
-            //showLoading() - TO BE IMPLEMENTED
-            this.createTimer();
-        }else{
-            //showLeaderBoardScreen()  - TO BE IMPLEMENTED
-            mainCtrl.showLeaderboard();
-        }
+        this.createTimer();
     }
 
     /**
@@ -128,15 +114,9 @@ public class GameScreenCtrl {
     public void selectAnswerC() throws InterruptedException {
         stopTime();
         disableAnswers();
-        answerPoints(currentQuestion, 3 );
+        answerPoints(currentQuestion, 3);
         --counter;
-        if(counter > 0) {
-            //showLoadingPage  - TO BE IMPLEMENTED
-            this.createTimer();
-        }else{
-            //showLeaderBoardScreen()  - TO BE IMPLEMENTED
-            mainCtrl.showLeaderboard();
-        }
+        this.createTimer();
     }
 
     /**
@@ -268,7 +248,12 @@ public class GameScreenCtrl {
         Score score = StartScreenCtrl.getOwnScore();
         Timeline wait = new Timeline
                 (new KeyFrame(Duration.seconds(1.5), ev -> {
-            mainCtrl.showInBetweenScreen(21-counter, score.getScore());
+                    if (counter > 0) {
+                        mainCtrl.showInBetweenScreen(21-counter,
+                                score.getScore());
+                    } else {
+                        mainCtrl.showLeaderboard();
+                    }
         }));
         wait.play();
 
