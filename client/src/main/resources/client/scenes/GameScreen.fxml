@@ -32,19 +32,19 @@
                 <Button layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onAction="#goToStartScene" prefHeight="34.0" prefWidth="75.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20" />
             </children>
         </AnchorPane>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <AnchorPane fx:id="anchorPane1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <children>
-                <ImageView fitHeight="96.0" fitWidth="134.0" layoutX="7.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true" style="fx: 10;" />
+                <ImageView fx:id="imageView1" fitHeight="96.0" fitWidth="134.0" layoutX="7.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true" style="fx: 10;" />
             </children>
         </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
             <children>
-                <ImageView fitHeight="96.0" fitWidth="134.0" layoutX="7.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="imageView2" fitHeight="96.0" fitWidth="134.0" layoutX="7.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true" />
             </children>
         </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
             <children>
-                <ImageView fitHeight="96.0" fitWidth="134.0" layoutX="14.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="imageView3" fitHeight="96.0" fitWidth="134.0" layoutX="14.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true" />
             </children>
         </AnchorPane>
         <AnchorPane prefHeight="92.0" prefWidth="380.0" GridPane.columnIndex="2" GridPane.rowIndex="1">

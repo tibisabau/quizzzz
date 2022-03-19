@@ -10,6 +10,8 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 
+
+
 public class InBetweenScreenCtrl {
 
     @FXML
@@ -40,7 +42,7 @@ public class InBetweenScreenCtrl {
         this.mainCtrl = mainCtrl;
     }
 
-    public void showGameScreen(){
+    public void showGameScreen() {
         mainCtrl.showGameScreen();
 
     }
