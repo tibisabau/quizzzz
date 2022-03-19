@@ -11,6 +11,7 @@ import commons.Score;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -47,6 +48,12 @@ public class GameScreenCtrl {
     @FXML
     public Text Qcounter;
 
+    @FXML
+    public Text countdown;
+
+    @FXML
+    public ProgressBar time;
+
     private final ServerUtils server;
 
     private final MainCtrl mainCtrl;
@@ -61,9 +68,9 @@ public class GameScreenCtrl {
 
     private MostEnergyQuestion currentQuestion;
 
+    private double timer;
 
-
-
+    private Timeline bar;
 
     /**
      * Instantiates a new Game screen ctrl.
@@ -83,71 +90,38 @@ public class GameScreenCtrl {
      * Selecting answer A
      */
     public void selectAnswerA() throws InterruptedException {
-        Answer1.setDisable(true);
-        AnswerA.setDisable(true);
-        AnswerB.setDisable(true);
-        Answer2.setDisable(true);
-        Answer3.setDisable(true);
-        AnswerC.setDisable(true);
+        stopTime();
+        disableAnswers();
         answerPoints(currentQuestion, 1);
         --counter;
-        if(counter > 0) {
-            //showLoadingPage  - TO BE IMPLEMENTED
-            this.createTimer();
-
-        }else{
-            //showLeaderBoardScreen()  - TO BE IMPLEMENTED
-
-            mainCtrl.showLeaderboard();
-        }
+        this.createTimer();
     }
 
     /**
      * Selecting answer B
      */
     public void selectAnswerB() throws InterruptedException {
-        Answer2.setDisable(true);
-        AnswerB.setDisable(true);
-        AnswerA.setDisable(true);
-        Answer1.setDisable(true);
-        AnswerC.setDisable(true);
-        Answer3.setDisable(true);
+        stopTime();
+        disableAnswers();
         answerPoints(currentQuestion,2);
         --counter;
-        if(counter > 0) {
-            //showLoading() - TO BE IMPLEMENTED
-            this.createTimer();
-        }else{
-            //showLeaderBoardScreen()  - TO BE IMPLEMENTED
-            mainCtrl.showLeaderboard();
-        }
+        this.createTimer();
     }
 
     /**
      * Selecting answer C
      */
     public void selectAnswerC() throws InterruptedException {
-        AnswerC.setDisable(true);
-        AnswerB.setDisable(true);
-        Answer2.setDisable(true);
-        Answer1.setDisable(true);
-        AnswerA.setDisable(true);
-        Answer3.setDisable(true);
-        answerPoints(currentQuestion, 3 );
+        stopTime();
+        disableAnswers();
+        answerPoints(currentQuestion, 3);
         --counter;
-        if(counter > 0) {
-            //showLoadingPage  - TO BE IMPLEMENTED
-            this.createTimer();
-        }else{
-            //showLeaderBoardScreen()  - TO BE IMPLEMENTED
-            mainCtrl.showLeaderboard();
-        }
+        this.createTimer();
     }
 
     /**
      * Shows answers green for the correct ones and red for incorrect
      */
-
     public void showAnswers(){
         if(answerCorrect(currentQuestion, 1 )){
             AnswerA.setStyle(correctColor);
@@ -170,6 +144,7 @@ public class GameScreenCtrl {
      * Change screen to StartScene
      */
     public void goToStartScene(){
+        stopTime();
         mainCtrl.showStartScreen();
     }
 
@@ -195,9 +170,74 @@ public class GameScreenCtrl {
         Answer1.setText(answerText1);
         Answer2.setText(answerText2);
         Answer3.setText(answerText3);
+        startTimer();
         int x = 21 - counter;
         Qcounter.setText("Question: " + x + "/20");
 
+    }
+
+    /**
+     * Stops the time bar
+     */
+    public void stopTime(){
+        if (bar != null){
+            bar.stop();
+        }
+    }
+
+    /**
+     * Starts the time bar
+     */
+    public void startTimer(){
+        time.setStyle("-fx-accent: #00FF01");
+        timer = 1;
+        bar = new Timeline(new KeyFrame(Duration.millis(8), ev ->{
+            timer -= 0.001;
+            time.setProgress(timer);
+            countdown.setText(String.valueOf((int) Math.round(timer*10)));
+            if (timer < 0.8){
+                time.setStyle("-fx-accent: #74FF00");
+            }
+            if (timer < 0.7){
+                time.setStyle("-fx-accent: #81FE00");
+            }
+            if (timer < 0.6){
+                time.setStyle("-fx-accent: #D6FE01");
+            }
+            if (timer < 0.5){
+                time.setStyle("-fx-accent: #FFEB01");
+            }
+            if (timer < 0.4){
+                time.setStyle("-fx-accent: #FFCB00");
+            }
+            if (timer < 0.3){
+                time.setStyle("-fx-accent: #FD5C02");
+            }
+            if (timer < 0.2){
+                time.setStyle("-fx-accent: #FE5600");
+            }
+            if (timer < 0.1){
+                time.setStyle("-fx-accent: #FF0100");
+            }
+            if (timer <= 0.002){
+                bar.stop();
+                disableAnswers();
+                showAnswers();
+                counter--;
+                createTimer();
+            }
+        }));
+        bar.setCycleCount(1000);
+        bar.play();
+    }
+
+    private void disableAnswers() {
+        Answer1.setDisable(true);
+        AnswerA.setDisable(true);
+        AnswerB.setDisable(true);
+        Answer2.setDisable(true);
+        Answer3.setDisable(true);
+        AnswerC.setDisable(true);
     }
 
     /**
@@ -206,12 +246,16 @@ public class GameScreenCtrl {
 
     public void createTimer(){
         Score score = StartScreenCtrl.getOwnScore();
-        Timeline timeline = new Timeline
-                (new KeyFrame(Duration.seconds(1), ev -> {
-            mainCtrl.showInBetweenScreen(21-counter, score.getScore());
-            setAnswer();
+        Timeline wait = new Timeline
+                (new KeyFrame(Duration.seconds(1.5), ev -> {
+                    if (counter > 0) {
+                        mainCtrl.showInBetweenScreen(21-counter,
+                                score.getScore());
+                    } else {
+                        mainCtrl.showLeaderboard();
+                    }
         }));
-        timeline.play();
+        wait.play();
 
     }
 
@@ -225,8 +269,11 @@ public class GameScreenCtrl {
 
     public void answerPoints(MostEnergyQuestion question, int answer){
         Score score = StartScreenCtrl.getOwnScore();
+        double multiplier = 0.5 + (2 * timer);
+        int extraPoints = (int) Math.round(100 * multiplier);
+
         if(answerCorrect(question,answer)) {
-            score.setScore(score.getScore() + 100);
+            score.setScore(score.getScore() + extraPoints);
         }
         showAnswers();
     }
