@@ -3,21 +3,19 @@ package client.scenes;
 import client.utils.ServerUtils;
 import com.google.inject.Inject;
 
-import commons.Activity;
-import commons.MostEnergyQuestion;
+import commons.*;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
-import commons.Score;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashSet;
 
 
 public class GameScreenCtrl {
@@ -46,10 +44,13 @@ public class GameScreenCtrl {
     public Text Answer3;
 
     @FXML
-    public Text Qcounter;
+    public Label Qcounter;
 
     @FXML
     public Text countdown;
+
+    @FXML
+    public TextField guessAnswer;
 
     @FXML
     public ProgressBar time;
@@ -58,15 +59,11 @@ public class GameScreenCtrl {
 
     private final MainCtrl mainCtrl;
 
-    private int counter;
-
-    private List<MostEnergyQuestion> questionList;
-
     private String correctColor = "-fx-background-color: Green";
 
     private String incorrectColor = "-fx-background-color: Red";
 
-    private MostEnergyQuestion currentQuestion;
+    private Object currentQuestion;
 
     private double timer;
 
@@ -82,8 +79,6 @@ public class GameScreenCtrl {
     public GameScreenCtrl(ServerUtils server, MainCtrl mainCtrl) {
         this.server = server;
         this.mainCtrl = mainCtrl;
-        this.counter = 20;
-        this.questionList = new ArrayList<>();
     }
 
     /**
@@ -93,7 +88,7 @@ public class GameScreenCtrl {
         stopTime();
         disableAnswers();
         answerPoints(currentQuestion, 1);
-        --counter;
+        --mainCtrl.counter;
         this.createTimer();
     }
 
@@ -104,7 +99,7 @@ public class GameScreenCtrl {
         stopTime();
         disableAnswers();
         answerPoints(currentQuestion,2);
-        --counter;
+        --mainCtrl.counter;
         this.createTimer();
     }
 
@@ -115,7 +110,7 @@ public class GameScreenCtrl {
         stopTime();
         disableAnswers();
         answerPoints(currentQuestion, 3);
-        --counter;
+        --mainCtrl.counter;
         this.createTimer();
     }
 
@@ -151,8 +146,9 @@ public class GameScreenCtrl {
     /**
      * Sets the answer for a new question
      * and adds this question to the question list.
+     * @param questionType
      */
-    public void setAnswer(){
+    public void setAnswer(int questionType){
         Answer1.setDisable(false);
         Answer2.setDisable(false);
         Answer3.setDisable(false);
@@ -162,18 +158,105 @@ public class GameScreenCtrl {
         AnswerA.setStyle("-fx-background-color: WHITE");
         AnswerB.setStyle("-fx-background-color: WHITE");
         AnswerC.setStyle("-fx-background-color: WHITE");
-        currentQuestion = server.getMEQuestion();
-        questionList.add(currentQuestion);
-        String answerText1 = currentQuestion.getFirstOption().toStringAnswer();
-        String answerText2 = currentQuestion.getSecondOption().toStringAnswer();
-        String answerText3 = currentQuestion.getThirdOption().toStringAnswer();
-        Answer1.setText(answerText1);
-        Answer2.setText(answerText2);
-        Answer3.setText(answerText3);
+        if(questionType == 1) {
+            createMEQuestion();
+        }
+
+        else {
+            createHMQuestion();
+        }
         startTimer();
-        int x = 21 - counter;
+        int x = 21 - mainCtrl.counter;
         Qcounter.setText("Question: " + x + "/20");
 
+    }
+
+    /**
+     * client adds a "Which activity takes more energy" question
+     * from the server to the question list
+     */
+    public void createMEQuestion() {
+        currentQuestion = server.getMEQuestion();
+        while(mainCtrl.questionList.contains(currentQuestion)) {
+            currentQuestion = server.getMEQuestion();
+        }
+        mainCtrl.questionList.add(currentQuestion);
+        Answer1.setText(((MostEnergyQuestion)currentQuestion).
+                getFirstOption().toStringAnswer());
+        Answer2.setText(((MostEnergyQuestion)currentQuestion).
+                getSecondOption().toStringAnswer());
+        Answer3.setText(((MostEnergyQuestion)currentQuestion).
+                getThirdOption().toStringAnswer());
+    }
+
+    /**
+     * client adds a "How much energy does it take" question
+     * from the server to the question list
+     */
+    public void createHMQuestion() {
+        currentQuestion = server.getHMQuestion();
+        while(mainCtrl.questionList.contains(currentQuestion)) {
+            currentQuestion = server.getHMQuestion();
+        }
+        mainCtrl.questionList.add(currentQuestion);
+        Answer1.setText(String.valueOf
+                (((HowMuchQuestion)currentQuestion).
+                        getFirstOption().getConsumptionInWh()));
+        Answer2.setText(String.valueOf
+                (((HowMuchQuestion)currentQuestion).
+                        getSecondOption().getConsumptionInWh()));
+        Answer3.setText(String.valueOf
+                (((HowMuchQuestion)currentQuestion).
+                        getThirdOption().getConsumptionInWh()));
+    }
+
+    /**
+     * client adds a "Guess how much energy this activity takes" question
+     * from the server to the question list
+     */
+    public void createGXQuestion() {
+        currentQuestion = server.getGXQuestion();
+        while(mainCtrl.questionList.contains(currentQuestion)) {
+            currentQuestion = server.getGXQuestion();
+        }
+        mainCtrl.questionList.add(currentQuestion);
+        guessAnswer.setDisable(false);
+        guessAnswer.clear();
+        startTimer();
+        int x = 21 - mainCtrl.counter;
+        Qcounter.setText("Question: " + x + "/20");
+    }
+
+    /**pressing ENTER submits the answer to
+     * the "Guess X" question type
+     *@param e the e
+     */
+    public void keyPressed(KeyEvent e) {
+        switch (e.getCode()) {
+            case ENTER:
+            {ok();
+                guessAnswer.setDisable(true);}
+            break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * confirms the answer to the "Guess X" question
+     * checks if the client can load a different
+     * question
+     */
+    public void ok() {
+        --mainCtrl.counter;
+        stopTime();
+        if(mainCtrl.counter > 0) {
+            //showLoadingPage  - TO BE IMPLEMENTED
+            this.createTimer();
+        }else{
+            //showLeaderBoardScreen()  - TO BE IMPLEMENTED
+            mainCtrl.showLeaderboard();
+        }
     }
 
     /**
@@ -221,9 +304,12 @@ public class GameScreenCtrl {
             }
             if (timer <= 0.002){
                 bar.stop();
-                disableAnswers();
-                showAnswers();
-                counter--;
+                if(currentQuestion instanceof MostEnergyQuestion ||
+                        currentQuestion instanceof HowMuchQuestion) {
+                    disableAnswers();
+                    showAnswers();
+                }
+                mainCtrl.counter--;
                 createTimer();
             }
         }));
@@ -231,6 +317,9 @@ public class GameScreenCtrl {
         bar.play();
     }
 
+    /**
+     * disable multiple choice answers
+     */
     private void disableAnswers() {
         Answer1.setDisable(true);
         AnswerA.setDisable(true);
@@ -243,13 +332,12 @@ public class GameScreenCtrl {
     /**
      * It creates a pause between 2 questions
      */
-
     public void createTimer(){
         Score score = StartScreenCtrl.getOwnScore();
         Timeline wait = new Timeline
                 (new KeyFrame(Duration.seconds(1.5), ev -> {
-                    if (counter > 0) {
-                        mainCtrl.showInBetweenScreen(21-counter,
+                    if (mainCtrl.counter > 0) {
+                        mainCtrl.showInBetweenScreen(21- mainCtrl.counter,
                                 score.getScore());
                     } else {
                         mainCtrl.showLeaderboard();
@@ -267,7 +355,7 @@ public class GameScreenCtrl {
      *
      */
 
-    public void answerPoints(MostEnergyQuestion question, int answer){
+    public void answerPoints(Object question, int answer){
         Score score = StartScreenCtrl.getOwnScore();
         double multiplier = 0.5 + (2 * timer);
         int extraPoints = (int) Math.round(100 * multiplier);
@@ -285,21 +373,46 @@ public class GameScreenCtrl {
      * @param answer Answer given
      * @return boolean if the answer is correct
      */
-    public boolean answerCorrect (MostEnergyQuestion question, int answer){
-        Activity correct = question.getCorrectOption();
+    public boolean answerCorrect (Object question, int answer){
+
+        if(question instanceof MostEnergyQuestion) {
+            return MECorrectAnswer(question, answer);
+        }
+        else
+            if(question instanceof HowMuchQuestion) {
+                return HMCorrectAnswer(question, answer);
+            }
+
+            else {
+                //to be implemented for the guessing question
+                return true;
+            }
+    }
+
+    /**
+     * check for correctness for MEQuestion
+     * @param question
+     * @param answer
+     * @return whether the answer is correct
+     */
+    public boolean MECorrectAnswer(Object question, int answer) {
+        Activity correct = ((MostEnergyQuestion)question).getCorrectOption();
         switch (answer){
             case 1:
-                if (question.getFirstOption().equals(correct)){
+                if (((MostEnergyQuestion)question).getFirstOption().
+                        equals(correct)){
                     return true;
                 }
                 break;
             case 2:
-                if (question.getSecondOption().equals(correct)){
+                if (((MostEnergyQuestion)question).getSecondOption().
+                        equals(correct)){
                     return true;
                 }
                 break;
             case 3:
-                if (question.getThirdOption().equals(correct)){
+                if (((MostEnergyQuestion)question).getThirdOption().
+                        equals(correct)){
                     return true;
                 }
                 break;
@@ -307,7 +420,50 @@ public class GameScreenCtrl {
         return false;
     }
 
+    /**
+     * Check for correctness HMQuestion
+     * @param question
+     * @param answer
+     * @return whether the answer is correct
+     */
+    public boolean HMCorrectAnswer(Object question, int answer) {
+        Activity correct = ((HowMuchQuestion)question).getCorrectOption();
+        switch (answer){
+            case 1:
+                if (((HowMuchQuestion)question).getFirstOption().
+                        equals(correct)){
+                    return true;
+                }
+                break;
+            case 2:
+                if (((HowMuchQuestion)question).getSecondOption().
+                        equals(correct)){
+                    return true;
+                }
+                break;
+            case 3:
+                if (((HowMuchQuestion)question).getThirdOption().
+                        equals(correct)){
+                    return true;
+                }
+                break;
+        }
+        return false;
+    }
+
+    /**
+     * resets the number of questions to 20 for each game
+     * @param value
+     */
     public void setCounter(int value){
-        this.counter = value;
+        mainCtrl.counter = value;
+    }
+
+    /**
+     * resets the current question list
+     * to start a new single player game
+     */
+    public void setQuestionList() {
+        mainCtrl.questionList = new HashSet<>();
     }
 }

@@ -17,10 +17,20 @@ public class HowMuchQuestion {
 
     private Activity correctOption;
 
+    /**
+     * default constructor for ObjectMapper
+     */
     public HowMuchQuestion(){
 
     }
 
+    /**
+     * constructor for the "How much energy does it take" question type
+     * @param firstOption
+     * @param secondOption
+     * @param thirdOption
+     * @param correctOption
+     */
     public HowMuchQuestion(Activity firstOption,
                            Activity secondOption, Activity thirdOption,
                            Activity correctOption) {

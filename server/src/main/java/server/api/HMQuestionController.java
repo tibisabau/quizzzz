@@ -24,14 +24,25 @@ import java.util.List;
             Activity firstOption = correctOption;
             double random = Math.random() * 2 + 0.1;
             double random2 = Math.random() * 2 + 0.1;
+
+            while(correctOption.getConsumptionInWh() * random / 10 * 10
+                    == correctOption.getConsumptionInWh()) {
+                random = Math.random() * 2 + 0.1;
+            }
+
+            while (random2 == random || correctOption.getConsumptionInWh() *
+                    random2 / 10 * 10 == correctOption.getConsumptionInWh()) {
+                random2 = Math.random() * 2 + 0.1;
+            }
+
             Activity secondOption = new Activity(correctOption.getImagePath(),
-                    correctOption.getTitle(),
-                    (int)(correctOption.getConsumptionInWh() * random)
-                            / 10 * 10);
+                    correctOption.getTitle()
+            , (long) (((correctOption.getConsumptionInWh() * random) /
+                                10 + random) * 10));
             Activity thirdOption = new Activity(correctOption.getImagePath(),
-                    correctOption.getTitle(),
-                    (int)(correctOption.getConsumptionInWh() * random2)
-                            / 10 * 10);
+                    correctOption.getTitle()
+                    , (long) (((correctOption.getConsumptionInWh()
+                                        * random2) / 10 + random2)* 10));
             List<Activity> options = new ArrayList<>();
 
             options.add(firstOption);

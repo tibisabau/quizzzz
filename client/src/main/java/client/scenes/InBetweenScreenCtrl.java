@@ -40,11 +40,28 @@ public class InBetweenScreenCtrl {
         this.mainCtrl = mainCtrl;
     }
 
+    /**
+     * generates a new question of random type
+     */
     public void showGameScreen(){
-        mainCtrl.showGameScreen();
-
+        int questionType = server.getQuestionType();
+        if(questionType == 1) {
+            mainCtrl.showMEQuestion(questionType);
+        }
+        else
+        if(questionType == 2) {
+            mainCtrl.showHMQuestion(questionType);
+        }
+        else {
+            mainCtrl.showGXQuestion();
+        }
     }
 
+    /**
+     * starts timer for inBetweenScreen
+     * @param question
+     * @param score
+     */
     public synchronized void startTimer(int question, int score) {
         qcounter2.setText("Question " + question + " out of 20");
         cscore.setText("Score: " + score);

@@ -14,12 +14,12 @@ class ActivityParseTest {
 
     @BeforeEach
     void setUp() {
-        activityParse1 = new ActivityParse("id","image_path",
-                "title",1000,"source");
-        activityParse2 = new ActivityParse("id","image_path",
-                "title",1000,"source");
+        activityParse1 = new ActivityParse("id","image_path","title",
+                1000,"source");
+        activityParse2 = new ActivityParse("id","image_path","title",
+                1000,"source");
         activityParse3 = new ActivityParse("new_id","new_image_path",
-                "new_title",2000,"new_source");
+                "new_title", 2000,"new_source");
     }
 
     @Test
@@ -42,7 +42,7 @@ class ActivityParseTest {
 
     @Test
     void setImagePath() {
-        activityParse1.setImage_path("test_path");
+        activityParse1.setImagePath("test_path");
         assertEquals("test_path", activityParse1.image_path);
     }
 
@@ -54,7 +54,7 @@ class ActivityParseTest {
 
     @Test
     void setConsumptionInWh() {
-        activityParse1.setConsumption_in_wh(7000);
+        activityParse1.setConsumptionInWh(7000);
         assertEquals(7000, activityParse1.consumption_in_wh);
     }
 
@@ -70,17 +70,16 @@ class ActivityParseTest {
 
     @Test
     void getImagePath() {
-        assertEquals("image_path",activityParse1.getImage_path());
+        assertEquals("image_path",activityParse1.getImagePath());
     }
 
     @Test
     void getSource() {
-        assertEquals("source",
-                activityParse1.getSource());
+        assertEquals("source", activityParse1.getSource());
     }
 
     @Test
     void getConsumptionInWh() {
-        assertEquals(1000, activityParse1.getConsumption_in_wh());
+        assertEquals(1000, activityParse1.getConsumptionInWh());
     }
 }

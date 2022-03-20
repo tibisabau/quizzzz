@@ -21,10 +21,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+import java.util.Set;
+
 /**
  * The type Main ctrl.
  */
 public class MainCtrl {
+
+    public int counter;
+
+    public Set<Object> questionList;
 
     private Stage primaryStage;
 
@@ -36,9 +42,17 @@ public class MainCtrl {
 
     private Scene instructionScene;
 
-    private GameScreenCtrl GameScreenCtrl;
+    private GameScreenCtrl meQuestion;
 
-    private Scene GameScreenScene;
+    private Scene meQuestionScene;
+
+    private GameScreenCtrl hmQuestion;
+
+    private Scene hmQuestionScene;
+
+    private GameScreenCtrl gxQuestion;
+
+    private Scene gxQuestionScene;
 
     private Scene leaderboardScene;
 
@@ -54,16 +68,21 @@ public class MainCtrl {
      * @param primaryStage the primary stage
      * @param startScreen  the start screen
      * @param instructionScene
-     * @param gameScreen
+     * @param meQuestion
+     * @param hmQuestion
+     * @param gxQuestion
      * @param leaderboardScreen
      * @param inBetweenScreen
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
             , Pair<InstructionSceneCtrl, Parent> instructionScene,
-                           Pair<GameScreenCtrl, Parent> gameScreen,
+                           Pair<GameScreenCtrl, Parent> meQuestion,
                            Pair<leaderboardSceneCtrl,
                                    Parent> leaderboardScreen,
+
+                           Pair<GameScreenCtrl, Parent> hmQuestion,
+                           Pair<GameScreenCtrl, Parent> gxQuestion,
                            Pair<InBetweenScreenCtrl, Parent> inBetweenScreen) {
         this.primaryStage = primaryStage;
         this.startScreenCtrl = startScreen.getKey();
@@ -72,8 +91,12 @@ public class MainCtrl {
         this.instructionSceneCtrl = instructionScene.getKey();
         this.leaderboardScene = new Scene(leaderboardScreen.getValue());
         this.leaderboardSceneCtrl = leaderboardScreen.getKey();
-        this.GameScreenCtrl = gameScreen.getKey();
-        this.GameScreenScene = new Scene(gameScreen.getValue());
+        this.meQuestion = meQuestion.getKey();
+        this.meQuestionScene = new Scene(meQuestion.getValue());
+        this.hmQuestion = hmQuestion.getKey();
+        this.hmQuestionScene = new Scene(hmQuestion.getValue());
+        this.gxQuestion = gxQuestion.getKey();
+        this.gxQuestionScene = new Scene(gxQuestion.getValue());
         this.inBetweenCtrl = inBetweenScreen.getKey();
         this.inBetweenScene = new Scene(inBetweenScreen.getValue());
 
@@ -87,7 +110,8 @@ public class MainCtrl {
     public void showStartScreen() {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(startScreen);
-        GameScreenCtrl.setCounter(20);
+        meQuestion.setCounter(20);
+        meQuestion.setQuestionList();
     }
 
     /**
@@ -99,12 +123,32 @@ public class MainCtrl {
     }
 
     /**
-     * Show game screen
+     * Show MEQuestion
+     * @param questionType
      */
-    public void showGameScreen() {
+    public void showMEQuestion(int questionType) {
         primaryStage.setTitle("Quizzzz");
-        primaryStage.setScene(GameScreenScene);
-        GameScreenCtrl.setAnswer();
+        primaryStage.setScene(meQuestionScene);
+        meQuestion.setAnswer(questionType);
+    }
+
+    /**
+     * Show HMQuestion
+     * @param questionType
+     */
+    public void showHMQuestion(int questionType) {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(hmQuestionScene);
+        hmQuestion.setAnswer(questionType);
+    }
+
+    /**
+     * Show GXQuestion
+     */
+    public void showGXQuestion() {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(gxQuestionScene);
+        gxQuestion.createGXQuestion();
     }
 
     /**
@@ -126,4 +170,5 @@ public class MainCtrl {
         primaryStage.setScene(inBetweenScene);
         inBetweenCtrl.startTimer(question, score);
     }
+
 }

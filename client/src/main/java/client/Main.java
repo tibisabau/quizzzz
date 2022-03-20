@@ -45,8 +45,12 @@ public class Main extends Application {
         var start = FXML.load(StartScreenCtrl.class, "client",
                 "scenes", "StartScreen.fxml");
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
-        var gameScreen = FXML.load(GameScreenCtrl.class,
-                "client", "scenes", "GameScreen.fxml");
+        var meQuestion = FXML.load(GameScreenCtrl.class,
+                "client", "scenes", "MEQuestion.fxml");
+        var hmQuestion = FXML.load(GameScreenCtrl.class,
+                "client", "scenes", "HMQuestion.fxml");
+        var gxQuestion = FXML.load(GameScreenCtrl.class,
+                "client", "scenes", "GXQuestion.fxml");
         var leaderboard = FXML.load(
                 leaderboardSceneCtrl.class, "client", "scenes",
                 "leaderboardScene.fxml");
@@ -54,6 +58,7 @@ public class Main extends Application {
                 "client", "scenes", "InBetweenScreen.fxml");
 
         mainCtrl.initialize(primaryStage, start ,
-                instruction, gameScreen, leaderboard, inBetweenScreen);
+                instruction, meQuestion, leaderboard, hmQuestion
+                , gxQuestion, inBetweenScreen);
     }
 }

@@ -24,7 +24,9 @@ public class Activity {
 
     public long consumptionInWh;
 
-    public Activity(){}
+    public Activity(){
+
+    }
 
     /**
      * Constructor method for activity
@@ -32,6 +34,7 @@ public class Activity {
      * @param title
      * @param consumptionInWh
      */
+
     public Activity(String imagePath, String title, long consumptionInWh){
         this.imagePath = imagePath;
         this.title = title;
@@ -51,12 +54,8 @@ public class Activity {
         this.title = title;
     }
 
-    public void setImagePath(String image_path) {
-        this.imagePath = image_path;
-    }
-
-    public void setConsumptionInWh(int consumption_in_wh) {
-        this.consumptionInWh = consumption_in_wh;
+    public void setConsumptionInWh(long consumptionInWh) {
+        this.consumptionInWh = consumptionInWh;
     }
 
     public long getId() {
@@ -88,5 +87,9 @@ public class Activity {
     public String toString() {
         return ToStringBuilder.reflectionToString(this,
                 MULTI_LINE_STYLE);
+    }
+
+    public void setImagePath(String somePath) {
+        this.imagePath = somePath;
     }
 }

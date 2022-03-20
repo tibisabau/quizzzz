@@ -136,11 +136,21 @@ public class StartScreenCtrl extends Application {
     }
 
     /**
-     * Change screen to GameScreen
+     * Change screen to Single Player GameScreen
      */
     public void goToGameScreen(){
         if(isCompleted == true){
-            mainCtrl.showGameScreen();
+            int questionType = server.getQuestionType();
+            if(questionType == 1) {
+                mainCtrl.showMEQuestion(questionType);
+            }
+            else
+                if(questionType == 2) {
+                    mainCtrl.showHMQuestion(questionType);
+                }
+                    else {
+                        mainCtrl.showGXQuestion();
+                }
             isCompleted = false;
         }else{
             return;
