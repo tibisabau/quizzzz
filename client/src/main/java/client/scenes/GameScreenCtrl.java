@@ -17,8 +17,8 @@ import javafx.util.Duration;
 
 import java.util.HashSet;
 import javafx.scene.image.ImageView;
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 
 
 public class GameScreenCtrl {
@@ -190,7 +190,7 @@ public class GameScreenCtrl {
      */
     public void createMEQuestion() {
         currentQuestion = server.getMEQuestion();
-        setImages(currentQuestion);
+        setImagesME((MostEnergyQuestion) currentQuestion);
         while(mainCtrl.questionList.contains(currentQuestion)) {
             currentQuestion = server.getMEQuestion();
         }
@@ -209,6 +209,7 @@ public class GameScreenCtrl {
      */
     public void createHMQuestion() {
         currentQuestion = server.getHMQuestion();
+        setImagesHQ((HowMuchQuestion) currentQuestion);
         while(mainCtrl.questionList.contains(currentQuestion)) {
             currentQuestion = server.getHMQuestion();
         }
@@ -256,13 +257,18 @@ public class GameScreenCtrl {
         }
     }
 
-    public void setImages(MostEnergyQuestion question){
+    public void setImagesME(MostEnergyQuestion question){
         String path1 = question.getFirstOption().getImagePath();
         String path2 = question.getSecondOption().getImagePath();
         String path3 = question.getThirdOption().getImagePath();
         imageView1.setImage(mainCtrl.getImage(path1));
         imageView2.setImage(mainCtrl.getImage(path2));
         imageView3.setImage(mainCtrl.getImage(path3));
+    }
+
+    public void setImagesHQ(HowMuchQuestion question){
+        String path2 = question.getSecondOption().getImagePath();
+        imageView2.setImage(mainCtrl.getImage(path2));
     }
 
 
