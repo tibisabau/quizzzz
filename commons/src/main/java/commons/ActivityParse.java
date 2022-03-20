@@ -25,8 +25,8 @@ public class ActivityParse {
      * @param consumption_in_wh
      * @param source
      */
-    public ActivityParse(String id, String image_path,
-                         String title, long consumption_in_wh, String source){
+    public ActivityParse(String id, String image_path, String title,
+                         long consumption_in_wh, String source){
         this.id = id;
         this.image_path = image_path;
         this.title = title;
@@ -66,6 +66,10 @@ public class ActivityParse {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getImage_path() {
+        return image_path;
     }
 
     public String getSource() {

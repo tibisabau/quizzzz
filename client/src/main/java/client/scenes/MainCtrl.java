@@ -42,21 +42,25 @@ public class MainCtrl {
 
     private Scene instructionScene;
 
-    private QuestionController meQuestion;
+    private GameScreenCtrl meQuestion;
 
     private Scene meQuestionScene;
 
-    private QuestionController hmQuestion;
+    private GameScreenCtrl hmQuestion;
 
     private Scene hmQuestionScene;
 
-    private QuestionController gxQuestion;
+    private GameScreenCtrl gxQuestion;
 
     private Scene gxQuestionScene;
 
     private Scene leaderboardScene;
 
     private leaderboardSceneCtrl leaderboardSceneCtrl;
+
+    private InBetweenScreenCtrl inBetweenCtrl;
+
+    private Scene inBetweenScene;
 
     /**
      * Initialize.
@@ -68,15 +72,18 @@ public class MainCtrl {
      * @param hmQuestion
      * @param gxQuestion
      * @param leaderboardScreen
+     * @param inBetweenScreen
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
             , Pair<InstructionSceneCtrl, Parent> instructionScene,
-                           Pair<QuestionController, Parent> meQuestion,
+                           Pair<GameScreenCtrl, Parent> meQuestion,
                            Pair<leaderboardSceneCtrl,
                                    Parent> leaderboardScreen,
-                           Pair<QuestionController, Parent> hmQuestion,
-                           Pair<QuestionController, Parent> gxQuestion) {
+
+                           Pair<GameScreenCtrl, Parent> hmQuestion,
+                           Pair<GameScreenCtrl, Parent> gxQuestion,
+                           Pair<InBetweenScreenCtrl, Parent> inBetweenScreen) {
         this.primaryStage = primaryStage;
         this.startScreenCtrl = startScreen.getKey();
         this.startScreen = new Scene(startScreen.getValue());
@@ -90,6 +97,8 @@ public class MainCtrl {
         this.hmQuestionScene = new Scene(hmQuestion.getValue());
         this.gxQuestion = gxQuestion.getKey();
         this.gxQuestionScene = new Scene(gxQuestion.getValue());
+        this.inBetweenCtrl = inBetweenScreen.getKey();
+        this.inBetweenScene = new Scene(inBetweenScreen.getValue());
 
         showStartScreen();
         primaryStage.show();
@@ -114,7 +123,7 @@ public class MainCtrl {
     }
 
     /**
-     * Show QuestionController
+     * Show MEQuestion
      * @param questionType
      */
     public void showMEQuestion(int questionType) {
@@ -149,6 +158,17 @@ public class MainCtrl {
         primaryStage.setTitle("Quizzzz");
         leaderboardSceneCtrl.load();
         primaryStage.setScene(leaderboardScene);
+    }
+
+    /**
+     * show inBetween Screen
+     * @param question
+     * @param score
+     */
+    public void showInBetweenScreen(int question, int score) {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(inBetweenScene);
+        inBetweenCtrl.startTimer(question, score);
     }
 
 }

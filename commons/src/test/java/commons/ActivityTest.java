@@ -14,9 +14,12 @@ class ActivityTest {
 
     @BeforeEach
     void setUp() {
-        activity1 = new Activity("path", "title", 1000);
-        activity2 = new Activity("path", "title", 1000);
-        activity3 = new Activity("new_path", "new_title", 2000);
+        activity1 = new Activity("path",
+                "title", 1000);
+        activity2 = new Activity("path",
+                "title", 1000);
+        activity3 = new Activity("new_path",
+                "new_title", 2000);
     }
 
     @Test
@@ -77,7 +80,8 @@ class ActivityTest {
 
     @Test
     void toStringAnswer() {
-        assertEquals("title", activity1.toStringAnswer());
+        assertEquals("title",
+                activity1.toStringAnswer());
     }
 
     @Test

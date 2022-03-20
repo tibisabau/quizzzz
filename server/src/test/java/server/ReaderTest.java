@@ -14,7 +14,8 @@ class ReaderTest {
 
     @BeforeEach
     void setUp() {
-        activityParse = new ActivityParse("id","path","title",1000,"source");
+        activityParse = new ActivityParse("id","path",
+                "title",1000,"source");
         activity = new Activity("path","title",1000);
     }
 

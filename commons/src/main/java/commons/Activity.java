@@ -85,7 +85,8 @@ public class Activity {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, MULTI_LINE_STYLE);
+        return ToStringBuilder.reflectionToString(this,
+                MULTI_LINE_STYLE);
     }
 
     public void setImagePath(String somePath) {
