@@ -55,6 +55,9 @@ public class GameScreenCtrl {
     @FXML
     public ProgressBar time;
 
+    @FXML
+    public Label scoreDisplay;
+
     private final ServerUtils server;
 
     private final MainCtrl mainCtrl;
@@ -255,6 +258,7 @@ public class GameScreenCtrl {
             this.createTimer();
         }else{
             //showLeaderBoardScreen()  - TO BE IMPLEMENTED
+            server.updateScore(StartScreenCtrl.getOwnScore());
             mainCtrl.showLeaderboard();
         }
     }
@@ -272,6 +276,8 @@ public class GameScreenCtrl {
      * Starts the time bar
      */
     public void startTimer(){
+        int scoreAmount = StartScreenCtrl.getOwnScore().getScore();
+        scoreDisplay.setText(Integer.toString(scoreAmount));
         time.setStyle("-fx-accent: #00FF01");
         timer = 1;
         bar = new Timeline(new KeyFrame(Duration.millis(8), ev ->{
@@ -340,6 +346,7 @@ public class GameScreenCtrl {
                         mainCtrl.showInBetweenScreen(21- mainCtrl.counter,
                                 score.getScore());
                     } else {
+                        server.updateScore(score);
                         mainCtrl.showLeaderboard();
                     }
         }));

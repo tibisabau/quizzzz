@@ -108,6 +108,20 @@ public class ServerUtils {
     }
 
     /**
+     * Update scores on the data base
+     * @param score the score
+     * @return the score
+     */
+    public Score updateScore(Score score){
+        Long id = score.getUserId();
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/score/put/" + id.toString())
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .put(Entity.entity(score, APPLICATION_JSON), Score.class);
+    }
+
+    /**
      * Adds an Activity to the database
      * @param activity
      * @return a new Activity
