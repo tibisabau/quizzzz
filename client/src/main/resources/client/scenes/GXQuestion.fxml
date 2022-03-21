@@ -54,7 +54,10 @@
     <children>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="25" />
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="25" />
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="25" />
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="25">
+         <children>
+            <Label fx:id="correctAnswerQX" layoutX="26.0" layoutY="49.0" prefHeight="45.0" prefWidth="83.0" wrapText="true" />
+         </children></AnchorPane>
         <AnchorPane prefHeight="92.0" prefWidth="380.0" GridPane.columnIndex="2" GridPane.rowIndex="22">
             <children>
                 <Label alignment="CENTER" layoutX="-126.0" layoutY="-6.0" prefHeight="39.0" prefWidth="383.0" style="-fx-background-color: #1b5e20;" text="Guess How Much Energy This Activity Takes" textAlignment="CENTER" textFill="WHITE">
