@@ -169,6 +169,17 @@ public class ServerUtils {
                 .get(Integer.class);
     }
 
+    public String getImage(String path) {
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/entry/photo/get")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .post(Entity.entity(path, APPLICATION_JSON), String.class);
+    }
+
+
+
+
     /**
      * generates a "Guess The Amount Of Energy" question
      * @return a "Guess The Amount Of Energy" question
