@@ -17,6 +17,8 @@ import javafx.util.Duration;
 
 import java.util.HashSet;
 import javafx.scene.image.ImageView;
+
+//import javax.swing.text.html.parser.Entity;
 //import java.util.ArrayList;
 //import java.util.List;
 
@@ -147,7 +149,10 @@ public class GameScreenCtrl {
             }
             else {
                 guessAnswer.setStyle(incorrectColor);
-                correctAnswerQX.setText("Correct answer: " + ((GuessXQuestion)currentQuestion).getCorrectOption().getConsumptionInWh());
+                //extra 2 lines because of checkstyle not above 80 character
+                GuessXQuestion cor = (GuessXQuestion)currentQuestion;
+                long corText = cor.getCorrectOption().getConsumptionInWh();
+                correctAnswerQX.setText("Correct answer: " + corText);
             }
         }
         else {
@@ -516,7 +521,8 @@ public class GameScreenCtrl {
     }
 
     public boolean GXCorrectAnswer(Object question, int answer){
-        int correctAmount = (int)((GuessXQuestion) question).getCorrectOption().getConsumptionInWh();
+        Activity cor = ((GuessXQuestion) question).getCorrectOption();
+        int correctAmount = (int)cor.getConsumptionInWh();
         if ((correctAmount * 1.1) > answer && (correctAmount * 0.9) < answer){
             return true;
         }
