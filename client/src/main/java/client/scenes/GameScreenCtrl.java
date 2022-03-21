@@ -62,7 +62,7 @@ public class GameScreenCtrl {
     public Text Answer3;
 
     @FXML
-    public Label Qcounter;
+    public Text qcounter;
 
     @FXML
     public Text countdown;
@@ -186,7 +186,7 @@ public class GameScreenCtrl {
         }
         startTimer();
         int x = 21 - mainCtrl.counter;
-        Qcounter.setText("Question: " + x + "/20");
+        qcounter.setText("Question: " + x + "/20");
 
     }
 
@@ -250,7 +250,7 @@ public class GameScreenCtrl {
         guessAnswer.clear();
         startTimer();
         int x = 21 - mainCtrl.counter;
-        Qcounter.setText("Question: " + x + "/20");
+        qcounter.setText("Question: " + x + "/20");
     }
 
     /**pressing ENTER submits the answer to
