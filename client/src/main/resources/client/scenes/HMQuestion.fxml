@@ -38,7 +38,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
-            <ImageView fitHeight="267.0" fitWidth="346.0" layoutX="10.0" layoutY="-44.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageView2" fitHeight="246.0" fitWidth="346.0" layoutX="10.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="92.0" prefWidth="380.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -48,6 +48,11 @@
                   <Font size="20.0" />
                </font>
             </Label>
+            <Text fx:id="textHMQuestion" fill="#1b5e20" layoutX="-97.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="511.20000000000005">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">

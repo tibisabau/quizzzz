@@ -44,6 +44,11 @@
                   <Font size="20.0" />
                </font>
             </Label>
+            <Text fx:id="textGXQuestion" fill="#1b5e20" layoutX="-82.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="511.20000000000005">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
@@ -75,6 +80,11 @@
                <font>
                   <Font size="20.0" />
                </font></TextField>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <children>
+            <ImageView fx:id="imageView2" fitHeight="234.0" fitWidth="366.0" layoutX="3.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </children>

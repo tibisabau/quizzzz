@@ -38,17 +38,17 @@
         </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <children>
-                <ImageView fitHeight="246.0" fitWidth="313.0" layoutX="21.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true" style="fx: 10;" />
+                <ImageView fx:id="imageView1" fitHeight="246.0" fitWidth="313.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true" style="fx: 10;" />
             </children>
         </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
             <children>
-                <ImageView fitHeight="228.0" fitWidth="313.0" layoutX="26.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="imageView2" fitHeight="228.0" fitWidth="313.0" layoutX="26.0" pickOnBounds="true" preserveRatio="true" />
             </children>
         </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
             <children>
-                <ImageView fitHeight="228.0" fitWidth="313.0" layoutX="14.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="imageView3" fitHeight="228.0" fitWidth="313.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true" />
             </children>
         </AnchorPane>
         <AnchorPane prefHeight="92.0" prefWidth="380.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
