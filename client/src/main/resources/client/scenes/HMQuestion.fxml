@@ -53,10 +53,7 @@
          <children>
             <ImageView fx:id="imageView1" fitHeight="72.0" fitWidth="134.0" layoutX="-21.0" layoutY="-22.0" pickOnBounds="true" preserveRatio="true" />
          </children></AnchorPane>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="23">
-         <children>
-            <ImageView fx:id="imageView2" fitHeight="120.0" fitWidth="269.0" layoutX="-6.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true" />
-         </children></AnchorPane>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="23" />
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="23">
          <children>
               <AnchorPane layoutX="52.0" layoutY="38.0" prefHeight="200.0" prefWidth="200.0">
@@ -88,6 +85,11 @@
                         <Font size="18.0" />
                     </font>
                 </Label>
+            <Text fx:id="textHMQuestion" fill="#1b5e20" layoutX="-179.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="505.5999938964844">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
             </children>
         </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="24">
@@ -146,5 +148,12 @@
             <Text fx:id="countdown" layoutX="-64.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="83.20000000000005" />
          </children>
       </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="22">
+         <children>
+            <ImageView fx:id="imageView2" fitHeight="150.0" fitWidth="200.0" layoutX="-31.0" layoutY="-44.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="22" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="21" />
     </children>
 </GridPane>
