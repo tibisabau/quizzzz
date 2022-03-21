@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -52,10 +53,7 @@
     </rowConstraints>
     <children>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="25" />
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="25">
-         <children>
-            <TextField fx:id="guessAnswer" layoutX="-3.0" layoutY="4.0" onKeyPressed="#keyPressed" prefHeight="63.0" prefWidth="146.0" promptText="Press ENTER to Confirm" />
-         </children></AnchorPane>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="25" />
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="25" />
         <AnchorPane prefHeight="92.0" prefWidth="380.0" GridPane.columnIndex="2" GridPane.rowIndex="22">
             <children>
@@ -64,10 +62,18 @@
                         <Font size="18.0" />
                     </font>
                 </Label>
+            <Text fx:id="textGXQuestion" fill="#1b5e20" layoutX="-179.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="508.79997558593755">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
             </children>
         </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="26" />
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="26" />
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="26">
+         <children>
+            <TextField fx:id="guessAnswer" layoutX="-5.0" layoutY="-18.0" onKeyPressed="#keyPressed" prefHeight="63.0" prefWidth="146.0" promptText="Press ENTER to Confirm" />
+         </children></AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="26" />
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="22" />
         <Button mnemonicParsing="false" onAction="#goToStartScene" prefHeight="14.0" prefWidth="90.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20" GridPane.columnIndex="4" GridPane.rowIndex="1">
@@ -87,5 +93,7 @@
             <Text fx:id="countdown" layoutX="-59.0" layoutY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="83.20000000000005" />
          </children>
       </AnchorPane>
+      <ImageView fx:id="imageView2" fitHeight="112.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="24" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="23" />
     </children>
 </GridPane>
