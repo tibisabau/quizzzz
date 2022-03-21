@@ -16,12 +16,18 @@
 
 package client.scenes;
 
+import client.utils.ServerUtils;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.util.Set;
+
+import javax.inject.Inject;
+import java.io.ByteArrayInputStream;
+import java.util.Base64;
+import javafx.scene.image.Image;
 
 /**
  * The type Main ctrl.
@@ -61,6 +67,9 @@ public class MainCtrl {
     private InBetweenScreenCtrl inBetweenCtrl;
 
     private Scene inBetweenScene;
+
+    @Inject
+    private ServerUtils server;
 
     /**
      * Initialize.
@@ -171,4 +180,12 @@ public class MainCtrl {
         inBetweenCtrl.startTimer(question, score);
     }
 
+
+    public Image getImage(String path) {
+        String imageString = server.getImage(path);
+        Base64.Decoder encoder = Base64.getDecoder();
+        byte[] byteArray = encoder.decode(imageString);
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(byteArray);
+        return new Image(inputStream);
+    }
 }

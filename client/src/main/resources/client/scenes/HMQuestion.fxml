@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -48,8 +49,14 @@
       <RowConstraints maxHeight="82.60001220703123" minHeight="10.0" prefHeight="81.00003662109373" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="23" />
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="23" />
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="23">
+         <children>
+            <ImageView fx:id="imageView1" fitHeight="72.0" fitWidth="134.0" layoutX="-21.0" layoutY="-22.0" pickOnBounds="true" preserveRatio="true" />
+         </children></AnchorPane>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="23">
+         <children>
+            <ImageView fx:id="imageView2" fitHeight="120.0" fitWidth="269.0" layoutX="-6.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true" />
+         </children></AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="23">
          <children>
               <AnchorPane layoutX="52.0" layoutY="38.0" prefHeight="200.0" prefWidth="200.0">
@@ -70,6 +77,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Text>
+                  <ImageView fx:id="imageView3" fitHeight="72.0" fitWidth="134.0" layoutX="-4.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                   </children>
               </AnchorPane>
          </children></AnchorPane>
