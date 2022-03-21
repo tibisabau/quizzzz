@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -9,17 +10,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="600.0" style="-fx-background-color: #b9f6caff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.InstructionSceneCtrl">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" style="-fx-background-color: #a9f6caff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.InstructionSceneCtrl">
   <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.4000244140625" minWidth="10.0" prefWidth="15.20001220703125" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="528.0000244140625" minWidth="10.0" prefWidth="518.3999267578125" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.4000244140625" minWidth="6.5999755859375" prefWidth="16.2000732421875" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="687.9999420166016" minWidth="10.0" prefWidth="263.73333129882815" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1048.0" minWidth="10.0" prefWidth="768.2666687011719" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.3333740234375" minWidth="0.0" prefWidth="249.3333740234375" />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints maxHeight="94.79999389648438" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="200.8" minHeight="10.0" prefHeight="98.80001220703124" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="263.9999633789063" minHeight="10.0" prefHeight="231.59998779296873" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="78.00003662109373" minHeight="10.0" prefHeight="28.199987792968727" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="218.7999755859375" minHeight="10.0" prefHeight="217.2" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="342.4" minHeight="10.0" prefHeight="286.3999999999999" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="134.39999999999998" minHeight="0.0" prefHeight="134.39999999999998" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <BorderPane prefHeight="102.0" prefWidth="529.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -37,14 +38,17 @@
                <font>
                   <Font name="Candara" size="17.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </bottom>
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: White; -fx-border-color: #1b5c1f;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="262.0" prefWidth="529.0" style="-fx-background-color: White; -fx-border-color: #1b5c1f;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="#1b5e20" layoutX="2.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="    Select a nickname and whether to play solo or multiplayer. Start a   game. &#10;    You will be presented with 20 questions one question at a time. &#10;    Select the one answer to the question on screen you consider to be   right.&#10;    You receive points per correct answer. The faster you answer correctly   the more points you can get.&#10;     You can use 3 power-ups in this game. Each power-up is good for 1   use/game.  " wrappingWidth="523.4526977539062">
+                  <Text fill="#1b5e20" layoutX="7.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="    Select a nickname and whether to play solo or multiplayer. Start a   game. &#10;    You will be presented with 20 questions one question at a time. &#10;    Select the one answer to the question on screen you consider to be   right.&#10;    You receive points per correct answer. The faster you answer correctly   the more points you can get.&#10;     You can use 3 power-ups in this game. Each power-up is good for 1   use/game.  " wrappingWidth="752.7860107421875">
                      <font>
-                        <Font size="16.0" />
+                        <Font size="22.0" />
                      </font>
                   </Text>
                </children>
