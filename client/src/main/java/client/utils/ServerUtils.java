@@ -25,6 +25,7 @@ import java.net.URL;
 import java.util.List;
 
 import commons.*;
+import org.checkerframework.checker.units.qual.A;
 import org.glassfish.jersey.client.ClientConfig;
 
 import jakarta.ws.rs.client.ClientBuilder;
@@ -119,6 +120,14 @@ public class ServerUtils {
                 .accept(APPLICATION_JSON)
                 .post(Entity.entity(activity, APPLICATION_JSON),
                         Activity.class);
+    }
+
+    public List<Activity> getActivities(){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/entry/get")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .get(new GenericType<List<Activity>>() {});
     }
 
     /**

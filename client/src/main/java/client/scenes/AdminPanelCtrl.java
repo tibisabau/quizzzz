@@ -2,29 +2,46 @@ package client.scenes;
 
 import client.utils.ServerUtils;
 import com.google.inject.Inject;
+import commons.Activity;
 import commons.Score;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.Cursor;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.List;
 
-public class AdminPanel {
+public class AdminPanelCtrl {
         @FXML
         public TableView table;
 
         @FXML
-        public TableColumn<Score,String> rank;
+        public TableColumn<Activity,String> id;
 
         @FXML
-        public TableColumn<Score, String> name;
+        public TableColumn<Activity, String> title;
 
         @FXML
-        public TableColumn<Score, String> value;
+        public TableColumn<Activity, String> consumptionInWh;
+
+        @FXML
+        public TableColumn<Activity, String> imagePath;
+
+        @FXML
+        public Button add;
+
+        @FXML
+        public Button delete;
 
         private final ServerUtils server;
 
@@ -37,7 +54,7 @@ public class AdminPanel {
          * @param mainCtrl
          */
         @Inject
-        public leaderboardSceneCtrl(ServerUtils server, MainCtrl mainCtrl) {
+        public AdminPanelCtrl(ServerUtils server, MainCtrl mainCtrl) {
             this.server = server;
             this.mainCtrl = mainCtrl;
         }
@@ -46,26 +63,16 @@ public class AdminPanel {
         /**
          * Fills the leaderboard with scores queried from the database.
          */
-        public void load(){
-            name.setCellValueFactory(new PropertyValueFactory<>("userName"));
-            value.setCellValueFactory(new PropertyValueFactory<>("score"));
-            rank.setCellValueFactory(
-                    new Callback<TableColumn.CellDataFeatures<Score, String>,
-                            ObservableValue<String>>() {
-                        @Override public ObservableValue<String>
-                        call(TableColumn.CellDataFeatures<Score, String> p) {
-                            return new ReadOnlyObjectWrapper(
-                                    (table.getItems().indexOf(p.getValue()) + 1) + "");
-                        }
-                    });
-            rank.setSortable(false);
-
-            List<Score> scores = server.getTopScores();
-            for(int i = 0; i < scores.size(); i++){
-                table.getItems().add(scores.get(i));
+        public void load() {
+            title.setCellValueFactory(new PropertyValueFactory<>("title"));
+            consumptionInWh.setCellValueFactory(new PropertyValueFactory<>("consumptionInWh"));
+            id.setCellValueFactory(new PropertyValueFactory<>("id"));
+            imagePath.setCellValueFactory(new PropertyValueFactory<>("imagePath"));
+            List<Activity> activities = server.getActivities();
+            for (int i = 0; i < activities.size(); i++) {
+                table.getItems().add(activities.get(i));
             }
         }
-
         /**
          * Return to start scene.
          */
@@ -73,6 +80,23 @@ public class AdminPanel {
             mainCtrl.showStartScreen();
         }
 
+    public void initialize() {
+        imagePath.setCellFactory(tc -> {
+            TableCell<Activity, String> cell = new TableCell<Activity, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setText(item);
+                }
+            };
+            cell.setCursor(Cursor.HAND);
+            cell.setOnMouseClicked(event -> {
+                if (!cell.isEmpty()) {
+                    mainCtrl.displayImage(cell.getText());
+                }
+            });
+            return cell;
+        });
     }
-
 }
+

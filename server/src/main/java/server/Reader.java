@@ -37,9 +37,6 @@ public class Reader implements ApplicationRunner {
      */
     @Override
     public void run(ApplicationArguments args) throws Exception{
-        if(entryController.getAll().size() != 0){
-            return;
-        }
         try {
 
             BufferedReader reader = null;

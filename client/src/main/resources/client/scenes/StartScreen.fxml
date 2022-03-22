@@ -80,5 +80,17 @@
          </children>
       </AnchorPane>
       <TextField fx:id="nicknameField" onKeyPressed="#keyPressed" promptText="Enter nickname" style="-fx-background-color: #b9f6caff; -fx-border-color: white;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <AnchorPane GridPane.columnIndex="4">
+         <children>
+            <Button fx:id="adminPanel" layoutX="-50.0" layoutY="34.0" mnemonicParsing="false" onAction="#goToAdminPanel" onMouseClicked="#quitButtonClicked" style="-fx-border-color: #1b5e20; -fx-background-color: #b9f6caff;" text="Admin Panel" textFill="#1b5e20">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </GridPane>

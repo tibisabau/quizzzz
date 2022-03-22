@@ -64,6 +64,14 @@ public class MainCtrl {
 
     private leaderboardSceneCtrl leaderboardSceneCtrl;
 
+    private Scene adminPanelScene;
+
+    private AdminPanelCtrl adminPanelCtrl;
+
+    private Scene imageScene;
+
+    private DisplayImageCtrl imageCtrl;
+
     private InBetweenScreenCtrl inBetweenCtrl;
 
     private Scene inBetweenScene;
@@ -73,15 +81,16 @@ public class MainCtrl {
 
     /**
      * Initialize.
-     *
      * @param primaryStage the primary stage
      * @param startScreen  the start screen
      * @param instructionScene
      * @param meQuestion
+     * @param leaderboardScreen
      * @param hmQuestion
      * @param gxQuestion
-     * @param leaderboardScreen
      * @param inBetweenScreen
+     * @param adminPanel
+     * @param image
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
@@ -92,7 +101,8 @@ public class MainCtrl {
 
                            Pair<GameScreenCtrl, Parent> hmQuestion,
                            Pair<GameScreenCtrl, Parent> gxQuestion,
-                           Pair<InBetweenScreenCtrl, Parent> inBetweenScreen) {
+                           Pair<InBetweenScreenCtrl, Parent> inBetweenScreen
+            , Pair<AdminPanelCtrl, Parent> adminPanel, Pair<DisplayImageCtrl, Parent> image) {
         this.primaryStage = primaryStage;
         this.startScreenCtrl = startScreen.getKey();
         this.startScreen = new Scene(startScreen.getValue());
@@ -108,6 +118,10 @@ public class MainCtrl {
         this.gxQuestionScene = new Scene(gxQuestion.getValue());
         this.inBetweenCtrl = inBetweenScreen.getKey();
         this.inBetweenScene = new Scene(inBetweenScreen.getValue());
+        this.adminPanelScene = new Scene(adminPanel.getValue());
+        this.adminPanelCtrl = adminPanel.getKey();
+        this.imageScene = new Scene(image.getValue());
+        this.imageCtrl = image.getKey();
 
         showStartScreen();
         primaryStage.show();
@@ -169,6 +183,12 @@ public class MainCtrl {
         primaryStage.setScene(leaderboardScene);
     }
 
+    public void showAdminPanel(){
+        primaryStage.setTitle("Quizzzz");
+        adminPanelCtrl.load();
+        primaryStage.setScene(adminPanelScene);
+    }
+
     /**
      * show inBetween Screen
      * @param question
@@ -187,5 +207,11 @@ public class MainCtrl {
         byte[] byteArray = encoder.decode(imageString);
         ByteArrayInputStream inputStream = new ByteArrayInputStream(byteArray);
         return new Image(inputStream);
+    }
+
+    public void displayImage(String path) {
+        imageCtrl.imageView.setImage(getImage(path));
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(imageScene);
     }
 }
