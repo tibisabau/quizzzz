@@ -124,11 +124,12 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text layoutX="-21.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 300" wrappingWidth="110.40000000000009">
+            <Text layoutX="-21.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" wrappingWidth="110.40000000000009">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
+            <Label fx:id="scoreDisplay" layoutX="34.0" layoutY="31.0" text="0" />
          </children>
         </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
