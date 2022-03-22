@@ -29,12 +29,13 @@
       <RowConstraints maxHeight="82.60001220703123" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <children>
-            <Button layoutX="14.0" layoutY="-22.0" mnemonicParsing="false" onAction="#goToStartScene" prefHeight="52.0" prefWidth="96.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
+            <TextField fx:id="guessAnswer" alignment="CENTER" layoutX="109.0" layoutY="43.0" onKeyPressed="#keyPressed" prefHeight="76.0" prefWidth="150.0">
+               <font>
+                  <Font size="20.0" />
+               </font></TextField>
+            <Label fx:id="correctAnswerQX" layoutX="307.0" layoutY="43.0" prefHeight="52.0" prefWidth="96.0" wrapText="true" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="92.0" prefWidth="380.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -75,13 +76,12 @@
             </Text>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
          <children>
-            <TextField fx:id="guessAnswer" alignment="CENTER" layoutX="109.0" layoutY="43.0" onKeyPressed="#keyPressed" prefHeight="76.0" prefWidth="150.0">
-               <font>
-                  <Font size="20.0" />
-               </font></TextField>
-            <Label fx:id="correctAnswerQX" layoutX="307.0" layoutY="43.0" prefHeight="52.0" prefWidth="96.0" wrapText="true" />
+            <Button layoutX="14.0" layoutY="-22.0" mnemonicParsing="false" onMouseReleased="#goToStartScene" prefHeight="52.0" prefWidth="96.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">

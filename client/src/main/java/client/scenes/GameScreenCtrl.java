@@ -286,8 +286,8 @@ public class GameScreenCtrl {
     public void keyPressed(KeyEvent e) {
         switch (e.getCode()) {
             case ENTER:
-            {ok();
-                guessAnswer.setDisable(true);}
+            {guessAnswer.setDisable(true);
+            ok();}
             break;
             default:
                 break;
@@ -332,7 +332,6 @@ public class GameScreenCtrl {
 
             this.createTimer();
         }else{
-            //showLeaderBoardScreen()  - TO BE IMPLEMENTED
             server.updateScore(StartScreenCtrl.getOwnScore());
             mainCtrl.showLeaderboard();
         }
@@ -533,6 +532,12 @@ public class GameScreenCtrl {
         return false;
     }
 
+    /**
+     * checks if answer given is correct
+     * @param question current question
+     * @param answer answer given
+     * @return if answer is  correct
+     */
     public boolean GXCorrectAnswer(Object question, int answer){
         Activity cor = ((GuessXQuestion) question).getCorrectOption();
         int correctAmount = (int)cor.getConsumptionInWh();
