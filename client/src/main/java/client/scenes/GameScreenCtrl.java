@@ -64,7 +64,7 @@ public class GameScreenCtrl {
     public Text Answer3;
 
     @FXML
-    public Label Qcounter;
+    public Text qcounter;
 
     @FXML
     public Text countdown;
@@ -206,7 +206,7 @@ public class GameScreenCtrl {
         }
         startTimer();
         int x = 21 - mainCtrl.counter;
-        Qcounter.setText("Question: " + x + "/20");
+        qcounter.setText("Question: " + x + "/20");
 
     }
 
@@ -272,8 +272,8 @@ public class GameScreenCtrl {
         correctAnswerQX.setText("");
         startTimer();
         int x = 21 - mainCtrl.counter;
-        Qcounter.setText("Question: " + x + "/20");
         guessAnswer.setStyle("-fx-background-color: WHITE");
+        qcounter.setText("Question: " + x + "/20");
     }
 
     /**pressing ENTER submits the answer to
