@@ -319,7 +319,12 @@ public class GameScreenCtrl {
     public void ok() {
         --mainCtrl.counter;
         stopTime();
-        answerPoints(currentQuestion, Integer.parseInt(guessAnswer.getText()));
+        try{
+        answerPoints(currentQuestion, Integer.parseInt(guessAnswer.getText()));}
+        catch (Exception e){
+            answerPoints(currentQuestion, 0);
+        }
+
         if(mainCtrl.counter > 0) {
 
             this.createTimer();
