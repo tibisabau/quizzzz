@@ -16,9 +16,27 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.util.HashSet;
+import javafx.scene.image.ImageView;
+//import java.util.ArrayList;
+//import java.util.List;
 
 
 public class GameScreenCtrl {
+    @FXML
+    public Text textGXQuestion;
+
+    @FXML
+    public Text textHMQuestion;
+
+    @FXML
+    public ImageView imageView1;
+
+    @FXML
+    public ImageView imageView2;
+
+    @FXML
+    public ImageView imageView3;
+
     @FXML
     public Label questionLabel;
 
@@ -44,7 +62,7 @@ public class GameScreenCtrl {
     public Text Answer3;
 
     @FXML
-    public Label Qcounter;
+    public Text qcounter;
 
     @FXML
     public Text countdown;
@@ -146,6 +164,7 @@ public class GameScreenCtrl {
         mainCtrl.showStartScreen();
     }
 
+
     /**
      * Sets the answer for a new question
      * and adds this question to the question list.
@@ -170,7 +189,7 @@ public class GameScreenCtrl {
         }
         startTimer();
         int x = 21 - mainCtrl.counter;
-        Qcounter.setText("Question: " + x + "/20");
+        qcounter.setText("Question: " + x + "/20");
 
     }
 
@@ -180,6 +199,7 @@ public class GameScreenCtrl {
      */
     public void createMEQuestion() {
         currentQuestion = server.getMEQuestion();
+        setImagesME((MostEnergyQuestion) currentQuestion);
         while(mainCtrl.questionList.contains(currentQuestion)) {
             currentQuestion = server.getMEQuestion();
         }
@@ -198,6 +218,9 @@ public class GameScreenCtrl {
      */
     public void createHMQuestion() {
         currentQuestion = server.getHMQuestion();
+        setImagesHQ((HowMuchQuestion) currentQuestion);
+        textHMQuestion.setText("- "+ ((HowMuchQuestion) currentQuestion)
+                .getCorrectOption().getTitle()+ " -");
         while(mainCtrl.questionList.contains(currentQuestion)) {
             currentQuestion = server.getHMQuestion();
         }
@@ -219,6 +242,9 @@ public class GameScreenCtrl {
      */
     public void createGXQuestion() {
         currentQuestion = server.getGXQuestion();
+        setImagesGX((GuessXQuestion) currentQuestion);
+        textGXQuestion.setText("- "+ ((GuessXQuestion) currentQuestion)
+                .getCorrectOption().getTitle()+ " -");
         while(mainCtrl.questionList.contains(currentQuestion)) {
             currentQuestion = server.getGXQuestion();
         }
@@ -227,7 +253,7 @@ public class GameScreenCtrl {
         guessAnswer.clear();
         startTimer();
         int x = 21 - mainCtrl.counter;
-        Qcounter.setText("Question: " + x + "/20");
+        qcounter.setText("Question: " + x + "/20");
     }
 
     /**pressing ENTER submits the answer to
@@ -244,6 +270,26 @@ public class GameScreenCtrl {
                 break;
         }
     }
+
+    public void setImagesME(MostEnergyQuestion question){
+        String path1 = question.getFirstOption().getImagePath();
+        String path2 = question.getSecondOption().getImagePath();
+        String path3 = question.getThirdOption().getImagePath();
+        imageView1.setImage(mainCtrl.getImage(path1));
+        imageView2.setImage(mainCtrl.getImage(path2));
+        imageView3.setImage(mainCtrl.getImage(path3));
+    }
+
+    public void setImagesHQ(HowMuchQuestion question){
+        String path2 = question.getSecondOption().getImagePath();
+        imageView2.setImage(mainCtrl.getImage(path2));
+    }
+
+    public void setImagesGX(GuessXQuestion question){
+        String path2 = question.getCorrectOption().getImagePath();
+        imageView2.setImage(mainCtrl.getImage(path2));
+    }
+
 
     /**
      * confirms the answer to the "Guess X" question
@@ -473,4 +519,6 @@ public class GameScreenCtrl {
     public void setQuestionList() {
         mainCtrl.questionList = new HashSet<>();
     }
+
+
 }

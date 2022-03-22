@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -12,80 +13,79 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #b9f6caff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.GameScreenCtrl">
-    <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.20001220703125" minWidth="10.0" prefWidth="82.20003662109374" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.199951171875" minWidth="10.0" prefWidth="139.79996337890626" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.19998779296873" minWidth="10.0" prefWidth="138.39998779296874" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.9999877929688" minWidth="10.0" prefWidth="152.0000122070312" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.199951171875" minWidth="10.0" prefWidth="90.20002441406245" />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints maxHeight="100.0000099182129" minHeight="10.0" prefHeight="87.19999389648437" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="100.0000099182129" minHeight="10.0" prefHeight="87.19999389648437" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="158.4" minHeight="10.0" prefHeight="91.2000061035156" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="140.4000152587891" minHeight="10.0" prefHeight="95.39999389648438" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="74.59998168945313" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="82.60001220703123" minHeight="10.0" prefHeight="81.00003662109373" vgrow="SOMETIMES" />
-    </rowConstraints>
-    <children>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="25" />
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="25">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" style="-fx-background-color: #a9f6caff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.GameScreenCtrl">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.20001220703125" minWidth="10.0" prefWidth="72.800048828125" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="355.2" minWidth="10.0" prefWidth="355.2" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.1999877929688" minWidth="10.0" prefWidth="183.2" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.799951171875" minWidth="10.0" prefWidth="332.799951171875" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.199951171875" minWidth="0.0" prefWidth="51.20004882812509" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="100.0000099182129" minHeight="10.0" prefHeight="87.19999389648437" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="158.4" minHeight="10.0" prefHeight="91.2000061035156" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="262.4000671386719" minHeight="10.0" prefHeight="193.59998779296876" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="158.39999999999998" minHeight="10.0" prefHeight="105.60001220703123" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="82.60001220703123" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
          <children>
-            <TextField fx:id="guessAnswer" layoutX="-3.0" layoutY="4.0" onKeyPressed="#keyPressed" prefHeight="63.0" prefWidth="146.0" promptText="Press ENTER to Confirm" />
-         </children></AnchorPane>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="25" />
-        <AnchorPane prefHeight="92.0" prefWidth="380.0" GridPane.columnIndex="2" GridPane.rowIndex="22">
-            <children>
-                <Label alignment="CENTER" layoutX="-126.0" layoutY="-6.0" prefHeight="39.0" prefWidth="383.0" style="-fx-background-color: #1b5e20;" text="Guess How Much Energy This Activity Takes" textAlignment="CENTER" textFill="WHITE">
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </Label>
-            </children>
-        </AnchorPane>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="26" />
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="26" />
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="26" />
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="22" />
-        <Button mnemonicParsing="false" onAction="#goToStartScene" prefHeight="14.0" prefWidth="90.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20" GridPane.columnIndex="4" GridPane.rowIndex="1">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-        <AnchorPane GridPane.rowIndex="3">
-            <children>
-                <Label fx:id="Qcounter" layoutY="14.0" prefHeight="18.0" prefWidth="90.0" text="Text" />
-                <Label fx:id="scoreDisplay" layoutX="40.0" layoutY="-10.0" prefHeight="18.0" prefWidth="29.0" text="0" />
-                <Label layoutY="-10.0" prefHeight="18.0" prefWidth="38.0" text="Score:" />
-            </children>
-        </AnchorPane>
-      <AnchorPane prefHeight="50.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
-         <children>
-            <ProgressBar fx:id="time" layoutX="-46.0" layoutY="-9.0" prefHeight="18.0" prefWidth="259.0" progress="0.0" />
-            <Text fx:id="countdown" layoutX="-59.0" layoutY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="83.20000000000005" />
+            <Button layoutX="14.0" layoutY="-22.0" mnemonicParsing="false" onAction="#goToStartScene" prefHeight="52.0" prefWidth="96.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
          </children>
       </AnchorPane>
-    </children>
+      <AnchorPane prefHeight="92.0" prefWidth="380.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <children>
+            <Label alignment="CENTER" layoutX="-82.0" layoutY="22.0" prefHeight="46.0" prefWidth="511.0" style="-fx-background-color: #1b5e20;" text="How much energy does: " textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Text fx:id="textGXQuestion" fill="#1b5e20" layoutX="-82.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="511.20000000000005">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
+         <children>
+            <Text fx:id="qcounter" layoutX="-21.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question x/20" wrappingWidth="138.39999237060556">
+               <font>
+                  <Font size="15.0" />
+               </font></Text>
+            <Text layoutX="-21.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 300" wrappingWidth="110.40000000000009">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+         <children>
+            <ProgressBar fx:id="time" layoutX="-10.0" layoutY="20.0" prefHeight="26.0" prefWidth="400.0" progress="0.0" />
+            <Text fx:id="countdown" layoutX="-32.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="83.20000000000005">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <children>
+            <TextField fx:id="guessAnswer" alignment="CENTER" layoutX="109.0" layoutY="43.0" onKeyPressed="#keyPressed" prefHeight="76.0" prefWidth="150.0">
+               <font>
+                  <Font size="20.0" />
+               </font></TextField>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <children>
+            <ImageView fx:id="imageView2" fitHeight="234.0" fitWidth="366.0" layoutX="3.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+   </children>
 </GridPane>

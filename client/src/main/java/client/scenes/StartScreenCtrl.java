@@ -15,6 +15,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 
+import java.io.IOException;
+
 
 /**
  * The type Start screen ctrl.
@@ -137,7 +139,7 @@ public class StartScreenCtrl extends Application {
     /**
      * Change screen to Single Player GameScreen
      */
-    public void goToGameScreen(){
+    public void goToGameScreen() throws IOException {
         if(isCompleted == true){
             int questionType = server.getQuestionType();
             if(questionType == 1) {
