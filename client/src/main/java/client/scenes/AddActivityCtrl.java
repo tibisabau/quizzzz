@@ -32,18 +32,18 @@ public class AddActivityCtrl {
 
     public Activity editActivity;
 
+    @FXML
+    public TextField title;
+
+    @FXML
+    public TextField consumption;
+
+    @FXML
+    public Label file;
+
     private final ServerUtils server;
 
     private final MainCtrl mainCtrl;
-
-    @FXML
-    private TextField title;
-
-    @FXML
-    private TextField consumption;
-
-    @FXML
-    private Label file;
 
 
     /**
@@ -81,7 +81,9 @@ public class AddActivityCtrl {
                         (consumption.getText())));
             }
             else {
-                editActivity.setImagePath(save(multipartFile));
+                if(multipartFile != null) {
+                    editActivity.setImagePath(save(multipartFile));
+                }
                 editActivity.setTitle(title.getText());
                 editActivity.setConsumptionInWh
                         (Long.parseLong(consumption.getText()));

@@ -254,6 +254,11 @@ public class MainCtrl {
     public void showEdit(Activity activity) {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(addScene);
+        addCtrl.title.setText(activity.getTitle());
+        addCtrl.consumption.setText(String.valueOf(
+                activity.getConsumptionInWh()));
+        addCtrl.file.setText(activity.getImagePath()
+                .substring(activity.getImagePath().indexOf("/") + 1).trim());
         addCtrl.toAdd = false;
         addCtrl.editActivity = activity;
     }

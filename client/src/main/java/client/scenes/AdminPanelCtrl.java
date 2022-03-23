@@ -89,7 +89,9 @@ public class AdminPanelCtrl {
     public void goToEdit(){
             try{
                 Activity activity = table.getSelectionModel().getSelectedItem();
-                mainCtrl.showEdit(activity);
+                if(activity != null) {
+                    mainCtrl.showEdit(activity);
+                }
             }
             catch (Exception e) {
                 e.printStackTrace();
