@@ -13,14 +13,17 @@ import java.util.function.Consumer;
 @RequestMapping("/api/multiplayer")
 public class MultiplayerController {
 
+
     Random random;
-    Map<Long, String> players = new HashMap<>();
-    Map<Integer, Map<Long, String>> games = new HashMap();
+
+    //when starting a game the lobby should be added here, so ids of all players in each game are here, we'll figure sth out from there
+    List<List<Score>> games = new ArrayList<>();
+
     private Map<Object, Consumer<List<Score>>> listeners = new HashMap<>();
-    private long noPlayers = 0;
+
+    //all scores containg usernames and ids are stored here
     private List<Score> lobby = new ArrayList<>();
 
-    int gameID = 0;
 
     public MultiplayerController(Random random){
         this.random = random;
@@ -30,8 +33,6 @@ public class MultiplayerController {
     public ResponseEntity<List<Score>> joinGame(@RequestBody List<Score> scores){
         lobby.addAll(scores);
         System.out.println(lobby.toString());
-        noPlayers++;
-        System.out.println(players.toString());
         listeners.forEach((k, l) -> l.accept(lobby));
         return ResponseEntity.ok(lobby);
     }
