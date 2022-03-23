@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class waitingRoomController implements Initializable{
+public class waitingRoomController{
 
 
     @FXML
@@ -50,8 +50,7 @@ public class waitingRoomController implements Initializable{
         this.players = new ArrayList<>();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void load() {
         username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         id.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Score, String>,

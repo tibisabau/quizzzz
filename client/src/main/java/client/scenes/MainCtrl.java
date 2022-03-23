@@ -213,7 +213,7 @@ public class MainCtrl {
     public void showWaitingRoom(){
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(waitingRoomScene);
-        Score s = new Score(this.userName, 33);
-        server.joinGame(s);
+        waitingRoomCtrl.load();
+        server.joinGame(this.score);
     }
 }

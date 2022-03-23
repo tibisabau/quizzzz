@@ -3,10 +3,7 @@ package server.api;
 import commons.Score;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.*;
@@ -20,6 +17,7 @@ public class MultiplayerController {
     Map<Long, String> players = new HashMap<>();
     Map<Integer, Map<Long, String>> games = new HashMap();
     private Map<Object, Consumer<Score>> listeners = new HashMap<>();
+    private long noPlayers = 0;
 
     int gameID = 0;
 
@@ -28,8 +26,10 @@ public class MultiplayerController {
     }
 
     @PostMapping(path = "join")
-    public ResponseEntity<Score> joinGame(Score score){
-        players.put(score.getUserId(), score.getUserName());
+    public ResponseEntity<Score> joinGame(@RequestBody Score score){
+        players.put(noPlayers, score.getUserName());
+        noPlayers++;
+        System.out.println(players.toString());
         listeners.forEach((k, l) -> l.accept(score));
         return ResponseEntity.ok(score);
     }

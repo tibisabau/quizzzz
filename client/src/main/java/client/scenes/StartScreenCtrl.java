@@ -107,6 +107,7 @@ public class StartScreenCtrl extends Application {
         try {
             ownScore = getNewScore();
             server.addScore(ownScore);
+            mainCtrl.setScore(ownScore);
         } catch (WebApplicationException e) {
 
             var alert = new Alert(Alert.AlertType.ERROR);
@@ -126,7 +127,6 @@ public class StartScreenCtrl extends Application {
      */
     public Score getNewScore(){
             Score score = new Score(nicknameField.getText(), 0);
-            mainCtrl.setUserName(nicknameField.getText());
             isCompleted = true;
             return score;
     }
