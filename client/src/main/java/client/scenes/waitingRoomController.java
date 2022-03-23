@@ -31,6 +31,10 @@ public class waitingRoomController{
 
     private List<Score> players;
 
+    private List<Score> oldPlayers;
+
+    Score score;
+
 
 
     private final ServerUtils server;
@@ -50,6 +54,10 @@ public class waitingRoomController{
         this.players = new ArrayList<>();
     }
 
+    public void setScore(Score score){
+        this.score = score;
+    }
+
     public void load() {
         username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         id.setCellValueFactory(
@@ -62,10 +70,18 @@ public class waitingRoomController{
                     }
                 });
         id.setSortable(false);
+        players.add(score);
+
         server.registerForUpdates(p -> {
-            players.add(p);
-            table.getItems().add(p);
+            players = p;
+            for(int i = 0; i < players.size(); i++){
+                Score score = players.get(i);
+                if(!table.getItems().contains(score)){
+                    table.getItems().add(score);
+                }
+            }
         });
+        server.joinGame(players);
     }
 
 

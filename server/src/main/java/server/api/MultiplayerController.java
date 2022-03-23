@@ -16,8 +16,9 @@ public class MultiplayerController {
     Random random;
     Map<Long, String> players = new HashMap<>();
     Map<Integer, Map<Long, String>> games = new HashMap();
-    private Map<Object, Consumer<Score>> listeners = new HashMap<>();
+    private Map<Object, Consumer<List<Score>>> listeners = new HashMap<>();
     private long noPlayers = 0;
+    private List<Score> lobby = new ArrayList<>();
 
     int gameID = 0;
 
@@ -26,22 +27,23 @@ public class MultiplayerController {
     }
 
     @PostMapping(path = "join")
-    public ResponseEntity<Score> joinGame(@RequestBody Score score){
-        players.put(noPlayers, score.getUserName());
+    public ResponseEntity<List<Score>> joinGame(@RequestBody List<Score> scores){
+        lobby.addAll(scores);
+        System.out.println(lobby.toString());
         noPlayers++;
         System.out.println(players.toString());
-        listeners.forEach((k, l) -> l.accept(score));
-        return ResponseEntity.ok(score);
+        listeners.forEach((k, l) -> l.accept(lobby));
+        return ResponseEntity.ok(lobby);
     }
 
     @GetMapping(path = "update")
-    public DeferredResult<ResponseEntity<Score>> getLobby(){
+    public DeferredResult<ResponseEntity<List<Score>>> getLobby(){
         var noContent = ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        var res = new DeferredResult<ResponseEntity<Score>>(5000L, noContent);
+        var res = new DeferredResult<ResponseEntity<List<Score>>>(5000L, noContent);
 
         var key = new Object();
         listeners.put(key, s -> {
-            res.setResult(ResponseEntity.ok(s));
+            res.setResult(ResponseEntity.ok(lobby));
         });
         res.onCompletion(() -> {
             listeners.remove(key);

@@ -24,6 +24,8 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.beans.BeanProperty;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -213,7 +215,8 @@ public class MainCtrl {
     public void showWaitingRoom(){
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(waitingRoomScene);
+        waitingRoomCtrl.setScore(this.score);
         waitingRoomCtrl.load();
-        server.joinGame(this.score);
+
     }
 }

@@ -22,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -200,7 +201,7 @@ public class ServerUtils {
 
     private static final ExecutorService exec = Executors.newSingleThreadExecutor();
 
-    public void joinGame(Score score){
+    public void joinGame(List<Score> score){
                 ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/multiplayer/join")
                 .request(APPLICATION_JSON)
@@ -208,7 +209,7 @@ public class ServerUtils {
                 .post(Entity.entity(score, APPLICATION_JSON), Score.class);
     }
 
-    public void registerForUpdates(Consumer<Score> consumer){
+    public void registerForUpdates(Consumer<List<Score>> consumer){
         exec.submit(() -> {
             while(!Thread.interrupted()){
                 var res = ClientBuilder.newClient(new ClientConfig())
@@ -219,7 +220,7 @@ public class ServerUtils {
                 if(res.getStatus() == 204){
                     continue;
                 }
-                var s = res.readEntity(Score.class);
+                var s = res.readEntity(new GenericType<List<Score>>() {});
                 consumer.accept(s);
             }
         });
