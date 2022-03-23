@@ -17,11 +17,13 @@
 package client.scenes;
 
 import client.utils.ServerUtils;
+import commons.Score;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+import java.beans.BeanProperty;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -68,6 +70,14 @@ public class MainCtrl {
 
     private Scene inBetweenScene;
 
+    private Scene waitingRoomScene;
+
+    private waitingRoomController waitingRoomCtrl;
+
+    private Score score;
+
+    private String userName;
+
     @Inject
     private ServerUtils server;
 
@@ -92,7 +102,8 @@ public class MainCtrl {
 
                            Pair<GameScreenCtrl, Parent> hmQuestion,
                            Pair<GameScreenCtrl, Parent> gxQuestion,
-                           Pair<InBetweenScreenCtrl, Parent> inBetweenScreen) {
+                           Pair<InBetweenScreenCtrl, Parent> inBetweenScreen,
+                           Pair<waitingRoomController, Parent> waitingRoom) {
         this.primaryStage = primaryStage;
         this.startScreenCtrl = startScreen.getKey();
         this.startScreen = new Scene(startScreen.getValue());
@@ -108,6 +119,8 @@ public class MainCtrl {
         this.gxQuestionScene = new Scene(gxQuestion.getValue());
         this.inBetweenCtrl = inBetweenScreen.getKey();
         this.inBetweenScene = new Scene(inBetweenScreen.getValue());
+        this.waitingRoomCtrl = waitingRoom.getKey();
+        this.waitingRoomScene = new Scene(waitingRoom.getValue());
 
         showStartScreen();
         primaryStage.show();
@@ -121,6 +134,14 @@ public class MainCtrl {
         primaryStage.setScene(startScreen);
         meQuestion.setCounter(20);
         meQuestion.setQuestionList();
+    }
+
+    public void setScore(Score score){
+        this.score = score;
+    }
+
+    public void setUserName(String userName){
+        this.userName = userName;
     }
 
     /**
@@ -187,5 +208,12 @@ public class MainCtrl {
         byte[] byteArray = encoder.decode(imageString);
         ByteArrayInputStream inputStream = new ByteArrayInputStream(byteArray);
         return new Image(inputStream);
+    }
+
+    public void showWaitingRoom(){
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(waitingRoomScene);
+        Score s = new Score(this.userName, 33);
+        server.joinGame(s);
     }
 }

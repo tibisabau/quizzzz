@@ -23,8 +23,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 
 import commons.*;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.core.Response;
+import javafx.scene.Scene;
 import org.glassfish.jersey.client.ClientConfig;
 
 import jakarta.ws.rs.client.ClientBuilder;
@@ -190,5 +196,36 @@ public class ServerUtils {
                 .request(APPLICATION_JSON)
                 .accept(APPLICATION_JSON)
                 .get(GuessXQuestion.class);
+    }
+
+    private static final ExecutorService exec = Executors.newSingleThreadExecutor();
+
+    public void joinGame(Score score){
+                ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/multiplayer/join")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .post(Entity.entity(score, APPLICATION_JSON), Score.class);
+    }
+
+    public void registerForUpdates(Consumer<Score> consumer){
+        exec.submit(() -> {
+            while(!Thread.interrupted()){
+                var res = ClientBuilder.newClient(new ClientConfig())
+                        .target(SERVER).path("/api/multiplayer/update")
+                        .request(APPLICATION_JSON)
+                        .accept(APPLICATION_JSON)
+                        .get(Response.class);
+                if(res.getStatus() == 204){
+                    continue;
+                }
+                var s = res.readEntity(Score.class);
+                consumer.accept(s);
+            }
+        });
+    }
+
+    public void stop(){
+        exec.shutdownNow();
     }
 }

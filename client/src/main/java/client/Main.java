@@ -56,9 +56,14 @@ public class Main extends Application {
                 "leaderboardScene.fxml");
         var inBetweenScreen = FXML.load(InBetweenScreenCtrl.class,
                 "client", "scenes", "InBetweenScreen.fxml");
+        var waitingRoom = FXML.load(waitingRoomController.class, "client", "scenes", "waitingRoomScreen.fxml");
 
         mainCtrl.initialize(primaryStage, start ,
                 instruction, meQuestion, leaderboard, hmQuestion
-                , gxQuestion, inBetweenScreen);
+                , gxQuestion, inBetweenScreen, waitingRoom);
+
+        primaryStage.setOnCloseRequest(e -> {
+            waitingRoom.getKey().stop();
+        });
     }
 }

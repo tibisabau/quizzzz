@@ -126,6 +126,7 @@ public class StartScreenCtrl extends Application {
      */
     public Score getNewScore(){
             Score score = new Score(nicknameField.getText(), 0);
+            mainCtrl.setUserName(nicknameField.getText());
             isCompleted = true;
             return score;
     }
@@ -158,6 +159,10 @@ public class StartScreenCtrl extends Application {
             return;
         }
 
+    }
+
+    public void goToWaitingRoom() throws  IOException{
+        mainCtrl.showWaitingRoom();
     }
 
     /**
