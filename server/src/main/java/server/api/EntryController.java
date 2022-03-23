@@ -31,21 +31,39 @@ public class EntryController {
 
     private List<Activity> list;
 
+    /**
+     * constructor for the activity controller
+     * @param random
+     * @param repo
+     */
     public EntryController(Random random, EntryRepository repo) {
         this.random = random;
         this.repo = repo;
     }
 
+    /**
+     * get request for all activities in the db
+     * @return list of activities
+     */
     @GetMapping(path = "get")
     public List<Activity> getAll() {
         return repo.findAll();
     }
 
+    /**
+     * get request for all activities in the json file
+     * @return list of activities
+     */
     @GetMapping(path = "get/json")
     public List<Activity> getJson() {
         return list;
     }
 
+    /**
+     * get request for an activity by id
+     * @param id
+     * @return an activity by id
+     */
     @GetMapping(path = "get/{id}")
     public ResponseEntity<Activity> getById (@PathVariable("id") long id ){
         if (id < 0 || !repo.existsById(id)) {
@@ -54,6 +72,10 @@ public class EntryController {
         return ResponseEntity.ok(repo.findById(id).get());
     }
 
+    /**
+     * get request for an activity by a random id
+     * @return an activity by a random id
+     */
     @GetMapping(path = "get/rnd")
     public ResponseEntity<Activity> getRandom() {
         var idx = random.nextInt((int) repo.count()) + 1;
@@ -61,12 +83,20 @@ public class EntryController {
 
     }
 
+    /**
+     * saves the list of activities in a list on the server
+     * @param list
+     */
     public void setJsonList(List<Activity> list) {
         this.list = list;
     }
 
 
-
+    /**
+     * posts an activity in the db
+     * @param activity
+     * @return a response entity
+     */
     @PostMapping(path = "post")
     public ResponseEntity<Activity> add(@RequestBody Activity activity) {
         if (isNullOrEmpty(activity.title) ||
@@ -77,21 +107,40 @@ public class EntryController {
         return ResponseEntity.ok(saved);
     }
 
+    /**
+     * checks for empty fields
+     * @param s
+     * @return boolean
+     */
     private static boolean isNullOrEmpty(String s) {
         return s == null || s.isEmpty();
     }
 
+    /**
+     * deletes an activity from the db
+     * @param id
+     * @return a response entity
+     */
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Activity> deleteById(@PathVariable("id") long id ){
         repo.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * deletes all activities from the db
+     */
     @DeleteMapping("delete/all")
     public void deleteAll(){
         repo.deleteAll();
     }
 
+    /**
+     * put request for an activity
+     * @param newActivity
+     * @param id
+     * @return a new activity
+     */
     @PutMapping("put/{id}")
     public Activity updateById(@RequestBody Activity newActivity,
                                @PathVariable("id") long id) {
@@ -110,6 +159,11 @@ public class EntryController {
                 });
     }
 
+    /**
+     * encodes an image as param
+     * @param path
+     * @return a response entity
+     */
     @PostMapping("photo/get")
     public ResponseEntity<String> getImage(@RequestBody String path) {
         try {

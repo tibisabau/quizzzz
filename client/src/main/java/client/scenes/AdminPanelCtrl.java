@@ -52,7 +52,7 @@ public class AdminPanelCtrl {
 
 
         /**
-         * Fills the leaderboard with activities queried from the database.
+         * Fills the table with activities queried from the database.
          */
         public void load() {
             table.getItems().clear();
@@ -76,11 +76,17 @@ public class AdminPanelCtrl {
             mainCtrl.showStartScreen();
         }
 
-        public void goToAdd(){
+    /**
+     * go to the add screen
+     */
+    public void goToAdd(){
             mainCtrl.showAdd();
         }
 
-        public void goToEdit(){
+    /**
+     * go to the edit scene
+     */
+    public void goToEdit(){
             try{
                 Activity activity = table.getSelectionModel().getSelectedItem();
                 mainCtrl.showEdit(activity);
@@ -90,7 +96,10 @@ public class AdminPanelCtrl {
             }
         }
 
-        public void goToDelete(){
+    /**
+     * deletes an activity from the list
+     */
+    public void goToDelete(){
             try{
                 Activity activity = table.getSelectionModel().getSelectedItem();
                 table.getItems().remove(table.getSelectionModel().
@@ -102,12 +111,18 @@ public class AdminPanelCtrl {
             }
         }
 
-        public void deleteAll(){
+    /**
+     * deletes all activities
+     */
+    public void deleteAll(){
             table.getItems().clear();
             server.deleteAll();
         }
 
-        public void addAll() {
+    /**
+     * add all activities
+     */
+    public void addAll() {
             if(server.getActivities().isEmpty()) {
                 for(Activity activity : server.getJson()) {
                     server.addEntry(activity);
@@ -116,7 +131,11 @@ public class AdminPanelCtrl {
             }
         }
 
-        public void initialize() {
+    /**
+     * make the image cells clickable
+     * to be able to see the image
+     */
+    public void initialize() {
             imagePath.setCellFactory(tc -> {
                 TableCell<Activity, String> cell =
                         new TableCell<Activity, String>() {

@@ -47,7 +47,7 @@ public class AddActivityCtrl {
 
 
     /**
-     * Instantiates a new Add quote ctrl.
+     * Instantiates a new Add activity ctrl.
      *
      * @param server   the server
      * @param mainCtrl the main ctrl
@@ -135,6 +135,9 @@ public class AddActivityCtrl {
         }
     }
 
+    /**
+     * sets the available file types
+     */
     public void initialize() {
         fileList = new ArrayList<>();
         fileList.add("*jpg");
@@ -142,6 +145,12 @@ public class AddActivityCtrl {
         fileList.add("*jpeg");
     }
 
+    /**
+     * uploads an image on the activity bank
+     * @param multipartFile
+     * @return a file name
+     * @throws IOException
+     */
     public String save(MultipartFile multipartFile) throws IOException {
 
         System.out.println(multipartFile);
@@ -154,6 +163,13 @@ public class AddActivityCtrl {
         return "79/" + fileName;
     }
 
+    /**
+     * creates the directory for all new images
+     * @param uploadDir
+     * @param fileName
+     * @param multipartFile
+     * @throws IOException
+     */
     public void saveFile(String uploadDir, String fileName,
                          MultipartFile multipartFile) throws IOException {
         Path uploadPath = Paths.get(uploadDir);

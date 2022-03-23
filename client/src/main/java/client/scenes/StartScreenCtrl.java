@@ -63,6 +63,9 @@ public class StartScreenCtrl extends Application {
         this.isCompleted = false;
     }
 
+    /**
+     * clear nickname field
+     */
     private void cancel() {
         nicknameField.clear();
     }
@@ -163,6 +166,9 @@ public class StartScreenCtrl extends Application {
 
     }
 
+    /**
+     * show the admin panel
+     */
     public void goToAdminPanel(){
         mainCtrl.showAdminPanel();
     }

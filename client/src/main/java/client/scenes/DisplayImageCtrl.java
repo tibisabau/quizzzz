@@ -20,12 +20,20 @@ public class DisplayImageCtrl {
 
     private final MainCtrl mainCtrl;
 
+    /**
+     * constructor for the image scene
+     * @param server
+     * @param mainCtrl
+     */
     @Inject
     public DisplayImageCtrl(ServerUtils server, MainCtrl mainCtrl) {
         this.server = server;
         this.mainCtrl = mainCtrl;
     }
 
+    /**
+     * go back to the admin panel
+     */
     public void goBack() {
         mainCtrl.showAdminPanel();
     }

@@ -193,6 +193,9 @@ public class MainCtrl {
         primaryStage.setScene(leaderboardScene);
     }
 
+    /**
+     * show admin panel
+     */
     public void showAdminPanel(){
         adminPanelCtrl.table.getItems().removeAll();
         primaryStage.setTitle("Quizzzz");
@@ -212,6 +215,11 @@ public class MainCtrl {
     }
 
 
+    /**
+     * decodes the image as path
+     * @param path
+     * @return a new image
+     */
     public Image getImage(String path) {
         String imageString = server.getImage(path);
         Base64.Decoder encoder = Base64.getDecoder();
@@ -220,18 +228,29 @@ public class MainCtrl {
         return new Image(inputStream);
     }
 
+    /**
+     * show the image from path
+     * @param path
+     */
     public void displayImage(String path) {
         imageCtrl.imageView.setImage(getImage(path));
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(imageScene);
     }
 
+    /**
+     * show the add scene
+     */
     public void showAdd() {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(addScene);
         addCtrl.toAdd = true;
     }
 
+    /**
+     * show the edit scene
+     * @param activity
+     */
     public void showEdit(Activity activity) {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(addScene);
