@@ -17,6 +17,7 @@
 package client.scenes;
 
 import client.utils.ServerUtils;
+import commons.Activity;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -72,6 +73,10 @@ public class MainCtrl {
 
     private DisplayImageCtrl imageCtrl;
 
+    private Scene addScene;
+
+    private AddActivityCtrl addCtrl;
+
     private InBetweenScreenCtrl inBetweenCtrl;
 
     private Scene inBetweenScene;
@@ -91,6 +96,7 @@ public class MainCtrl {
      * @param inBetweenScreen
      * @param adminPanel
      * @param image
+     * @param add
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
@@ -102,7 +108,9 @@ public class MainCtrl {
                            Pair<GameScreenCtrl, Parent> hmQuestion,
                            Pair<GameScreenCtrl, Parent> gxQuestion,
                            Pair<InBetweenScreenCtrl, Parent> inBetweenScreen
-            , Pair<AdminPanelCtrl, Parent> adminPanel, Pair<DisplayImageCtrl, Parent> image) {
+            , Pair<AdminPanelCtrl, Parent> adminPanel,
+                           Pair<DisplayImageCtrl, Parent> image
+            , Pair<AddActivityCtrl, Parent> add) {
         this.primaryStage = primaryStage;
         this.startScreenCtrl = startScreen.getKey();
         this.startScreen = new Scene(startScreen.getValue());
@@ -122,6 +130,8 @@ public class MainCtrl {
         this.adminPanelCtrl = adminPanel.getKey();
         this.imageScene = new Scene(image.getValue());
         this.imageCtrl = image.getKey();
+        this.addScene = new Scene(add.getValue());
+        this.addCtrl = add.getKey();
 
         showStartScreen();
         primaryStage.show();
@@ -184,6 +194,7 @@ public class MainCtrl {
     }
 
     public void showAdminPanel(){
+        adminPanelCtrl.table.getItems().removeAll();
         primaryStage.setTitle("Quizzzz");
         adminPanelCtrl.load();
         primaryStage.setScene(adminPanelScene);
@@ -213,5 +224,18 @@ public class MainCtrl {
         imageCtrl.imageView.setImage(getImage(path));
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(imageScene);
+    }
+
+    public void showAdd() {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(addScene);
+        addCtrl.toAdd = true;
+    }
+
+    public void showEdit(Activity activity) {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(addScene);
+        addCtrl.toAdd = false;
+        addCtrl.editActivity = activity;
     }
 }

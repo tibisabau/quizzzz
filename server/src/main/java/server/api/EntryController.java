@@ -1,10 +1,8 @@
 package server.api;
 
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
+import java.io.*;
 import java.util.Base64;
 import java.util.List;
 import java.util.Random;
@@ -12,17 +10,12 @@ import java.util.Random;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
+
+import org.springframework.web.bind.annotation.*;
 
 
 import commons.Activity;
+
 import server.database.EntryRepository;
 
 import javax.imageio.ImageIO;
@@ -36,6 +29,8 @@ public class EntryController {
 
     private final EntryRepository repo;
 
+    private List<Activity> list;
+
     public EntryController(Random random, EntryRepository repo) {
         this.random = random;
         this.repo = repo;
@@ -44,6 +39,11 @@ public class EntryController {
     @GetMapping(path = "get")
     public List<Activity> getAll() {
         return repo.findAll();
+    }
+
+    @GetMapping(path = "get/json")
+    public List<Activity> getJson() {
+        return list;
     }
 
     @GetMapping(path = "get/{id}")
@@ -60,6 +60,11 @@ public class EntryController {
         return ResponseEntity.ok(repo.findById((long) idx).get());
 
     }
+
+    public void setJsonList(List<Activity> list) {
+        this.list = list;
+    }
+
 
 
     @PostMapping(path = "post")

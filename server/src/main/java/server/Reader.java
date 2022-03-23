@@ -3,6 +3,7 @@ package server;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -60,12 +61,13 @@ public class Reader implements ApplicationRunner {
             // close reader
             reader.close();
             entryController.deleteAll();
-
+            List<Activity> parsedList = new ArrayList<>();
             for(int i = 0; i < entries.size(); i++){
                 Activity activity = convert(entries.get(i));
+                parsedList.add(activity);
                 entryController.add(activity);
             }
-
+            entryController.setJsonList(parsedList);
 
         } catch (Exception ex) {
             ex.printStackTrace();

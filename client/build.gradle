@@ -14,7 +14,13 @@ javafx {
 
 
 dependencies {
-	implementation project(":commons")
+
+
+	implementation 'com.antkorwin:ioutils:0.8'
+	implementation 'io.github.huiaong:base64-multipartfile-starter:1.0.0-RELEASE'
+    implementation 'com.github.davidcarboni:encrypted-:1.0.0'
+	implementation 'com.github.davidcarboni:encrypted-file-upload:2.1.0'
+    implementation project(":commons")
 	
 	implementation group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '3.0.3'
 	implementation group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '3.0.3'
@@ -23,10 +29,12 @@ dependencies {
 	implementation group: 'jakarta.activation', name: 'jakarta.activation-api', version: '2.0.1'
 	
 	implementation 'com.google.inject:guice:5.0.1'
-	
-	
-	
+
+	implementation group: 'org.springframework', name: 'spring-web', version: '5.3.17'
+
+	implementation group: 'org.springframework', name: 'spring-test', version: '5.3.17'
 	implementation 'org.openjfx:javafx-controls:17.0.2'
 	implementation 'org.openjfx:javafx-fxml:17.0.2'
+	implementation 'commons-io:commons-io:2.11.0'
 	
 }

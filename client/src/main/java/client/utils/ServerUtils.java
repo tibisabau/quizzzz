@@ -17,19 +17,15 @@
 package client.utils;
 
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
-
 import commons.*;
-import org.checkerframework.checker.units.qual.A;
+import jakarta.ws.rs.client.*;
 import org.glassfish.jersey.client.ClientConfig;
 
-import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.core.GenericType;
 
 /**
@@ -122,12 +118,46 @@ public class ServerUtils {
                         Activity.class);
     }
 
+    public Activity updateEntry(Activity activity){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/entry/put/" + activity.getId())
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .put(Entity.entity(activity, APPLICATION_JSON),
+                        Activity.class);
+    }
+
     public List<Activity> getActivities(){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/entry/get")
                 .request(APPLICATION_JSON)
                 .accept(APPLICATION_JSON)
                 .get(new GenericType<List<Activity>>() {});
+    }
+
+    public List<Activity> getJson(){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/entry/get/json")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .get(new GenericType<List<Activity>>() {});
+    }
+
+
+    public Activity deleteActivity(long id){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/entry/delete/" + id)
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .delete(Activity.class);
+    }
+
+    public List<Activity> deleteAll(){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/entry/delete/all")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .delete(new GenericType<List<Activity>>() {});
     }
 
     /**
@@ -185,9 +215,6 @@ public class ServerUtils {
                 .accept(APPLICATION_JSON)
                 .post(Entity.entity(path, APPLICATION_JSON), String.class);
     }
-
-
-
 
     /**
      * generates a "Guess The Amount Of Energy" question
