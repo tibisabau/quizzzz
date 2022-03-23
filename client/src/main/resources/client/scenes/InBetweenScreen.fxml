@@ -9,11 +9,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #b9f6caff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.InBetweenScreenCtrl">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" style="-fx-background-color: #a9f6caff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.InBetweenScreenCtrl">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.20001220703125" minWidth="10.0" prefWidth="92.8000244140625" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.9999755859375" minWidth="10.0" prefWidth="371.9999755859375" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.4000274658203" minWidth="10.0" prefWidth="262.4000274658203" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="786.3999633789062" minWidth="10.0" prefWidth="690.3999725341796" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="706.4000244140625" minWidth="10.0" prefWidth="303.20001220703125" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -23,17 +23,17 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
          <children>
-            <Text fx:id="qcounter2" fill="#1b5e20" layoutX="-10.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question x out of 20" textAlignment="CENTER" wrappingWidth="388.79997522830945">
+            <Text fx:id="qcounter2" fill="#1b5e20" layoutX="133.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question x out of 20" textAlignment="CENTER" wrappingWidth="476.0">
                <font>
-                  <Font size="40.0" />
+                  <Font size="46.0" />
                </font>
             </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <Ellipse fill="#1b5e20" layoutX="187.0" layoutY="78.0" radiusX="233.0" radiusY="80.0" stroke="BLACK" strokeType="INSIDE" />
-            <Text fx:id="cscore" fill="WHITE" layoutX="-1.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 300" textAlignment="CENTER" wrappingWidth="372.79999999999995">
+            <Ellipse fill="#1b5e20" layoutX="384.0" layoutY="82.0" radiusX="238.0" radiusY="86.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text fx:id="cscore" fill="WHITE" layoutX="198.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 300" textAlignment="CENTER" wrappingWidth="372.79999999999995">
                <font>
                   <Font size="40.0" />
                </font>
@@ -42,7 +42,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <ProgressBar fx:id="progressbar" layoutX="7.0" layoutY="49.0" prefHeight="27.0" prefWidth="372.0" progress="0.0" style="-fx-background-color: #1b5e20;" styleClass="acc" />
+            <ProgressBar fx:id="progressbar" layoutX="176.0" layoutY="51.0" prefHeight="27.0" prefWidth="421.0" progress="0.0" style="-fx-background-color: #1b5e20;" styleClass="acc" />
          </children>
       </AnchorPane>
    </children>

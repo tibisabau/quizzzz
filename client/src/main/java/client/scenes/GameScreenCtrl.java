@@ -23,6 +23,12 @@ import javafx.scene.image.ImageView;
 
 public class GameScreenCtrl {
     @FXML
+    public Text textGXQuestion;
+
+    @FXML
+    public Text textHMQuestion;
+
+    @FXML
     public ImageView imageView1;
 
     @FXML
@@ -56,7 +62,7 @@ public class GameScreenCtrl {
     public Text Answer3;
 
     @FXML
-    public Label Qcounter;
+    public Text qcounter;
 
     @FXML
     public Text countdown;
@@ -180,7 +186,7 @@ public class GameScreenCtrl {
         }
         startTimer();
         int x = 21 - mainCtrl.counter;
-        Qcounter.setText("Question: " + x + "/20");
+        qcounter.setText("Question: " + x + "/20");
 
     }
 
@@ -210,6 +216,8 @@ public class GameScreenCtrl {
     public void createHMQuestion() {
         currentQuestion = server.getHMQuestion();
         setImagesHQ((HowMuchQuestion) currentQuestion);
+        textHMQuestion.setText("- "+ ((HowMuchQuestion) currentQuestion)
+                .getCorrectOption().getTitle()+ " -");
         while(mainCtrl.questionList.contains(currentQuestion)) {
             currentQuestion = server.getHMQuestion();
         }
@@ -231,6 +239,9 @@ public class GameScreenCtrl {
      */
     public void createGXQuestion() {
         currentQuestion = server.getGXQuestion();
+        setImagesGX((GuessXQuestion) currentQuestion);
+        textGXQuestion.setText("- "+ ((GuessXQuestion) currentQuestion)
+                .getCorrectOption().getTitle()+ " -");
         while(mainCtrl.questionList.contains(currentQuestion)) {
             currentQuestion = server.getGXQuestion();
         }
@@ -239,7 +250,7 @@ public class GameScreenCtrl {
         guessAnswer.clear();
         startTimer();
         int x = 21 - mainCtrl.counter;
-        Qcounter.setText("Question: " + x + "/20");
+        qcounter.setText("Question: " + x + "/20");
     }
 
     /**pressing ENTER submits the answer to
@@ -268,6 +279,11 @@ public class GameScreenCtrl {
 
     public void setImagesHQ(HowMuchQuestion question){
         String path2 = question.getSecondOption().getImagePath();
+        imageView2.setImage(mainCtrl.getImage(path2));
+    }
+
+    public void setImagesGX(GuessXQuestion question){
+        String path2 = question.getCorrectOption().getImagePath();
         imageView2.setImage(mainCtrl.getImage(path2));
     }
 

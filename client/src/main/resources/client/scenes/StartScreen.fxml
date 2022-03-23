@@ -10,12 +10,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #b9f6caff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.StartScreenCtrl">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" style="-fx-background-color: #a9f6caff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.StartScreenCtrl">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.20001220703125" minWidth="10.0" prefWidth="72.800048828125" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.199951171875" minWidth="10.0" prefWidth="167.199951171875" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.9999877929688" minWidth="10.0" prefWidth="159.79997558593755" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.19996948242186" minWidth="10.0" prefWidth="327.19996948242186" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="718.2000122070312" minWidth="10.0" prefWidth="454.99992675781255" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.40007324218755" minWidth="10.0" prefWidth="294.40007324218755" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.199951171875" minWidth="10.0" prefWidth="84.60002441406243" />
    </columnConstraints>
    <rowConstraints>
@@ -24,11 +24,12 @@
       <RowConstraints maxHeight="140.4000152587891" minHeight="10.0" prefHeight="36.80000000000001" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="74.59998168945313" minHeight="10.0" prefHeight="43.39996337890625" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="82.60001220703123" minHeight="10.0" prefHeight="81.00003662109373" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="82.60001220703123" minHeight="10.0" prefHeight="81.00003662109373" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="quitButton" layoutX="15.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#quitButtonClicked" style="-fx-border-color: #1b5e20; -fx-background-color: #b9f6caff;" text="Quit" textFill="#1b5e20">
+            <Button fx:id="quitButton" layoutX="20.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#quitButtonClicked" prefHeight="54.0" prefWidth="100.0" style="-fx-border-color: #1b5e20; -fx-background-color: #b9f6caff;" text="Quit" textFill="#1b5e20">
                <font>
                   <Font size="14.0" />
                </font>
@@ -38,21 +39,9 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <children>
-            <Button fx:id="singlePlayerButton" layoutX="-20.0" layoutY="17.0" mnemonicParsing="false" onAction="#goToGameScreen" prefHeight="54.0" prefWidth="193.0" style="-fx-background-color: WHITE; -fx-border-color: #1b5e20; -fx-border-width: 4;" text="Single Player" textAlignment="CENTER" textFill="#1b5e20" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-26.0" AnchorPane.topAnchor="0.0">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="multiPlayerButton" layoutX="-30.0" layoutY="18.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="193.0" style="-fx-background-color: #1b5e20; -fx-border-color: WHITE; -fx-border-width: 4;" text="Multiplayer" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-30.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Button fx:id="multiPlayerButton" layoutX="-112.0" layoutY="25.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="221.0" style="-fx-background-color: #1b5e20; -fx-border-color: WHITE; -fx-border-width: 4;" text="Multiplayer" textFill="WHITE" AnchorPane.bottomAnchor="-27.0" AnchorPane.leftAnchor="-112.0" AnchorPane.rightAnchor="186.0" AnchorPane.topAnchor="25.0">
                <font>
                   <Font name="Candara" size="18.0" />
                </font>
@@ -62,27 +51,42 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <TextField fx:id="nicknameField" onKeyPressed="#keyPressed" promptText="Enter nickname" style="-fx-background-color: #b9f6caff; -fx-border-color: white;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <AnchorPane GridPane.columnIndex="4">
          <children>
-            <Button fx:id="instructionsButton" mnemonicParsing="false" onMouseClicked="#instructionButtonClick" style="-fx-background-color: #b9f6caff;" text="How to play?" textFill="#1b5e20" underline="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Button fx:id="adminPanel" layoutX="-34.0" layoutY="23.0" mnemonicParsing="false" onAction="#goToAdminPanel" onMouseClicked="#quitButtonClicked" prefHeight="54.0" prefWidth="120.0" style="-fx-border-color: #1b5e20; -fx-background-color: #b9f6caff;" text="Admin Panel" textFill="#1b5e20">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Button>
+               </cursor>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <children>
-            <Text fill="#1b5e20" layoutX="-51.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quizzz!" textAlignment="CENTER" AnchorPane.bottomAnchor="18.200000000000003" AnchorPane.leftAnchor="-51.0" AnchorPane.rightAnchor="53.315332031249994" AnchorPane.topAnchor="19.0">
+            <Text fill="#1b5e20" layoutX="88.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quizzz!" textAlignment="CENTER">
                <font>
-                  <Font name="Candara" size="65.0" />
+                  <Font name="Candara" size="96.0" />
                </font>
             </Text>
          </children>
       </AnchorPane>
-      <TextField fx:id="nicknameField" onKeyPressed="#keyPressed" promptText="Enter nickname" style="-fx-background-color: #b9f6caff; -fx-border-color: white;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <AnchorPane GridPane.columnIndex="4">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="adminPanel" layoutX="-50.0" layoutY="34.0" mnemonicParsing="false" onAction="#goToAdminPanel" onMouseClicked="#quitButtonClicked" style="-fx-border-color: #1b5e20; -fx-background-color: #b9f6caff;" text="Admin Panel" textFill="#1b5e20">
+            <Button fx:id="singlePlayerButton1" layoutX="219.0" layoutY="53.0" mnemonicParsing="false" onAction="#goToGameScreen" prefHeight="75.0" prefWidth="221.0" style="-fx-background-color: WHITE; -fx-border-color: #1b5e20; -fx-border-width: 4;" text="Single Player" textAlignment="CENTER" textFill="#1b5e20">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+         <children>
+            <Button fx:id="instructionsButton" layoutX="185.0" mnemonicParsing="false" onMouseClicked="#instructionButtonClick" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: #b9f6caff;" text="How to play?" textFill="#1b5e20" underline="true">
+>>>>>>> main
                <font>
                   <Font size="14.0" />
                </font>
