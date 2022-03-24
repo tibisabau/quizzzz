@@ -2,6 +2,7 @@ package client.scenes;
 
 import client.utils.ServerUtils;
 import com.google.inject.Inject;
+import commons.Game;
 import commons.Score;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
@@ -34,6 +35,7 @@ public class waitingRoomController{
     private List<Score> oldPlayers;
 
     Score score;
+    Game game;
 
 
 
@@ -82,6 +84,16 @@ public class waitingRoomController{
             }
         });
         server.joinGame(players);
+
+
+        server.registerForMessages("/topic/game", Game.class, g -> {
+            System.out.println("hello1");
+            this.game = g;
+            this.game.updateScore(this.score);
+            System.out.println(this.game);
+        });
+        server.send("/app/game", "hello");
+
     }
 
 
@@ -96,5 +108,6 @@ public class waitingRoomController{
     public void goToStartScene(){
         mainCtrl.showStartScreen();
     }
+
 
 }

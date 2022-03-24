@@ -1,18 +1,37 @@
 package commons;
 
 
+import javax.persistence.*;
 import java.util.Iterator;
 import java.util.List;
 
+@Entity
 public class Game {
-    private int id;
-    private Score user;
-    public Iterator<Object> iter;
 
-    public Game(int id, Score user, List<Object> questions){
+
+    @Id
+    private int id;
+
+    @Transient
+    private Score user;
+
+    @Transient
+    private List<Object> questions;
+
+    private int counter = 0;
+
+    public Score getUser() {
+        return user;
+    }
+
+
+    public Game(int id, List<Object> questions){
         this.id = id;
-        this.user = user;
-        iter = questions.iterator();
+        this.questions = questions;
+    }
+
+    public void updateScore(Score score){
+        this.user = score;
     }
 
     public void incrementScore(int value){
@@ -20,6 +39,6 @@ public class Game {
     }
 
     public Object getNextQuestion(){
-        return iter.next();
+        return questions.get(counter++);
     }
 }
