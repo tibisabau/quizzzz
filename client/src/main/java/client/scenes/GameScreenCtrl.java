@@ -387,8 +387,11 @@ public class GameScreenCtrl {
                 if(currentQuestion instanceof MostEnergyQuestion ||
                         currentQuestion instanceof HowMuchQuestion) {
                     disableAnswers();
-                    showAnswers();
                 }
+                else {
+                    guessAnswer.setDisable(true);
+                }
+                showAnswers();
                 mainCtrl.counter--;
                 createTimer();
             }
@@ -407,6 +410,7 @@ public class GameScreenCtrl {
         Answer2.setDisable(true);
         Answer3.setDisable(true);
         AnswerC.setDisable(true);
+
     }
 
     /**
