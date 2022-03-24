@@ -10,8 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
-import org.apache.commons.io.IOUtils;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -25,6 +23,8 @@ import java.util.List;
 public class AddActivityCtrl {
 
     public List<String> fileList;
+
+    public File imageFile;
 
     public MultipartFile multipartFile;
 
@@ -75,13 +75,13 @@ public class AddActivityCtrl {
                 throw new Exception();
             }
             if(toAdd) {
-                server.addEntry(new Activity(save(multipartFile),
+                server.addEntry(new Activity(server.addImage(imageFile),
                         title.getText(), Long.parseLong
                         (consumption.getText())));
             }
             else {
-                if(multipartFile != null) {
-                    editActivity.setImagePath(save(multipartFile));
+                if(imageFile != null) {
+                    editActivity.setImagePath(server.addImage(imageFile));
                 }
                 editActivity.setTitle(title.getText());
                 editActivity.setConsumptionInWh
@@ -131,8 +131,7 @@ public class AddActivityCtrl {
         File f = fileChooser.showOpenDialog(null);
         if (f != null) {
             file.setText(f.getName());
-            multipartFile = new MockMultipartFile(f.getName(),
-                    IOUtils.toByteArray(new FileInputStream(f)));
+            imageFile = f;
         }
     }
 

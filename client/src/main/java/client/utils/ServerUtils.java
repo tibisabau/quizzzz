@@ -17,13 +17,18 @@
 package client.utils;
 
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
+import java.io.*;
 import java.net.URL;
 import java.util.List;
 import commons.*;
 import jakarta.ws.rs.client.*;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.glassfish.jersey.client.ClientConfig;
 
 import jakarta.ws.rs.core.GenericType;
@@ -226,5 +231,34 @@ public class ServerUtils {
                 .request(APPLICATION_JSON)
                 .accept(APPLICATION_JSON)
                 .get(GuessXQuestion.class);
+    }
+
+    public String updateImage(File image, String url) {
+        try {
+            HttpPost save = new HttpPost(SERVER + url);
+            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+            builder.addBinaryBody("File", new FileInputStream(image)
+                    , ContentType.MULTIPART_FORM_DATA, image.getName());
+            org.apache.http.HttpEntity multipart = builder.build();
+            save.setEntity(multipart);
+            CloseableHttpClient httpClient = HttpClients.createDefault();
+            CloseableHttpResponse response = httpClient.execute(save);
+            org.apache.http.HttpEntity responseEntity = response.getEntity();
+            httpClient.close();
+            response.close();
+            if(response.getStatusLine().getStatusCode() == 200) {
+                return "79/" + image.getName();
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return "400 BAD_REQUEST";
+    }
+
+    public String addImage(File image) {
+        String url = "/api/entry/save";
+        String response = updateImage(image, url);
+        return response;
     }
 }
