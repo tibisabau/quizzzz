@@ -124,4 +124,7 @@ public class Score {
         return ToStringBuilder.reflectionToString(this, MULTI_LINE_STYLE);
     }
 
+    public void incrementScore(int value) {
+        this.score += value;
+    }
 }

@@ -1,22 +1,25 @@
 package commons;
 
 
+import java.util.Iterator;
+import java.util.List;
+
 public class Game {
     private int id;
-    private int Score;
-    private int questionNumber;
+    private Score user;
+    public Iterator<Object> iter;
 
-    public Game(int id){
+    public Game(int id, Score user, List<Object> questions){
         this.id = id;
-        this.Score = 0;
-        this.questionNumber = 0;
+        this.user = user;
+        iter = questions.iterator();
     }
 
     public void incrementScore(int value){
-        this.Score += value;
+        this.user.incrementScore(value);
     }
 
-    public void nextQuestion(){
-        questionNumber++;
+    public Object getNextQuestion(){
+        return iter.next();
     }
 }
