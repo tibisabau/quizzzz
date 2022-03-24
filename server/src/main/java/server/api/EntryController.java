@@ -3,6 +3,10 @@ package server.api;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Base64;
 import java.util.List;
 import java.util.Random;
@@ -11,11 +15,13 @@ import java.util.Random;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 
 import commons.Activity;
 
+import org.springframework.web.multipart.MultipartFile;
 import server.database.EntryRepository;
 
 import javax.imageio.ImageIO;
@@ -179,6 +185,48 @@ public class EntryController {
             e.printStackTrace();
         }
         return ResponseEntity.badRequest().build();
+    }
+
+
+    @PostMapping("/save")
+    public String save(@RequestParam("File") MultipartFile multipartFile)
+            throws IOException {
+
+        System.out.println(multipartFile);
+        String fileName = StringUtils.cleanPath(
+                multipartFile.getOriginalFilename());
+
+        String uploadDir = "./activity_bank/79";
+
+        saveFile(uploadDir, fileName, multipartFile);
+
+        return "79/" + fileName;
+    }
+
+    /**
+     * creates the directory for all new images
+     * @param uploadDir
+     * @param fileName
+     * @param multipartFile
+     * @throws IOException
+     */
+    public void saveFile(String uploadDir, String fileName,
+                         MultipartFile multipartFile) throws IOException {
+        Path uploadPath = Paths.get(uploadDir);
+
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+
+        try (InputStream inputStream = multipartFile.
+                getInputStream()) {
+            Path filePath = uploadPath.resolve(fileName);
+            Files.copy(inputStream, filePath, StandardCopyOption.
+                    REPLACE_EXISTING);
+        } catch (IOException ioe) {
+            throw new IOException("Could not save image file: " +
+                    fileName, ioe);
+        }
     }
 
 }

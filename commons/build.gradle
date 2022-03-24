@@ -6,4 +6,5 @@ dependencies {
     implementation 'com.antkorwin:ioutils:0.8'
     implementation 'io.github.huiaong:base64-multipartfile-starter:1.0.0-RELEASE'
     implementation group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '2.2.3'
+    implementation group: 'org.springframework', name: 'spring-test', version: '5.3.17'
 }

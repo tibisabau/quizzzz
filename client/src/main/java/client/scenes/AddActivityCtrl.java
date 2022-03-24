@@ -45,7 +45,6 @@ public class AddActivityCtrl {
 
     private final MainCtrl mainCtrl;
 
-
     /**
      * Instantiates a new Add activity ctrl.
      *
