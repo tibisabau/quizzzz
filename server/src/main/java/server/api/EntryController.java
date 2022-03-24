@@ -188,6 +188,12 @@ public class EntryController {
     }
 
 
+    /**
+     * creates the image on the server
+     * @param multipartFile
+     * @return the image path
+     * @throws IOException
+     */
     @PostMapping("/save")
     public String save(@RequestParam("File") MultipartFile multipartFile)
             throws IOException {

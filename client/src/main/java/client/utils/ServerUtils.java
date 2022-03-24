@@ -123,6 +123,11 @@ public class ServerUtils {
                         Activity.class);
     }
 
+    /**
+     * updates an activity
+     * @param activity
+     * @return the updated activity
+     */
     public Activity updateEntry(Activity activity){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/entry/put/" + activity.getId())
@@ -132,6 +137,10 @@ public class ServerUtils {
                         Activity.class);
     }
 
+    /**
+     * client gets all activities from the db
+     * @return a list of activities
+     */
     public List<Activity> getActivities(){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/entry/get")
@@ -140,6 +149,11 @@ public class ServerUtils {
                 .get(new GenericType<List<Activity>>() {});
     }
 
+    /**
+     * client accepts the list of activities from
+     * the server
+     * @return a list of activities
+     */
     public List<Activity> getJson(){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/entry/get/json")
@@ -148,7 +162,12 @@ public class ServerUtils {
                 .get(new GenericType<List<Activity>>() {});
     }
 
-
+    /**
+     * client accepts the delete activity
+     * request
+     * @param id
+     * @return the deleted activity
+     */
     public Activity deleteActivity(long id){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/entry/delete/" + id)
@@ -157,6 +176,11 @@ public class ServerUtils {
                 .delete(Activity.class);
     }
 
+    /**
+     * client accepts delete request
+     * for the db of activities
+     * @return the remaining activities
+     */
     public List<Activity> deleteAll(){
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/entry/delete/all")
@@ -213,6 +237,11 @@ public class ServerUtils {
                 .get(Integer.class);
     }
 
+    /**
+     * gets the encoded image from the server
+     * @param path
+     * @return an encoded image
+     */
     public String getImage(String path) {
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/entry/photo/get")
@@ -233,6 +262,12 @@ public class ServerUtils {
                 .get(GuessXQuestion.class);
     }
 
+    /**
+     * client sends image to server
+     * @param image
+     * @param url
+     * @return the image path
+     */
     public String updateImage(File image, String url) {
         try {
             HttpPost save = new HttpPost(SERVER + url);
@@ -256,6 +291,11 @@ public class ServerUtils {
         return "400 BAD_REQUEST";
     }
 
+    /**
+     * send image from client to server
+     * @param image
+     * @return the image path
+     */
     public String addImage(File image) {
         String url = "/api/entry/save";
         String response = updateImage(image, url);
