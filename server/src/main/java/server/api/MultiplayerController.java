@@ -21,7 +21,7 @@ public class MultiplayerController {
 
     private Map<Object, Consumer<List<Score>>> listeners = new HashMap<>();
 
-    //all scores containg usernames and ids are stored here
+    //all scores containing usernames and ids are stored here
     private List<Score> lobby = new ArrayList<>();
 
 
