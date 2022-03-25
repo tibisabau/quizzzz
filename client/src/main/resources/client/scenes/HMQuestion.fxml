@@ -28,11 +28,7 @@
       <RowConstraints maxHeight="82.60001220703123" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-         <children>
-            <ImageView fx:id="imageView2" fitHeight="246.0" fitWidth="346.0" layoutX="10.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <AnchorPane prefHeight="92.0" prefWidth="380.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <children>
             <Label alignment="CENTER" layoutX="-96.0" layoutY="32.0" prefHeight="46.0" prefWidth="511.0" style="-fx-background-color: #1b5e20;" text="How much energy does this activity take?" textAlignment="CENTER" textFill="WHITE">
@@ -106,17 +102,16 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
          <children>
-            <Text fx:id="qcounter" layoutX="-21.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question x/20" wrappingWidth="138.39999237060556">
+            <Text fx:id="qcounter" fill="#1b5e20" layoutX="-21.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question x/20" wrappingWidth="138.39999237060556">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text layoutX="-21.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" wrappingWidth="110.40000000000009">
+            <Text fx:id="scoreText" fill="#1b5e20" layoutX="-21.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 300" wrappingWidth="110.40000000000009">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <Label fx:id="scoreDisplay" layoutX="31.0" layoutY="31.0" text="0" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
@@ -138,5 +133,6 @@
             </Text>
          </children>
       </AnchorPane>
+      <ImageView fx:id="imageView2" fitHeight="246.0" fitWidth="346.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
    </children>
 </GridPane>
