@@ -23,9 +23,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
-import java.beans.BeanProperty;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -61,6 +58,18 @@ public class MainCtrl {
     private Scene hmQuestionScene;
 
     private GameScreenCtrl gxQuestion;
+
+    private Scene gxQuestionMP;
+
+    private GameScreenMPCtrl gxQuestionMPCtrl;
+
+    private Scene hmQuestionMP;
+
+    private GameScreenMPCtrl hmQestionMPCtrl;
+
+    private Scene meQuestionMP;
+
+    private GameScreenMPCtrl meQuestionMPCtrl;
 
     private Scene gxQuestionScene;
 
@@ -105,24 +114,44 @@ public class MainCtrl {
                            Pair<GameScreenCtrl, Parent> hmQuestion,
                            Pair<GameScreenCtrl, Parent> gxQuestion,
                            Pair<InBetweenScreenCtrl, Parent> inBetweenScreen,
-                           Pair<waitingRoomController, Parent> waitingRoom) {
+                           Pair<waitingRoomController, Parent> waitingRoom,
+                           Pair<GameScreenMPCtrl, Parent> gxQuestionMP,
+                           Pair<GameScreenMPCtrl, Parent> hmQuestionMP,
+                           Pair<GameScreenMPCtrl, Parent> meQuestionMP) {
         this.primaryStage = primaryStage;
+
         this.startScreenCtrl = startScreen.getKey();
         this.startScreen = new Scene(startScreen.getValue());
+
         this.instructionScene = new Scene(instructionScene.getValue());
         this.instructionSceneCtrl = instructionScene.getKey();
+
         this.leaderboardScene = new Scene(leaderboardScreen.getValue());
         this.leaderboardSceneCtrl = leaderboardScreen.getKey();
+
         this.meQuestion = meQuestion.getKey();
         this.meQuestionScene = new Scene(meQuestion.getValue());
+
         this.hmQuestion = hmQuestion.getKey();
         this.hmQuestionScene = new Scene(hmQuestion.getValue());
+
         this.gxQuestion = gxQuestion.getKey();
         this.gxQuestionScene = new Scene(gxQuestion.getValue());
+
         this.inBetweenCtrl = inBetweenScreen.getKey();
         this.inBetweenScene = new Scene(inBetweenScreen.getValue());
+
         this.waitingRoomCtrl = waitingRoom.getKey();
         this.waitingRoomScene = new Scene(waitingRoom.getValue());
+
+        this.gxQuestionMPCtrl = gxQuestionMP.getKey();
+        this.gxQuestionMP = new Scene(gxQuestionMP.getValue());
+
+        this.hmQestionMPCtrl = hmQuestionMP.getKey();
+        this.hmQuestionMP = new Scene(hmQuestionMP.getValue());
+
+        this.meQuestionMPCtrl = meQuestionMP.getKey();
+        this.meQuestionMP = new Scene(meQuestionMP.getValue());
 
         showStartScreen();
         primaryStage.show();

@@ -258,7 +258,7 @@ public class ServerUtils {
             public Type getPayloadType(StompHeaders headers) {
                 return type;
             }
-
+            @SuppressWarnings("unchecked")
             @Override
             public void handleFrame(StompHeaders headers, Object payload) {
                 consumer.accept((T) payload);

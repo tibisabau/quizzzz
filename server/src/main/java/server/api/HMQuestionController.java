@@ -19,7 +19,6 @@ import java.util.List;
         private EntryController ctrl;
 
         @GetMapping(path = "")
-        public HowMuchQuestion getAll() {
             Activity correctOption = ctrl.getRandom().getBody();
             Activity firstOption = correctOption;
             double random = Math.random() * 2 + 0.1;

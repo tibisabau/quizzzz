@@ -46,10 +46,9 @@ public class MultiplayerController {
         this.random = random;
     }
 
-    @MessageMapping("/game")
-    @SendTo("/topic/game")
+    @MessageMapping("/multiplayer")
+    @SendTo("topic/multiplayer")
     public Game createGame(Object o){
-        System.out.println("Hello");
 
         List<Object> questions = new ArrayList<>();
         for (int i = 0; i < 20; i++){
@@ -67,6 +66,7 @@ public class MultiplayerController {
             }
         }
         Game game = new Game(counter++, questions);
+        System.out.println(game);
         return game;
     }
 

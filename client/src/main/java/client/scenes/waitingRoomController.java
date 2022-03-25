@@ -60,6 +60,7 @@ public class waitingRoomController{
         this.score = score;
     }
 
+
     public void load() {
         username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         id.setCellValueFactory(
@@ -86,17 +87,22 @@ public class waitingRoomController{
         server.joinGame(players);
 
 
-        server.registerForMessages("/topic/game", Game.class, g -> {
-            System.out.println("hello1");
+
+    }
+
+    public void initialize(){
+        server.registerForMessages("/topic/multiplayer", Game.class, g -> {
+            System.out.println(g);
             this.game = g;
             this.game.updateScore(this.score);
             System.out.println(this.game);
         });
-        server.send("/app/game", "hello");
-
     }
 
-
+    public void startGame(){
+        server.send("/app/multiplayer", "hello");
+        System.out.println(game);
+    }
 
     public void stop(){
         server.stop();
