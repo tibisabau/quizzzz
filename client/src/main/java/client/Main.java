@@ -70,7 +70,7 @@ public class Main extends Application {
                 "client", "scenes", "AddActivity.fxml");
         mainCtrl.initialize(primaryStage, start ,
                 instruction, meQuestion, leaderboard, hmQuestion
-                , gxQuestion, inBetweenScreen, waitingRoom, gxQuestionMP, hmQuestionMP, meQuestionMP, inBetweenScreen, adminPanel, image, add);
+                , gxQuestion, inBetweenScreen, waitingRoom, gxQuestionMP, hmQuestionMP, meQuestionMP, adminPanel, image, add);
 
         primaryStage.setOnCloseRequest(e -> {
             waitingRoom.getKey().stop();

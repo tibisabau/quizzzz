@@ -133,8 +133,7 @@ public class MainCtrl {
                            Pair<GameScreenMPCtrl, Parent> gxQuestionMP,
                            Pair<GameScreenMPCtrl, Parent> hmQuestionMP,
                            Pair<GameScreenMPCtrl, Parent> meQuestionMP,
-                           Pair<InBetweenScreenCtrl, Parent> inBetweenScreen
-            , Pair<AdminPanelCtrl, Parent> adminPanel,
+                           Pair<AdminPanelCtrl, Parent> adminPanel,
                            Pair<DisplayImageCtrl, Parent> image
             , Pair<AddActivityCtrl, Parent> add) {
         this.primaryStage = primaryStage;
