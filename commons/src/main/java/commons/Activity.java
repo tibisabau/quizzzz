@@ -14,8 +14,7 @@ public class Activity {
 
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "generator")
-    @SequenceGenerator(name="generator", sequenceName = "seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
 
     public String title;

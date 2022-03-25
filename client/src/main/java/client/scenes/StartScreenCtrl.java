@@ -47,6 +47,9 @@ public class StartScreenCtrl extends Application {
     @FXML
     private Button instructionsButton;
 
+    @FXML
+    private Button adminPanel;
+
     /**
      * Instantiates a new Start screen ctrl.
      *
@@ -60,6 +63,9 @@ public class StartScreenCtrl extends Application {
         this.isCompleted = false;
     }
 
+    /**
+     * clear nickname field
+     */
     private void cancel() {
         nicknameField.clear();
     }
@@ -157,6 +163,13 @@ public class StartScreenCtrl extends Application {
             return;
         }
 
+    }
+
+    /**
+     * show the admin panel
+     */
+    public void goToAdminPanel(){
+        mainCtrl.showAdminPanel();
     }
 
     /**

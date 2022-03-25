@@ -17,6 +17,7 @@
 package client.scenes;
 
 import client.utils.ServerUtils;
+import commons.Activity;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -64,6 +65,18 @@ public class MainCtrl {
 
     private leaderboardSceneCtrl leaderboardSceneCtrl;
 
+    private Scene adminPanelScene;
+
+    private AdminPanelCtrl adminPanelCtrl;
+
+    private Scene imageScene;
+
+    private DisplayImageCtrl imageCtrl;
+
+    private Scene addScene;
+
+    private AddActivityCtrl addCtrl;
+
     private InBetweenScreenCtrl inBetweenCtrl;
 
     private Scene inBetweenScene;
@@ -73,15 +86,17 @@ public class MainCtrl {
 
     /**
      * Initialize.
-     *
      * @param primaryStage the primary stage
      * @param startScreen  the start screen
      * @param instructionScene
      * @param meQuestion
+     * @param leaderboardScreen
      * @param hmQuestion
      * @param gxQuestion
-     * @param leaderboardScreen
      * @param inBetweenScreen
+     * @param adminPanel
+     * @param image
+     * @param add
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
@@ -92,7 +107,10 @@ public class MainCtrl {
 
                            Pair<GameScreenCtrl, Parent> hmQuestion,
                            Pair<GameScreenCtrl, Parent> gxQuestion,
-                           Pair<InBetweenScreenCtrl, Parent> inBetweenScreen) {
+                           Pair<InBetweenScreenCtrl, Parent> inBetweenScreen
+            , Pair<AdminPanelCtrl, Parent> adminPanel,
+                           Pair<DisplayImageCtrl, Parent> image
+            , Pair<AddActivityCtrl, Parent> add) {
         this.primaryStage = primaryStage;
         this.startScreenCtrl = startScreen.getKey();
         this.startScreen = new Scene(startScreen.getValue());
@@ -108,6 +126,12 @@ public class MainCtrl {
         this.gxQuestionScene = new Scene(gxQuestion.getValue());
         this.inBetweenCtrl = inBetweenScreen.getKey();
         this.inBetweenScene = new Scene(inBetweenScreen.getValue());
+        this.adminPanelScene = new Scene(adminPanel.getValue());
+        this.adminPanelCtrl = adminPanel.getKey();
+        this.imageScene = new Scene(image.getValue());
+        this.imageCtrl = image.getKey();
+        this.addScene = new Scene(add.getValue());
+        this.addCtrl = add.getKey();
 
         showStartScreen();
         primaryStage.show();
@@ -170,6 +194,16 @@ public class MainCtrl {
     }
 
     /**
+     * show admin panel
+     */
+    public void showAdminPanel(){
+        adminPanelCtrl.table.getItems().removeAll();
+        primaryStage.setTitle("Quizzzz");
+        adminPanelCtrl.load();
+        primaryStage.setScene(adminPanelScene);
+    }
+
+    /**
      * show inBetween Screen
      * @param question
      * @param score
@@ -181,11 +215,51 @@ public class MainCtrl {
     }
 
 
+    /**
+     * decodes the image as path
+     * @param path
+     * @return a new image
+     */
     public Image getImage(String path) {
         String imageString = server.getImage(path);
         Base64.Decoder encoder = Base64.getDecoder();
         byte[] byteArray = encoder.decode(imageString);
         ByteArrayInputStream inputStream = new ByteArrayInputStream(byteArray);
         return new Image(inputStream);
+    }
+
+    /**
+     * show the image from path
+     * @param path
+     */
+    public void displayImage(String path) {
+        imageCtrl.imageView.setImage(getImage(path));
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(imageScene);
+    }
+
+    /**
+     * show the add scene
+     */
+    public void showAdd() {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(addScene);
+        addCtrl.toAdd = true;
+    }
+
+    /**
+     * show the edit scene
+     * @param activity
+     */
+    public void showEdit(Activity activity) {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(addScene);
+        addCtrl.title.setText(activity.getTitle());
+        addCtrl.consumption.setText(String.valueOf(
+                activity.getConsumptionInWh()));
+        addCtrl.file.setText(activity.getImagePath()
+                .substring(activity.getImagePath().indexOf("/") + 1).trim());
+        addCtrl.toAdd = false;
+        addCtrl.editActivity = activity;
     }
 }

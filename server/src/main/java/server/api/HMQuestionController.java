@@ -18,9 +18,15 @@ import java.util.List;
         @Autowired
         private EntryController ctrl;
 
-        @GetMapping(path = "")
+    /**
+     * server gets a "How much energy does this activity take" question
+     * @return HowMuchQuestion
+     */
+    @GetMapping(path = "")
         public HowMuchQuestion getAll() {
-            Activity correctOption = ctrl.getRandom().getBody();
+            List<Activity> activities = ctrl.getAll();
+            Collections.shuffle(activities);
+            Activity correctOption = activities.get(0);
             Activity firstOption = correctOption;
             double random = Math.random() * 2 + 0.1;
             double random2 = Math.random() * 2 + 0.1;
