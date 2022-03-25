@@ -253,7 +253,7 @@ public class ServerUtils {
     }
 
     public <T> void registerForMessages(String dest, Class<T> type, Consumer<T> consumer){
-        session.subscribe(SERVER, new StompFrameHandler() {
+        session.subscribe(dest, new StompFrameHandler() {
             @Override
             public Type getPayloadType(StompHeaders headers) {
                 return type;
