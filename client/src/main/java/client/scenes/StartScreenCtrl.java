@@ -105,8 +105,7 @@ public class StartScreenCtrl extends Application {
      */
     public void ok() {
         try {
-            ownScore = getNewScore();
-            server.addScore(ownScore);
+            ownScore = server.addScore(getNewScore());
         } catch (WebApplicationException e) {
 
             var alert = new Alert(Alert.AlertType.ERROR);

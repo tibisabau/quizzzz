@@ -28,14 +28,6 @@
       <RowConstraints maxHeight="82.60001220703123" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
-         <children>
-            <Button layoutX="14.0" layoutY="-22.0" mnemonicParsing="false" onAction="#goToStartScene" prefHeight="52.0" prefWidth="96.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
-         </children>
-      </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
             <ImageView fx:id="imageView2" fitHeight="246.0" fitWidth="346.0" layoutX="10.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true" />
@@ -124,6 +116,16 @@
                   <Font size="15.0" />
                </font>
             </Text>
+            <Label fx:id="scoreDisplay" layoutX="31.0" layoutY="31.0" text="0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+         <children>
+            <Button layoutX="14.0" layoutY="-22.0" mnemonicParsing="false" onMouseReleased="#goToStartScene" prefHeight="52.0" prefWidth="96.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
