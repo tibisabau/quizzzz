@@ -63,7 +63,6 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <Label fx:id="scoreDisplay" layoutX="31.0" layoutY="31.0" text="0" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">

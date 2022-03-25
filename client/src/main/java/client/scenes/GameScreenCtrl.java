@@ -135,8 +135,8 @@ public class GameScreenCtrl {
     @FXML
     public ProgressBar time;
 
-    @FXML
-    public Label scoreDisplay;
+   /** @FXML
+    public Label scoreDisplay;**/
 
     @FXML
     public Label correctAnswerQX;
@@ -440,7 +440,7 @@ public class GameScreenCtrl {
      */
     public void startTimer(){
         int scoreAmount = StartScreenCtrl.getOwnScore().getScore();
-        scoreDisplay.setText(Integer.toString(scoreAmount));
+        scoreText.setText(Integer.toString(scoreAmount));
         time.setStyle("-fx-accent: #00FF01");
         timer = 1;
         bar = new Timeline(new KeyFrame(Duration.millis(8), ev ->{
