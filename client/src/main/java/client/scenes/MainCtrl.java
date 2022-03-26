@@ -18,14 +18,12 @@ package client.scenes;
 
 import client.utils.ServerUtils;
 import commons.Score;
+import commons.Activity;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
-import java.beans.BeanProperty;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -62,11 +60,35 @@ public class MainCtrl {
 
     private GameScreenCtrl gxQuestion;
 
+    private Scene gxQuestionMP;
+
+    private GameScreenMPCtrl gxQuestionMPCtrl;
+
+    private Scene hmQuestionMP;
+
+    private GameScreenMPCtrl hmQuestionMPCtrl;
+
+    private Scene meQuestionMP;
+
+    private GameScreenMPCtrl meQuestionMPCtrl;
+
     private Scene gxQuestionScene;
 
     private Scene leaderboardScene;
 
     private leaderboardSceneCtrl leaderboardSceneCtrl;
+
+    private Scene adminPanelScene;
+
+    private AdminPanelCtrl adminPanelCtrl;
+
+    private Scene imageScene;
+
+    private DisplayImageCtrl imageCtrl;
+
+    private Scene addScene;
+
+    private AddActivityCtrl addCtrl;
 
     private InBetweenScreenCtrl inBetweenCtrl;
 
@@ -85,15 +107,17 @@ public class MainCtrl {
 
     /**
      * Initialize.
-     *
      * @param primaryStage the primary stage
      * @param startScreen  the start screen
      * @param instructionScene
      * @param meQuestion
+     * @param leaderboardScreen
      * @param hmQuestion
      * @param gxQuestion
-     * @param leaderboardScreen
      * @param inBetweenScreen
+     * @param adminPanel
+     * @param image
+     * @param add
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
@@ -105,24 +129,53 @@ public class MainCtrl {
                            Pair<GameScreenCtrl, Parent> hmQuestion,
                            Pair<GameScreenCtrl, Parent> gxQuestion,
                            Pair<InBetweenScreenCtrl, Parent> inBetweenScreen,
-                           Pair<waitingRoomController, Parent> waitingRoom) {
+                           Pair<waitingRoomController, Parent> waitingRoom,
+                           Pair<GameScreenMPCtrl, Parent> gxQuestionMP,
+                           Pair<GameScreenMPCtrl, Parent> hmQuestionMP,
+                           Pair<GameScreenMPCtrl, Parent> meQuestionMP,
+                           Pair<AdminPanelCtrl, Parent> adminPanel,
+                           Pair<DisplayImageCtrl, Parent> image
+            , Pair<AddActivityCtrl, Parent> add) {
         this.primaryStage = primaryStage;
+
         this.startScreenCtrl = startScreen.getKey();
         this.startScreen = new Scene(startScreen.getValue());
+
         this.instructionScene = new Scene(instructionScene.getValue());
         this.instructionSceneCtrl = instructionScene.getKey();
+
         this.leaderboardScene = new Scene(leaderboardScreen.getValue());
         this.leaderboardSceneCtrl = leaderboardScreen.getKey();
+
         this.meQuestion = meQuestion.getKey();
         this.meQuestionScene = new Scene(meQuestion.getValue());
+
         this.hmQuestion = hmQuestion.getKey();
         this.hmQuestionScene = new Scene(hmQuestion.getValue());
+
         this.gxQuestion = gxQuestion.getKey();
         this.gxQuestionScene = new Scene(gxQuestion.getValue());
+
         this.inBetweenCtrl = inBetweenScreen.getKey();
         this.inBetweenScene = new Scene(inBetweenScreen.getValue());
+        this.adminPanelScene = new Scene(adminPanel.getValue());
+        this.adminPanelCtrl = adminPanel.getKey();
+        this.imageScene = new Scene(image.getValue());
+        this.imageCtrl = image.getKey();
+        this.addScene = new Scene(add.getValue());
+        this.addCtrl = add.getKey();
+
         this.waitingRoomCtrl = waitingRoom.getKey();
         this.waitingRoomScene = new Scene(waitingRoom.getValue());
+
+        this.gxQuestionMPCtrl = gxQuestionMP.getKey();
+        this.gxQuestionMP = new Scene(gxQuestionMP.getValue());
+
+        this.hmQuestionMPCtrl = hmQuestionMP.getKey();
+        this.hmQuestionMP = new Scene(hmQuestionMP.getValue());
+
+        this.meQuestionMPCtrl = meQuestionMP.getKey();
+        this.meQuestionMP = new Scene(meQuestionMP.getValue());
 
         showStartScreen();
         primaryStage.show();
@@ -193,6 +246,16 @@ public class MainCtrl {
     }
 
     /**
+     * show admin panel
+     */
+    public void showAdminPanel(){
+        adminPanelCtrl.table.getItems().removeAll();
+        primaryStage.setTitle("Quizzzz");
+        adminPanelCtrl.load();
+        primaryStage.setScene(adminPanelScene);
+    }
+
+    /**
      * show inBetween Screen
      * @param question
      * @param score
@@ -204,6 +267,11 @@ public class MainCtrl {
     }
 
 
+    /**
+     * decodes the image as path
+     * @param path
+     * @return a new image
+     */
     public Image getImage(String path) {
         String imageString = server.getImage(path);
         Base64.Decoder encoder = Base64.getDecoder();
@@ -218,5 +286,40 @@ public class MainCtrl {
         waitingRoomCtrl.setScore(this.score);
         waitingRoomCtrl.load();
 
+    }
+
+    /**
+     * show the image from path
+     * @param path
+     */
+    public void displayImage(String path) {
+        imageCtrl.imageView.setImage(getImage(path));
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(imageScene);
+    }
+
+    /**
+     * show the add scene
+     */
+    public void showAdd() {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(addScene);
+        addCtrl.toAdd = true;
+    }
+
+    /**
+     * show the edit scene
+     * @param activity
+     */
+    public void showEdit(Activity activity) {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(addScene);
+        addCtrl.title.setText(activity.getTitle());
+        addCtrl.consumption.setText(String.valueOf(
+                activity.getConsumptionInWh()));
+        addCtrl.file.setText(activity.getImagePath()
+                .substring(activity.getImagePath().indexOf("/") + 1).trim());
+        addCtrl.toAdd = false;
+        addCtrl.editActivity = activity;
     }
 }

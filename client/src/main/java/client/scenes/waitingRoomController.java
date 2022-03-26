@@ -61,6 +61,7 @@ public class waitingRoomController{
         this.score = score;
     }
 
+
     public void load() {
         System.out.println("i was in load");
         username.setCellValueFactory(new PropertyValueFactory<>("userName"));
@@ -97,6 +98,9 @@ public class waitingRoomController{
             System.out.println("hello from the server");
         });
 
+    public void startGame(){
+        server.send("/app/multiplayer", "hello");
+        System.out.println(game);
     }
 
     public void startGame(){

@@ -14,6 +14,14 @@ javafx {
 
 
 dependencies {
+
+
+	implementation 'com.antkorwin:ioutils:0.8'
+	implementation 'io.github.huiaong:base64-multipartfile-starter:1.0.0-RELEASE'
+    implementation 'com.github.davidcarboni:encrypted-:1.0.0'
+	implementation 'com.github.davidcarboni:encrypted-file-upload:2.1.0'
+	implementation group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.3.1'
+
 	implementation project(":commons")
 	
 	implementation group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '3.0.3'
@@ -24,9 +32,14 @@ dependencies {
 	
 	implementation 'com.google.inject:guice:5.1.0'
 
-	implementation 'org.springframework.boot:spring-boot-starter-websocket:2.6.4'
+	implementation group: 'org.springframework', name: 'spring-web', version: '5.3.17'
+
+	implementation group: 'org.springframework', name: 'spring-test', version: '5.3.17'
+
+	implementation 'org.springframework.boot:spring-boot-starter-websocket:2.6.3'
 
 	implementation 'org.openjfx:javafx-controls:17.0.2'
 	implementation 'org.openjfx:javafx-fxml:17.0.2'
+	implementation 'commons-io:commons-io:2.11.0'
 	
 }

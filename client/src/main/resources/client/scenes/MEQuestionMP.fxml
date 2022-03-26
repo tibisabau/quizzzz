@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" style="-fx-background-color: #a9f6caff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.GameScreenCtrl">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" style="-fx-background-color: #a9f6caff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.GameScreenMPCtrl">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.20001220703125" minWidth="10.0" prefWidth="72.800048828125" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="355.2" minWidth="10.0" prefWidth="355.2" />
@@ -28,6 +28,14 @@
         <RowConstraints maxHeight="82.60001220703123" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+            <children>
+                <Button layoutX="14.0" layoutY="-22.0" mnemonicParsing="false" onAction="#goToStartScene" prefHeight="52.0" prefWidth="96.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            </children>
+        </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <children>
                 <ImageView fx:id="imageView1" fitHeight="246.0" fitWidth="313.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true" style="fx: 10;" />
@@ -111,12 +119,12 @@
         </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
          <children>
-            <Text fx:id="qcounter" fill="#1b5e20" layoutX="-21.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question x/20" wrappingWidth="138.39999237060556">
+            <Text fx:id="qcounter" layoutX="-21.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question x/20" wrappingWidth="138.39999237060556">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text fx:id="scoreText" fill="#1b5e20" layoutX="-21.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 300" wrappingWidth="110.40000000000009">
+            <Text layoutX="-21.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 300" wrappingWidth="110.40000000000009">
                <font>
                   <Font size="15.0" />
                </font>
@@ -130,14 +138,6 @@
                     <font>
                         <Font size="18.0" />
                     </font></Text>
-            </children>
-        </AnchorPane>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
-            <children>
-                <Button layoutX="14.0" layoutY="-22.0" mnemonicParsing="false" onMouseClicked="#goToStartScene" prefHeight="52.0" prefWidth="96.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
             </children>
         </AnchorPane>
     </children>

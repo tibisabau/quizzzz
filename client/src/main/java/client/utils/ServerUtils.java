@@ -22,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,13 +32,16 @@ import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 import commons.*;
-import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.client.*;
 import jakarta.ws.rs.core.Response;
-import javafx.scene.Scene;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.glassfish.jersey.client.ClientConfig;
 
-import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.core.GenericType;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.simp.stomp.StompFrameHandler;
@@ -129,6 +133,20 @@ public class ServerUtils {
     }
 
     /**
+     * Update scores on the data base
+     * @param score the score
+     * @return the score
+     */
+    public Score updateScore(Score score){
+        Long id = score.getUserId();
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/score/put/" + id.toString())
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .put(Entity.entity(score, APPLICATION_JSON), Score.class);
+    }
+
+    /**
      * Adds an Activity to the database
      * @param activity
      * @return a new Activity
@@ -140,6 +158,72 @@ public class ServerUtils {
                 .accept(APPLICATION_JSON)
                 .post(Entity.entity(activity, APPLICATION_JSON),
                         Activity.class);
+    }
+
+    /**
+     * updates an activity
+     * @param activity
+     * @return the updated activity
+     */
+    public Activity updateEntry(Activity activity){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/entry/put/" + activity.getId())
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .put(Entity.entity(activity, APPLICATION_JSON),
+                        Activity.class);
+    }
+
+    /**
+     * client gets all activities from the db
+     * @return a list of activities
+     */
+    public List<Activity> getActivities(){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/entry/get")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .get(new GenericType<List<Activity>>() {});
+    }
+
+    /**
+     * client accepts the list of activities from
+     * the server
+     * @return a list of activities
+     */
+    public List<Activity> getJson(){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/entry/get/json")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .get(new GenericType<List<Activity>>() {});
+    }
+
+    /**
+     * client accepts the delete activity
+     * request
+     * @param id
+     * @return the deleted activity
+     */
+    public Activity deleteActivity(long id){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/entry/delete/" + id)
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .delete(Activity.class);
+    }
+
+    /**
+     * client accepts delete request
+     * for the db of activities
+     * @return the remaining activities
+     */
+    public List<Activity> deleteAll(){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/entry/delete/all")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .delete(new GenericType<List<Activity>>() {});
     }
 
     /**
@@ -190,6 +274,11 @@ public class ServerUtils {
                 .get(Integer.class);
     }
 
+    /**
+     * gets the encoded image from the server
+     * @param path
+     * @return an encoded image
+     */
     public String getImage(String path) {
         return ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/entry/photo/get")
@@ -197,9 +286,6 @@ public class ServerUtils {
                 .accept(APPLICATION_JSON)
                 .post(Entity.entity(path, APPLICATION_JSON), String.class);
     }
-
-
-
 
     /**
      * generates a "Guess The Amount Of Energy" question
@@ -259,7 +345,6 @@ public class ServerUtils {
             public Type getPayloadType(StompHeaders headers) {
                 return type;
             }
-
             @SuppressWarnings("unchecked")
             @Override
             public void handleFrame(StompHeaders headers, Object payload) {
@@ -290,5 +375,45 @@ public class ServerUtils {
 
     public void stop(){
         exec.shutdownNow();
+    }
+
+    /**
+     * client sends image to server
+     * @param image
+     * @param url
+     * @return the image path
+     */
+    public String updateImage(File image, String url) {
+        try {
+            HttpPost save = new HttpPost(SERVER + url);
+            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+            builder.addBinaryBody("File", new FileInputStream(image)
+                    , ContentType.MULTIPART_FORM_DATA, image.getName());
+            org.apache.http.HttpEntity multipart = builder.build();
+            save.setEntity(multipart);
+            CloseableHttpClient httpClient = HttpClients.createDefault();
+            CloseableHttpResponse response = httpClient.execute(save);
+            org.apache.http.HttpEntity responseEntity = response.getEntity();
+            httpClient.close();
+            response.close();
+            if(response.getStatusLine().getStatusCode() == 200) {
+                return "79/" + image.getName();
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return "400 BAD_REQUEST";
+    }
+
+    /**
+     * send image from client to server
+     * @param image
+     * @return the image path
+     */
+    public String addImage(File image) {
+        String url = "/api/entry/save";
+        String response = updateImage(image, url);
+        return response;
     }
 }
