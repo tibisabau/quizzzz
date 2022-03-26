@@ -33,7 +33,7 @@ public class GameScreenCtrl {
      * The Instead of label.
      */
     @FXML
-    public Label insteadOfLabel;
+    public Text insteadOfLabel;
 
     /**
      * The Score text.

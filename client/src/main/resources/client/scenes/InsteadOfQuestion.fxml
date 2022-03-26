@@ -54,8 +54,8 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Text fx:id="Answer1" fill="#1b5e20" layoutX="80.0" layoutY="4.0" onMouseClicked="#selectAnswerA" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="234.93678283691406" />
-                  <Text fx:id="Answer2" fill="#1b5e20" layoutX="68.0" layoutY="153.0" onMouseClicked="#selectAnswerB" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="246.39999999999986" />
+                  <Text fx:id="Answer1" fill="#1b5e20" layoutX="80.0" layoutY="4.0" onMouseClicked="#selectAnswerA" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="234.93678283691406" />
+                  <Text fx:id="Answer2" fill="#1b5e20" layoutX="68.0" layoutY="153.0" onMouseClicked="#selectAnswerB" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="246.39999999999986" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="92.0" prefWidth="380.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -71,12 +71,12 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Text fx:id="Answer3" fill="#1b5e20" layoutX="74.0" layoutY="20.0" onMouseClicked="#selectAnswerC" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="246.39999999999986" />
+                  <Text fx:id="Answer3" fill="#1b5e20" layoutX="74.0" layoutY="20.0" onMouseClicked="#selectAnswerC" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="246.39999999999986" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
                <children>
-                  <Text fx:id="qcounter" fill="#1b5e20" layoutX="-21.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question x/20" wrappingWidth="138.39999237060556">
+                  <Text fx:id="qcounter" fill="#1b5e20" layoutX="-21.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="138.39999237060556">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -107,11 +107,20 @@
                   </Button>
                </children>
             </AnchorPane>
-            <Label fx:id="insteadOfLabel" alignment="CENTER" prefHeight="163.0" prefWidth="355.0" style="-fx-background-color: #1b5e20;" text="Instead of  , you could do :" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label alignment="CENTER" prefHeight="163.0" prefWidth="355.0" style="-fx-background-color: #1b5e20;" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Text fx:id="insteadOfLabel" fill="WHITE" layoutX="14.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="332.79999999999995">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
          </children>
       </GridPane>
    </children>
