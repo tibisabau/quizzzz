@@ -2,6 +2,7 @@ package client.scenes;
 
 import client.Main;
 import client.utils.ServerUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 
 import commons.*;
@@ -19,6 +20,7 @@ import javafx.util.Duration;
 import java.awt.desktop.QuitEvent;
 import java.util.HashSet;
 import javafx.scene.image.ImageView;
+import org.apache.catalina.mapper.Mapper;
 //import java.util.ArrayList;
 //import java.util.List;
 
@@ -93,6 +95,8 @@ public class GameScreenMPCtrl {
 
     private GameScreenCtrl gameScreenCtrl;
 
+    ObjectMapper mapper = new ObjectMapper();
+
     /**
      * Instantiates a new Game screen ctrl.
      *
@@ -116,18 +120,30 @@ public class GameScreenMPCtrl {
     }
 
     public void getTypeOfQuestion(){
+
+        System.out.println("Start here:");
+        Boolean found = false;
         currentQuestion = game.getNextQuestion();
-        if (currentQuestion instanceof MostEnergyQuestion){
-            MostEnergyQuestion question = (MostEnergyQuestion) currentQuestion;
+
+        MostEnergyQuestion question = mapper.convertValue(currentQuestion, MostEnergyQuestion.class);
+        if (question.getIdentity() != null){
+            currentQuestion = question;
+            found = true;
             setMeQuestion(question);
-        } else if (currentQuestion instanceof HowMuchQuestion){
-            HowMuchQuestion question = (HowMuchQuestion) currentQuestion;
-            setHmQuestion(question);
-        } else if (currentQuestion instanceof GuessXQuestion){
-            GuessXQuestion question = (GuessXQuestion) currentQuestion;
-            setGxQuestion(question);
         }
-        startTimer(currentQuestion);
+        if (!found){
+            HowMuchQuestion question2 = mapper.convertValue(currentQuestion, HowMuchQuestion.class);
+            if (question.getFirstOption() != null){
+                currentQuestion = question2;
+                found = true;
+                setHmQuestion(question2);
+            }
+        }
+        if (!found){
+            GuessXQuestion question2 = mapper.convertValue(currentQuestion, GuessXQuestion.class);
+            currentQuestion = question2;
+            setGxQuestion(question2);
+        }
     }
 
     public void setMeQuestion(MostEnergyQuestion question) {

@@ -101,9 +101,9 @@ public class waitingRoomController{
             this.game = game;
             this.game.updateScore(this.score);
             System.out.println("hello from the server");
-//            quitButton.setDisable(true);
-//            startButton.setDisable(true);
-//            mainCtrl.showMpGameScreen(this.game);
+            quitButton.setDisable(true);
+            startButton.setDisable(true);
+            mainCtrl.showMpGameScreen(this.game);
         });
     }
 
