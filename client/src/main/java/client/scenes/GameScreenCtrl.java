@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import java.awt.*;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -134,6 +135,9 @@ public class GameScreenCtrl {
     @FXML
     public ProgressBar time;
 
+    @FXML
+    public Button hotKey;
+
    /** @FXML
     public Label scoreDisplay;**/
 
@@ -163,6 +167,8 @@ public class GameScreenCtrl {
     private boolean answerIsCorrect;
 
     private boolean isPointsJoker;
+
+    private boolean hotKeyAvailable;
 
 
 
@@ -227,7 +233,7 @@ public class GameScreenCtrl {
             }
             else {
                 guessAnswer.setStyle(incorrectColor);
-                //extra 2 lines because of checkstyle not above 80 character
+
                 GuessXQuestion cor = (GuessXQuestion)currentQuestion;
                 long corText = cor.getCorrectOption().getConsumptionInWh();
                 correctAnswerQX.setText("Correct answer: " + corText);
@@ -279,6 +285,7 @@ public class GameScreenCtrl {
         AnswerB.setStyle("-fx-background-color: WHITE");
         AnswerC.setStyle("-fx-background-color: WHITE");
         setJokers();
+        hotKeyAvailable = true;
         if(questionType == 1) {
             createMEQuestion();
         }
@@ -359,6 +366,42 @@ public class GameScreenCtrl {
         qcounter.setText("Question: " + x + "/20");
         Score score = StartScreenCtrl.getOwnScore();
         setScoreText(score.getScore());
+
+    }
+
+    /**
+     * listen for key press.
+     * if a key is pressed that is a hot key it will do the hotkey.
+     * @param e
+     * @throws InterruptedException
+     */
+    public void hotKeys(KeyEvent e) throws InterruptedException {
+        if(hotKeyAvailable) {
+
+            switch (e.getCode()) {
+                case A:
+                    selectAnswerA();
+
+                    break;
+                case B:
+                    selectAnswerB();
+
+                    break;
+                case C:
+                    selectAnswerC();
+
+                    break;
+                case DIGIT1:
+                    if (!mainCtrl.isAnswerJokerUsed()) {
+                        useAnswerJoker();
+                    }
+                    break;
+                case DIGIT2:
+                    if (!mainCtrl.isPointsJokerUsed()) {
+                        usePointsJoker();
+                    }
+            }
+        }
 
     }
 
@@ -516,6 +559,7 @@ public class GameScreenCtrl {
         AnswerC.setDisable(true);
         pointsJoker.setDisable(true);
         answerJoker.setDisable(true);
+        hotKeyAvailable = false;
 
     }
 

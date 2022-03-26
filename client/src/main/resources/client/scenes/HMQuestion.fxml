@@ -28,7 +28,11 @@
       <RowConstraints maxHeight="82.60001220703123" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="hotKey" layoutX="40.0" layoutY="38.0" mnemonicParsing="false" onKeyPressed="#hotKeys" opacity="0.0" text="Hotkey checker" />
+         </children>
+      </AnchorPane>
       <AnchorPane prefHeight="92.0" prefWidth="380.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <children>
             <Label alignment="CENTER" layoutX="-96.0" layoutY="32.0" prefHeight="46.0" prefWidth="511.0" style="-fx-background-color: #1b5e20;" text="How much energy does this activity take?" textAlignment="CENTER" textFill="WHITE">

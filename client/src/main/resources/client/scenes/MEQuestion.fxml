@@ -28,6 +28,11 @@
         <RowConstraints maxHeight="82.60001220703123" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="hotKey" layoutX="40.0" layoutY="38.0" mnemonicParsing="false" onKeyPressed="#hotKeys" opacity="0.0" text="Hotkey checker" />
+         </children>
+      </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <children>
                 <ImageView fx:id="imageView1" fitHeight="246.0" fitWidth="313.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true" style="fx: 10;" />
