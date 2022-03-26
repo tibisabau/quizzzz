@@ -35,8 +35,14 @@ import javafx.scene.image.Image;
  */
 public class MainCtrl {
 
+    /**
+     * The Counter.
+     */
     public int counter;
 
+    /**
+     * The Question list.
+     */
     public Set<Object> questionList;
 
     private Stage primaryStage;
@@ -93,18 +99,19 @@ public class MainCtrl {
 
     /**
      * Initialize.
-     * @param primaryStage the primary stage
-     * @param startScreen  the start screen
-     * @param instructionScene
-     * @param meQuestion
-     * @param leaderboardScreen
-     * @param hmQuestion
-     * @param gxQuestion
-     * @param inBetweenScreen
-     * @param adminPanel
-     * @param image
-     * @param add
-     * @param insteadOfQuestion
+     *
+     * @param primaryStage      the primary stage
+     * @param startScreen       the start screen
+     * @param instructionScene  the instruction scene
+     * @param meQuestion        the me question
+     * @param leaderboardScreen the leaderboard screen
+     * @param hmQuestion        the hm question
+     * @param gxQuestion        the gx question
+     * @param insteadOfQuestion the instead of question
+     * @param inBetweenScreen   the in between screen
+     * @param adminPanel        the admin panel
+     * @param image             the image
+     * @param add               the add
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
@@ -168,7 +175,8 @@ public class MainCtrl {
 
     /**
      * Show MEQuestion
-     * @param questionType
+     *
+     * @param questionType the question type
      */
     public void showMEQuestion(int questionType) {
         primaryStage.setTitle("Quizzzz");
@@ -178,7 +186,8 @@ public class MainCtrl {
 
     /**
      * Show HMQuestion
-     * @param questionType
+     *
+     * @param questionType the question type
      */
     public void showHMQuestion(int questionType) {
         primaryStage.setTitle("Quizzzz");
@@ -195,6 +204,11 @@ public class MainCtrl {
         gxQuestion.createGXQuestion();
     }
 
+    /**
+     * Show instead of question.
+     *
+     * @param questionType the question type
+     */
     public void showInsteadOfQuestion(int questionType) {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(insteadOfScene);
@@ -222,8 +236,9 @@ public class MainCtrl {
 
     /**
      * show inBetween Screen
-     * @param question
-     * @param score
+     *
+     * @param question the question
+     * @param score    the score
      */
     public void showInBetweenScreen(int question, int score) {
         primaryStage.setTitle("Quizzzz");
@@ -234,7 +249,8 @@ public class MainCtrl {
 
     /**
      * decodes the image as path
-     * @param path
+     *
+     * @param path the path
      * @return a new image
      */
     public Image getImage(String path) {
@@ -247,7 +263,8 @@ public class MainCtrl {
 
     /**
      * show the image from path
-     * @param path
+     *
+     * @param path the path
      */
     public void displayImage(String path) {
         imageCtrl.imageView.setImage(getImage(path));
@@ -266,7 +283,8 @@ public class MainCtrl {
 
     /**
      * show the edit scene
-     * @param activity
+     *
+     * @param activity the activity
      */
     public void showEdit(Activity activity) {
         primaryStage.setTitle("Quizzzz");
