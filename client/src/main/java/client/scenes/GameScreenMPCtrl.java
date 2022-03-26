@@ -129,6 +129,7 @@ public class GameScreenMPCtrl {
         if (question.getIdentity() != null){
             currentQuestion = question;
             found = true;
+            System.out.println(question);
             setMeQuestion(question);
         }
         if (!found){
@@ -136,37 +137,51 @@ public class GameScreenMPCtrl {
             if (question.getFirstOption() != null){
                 currentQuestion = question2;
                 found = true;
+                System.out.println(question2);
                 setHmQuestion(question2);
             }
         }
         if (!found){
             GuessXQuestion question2 = mapper.convertValue(currentQuestion, GuessXQuestion.class);
             currentQuestion = question2;
+            System.out.println(question2);
             setGxQuestion(question2);
         }
     }
 
     public void setMeQuestion(MostEnergyQuestion question) {
+        System.out.println("Most 1");
         setImagesME(question);
+        System.out.println("Most 2");
         Answer1.setText(question.getFirstOption().toStringAnswer());
+        System.out.println("Most 3");
         Answer2.setText(question.getSecondOption().toStringAnswer());
         Answer3.setText(question.getThirdOption().toStringAnswer());
+        System.out.println("I got here");
         mainCtrl.showMEQuestionMP();
     }
 
     public void setHmQuestion(HowMuchQuestion question) {
+        System.out.println("Much 1");
         setImagesHQ(question);
+        System.out.println("Much 2");
         Answer1.setText(question.getFirstOption().toStringAnswer());
+        System.out.println("Much 3");
         Answer2.setText(question.getSecondOption().toStringAnswer());
         Answer3.setText(question.getThirdOption().toStringAnswer());
+        System.out.println("I got here");
         mainCtrl.showHMQuestionMP();
     }
 
     public void setGxQuestion(GuessXQuestion question) {
+        System.out.println("Guess 1");
         setImagesGX(question);
+        System.out.println("Guess 2");
         textGXQuestion.setText("- "+ question.getCorrectOption().getTitle()+ " -");
+        System.out.println("Guess 3");
         guessAnswer.setDisable(false);
         guessAnswer.clear();
+        System.out.println("I got here");
         mainCtrl.showGXQuestionMP();
     }
 
