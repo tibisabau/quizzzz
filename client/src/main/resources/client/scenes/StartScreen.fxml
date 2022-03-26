@@ -53,6 +53,15 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
       <TextField fx:id="nicknameField" onKeyPressed="#keyPressed" promptText="Enter nickname" style="-fx-background-color: #b9f6caff; -fx-border-color: white;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <AnchorPane GridPane.columnIndex="4">
+         <children>
+            <Button fx:id="adminPanel" layoutX="-34.0" layoutY="23.0" mnemonicParsing="false" onAction="#goToAdminPanel" onMouseClicked="#quitButtonClicked" prefHeight="54.0" prefWidth="120.0" style="-fx-border-color: #1b5e20; -fx-background-color: #b9f6caff;" text="Admin Panel" textFill="#1b5e20">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <children>
             <Text fill="#1b5e20" layoutX="88.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quizzz!" textAlignment="CENTER">
@@ -77,6 +86,7 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
          <children>
             <Button fx:id="instructionsButton" layoutX="185.0" mnemonicParsing="false" onMouseClicked="#instructionButtonClick" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: #b9f6caff;" text="How to play?" textFill="#1b5e20" underline="true">
+>>>>>>> main
                <font>
                   <Font size="14.0" />
                </font>

@@ -56,9 +56,14 @@ public class Main extends Application {
                 "leaderboardScene.fxml");
         var inBetweenScreen = FXML.load(InBetweenScreenCtrl.class,
                 "client", "scenes", "InBetweenScreen.fxml");
-
+        var adminPanel = FXML.load(AdminPanelCtrl.class,
+                "client", "scenes", "AdminPanel.fxml");
+        var image = FXML.load(DisplayImageCtrl.class,
+                "client", "scenes", "DisplayImage.fxml");
+        var add = FXML.load(AddActivityCtrl.class,
+                "client", "scenes", "AddActivity.fxml");
         mainCtrl.initialize(primaryStage, start ,
                 instruction, meQuestion, leaderboard, hmQuestion
-                , gxQuestion, inBetweenScreen);
+                , gxQuestion, inBetweenScreen, adminPanel, image, add);
     }
 }

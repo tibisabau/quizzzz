@@ -22,60 +22,120 @@ import javafx.scene.image.ImageView;
 
 
 
+/**
+ * The type Game screen ctrl.
+ */
 public class GameScreenCtrl {
+    /**
+     * The Score text.
+     */
+    @FXML
+    public Text scoreText;
+
+    /**
+     * The Text gx question.
+     */
     @FXML
     public Text textGXQuestion;
 
+    /**
+     * The Text hm question.
+     */
     @FXML
     public Text textHMQuestion;
 
+    /**
+     * The Image view 1.
+     */
     @FXML
     public ImageView imageView1;
 
+    /**
+     * The Image view 2.
+     */
     @FXML
     public ImageView imageView2;
 
+    /**
+     * The Image view 3.
+     */
     @FXML
     public ImageView imageView3;
 
+    /**
+     * The Question label.
+     */
     @FXML
     public Label questionLabel;
 
+    /**
+     * The Quit button.
+     */
     @FXML
     public Button QuitButton;
 
+    /**
+     * The Answer a.
+     */
     @FXML
     public Button AnswerA;
 
+    /**
+     * The Answer 1.
+     */
     @FXML
     public Text Answer1;
 
+    /**
+     * The Answer b.
+     */
     @FXML
     public Button AnswerB;
 
+    /**
+     * The Answer 2.
+     */
     @FXML
     public Text Answer2;
 
+    /**
+     * The Answer c.
+     */
     @FXML
     public Button AnswerC;
 
+    /**
+     * The Answer 3.
+     */
     @FXML
     public Text Answer3;
 
+    /**
+     * The Qcounter.
+     */
     @FXML
     public Text qcounter;
 
+    /**
+     * The Countdown.
+     */
     @FXML
     public Text countdown;
 
+    /**
+     * The Guess answer.
+     */
     @FXML
     public TextField guessAnswer;
 
+    /**
+     * The Time.
+     */
     @FXML
     public ProgressBar time;
 
-    @FXML
-    public Label scoreDisplay;
+   /** @FXML
+    public Label scoreDisplay;**/
 
     @FXML
     public Label correctAnswerQX;
@@ -120,6 +180,8 @@ public class GameScreenCtrl {
 
     /**
      * Selecting answer A
+     *
+     * @throws InterruptedException the interrupted exception
      */
     public void selectAnswerA() throws InterruptedException {
         stopTime();
@@ -131,6 +193,8 @@ public class GameScreenCtrl {
 
     /**
      * Selecting answer B
+     *
+     * @throws InterruptedException the interrupted exception
      */
     public void selectAnswerB() throws InterruptedException {
         stopTime();
@@ -142,6 +206,8 @@ public class GameScreenCtrl {
 
     /**
      * Selecting answer C
+     *
+     * @throws InterruptedException the interrupted exception
      */
     public void selectAnswerC() throws InterruptedException {
         stopTime();
@@ -197,9 +263,12 @@ public class GameScreenCtrl {
     /**
      * Sets the answer for a new question
      * and adds this question to the question list.
-     * @param questionType
+     *
+     * @param questionType the question type
      */
     public void setAnswer(int questionType){
+        Score score = StartScreenCtrl.getOwnScore();
+        setScoreText(score.getScore());
         Answer1.setDisable(false);
         Answer2.setDisable(false);
         Answer3.setDisable(false);
@@ -288,11 +357,16 @@ public class GameScreenCtrl {
         int x = 21 - mainCtrl.counter;
         guessAnswer.setStyle("-fx-background-color: WHITE");
         qcounter.setText("Question: " + x + "/20");
+        Score score = StartScreenCtrl.getOwnScore();
+        setScoreText(score.getScore());
+
     }
 
-    /**pressing ENTER submits the answer to
+    /**
+     * pressing ENTER submits the answer to
      * the "Guess X" question type
-     *@param e the e
+     *
+     * @param e the e
      */
     public void keyPressed(KeyEvent e) {
         switch (e.getCode()) {
@@ -308,6 +382,11 @@ public class GameScreenCtrl {
         }
     }
 
+    /**
+     * Set images me.
+     *
+     * @param question the question
+     */
     public void setImagesME(MostEnergyQuestion question){
         String path1 = question.getFirstOption().getImagePath();
         String path2 = question.getSecondOption().getImagePath();
@@ -317,11 +396,21 @@ public class GameScreenCtrl {
         imageView3.setImage(mainCtrl.getImage(path3));
     }
 
+    /**
+     * Set images hq.
+     *
+     * @param question the question
+     */
     public void setImagesHQ(HowMuchQuestion question){
         String path2 = question.getSecondOption().getImagePath();
         imageView2.setImage(mainCtrl.getImage(path2));
     }
 
+    /**
+     * Set images gx.
+     *
+     * @param question the question
+     */
     public void setImagesGX(GuessXQuestion question){
         String path2 = question.getCorrectOption().getImagePath();
         imageView2.setImage(mainCtrl.getImage(path2));
@@ -365,7 +454,7 @@ public class GameScreenCtrl {
      */
     public void startTimer(){
         int scoreAmount = StartScreenCtrl.getOwnScore().getScore();
-        scoreDisplay.setText(Integer.toString(scoreAmount));
+        scoreText.setText(Integer.toString(scoreAmount));
         time.setStyle("-fx-accent: #00FF01");
         timer = 1;
         bar = new Timeline(new KeyFrame(Duration.millis(8), ev ->{
@@ -452,13 +541,13 @@ public class GameScreenCtrl {
 
     /**
      * Gives points if correct answer is given
-     * @param question question to check if correct
-     * @param answer answer number from 1 to 3, 1 is for a, 2 for b, 3 for c
      *
+     * @param question question to check if correct
+     * @param answer   answer number from 1 to 3, 1 is for a, 2 for b, 3 for c
      */
-
     public void answerPoints(Object question, int answer){
         Score score = StartScreenCtrl.getOwnScore();
+        setScoreText(score.getScore());
         double multiplier = 0.5 + (2 * timer);
         int extraPoints = (int) Math.round(100 * multiplier);
         answerIsCorrect = false;
@@ -476,9 +565,10 @@ public class GameScreenCtrl {
 
 
     /**
+     * Answer correct boolean.
      *
      * @param question question to check if correct
-     * @param answer Answer given
+     * @param answer   Answer given
      * @return boolean if the answer is correct
      */
     public boolean answerCorrect (Object question, int answer){
@@ -490,7 +580,6 @@ public class GameScreenCtrl {
             if(question instanceof HowMuchQuestion) {
                 return HMCorrectAnswer(question, answer);
             }
-
             else {
                 return  GXCorrectAnswer(question, answer);
             }
@@ -498,8 +587,9 @@ public class GameScreenCtrl {
 
     /**
      * check for correctness for MEQuestion
-     * @param question
-     * @param answer
+     *
+     * @param question the question
+     * @param answer   the answer
      * @return whether the answer is correct
      */
     public boolean MECorrectAnswer(Object question, int answer) {
@@ -529,8 +619,9 @@ public class GameScreenCtrl {
 
     /**
      * Check for correctness HMQuestion
-     * @param question
-     * @param answer
+     *
+     * @param question the question
+     * @param answer   the answer
      * @return whether the answer is correct
      */
     public boolean HMCorrectAnswer(Object question, int answer) {
@@ -575,7 +666,8 @@ public class GameScreenCtrl {
 
     /**
      * resets the number of questions to 20 for each game
-     * @param value
+     *
+     * @param value the value
      */
     public void setCounter(int value){
         mainCtrl.counter = value;
@@ -607,7 +699,14 @@ public class GameScreenCtrl {
         else {
             pointsJoker.setDisable(false);
         }
-
+    /**
+     * Sets score text.
+     *
+     * @param score the score
+     */
+    public void setScoreText(int score) {
+        scoreText.setText("Score : " + String.valueOf(score));
+    }
     }
 
     /**
