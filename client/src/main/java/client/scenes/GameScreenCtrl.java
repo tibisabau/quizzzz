@@ -684,21 +684,21 @@ public class GameScreenCtrl {
     /**
      * Set the jokers to be used if they are still available
      */
-    public void setJokers(){
-        if(!(currentQuestion instanceof GuessXQuestion)){
-            if(mainCtrl.isAnswerJokerUsed()){
+    public void setJokers() {
+        if (!(currentQuestion instanceof GuessXQuestion)) {
+            if (mainCtrl.isAnswerJokerUsed()) {
                 answerJoker.setDisable(true);
-            }
-            else{
+            } else {
                 answerJoker.setDisable(false);
             }
         }
-        if(mainCtrl.isPointsJokerUsed()){
+        if (mainCtrl.isPointsJokerUsed()) {
             pointsJoker.setDisable(true);
-        }
-        else {
+        } else {
             pointsJoker.setDisable(false);
         }
+    }
+    
     /**
      * Sets score text.
      *
@@ -706,7 +706,6 @@ public class GameScreenCtrl {
      */
     public void setScoreText(int score) {
         scoreText.setText("Score : " + String.valueOf(score));
-    }
     }
 
     /**
