@@ -276,6 +276,15 @@ public class ServerUtils {
                 .get(GuessXQuestion.class);
     }
 
+
+    public InsteadOfQuestion getInsteadOfQuestion(){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/instead/question")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .get(InsteadOfQuestion.class);
+    }
+
     /**
      * client sends image to server
      * @param image

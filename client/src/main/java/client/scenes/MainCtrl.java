@@ -81,6 +81,9 @@ public class MainCtrl {
 
     private Scene inBetweenScene;
 
+
+
+
     @Inject
     private ServerUtils server;
 
@@ -107,6 +110,7 @@ public class MainCtrl {
 
                            Pair<GameScreenCtrl, Parent> hmQuestion,
                            Pair<GameScreenCtrl, Parent> gxQuestion,
+
                            Pair<InBetweenScreenCtrl, Parent> inBetweenScreen
             , Pair<AdminPanelCtrl, Parent> adminPanel,
                            Pair<DisplayImageCtrl, Parent> image

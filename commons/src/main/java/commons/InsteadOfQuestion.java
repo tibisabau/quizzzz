@@ -1,0 +1,91 @@
+package commons;
+
+
+import java.util.Objects;
+
+public class InsteadOfQuestion {
+
+    private Activity promptedOption;
+
+    private Activity correctOption;
+
+    private Activity firstOption;
+
+    private Activity secondOption;
+
+    public InsteadOfQuestion(){
+
+    }
+
+    public InsteadOfQuestion(Activity promptedOption,
+                             Activity correctOption,
+                             Activity firstOption, Activity secondOption) {
+        this.promptedOption = promptedOption;
+        this.correctOption = correctOption;
+        this.firstOption = firstOption;
+        this.secondOption = secondOption;
+    }
+
+    public Activity getPromptedOption() {
+        return promptedOption;
+    }
+
+    public void setPromptedOption(Activity promptedOption) {
+        this.promptedOption = promptedOption;
+    }
+
+    public Activity getCorrectOption() {
+        return correctOption;
+    }
+
+    public void setCorrectOption(Activity correctOption) {
+        this.correctOption = correctOption;
+    }
+
+    public Activity getFirstOption() {
+        return firstOption;
+    }
+
+    public void setFirstOption(Activity firstOption) {
+        this.firstOption = firstOption;
+    }
+
+    public Activity getSecondOption() {
+        return secondOption;
+    }
+
+    public void setSecondOption(Activity secondOption) {
+        this.secondOption = secondOption;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        InsteadOfQuestion that = (InsteadOfQuestion) o;
+        return Objects.equals(promptedOption, that.promptedOption)
+                && Objects.equals(correctOption, that.correctOption)
+                && Objects.equals(firstOption, that.firstOption)
+                && Objects.equals(secondOption, that.secondOption);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash
+                (promptedOption, correctOption, firstOption, secondOption);
+    }
+
+    @Override
+    public String toString() {
+        return "InsteadOfQuestion{" +
+                "promptedOption=" + promptedOption +
+                ", correctOption=" + correctOption +
+                ", firstOption=" + firstOption +
+                ", secondOption=" + secondOption +
+                '}';
+    }
+}

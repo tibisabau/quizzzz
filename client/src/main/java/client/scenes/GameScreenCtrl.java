@@ -539,6 +539,7 @@ public class GameScreenCtrl {
             score.setScore(score.getScore() + extraPoints);
         }
         showAnswers();
+
     }
 
 
