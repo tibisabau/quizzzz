@@ -5,29 +5,28 @@ import javax.persistence.*;
 import java.util.Iterator;
 import java.util.List;
 
-@Entity
+
 public class Game {
 
-
-    @Id
     private int id;
 
-    @Transient
     private Score user;
 
-    @Transient
-    private List<Object> questions;
+    public List<Object> questions;
 
-    private int counter = 0;
+    public int counter = 0;
 
     public Score getUser() {
         return user;
     }
 
+    public Game(){
 
-    public Game(int id, List<Object> questions){
-        this.id = id;
+    }
+
+    public Game(int id, List <Object> questions){
         this.questions = questions;
+        this.id = id;
     }
 
     public void updateScore(Score score){

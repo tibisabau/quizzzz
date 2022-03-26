@@ -54,6 +54,7 @@ public class ServerUtils {
 
     private static final String SERVER = "http://localhost:8080/";
 
+
     private StompSession session = connect("ws://localhost:8080/websocket");
 
 
@@ -253,12 +254,14 @@ public class ServerUtils {
     }
 
     public <T> void registerForMessages(String dest, Class<T> type, Consumer<T> consumer){
-        session.subscribe(SERVER, new StompFrameHandler() {
+        System.out.println("im inside register method");
+        session.subscribe(dest, new StompFrameHandler() {
             @Override
             public Type getPayloadType(StompHeaders headers) {
                 return type;
             }
 
+            @SuppressWarnings("unchecked")
             @Override
             public void handleFrame(StompHeaders headers, Object payload) {
                 consumer.accept((T) payload);
@@ -266,8 +269,24 @@ public class ServerUtils {
         });
     }
 
-    public void send(String dest, Object o){
-        session.send(dest, o);
+//    public void registerForString1(String dest, Consumer<String> consumer){
+//        System.out.println("im inside register method");
+//        session.subscribe(dest, new StompFrameHandler() {
+//            @Override
+//            public Type getPayloadType(StompHeaders headers) {
+//                return String.class;
+//            }
+//
+//            @SuppressWarnings("unchecked")
+//            @Override
+//            public void handleFrame(StompHeaders headers, Object payload) {
+//                consumer.accept((String) payload);
+//            }
+//        });
+//    }
+
+    public void send(String dest, String s){
+        session.send(dest, s);
     }
 
     public void stop(){

@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
 
@@ -21,6 +24,9 @@ public class MultiplayerController {
 
     int counter;
     Random random;
+
+    @Autowired
+    SimpMessagingTemplate simpMess;
 
     @Autowired
     QTypeController qTypeController;
@@ -48,8 +54,8 @@ public class MultiplayerController {
 
     @MessageMapping("/game")
     @SendTo("/topic/game")
-    public Game createGame(Object o){
-        System.out.println("Hello");
+    public Game createGame(@Payload String s){
+        System.out.println("_____\n"+s+"\n_____");
 
         List<Object> questions = new ArrayList<>();
         for (int i = 0; i < 20; i++){
@@ -67,7 +73,14 @@ public class MultiplayerController {
             }
         }
         Game game = new Game(counter++, questions);
+        System.out.println(game);
+        sendString("hi from server");
         return game;
+    }
+
+    @SendTo("/topic")
+    public String sendString(String s){
+        return s;
     }
 
     @PostMapping(path = "join")

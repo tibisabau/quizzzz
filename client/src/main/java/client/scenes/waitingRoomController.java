@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
+import java.io.Console;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,7 @@ public class waitingRoomController{
     }
 
     public void load() {
+        System.out.println("i was in load");
         username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         id.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Score, String>,
@@ -74,6 +76,10 @@ public class waitingRoomController{
         id.setSortable(false);
         players.add(score);
 
+
+
+
+
         server.registerForUpdates(p -> {
             players = p;
             for(int i = 0; i < players.size(); i++){
@@ -85,16 +91,19 @@ public class waitingRoomController{
         });
         server.joinGame(players);
 
-
-        server.registerForMessages("/topic/game", Game.class, g -> {
-            System.out.println("hello1");
-            this.game = g;
+        server.registerForMessages("/topic/game", Game.class, game -> {
+            this.game = game;
             this.game.updateScore(this.score);
-            System.out.println(this.game);
+            System.out.println("hello from the server");
         });
-        server.send("/app/game", "hello");
 
     }
+
+    public void startGame(){
+        server.send("/app/game", "hello from the client");
+    }
+
+
 
 
 

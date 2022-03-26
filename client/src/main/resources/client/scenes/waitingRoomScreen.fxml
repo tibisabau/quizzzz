@@ -56,7 +56,7 @@
               </columns>
             </TableView>
             <Button layoutX="14.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#goToStartScene" text="Quit Game" />
-            <Button layoutX="550.0" layoutY="353.0" mnemonicParsing="false" text="Start Game" />
+            <Button layoutX="550.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#startGame" text="Start Game" />
       </children>
     </AnchorPane>
   </children>
