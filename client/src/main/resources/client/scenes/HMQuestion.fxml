@@ -133,6 +133,6 @@
             </Text>
          </children>
       </AnchorPane>
-      <ImageView fx:id="imageView2" fitHeight="246.0" fitWidth="346.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <ImageView fx:id="imageView2" fitHeight="178.0" fitWidth="346.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
    </children>
 </GridPane>

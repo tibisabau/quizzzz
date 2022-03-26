@@ -61,6 +61,10 @@ public class MainCtrl {
 
     private Scene gxQuestionScene;
 
+    private GameScreenCtrl insteadOfQuestion;
+
+    private Scene insteadOfScene;
+
     private Scene leaderboardScene;
 
     private leaderboardSceneCtrl leaderboardSceneCtrl;
@@ -100,6 +104,7 @@ public class MainCtrl {
      * @param adminPanel
      * @param image
      * @param add
+     * @param insteadOfQuestion
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
@@ -110,7 +115,7 @@ public class MainCtrl {
 
                            Pair<GameScreenCtrl, Parent> hmQuestion,
                            Pair<GameScreenCtrl, Parent> gxQuestion,
-
+                           Pair<GameScreenCtrl, Parent> insteadOfQuestion,
                            Pair<InBetweenScreenCtrl, Parent> inBetweenScreen
             , Pair<AdminPanelCtrl, Parent> adminPanel,
                            Pair<DisplayImageCtrl, Parent> image
@@ -128,6 +133,8 @@ public class MainCtrl {
         this.hmQuestionScene = new Scene(hmQuestion.getValue());
         this.gxQuestion = gxQuestion.getKey();
         this.gxQuestionScene = new Scene(gxQuestion.getValue());
+        this.insteadOfQuestion = insteadOfQuestion.getKey();
+        this.insteadOfScene = new Scene(insteadOfQuestion.getValue());
         this.inBetweenCtrl = inBetweenScreen.getKey();
         this.inBetweenScene = new Scene(inBetweenScreen.getValue());
         this.adminPanelScene = new Scene(adminPanel.getValue());
@@ -186,6 +193,12 @@ public class MainCtrl {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(gxQuestionScene);
         gxQuestion.createGXQuestion();
+    }
+
+    public void showInsteadOfQuestion(int questionType) {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(insteadOfScene);
+        insteadOfQuestion.setAnswer(questionType);
     }
 
     /**
