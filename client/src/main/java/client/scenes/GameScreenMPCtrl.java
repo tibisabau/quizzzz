@@ -267,6 +267,37 @@ public class GameScreenMPCtrl {
     }
 
     /**
+     * pressing ENTER submits the answer to
+     * the "Guess X" question type
+     *
+     * @param e the e
+     */
+    public void keyPressed(KeyEvent e) {
+        switch (e.getCode()) {
+            case ENTER:
+            {guessAnswer.setDisable(true);
+                ok();}
+            break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * confirms the answer to the "Guess X" question
+     * checks if the client can load a different
+     * question
+     */
+    public void ok() {
+        stopTime();
+        try{
+            answerPoints(currentQuestion, Integer.parseInt(guessAnswer.getText()));}
+        catch (Exception e){
+            answerPoints(currentQuestion, 0);
+        }
+    }
+
+    /**
      * Gives points if correct answer is given
      * @param question question to check if correct
      * @param answer answer number from 1 to 3, 1 is for a, 2 for b, 3 for c
@@ -291,4 +322,7 @@ public class GameScreenMPCtrl {
         }
     }
 
+    public void goToStartScene(){
+        mainCtrl.showStartScreen();
+    }
 }

@@ -33,6 +33,7 @@ import java.util.function.Consumer;
 
 import commons.*;
 import jakarta.ws.rs.client.*;
+import jakarta.ws.rs.core.Response;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;

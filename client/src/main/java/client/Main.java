@@ -59,8 +59,8 @@ public class Main extends Application {
         var waitingRoom = FXML.load(waitingRoomController.class, "client", "scenes", "waitingRoomScreen.fxml");
 
         var gxQuestionMP = FXML.load(GameScreenMPCtrl.class, "client", "scenes", "GXQuestionMP.fxml");
-        var hmQuestionMP = FXML.load(GameScreenMPCtrl.class, "client", "scenes", "HMQuestion.fxml");
-        var meQuestionMP = FXML.load(GameScreenMPCtrl.class, "client", "scenes", "MEQuestion.fxml");
+        var hmQuestionMP = FXML.load(GameScreenMPCtrl.class, "client", "scenes", "HMQuestionMP.fxml");
+        var meQuestionMP = FXML.load(GameScreenMPCtrl.class, "client", "scenes", "MEQuestionMP.fxml");
 
         var adminPanel = FXML.load(AdminPanelCtrl.class,
                 "client", "scenes", "AdminPanel.fxml");

@@ -66,7 +66,7 @@ public class MainCtrl {
 
     private Scene hmQuestionMP;
 
-    private GameScreenMPCtrl hmQestionMPCtrl;
+    private GameScreenMPCtrl hmQuestionMPCtrl;
 
     private Scene meQuestionMP;
 
@@ -171,7 +171,7 @@ public class MainCtrl {
         this.gxQuestionMPCtrl = gxQuestionMP.getKey();
         this.gxQuestionMP = new Scene(gxQuestionMP.getValue());
 
-        this.hmQestionMPCtrl = hmQuestionMP.getKey();
+        this.hmQuestionMPCtrl = hmQuestionMP.getKey();
         this.hmQuestionMP = new Scene(hmQuestionMP.getValue());
 
         this.meQuestionMPCtrl = meQuestionMP.getKey();
