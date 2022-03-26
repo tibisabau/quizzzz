@@ -68,7 +68,8 @@ public class waitingRoomController{
         id.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Score, String>,
                         ObservableValue<String>>() {
-                    @Override public ObservableValue<String>
+                    @Override
+                    public ObservableValue<String>
                     call(TableColumn.CellDataFeatures<Score, String> p) {
                         return new ReadOnlyObjectWrapper(
                                 (table.getItems().indexOf(p.getValue()) + 1) + "");
@@ -78,14 +79,11 @@ public class waitingRoomController{
         players.add(score);
 
 
-
-
-
         server.registerForUpdates(p -> {
             players = p;
-            for(int i = 0; i < players.size(); i++){
+            for (int i = 0; i < players.size(); i++) {
                 Score score = players.get(i);
-                if(!table.getItems().contains(score)){
+                if (!table.getItems().contains(score)) {
                     table.getItems().add(score);
                 }
             }
@@ -97,17 +95,11 @@ public class waitingRoomController{
             this.game.updateScore(this.score);
             System.out.println("hello from the server");
         });
-
-    public void startGame(){
-        server.send("/app/multiplayer", "hello");
-        System.out.println(game);
     }
 
     public void startGame(){
         server.send("/app/game", "hello from the client");
     }
-
-
 
 
 
