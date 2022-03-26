@@ -41,7 +41,6 @@ public class MultiplayerController {
     GuessXController guessXController;
 
     //when starting a game the lobby should be added here, so ids of all players in each game are here, we'll figure sth out from there
-    List<List<Score>> games = new ArrayList<>();
 
     private Map<Object, Consumer<List<Score>>> listeners = new HashMap<>();
 
@@ -51,6 +50,8 @@ public class MultiplayerController {
     public MultiplayerController(Random random){
         this.random = random;
     }
+
+    List<Game> currentGames = new ArrayList<>();
 
     @MessageMapping("/game")
     @SendTo("/topic/game")
@@ -74,11 +75,15 @@ public class MultiplayerController {
         }
         Game game = new Game(counter++, questions);
         System.out.println(game);
-        sendString("hi from server");
+//        sendString("hi from server");
+        currentGames.add(game);
+
+        //game control timer init here
+
         return game;
     }
 
-    @SendTo("/topic")
+    @SendTo("/topic/nextQuestion")
     public String sendString(String s){
         return s;
     }

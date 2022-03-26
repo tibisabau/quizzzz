@@ -8,6 +8,7 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -30,6 +31,12 @@ public class waitingRoomController{
 
     @FXML
     public TableColumn<Score, String> username;
+
+    @FXML
+    public Button quitButton;
+
+    @FXML
+    public  Button startButton;
 
     private List<Score> players;
 
@@ -94,11 +101,18 @@ public class waitingRoomController{
             this.game = game;
             this.game.updateScore(this.score);
             System.out.println("hello from the server");
+//            quitButton.setDisable(true);
+//            startButton.setDisable(true);
+//            mainCtrl.showMpGameScreen(this.game);
         });
     }
 
     public void startGame(){
         server.send("/app/game", "hello from the client");
+    }
+
+    public Game getGame(){
+        return this.game;
     }
 
 

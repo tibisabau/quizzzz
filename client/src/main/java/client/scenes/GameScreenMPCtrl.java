@@ -111,6 +111,10 @@ public class GameScreenMPCtrl {
         //
     }
 
+    public void setGame(Game game){
+        this.game = game;
+    }
+
     public void getTypeOfQuestion(){
         currentQuestion = game.getNextQuestion();
         if (currentQuestion instanceof MostEnergyQuestion){
@@ -131,6 +135,7 @@ public class GameScreenMPCtrl {
         Answer1.setText(question.getFirstOption().toStringAnswer());
         Answer2.setText(question.getSecondOption().toStringAnswer());
         Answer3.setText(question.getThirdOption().toStringAnswer());
+        mainCtrl.showMEQuestionMP();
     }
 
     public void setHmQuestion(HowMuchQuestion question) {
@@ -138,6 +143,7 @@ public class GameScreenMPCtrl {
         Answer1.setText(question.getFirstOption().toStringAnswer());
         Answer2.setText(question.getSecondOption().toStringAnswer());
         Answer3.setText(question.getThirdOption().toStringAnswer());
+        mainCtrl.showHMQuestionMP();
     }
 
     public void setGxQuestion(GuessXQuestion question) {
@@ -145,6 +151,7 @@ public class GameScreenMPCtrl {
         textGXQuestion.setText("- "+ question.getCorrectOption().getTitle()+ " -");
         guessAnswer.setDisable(false);
         guessAnswer.clear();
+        mainCtrl.showGXQuestionMP();
     }
 
     public void setImagesME(MostEnergyQuestion question){

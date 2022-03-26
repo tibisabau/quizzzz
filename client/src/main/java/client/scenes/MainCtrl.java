@@ -17,6 +17,7 @@
 package client.scenes;
 
 import client.utils.ServerUtils;
+import commons.Game;
 import commons.Score;
 import commons.Activity;
 import javafx.scene.Parent;
@@ -177,6 +178,8 @@ public class MainCtrl {
         this.meQuestionMPCtrl = meQuestionMP.getKey();
         this.meQuestionMP = new Scene(meQuestionMP.getValue());
 
+        this.
+
         showStartScreen();
         primaryStage.show();
     }
@@ -321,5 +324,37 @@ public class MainCtrl {
                 .substring(activity.getImagePath().indexOf("/") + 1).trim());
         addCtrl.toAdd = false;
         addCtrl.editActivity = activity;
+    }
+
+    public void showMpGameScreen(Game game){
+        meQuestionMPCtrl.setGame(game);
+        hmQuestionMPCtrl.setGame(game);
+        gxQuestionMPCtrl.setGame(game);
+        meQuestionMPCtrl.getTypeOfQuestion();
+        System.out.println("showMPGameScreen");
+        server.registerForMessages("/topic/nextQuestion", String.class, x -> {
+            meQuestionMPCtrl.getTypeOfQuestion();
+        });
+    }
+
+    public void showMEQuestionMP() {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(meQuestionScene);
+    }
+
+    /**
+     * Show HMQuestion
+     */
+    public void showHMQuestionMP() {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(hmQuestionScene);
+    }
+
+    /**
+     * Show GXQuestion
+     */
+    public void showGXQuestionMP() {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(gxQuestionScene);
     }
 }
