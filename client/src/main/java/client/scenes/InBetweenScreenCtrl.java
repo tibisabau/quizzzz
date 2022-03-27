@@ -51,11 +51,16 @@ public class InBetweenScreenCtrl {
             mainCtrl.showMEQuestion(questionType);
         }
         else
-        if(questionType == 2) {
-            mainCtrl.showHMQuestion(questionType);
+            if(questionType == 2) {
+                mainCtrl.showHMQuestion(questionType);
         }
-        else {
-            mainCtrl.showGXQuestion();
+            else {
+                if(questionType == 3){
+                    mainCtrl. showGXQuestion();
+                }
+                else{
+                    mainCtrl.showInsteadOfQuestion(questionType);
+                }
         }
     }
 

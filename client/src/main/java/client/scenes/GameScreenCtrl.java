@@ -27,6 +27,12 @@ import javafx.scene.image.ImageView;
  */
 public class GameScreenCtrl {
     /**
+     * The Instead of label.
+     */
+    @FXML
+    public Text insteadOfLabel;
+
+    /**
      * The Score text.
      */
     @FXML
@@ -134,9 +140,11 @@ public class GameScreenCtrl {
     @FXML
     public ProgressBar time;
 
-   /** @FXML
-    public Label scoreDisplay;**/
-
+    /**
+     * The Correct answer qx.
+     *
+     * @FXML public Label scoreDisplay;
+     */
     @FXML
     public Label correctAnswerQX;
 
@@ -282,9 +290,13 @@ public class GameScreenCtrl {
         if(questionType == 1) {
             createMEQuestion();
         }
-
         else {
-            createHMQuestion();
+            if(questionType == 2) {
+                createHMQuestion();
+            }
+            else {
+                createInsteadOfQuestion();
+            }
         }
         startTimer();
         int x = 21 - mainCtrl.counter;
@@ -363,6 +375,51 @@ public class GameScreenCtrl {
     }
 
     /**
+     * Create instead of question.
+     */
+    public void createInsteadOfQuestion() {
+        InsteadOfQuestion currentQuestionI = server.getInsteadOfQuestion();
+        while(mainCtrl.questionList.contains(currentQuestionI)) {
+            currentQuestionI = server.getInsteadOfQuestion();
+        }
+        setImageInsteadOfQuestion( currentQuestionI );
+        mainCtrl.questionList.add(currentQuestionI);
+        insteadOfLabel.setText("Instead of : "
+                + currentQuestionI.getPromptedOption().toStringAnswer()
+                + " , you could do instead :");
+        Random random = new Random();
+        int numberOfTheButton = random.nextInt(2);
+        switch (numberOfTheButton){
+            case 1 :
+                Answer1.setText(currentQuestionI.
+                        getCorrectOption().toStringAnswer());
+                Answer2.setText(currentQuestionI.
+                        getFirstOption().toStringAnswer());
+                Answer3.setText(currentQuestionI.
+                        getSecondOption().toStringAnswer());
+                break;
+            case 2 :
+                Answer1.setText(currentQuestionI.
+                        getFirstOption().toStringAnswer());
+                Answer2.setText(currentQuestionI.
+                        getCorrectOption().toStringAnswer());
+                Answer3.setText(currentQuestionI.
+                        getSecondOption().toStringAnswer());
+                break;
+            default:
+                Answer1.setText(currentQuestionI.
+                        getFirstOption().toStringAnswer());
+                Answer2.setText(currentQuestionI.
+                        getSecondOption().toStringAnswer());
+                Answer3.setText(currentQuestionI.
+                        getCorrectOption().toStringAnswer());
+                break;
+
+        }
+        currentQuestion = currentQuestionI;
+    }
+
+    /**
      * pressing ENTER submits the answer to
      * the "Guess X" question type
      *
@@ -414,6 +471,16 @@ public class GameScreenCtrl {
     public void setImagesGX(GuessXQuestion question){
         String path2 = question.getCorrectOption().getImagePath();
         imageView2.setImage(mainCtrl.getImage(path2));
+    }
+
+    /**
+     * Set image instead of question.
+     *
+     * @param question the question
+     */
+    public void setImageInsteadOfQuestion(InsteadOfQuestion question){
+        String path = question.getPromptedOption().getImagePath();
+        imageView1.setImage(mainCtrl.getImage(path));
     }
 
 
@@ -487,17 +554,17 @@ public class GameScreenCtrl {
             }
             if (timer <= 0.002){
                 bar.stop();
-                if(currentQuestion instanceof MostEnergyQuestion ||
-                        currentQuestion instanceof HowMuchQuestion) {
-                    disableAnswers();
+                if(currentQuestion instanceof GuessXQuestion ) {
+                    guessAnswer.setDisable(true);
                 }
                 else {
-                    guessAnswer.setDisable(true);
+                    disableAnswers();
                     pointsJoker.setDisable(true);
                 }
                 showAnswers();
                 mainCtrl.counter--;
                 createTimer();
+                disableAnswers();
             }
         }));
         bar.setCycleCount(1000);
@@ -561,6 +628,7 @@ public class GameScreenCtrl {
             }
         }
         showAnswers();
+
     }
 
 
@@ -581,7 +649,12 @@ public class GameScreenCtrl {
                 return HMCorrectAnswer(question, answer);
             }
             else {
-                return  GXCorrectAnswer(question, answer);
+                if(question instanceof GuessXQuestion){
+                    return  GXCorrectAnswer(question, answer);
+                }else{
+                    return insteadOfCorrectAnswer(question, answer);
+                }
+
             }
     }
 
@@ -651,8 +724,9 @@ public class GameScreenCtrl {
 
     /**
      * checks if answer given is correct
+     *
      * @param question current question
-     * @param answer answer given
+     * @param answer   answer given
      * @return if answer is  correct
      */
     public boolean GXCorrectAnswer(Object question, int answer){
@@ -663,6 +737,37 @@ public class GameScreenCtrl {
         }
         return false;
     }
+
+
+    /**
+     * Instead of correct answer boolean.
+     *
+     * @param question the question
+     * @param answer   the answer
+     * @return the boolean
+     */
+    public boolean insteadOfCorrectAnswer(Object question, int answer){
+        Activity correct = ((InsteadOfQuestion)question).getCorrectOption();
+        switch (answer){
+            case 1:
+                if (Answer1.getText().equals(correct.toStringAnswer())){
+                    return true;
+                }
+                break;
+            case 2:
+                if (Answer2.getText().equals(correct.toStringAnswer())){
+                    return true;
+                }
+                break;
+            default:
+                if (Answer3.getText().equals(correct.toStringAnswer())){
+                    return true;
+                }
+                break;
+        }
+        return false;
+    }
+
 
     /**
      * resets the number of questions to 20 for each game
@@ -749,6 +854,7 @@ public class GameScreenCtrl {
         isPointsJoker = true;
         mainCtrl.usePointsJoker();
     }
+
 
 
 }

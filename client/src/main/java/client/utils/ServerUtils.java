@@ -111,6 +111,7 @@ public class ServerUtils {
 
     /**
      * Update scores on the data base
+     *
      * @param score the score
      * @return the score
      */
@@ -125,7 +126,8 @@ public class ServerUtils {
 
     /**
      * Adds an Activity to the database
-     * @param activity
+     *
+     * @param activity the activity
      * @return a new Activity
      */
     public Activity addEntry(Activity activity){
@@ -139,7 +141,8 @@ public class ServerUtils {
 
     /**
      * updates an activity
-     * @param activity
+     *
+     * @param activity the activity
      * @return the updated activity
      */
     public Activity updateEntry(Activity activity){
@@ -153,6 +156,7 @@ public class ServerUtils {
 
     /**
      * client gets all activities from the db
+     *
      * @return a list of activities
      */
     public List<Activity> getActivities(){
@@ -166,6 +170,7 @@ public class ServerUtils {
     /**
      * client accepts the list of activities from
      * the server
+     *
      * @return a list of activities
      */
     public List<Activity> getJson(){
@@ -179,7 +184,8 @@ public class ServerUtils {
     /**
      * client accepts the delete activity
      * request
-     * @param id
+     *
+     * @param id the id
      * @return the deleted activity
      */
     public Activity deleteActivity(long id){
@@ -193,6 +199,7 @@ public class ServerUtils {
     /**
      * client accepts delete request
      * for the db of activities
+     *
      * @return the remaining activities
      */
     public List<Activity> deleteAll(){
@@ -205,6 +212,7 @@ public class ServerUtils {
 
     /**
      * generates a "Which activity takes more energy" question
+     *
      * @return a "Which activity takes more energy" question
      */
     public MostEnergyQuestion getMEQuestion(){
@@ -217,6 +225,7 @@ public class ServerUtils {
 
     /**
      * Get a sorted list of scores from the database.
+     *
      * @return a sorted list of type Score
      */
     public List<Score> getTopScores(){
@@ -229,6 +238,7 @@ public class ServerUtils {
 
     /**
      * generates a "How much energy does it take" question
+     *
      * @return a "How much energy does it take" question
      */
     public HowMuchQuestion getHMQuestion(){
@@ -241,6 +251,7 @@ public class ServerUtils {
 
     /**
      * generates a way to randomise between question types
+     *
      * @return a random integer
      */
     public Integer getQuestionType(){
@@ -253,7 +264,8 @@ public class ServerUtils {
 
     /**
      * gets the encoded image from the server
-     * @param path
+     *
+     * @param path the path
      * @return an encoded image
      */
     public String getImage(String path) {
@@ -266,6 +278,7 @@ public class ServerUtils {
 
     /**
      * generates a "Guess The Amount Of Energy" question
+     *
      * @return a "Guess The Amount Of Energy" question
      */
     public GuessXQuestion getGXQuestion(){
@@ -276,10 +289,25 @@ public class ServerUtils {
                 .get(GuessXQuestion.class);
     }
 
+
+    /**
+     * Get instead of question instead of question.
+     *
+     * @return the instead of question
+     */
+    public InsteadOfQuestion getInsteadOfQuestion(){
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/instead/question")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .get(InsteadOfQuestion.class);
+    }
+
     /**
      * client sends image to server
-     * @param image
-     * @param url
+     *
+     * @param image the image
+     * @param url   the url
      * @return the image path
      */
     public String updateImage(File image, String url) {
@@ -307,7 +335,8 @@ public class ServerUtils {
 
     /**
      * send image from client to server
-     * @param image
+     *
+     * @param image the image
      * @return the image path
      */
     public String addImage(File image) {
