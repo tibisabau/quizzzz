@@ -22,6 +22,7 @@ import java.awt.desktop.QuitEvent;
 import java.util.HashSet;
 import javafx.scene.image.ImageView;
 import org.apache.catalina.mapper.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 //import java.util.ArrayList;
 //import java.util.List;
 
@@ -105,9 +106,10 @@ public class GameScreenMPCtrl {
      * @param mainCtrl the main ctrl
      */
     @Inject
-    public GameScreenMPCtrl(ServerUtils server, MainCtrl mainCtrl) {
+    public GameScreenMPCtrl(ServerUtils server, MainCtrl mainCtrl, GameScreenCtrl gameScreenCtrl) {
         this.server = server;
         this.mainCtrl = mainCtrl;
+        this.gameScreenCtrl = gameScreenCtrl;
     }
 
 
@@ -120,73 +122,69 @@ public class GameScreenMPCtrl {
         });
     }
 
+    public void test(){
+        getTypeOfQuestion();
+    }
+
     public void setGame(Game game){
         this.game = game;
     }
 
     public void getTypeOfQuestion(){
-
-        System.out.println("Start here:");
         Boolean found = false;
         currentQuestion = game.getNextQuestion();
-
+        System.out.println(game.getUser());
         MostEnergyQuestion question = mapper.convertValue(currentQuestion, MostEnergyQuestion.class);
         if (question.getIdentity() != null){
             currentQuestion = question;
             found = true;
-            System.out.println(question);
             setMeQuestion(question);
         }
         if (!found){
             HowMuchQuestion question2 = mapper.convertValue(currentQuestion, HowMuchQuestion.class);
-            if (question.getFirstOption() != null){
+            if (question.getCorrectOption() != null){
                 currentQuestion = question2;
                 found = true;
-                System.out.println(question2);
                 setHmQuestion(question2);
             }
         }
         if (!found){
             GuessXQuestion question2 = mapper.convertValue(currentQuestion, GuessXQuestion.class);
             currentQuestion = question2;
-            System.out.println(question2);
             setGxQuestion(question2);
         }
     }
 
     public void setMeQuestion(MostEnergyQuestion question) {
-        System.out.println("Most 1");
         setImagesME(question);
-        System.out.println("Most 2");
         Answer1.setText(question.getFirstOption().toStringAnswer());
-        System.out.println("Most 3");
         Answer2.setText(question.getSecondOption().toStringAnswer());
         Answer3.setText(question.getThirdOption().toStringAnswer());
-        System.out.println("I got here");
         mainCtrl.showMEQuestionMP();
     }
 
     public void setHmQuestion(HowMuchQuestion question) {
-        System.out.println("Much 1");
-        setImagesHQ(question);
-        System.out.println("Much 2");
-        Answer1.setText(question.getFirstOption().toStringAnswer());
-        System.out.println("Much 3");
-        Answer2.setText(question.getSecondOption().toStringAnswer());
-        Answer3.setText(question.getThirdOption().toStringAnswer());
-        System.out.println("I got here");
         mainCtrl.showHMQuestionMP();
+        setImagesHQ(question);
+        textHMQuestion.setText("- "+ ((HowMuchQuestion) currentQuestion)
+                .getCorrectOption().getTitle()+ " -");
+        mainCtrl.questionList.add(currentQuestion);
+        Answer1.setText(String.valueOf
+                (((HowMuchQuestion)currentQuestion).
+                        getFirstOption().getConsumptionInWh()));
+        Answer2.setText(String.valueOf
+                (((HowMuchQuestion)currentQuestion).
+                        getSecondOption().getConsumptionInWh()));
+        Answer3.setText(String.valueOf
+                (((HowMuchQuestion)currentQuestion).
+                        getThirdOption().getConsumptionInWh()));
     }
 
     public void setGxQuestion(GuessXQuestion question) {
-        System.out.println("Guess 1");
         setImagesGX(question);
-        System.out.println("Guess 2");
         textGXQuestion.setText("- "+ question.getCorrectOption().getTitle()+ " -");
-        System.out.println("Guess 3");
         guessAnswer.setDisable(false);
         guessAnswer.clear();
-        System.out.println("I got here");
         mainCtrl.showGXQuestionMP();
     }
 
@@ -197,23 +195,25 @@ public class GameScreenMPCtrl {
         imageView1.setImage(mainCtrl.getImage(path1));
         imageView2.setImage(mainCtrl.getImage(path2));
         imageView3.setImage(mainCtrl.getImage(path3));
+        startTimer();
     }
 
     public void setImagesHQ(HowMuchQuestion question){
         String path2 = question.getSecondOption().getImagePath();
         imageView2.setImage(mainCtrl.getImage(path2));
+        startTimer();
     }
 
     public void setImagesGX(GuessXQuestion question){
         String path2 = question.getCorrectOption().getImagePath();
         imageView2.setImage(mainCtrl.getImage(path2));
+        startTimer();
     }
 
     /**
      * Starts the time bar
-     * @param q
      */
-    public void startTimer(Object q){
+    public void startTimer(){
         time.setStyle("-fx-accent: #00FF01");
         timer = 1;
         bar = new Timeline(new KeyFrame(Duration.millis(8), ev ->{
@@ -246,8 +246,8 @@ public class GameScreenMPCtrl {
             }
             if (timer <= 0.002){
                 bar.stop();
-                if(q instanceof MostEnergyQuestion ||
-                        q instanceof HowMuchQuestion) {
+                if(currentQuestion instanceof MostEnergyQuestion ||
+                        currentQuestion instanceof HowMuchQuestion) {
                     disableAnswers();
                     showAnswers();
                 }

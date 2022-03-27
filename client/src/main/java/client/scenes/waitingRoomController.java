@@ -4,6 +4,7 @@ import client.utils.ServerUtils;
 import com.google.inject.Inject;
 import commons.Game;
 import commons.Score;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.TimerTask;
 
 public class waitingRoomController{
 
@@ -100,10 +102,9 @@ public class waitingRoomController{
         server.registerForMessages("/topic/game", Game.class, game -> {
             this.game = game;
             this.game.updateScore(this.score);
-            System.out.println("hello from the server");
             quitButton.setDisable(true);
             startButton.setDisable(true);
-            mainCtrl.showMpGameScreen(this.game);
+            Platform.runLater(() -> mainCtrl.showMpGameScreen(game));
         });
     }
 

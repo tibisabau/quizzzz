@@ -178,9 +178,7 @@ public class MainCtrl {
         this.meQuestionMPCtrl = meQuestionMP.getKey();
         this.meQuestionMP = new Scene(meQuestionMP.getValue());
 
-
-
-        this.showStartScreen();
+        showStartScreen();
         primaryStage.show();
     }
 
@@ -331,7 +329,6 @@ public class MainCtrl {
         hmQuestionMPCtrl.setGame(game);
         gxQuestionMPCtrl.setGame(game);
         meQuestionMPCtrl.getTypeOfQuestion();
-        System.out.println("showMPGameScreen");
         server.registerForMessages("/topic/nextQuestion", String.class, x -> {
             meQuestionMPCtrl.getTypeOfQuestion();
         });
