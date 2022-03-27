@@ -119,7 +119,8 @@ public class GameScreenMPCtrl {
                             GameScreenCtrl gameScreenCtrl) {
         this.server = server;
         this.mainCtrl = mainCtrl;
-        this.gameScreenCtrl = gameScreenCtrl;;
+        this.gameScreenCtrl = gameScreenCtrl;
+
     }
 
 
@@ -130,6 +131,10 @@ public class GameScreenMPCtrl {
                 Platform.runLater(() -> getTypeOfQuestion());
             }
         });
+        EmojiMenuPic.setImage(mainCtrl.getEmoji("emoji1.png"));
+        Emoji1.setImage(mainCtrl.getEmoji("emoji1.png"));
+        Emoji2.setImage(mainCtrl.getEmoji("emoji2.png"));
+        Emoji3.setImage(mainCtrl.getEmoji("emoji3.png"));
     }
 
     public void test(){
@@ -141,9 +146,6 @@ public class GameScreenMPCtrl {
     }
 
     public void getTypeOfQuestion(){
-//        Emoji1.setImage(mainCtrl.getImage("resources/client/scenes/Emojis/emoji1.png"));
-//        Emoji2.setImage(mainCtrl.getImage("resources/client/scenes/Emojis/emoji2.png"));
-//        Emoji3.setImage(mainCtrl.getImage("resources/client/scenes/Emojis/emoji3.png"));
         Boolean found = false;
         currentQuestion = game.getNextQuestion();
         MostEnergyQuestion question = mapper.convertValue(currentQuestion,

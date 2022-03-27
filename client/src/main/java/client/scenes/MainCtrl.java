@@ -285,6 +285,19 @@ public class MainCtrl {
         return new Image(inputStream);
     }
 
+    /**
+     * decodes the emoji image as path
+     * @param path
+     * @return a new image
+     */
+    public Image getEmoji(String path) {
+        String imageString = server.getEmoji(path);
+        Base64.Decoder encoder = Base64.getDecoder();
+        byte[] byteArray = encoder.decode(imageString);
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(byteArray);
+        return new Image(inputStream);
+    }
+
     public void showWaitingRoom(){
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(waitingRoomScene);
