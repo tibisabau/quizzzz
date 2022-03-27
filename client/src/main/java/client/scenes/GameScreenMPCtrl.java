@@ -67,6 +67,9 @@ public class GameScreenMPCtrl {
     public Text countdown;
 
     @FXML
+    public Text ScoreText;
+
+    @FXML
     public TextField guessAnswer;
 
     @FXML
@@ -138,7 +141,7 @@ public class GameScreenMPCtrl {
         if (!found){
             HowMuchQuestion question2 = mapper.convertValue(currentQuestion,
                     HowMuchQuestion.class);
-            if (question.getCorrectOption() != null){
+            if (question.getSecondOption() != null){
                 currentQuestion = question2;
                 mainCtrl.showHMQuestionMP(currentQuestion);
                 found = true;
@@ -153,14 +156,17 @@ public class GameScreenMPCtrl {
     }
 
     public void setMeQuestion() {
+        resetStage();
         MostEnergyQuestion question = (MostEnergyQuestion) currentQuestion;
         setImagesME(question);
         Answer1.setText(question.getFirstOption().toStringAnswer());
         Answer2.setText(question.getSecondOption().toStringAnswer());
         Answer3.setText(question.getThirdOption().toStringAnswer());
+
     }
 
     public void setHmQuestion() {
+        resetStage();
         HowMuchQuestion question = (HowMuchQuestion) currentQuestion;
         setImagesHQ(question);
         textHMQuestion.setText("- "+ ((HowMuchQuestion) currentQuestion)
@@ -177,7 +183,23 @@ public class GameScreenMPCtrl {
                         getThirdOption().getConsumptionInWh()));
     }
 
+    public void resetStage(){
+        qcounter.setText("Question: " + game.getCounter() + "/20");
+        ScoreText.setText("Score : " + game.getUser().getScore());
+        Answer1.setDisable(false);
+        Answer2.setDisable(false);
+        Answer3.setDisable(false);
+        AnswerA.setDisable(false);
+        AnswerB.setDisable(false);
+        AnswerC.setDisable(false);
+        AnswerA.setStyle("-fx-background-color: WHITE");
+        AnswerB.setStyle("-fx-background-color: WHITE");
+        AnswerC.setStyle("-fx-background-color: WHITE");
+    }
+
     public void setGxQuestion() {
+        qcounter.setText("Question: " + game.getCounter() + "/20");
+        ScoreText.setText("Score : " + game.getUser().getScore());
         GuessXQuestion question = (GuessXQuestion) currentQuestion;
         setImagesGX(question);
         textGXQuestion.setText("- "+
@@ -268,15 +290,20 @@ public class GameScreenMPCtrl {
     }
 
     public void showAnswers() {
-        AnswerA.setStyle(incorrectColor);
-        AnswerB.setStyle(incorrectColor);
-        AnswerC.setStyle(incorrectColor);
-        if (gameScreenCtrl.answerCorrect(currentQuestion, 1)) {
-            AnswerA.setStyle(correctColor);
-        } else if (gameScreenCtrl.answerCorrect(currentQuestion, 2)) {
-            AnswerB.setStyle(correctColor);
+        if(currentQuestion instanceof MostEnergyQuestion ||
+                currentQuestion instanceof HowMuchQuestion) {
+            AnswerA.setStyle(incorrectColor);
+            AnswerB.setStyle(incorrectColor);
+            AnswerC.setStyle(incorrectColor);
+            if (gameScreenCtrl.answerCorrect(currentQuestion, 1)) {
+                AnswerA.setStyle(correctColor);
+            } else if (gameScreenCtrl.answerCorrect(currentQuestion, 2)) {
+                AnswerB.setStyle(correctColor);
+            } else {
+                AnswerC.setStyle(correctColor);
+            }
         } else {
-            AnswerC.setStyle(correctColor);
+        //Correct answer for Guess x question
         }
     }
 
@@ -349,7 +376,6 @@ public class GameScreenMPCtrl {
         double multiplier = 0.5 + (2 * timer);
         int extraPoints = (int) Math.round(100 * multiplier);
         if(gameScreenCtrl.answerCorrect(currentQuestion,answer)) {
-
             game.incrementScore(extraPoints);
         }
         showAnswers();
