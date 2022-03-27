@@ -16,6 +16,8 @@ public class InsteadOfQuestion {
 
     private Activity secondOption;
 
+    private Activity thirdOption;
+
     /**
      * Instantiates a new Instead of question.
      */
@@ -30,14 +32,17 @@ public class InsteadOfQuestion {
      * @param correctOption  the correct option
      * @param firstOption    the first option
      * @param secondOption   the second option
+     * @param thirdOption   the third option
      */
     public InsteadOfQuestion(Activity promptedOption,
                              Activity correctOption,
-                             Activity firstOption, Activity secondOption) {
+                             Activity firstOption, Activity secondOption,
+                             Activity thirdOption) {
         this.promptedOption = promptedOption;
         this.correctOption = correctOption;
         this.firstOption = firstOption;
         this.secondOption = secondOption;
+        this.thirdOption = thirdOption;
     }
 
     /**
@@ -103,6 +108,10 @@ public class InsteadOfQuestion {
         return secondOption;
     }
 
+    public Activity getThirdOption() {
+        return thirdOption;
+    }
+
     /**
      * Sets second option.
      *
@@ -110,6 +119,10 @@ public class InsteadOfQuestion {
      */
     public void setSecondOption(Activity secondOption) {
         this.secondOption = secondOption;
+    }
+
+    public void setThirdOption(Activity thirdOption) {
+        this.thirdOption = thirdOption;
     }
 
     @Override

@@ -217,8 +217,8 @@ public class MainCtrl {
      */
     public void showInsteadOfQuestion(int questionType) {
         primaryStage.setTitle("Quizzzz");
-        primaryStage.setScene(insteadOfScene);
         insteadOfQuestion.setAnswer(questionType);
+        primaryStage.setScene(insteadOfScene);
     }
 
     /**
