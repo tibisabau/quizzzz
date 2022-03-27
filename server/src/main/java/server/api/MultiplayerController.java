@@ -79,14 +79,9 @@ public class MultiplayerController {
         currentGames.add(game);
 
         //game control timer init here
-
         return game;
     }
 
-    @SendTo("/topic/nextQuestion")
-    public String sendString(String s){
-        return s;
-    }
 
     @PostMapping(path = "join")
     public ResponseEntity<List<Score>> joinGame(@RequestBody List<Score> scores){

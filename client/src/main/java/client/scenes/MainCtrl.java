@@ -178,8 +178,6 @@ public class MainCtrl {
         this.meQuestionMPCtrl = meQuestionMP.getKey();
         this.meQuestionMP = new Scene(meQuestionMP.getValue());
 
-        this.
-
         showStartScreen();
         primaryStage.show();
     }
@@ -331,7 +329,6 @@ public class MainCtrl {
         hmQuestionMPCtrl.setGame(game);
         gxQuestionMPCtrl.setGame(game);
         meQuestionMPCtrl.getTypeOfQuestion();
-        System.out.println("showMPGameScreen");
         server.registerForMessages("/topic/nextQuestion", String.class, x -> {
             meQuestionMPCtrl.getTypeOfQuestion();
         });
@@ -339,7 +336,7 @@ public class MainCtrl {
 
     public void showMEQuestionMP() {
         primaryStage.setTitle("Quizzzz");
-        primaryStage.setScene(meQuestionScene);
+        primaryStage.setScene(meQuestionMP);
     }
 
     /**
@@ -347,7 +344,7 @@ public class MainCtrl {
      */
     public void showHMQuestionMP() {
         primaryStage.setTitle("Quizzzz");
-        primaryStage.setScene(hmQuestionScene);
+        primaryStage.setScene(hmQuestionMP);
     }
 
     /**
@@ -355,6 +352,6 @@ public class MainCtrl {
      */
     public void showGXQuestionMP() {
         primaryStage.setTitle("Quizzzz");
-        primaryStage.setScene(gxQuestionScene);
+        primaryStage.setScene(gxQuestionMP);
     }
 }
