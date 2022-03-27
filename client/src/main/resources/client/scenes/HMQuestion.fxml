@@ -134,5 +134,11 @@
          </children>
       </AnchorPane>
       <ImageView fx:id="imageView2" fitHeight="246.0" fitWidth="346.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+         <children>
+            <Button fx:id="answerJoker" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#useAnswerJoker" prefHeight="39.0" prefWidth="96.0" text="Delete Answer" />
+            <Button fx:id="pointsJoker" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#usePointsJoker" prefHeight="39.0" prefWidth="96.0" text="Dubbel Points" />
+         </children>
+      </AnchorPane>
    </children>
 </GridPane>

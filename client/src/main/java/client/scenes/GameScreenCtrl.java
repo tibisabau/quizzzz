@@ -16,11 +16,10 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.util.HashSet;
+import java.util.Random;
+
 import javafx.scene.image.ImageView;
 
-//import javax.swing.text.html.parser.Entity;
-//import java.util.ArrayList;
-//import java.util.List;
 
 
 /**
@@ -141,6 +140,12 @@ public class GameScreenCtrl {
     @FXML
     public Label correctAnswerQX;
 
+    @FXML
+    public Button pointsJoker;
+
+    @FXML
+    public Button answerJoker;
+
     private final ServerUtils server;
 
     private final MainCtrl mainCtrl;
@@ -156,6 +161,10 @@ public class GameScreenCtrl {
     private Timeline bar;
 
     private boolean answerIsCorrect;
+
+    private boolean isPointsJoker;
+
+
 
     /**
      * Instantiates a new Game screen ctrl.
@@ -269,6 +278,7 @@ public class GameScreenCtrl {
         AnswerA.setStyle("-fx-background-color: WHITE");
         AnswerB.setStyle("-fx-background-color: WHITE");
         AnswerC.setStyle("-fx-background-color: WHITE");
+        setJokers();
         if(questionType == 1) {
             createMEQuestion();
         }
@@ -341,6 +351,7 @@ public class GameScreenCtrl {
         mainCtrl.questionList.add(currentQuestion);
         guessAnswer.setDisable(false);
         guessAnswer.clear();
+        setJokers();
         correctAnswerQX.setText("");
         startTimer();
         int x = 21 - mainCtrl.counter;
@@ -360,8 +371,11 @@ public class GameScreenCtrl {
     public void keyPressed(KeyEvent e) {
         switch (e.getCode()) {
             case ENTER:
-            {guessAnswer.setDisable(true);
-            ok();}
+            {
+                guessAnswer.setDisable(true);
+                pointsJoker.setDisable(true);
+                ok();
+            }
             break;
             default:
                 break;
@@ -479,6 +493,7 @@ public class GameScreenCtrl {
                 }
                 else {
                     guessAnswer.setDisable(true);
+                    pointsJoker.setDisable(true);
                 }
                 showAnswers();
                 mainCtrl.counter--;
@@ -499,6 +514,8 @@ public class GameScreenCtrl {
         Answer2.setDisable(true);
         Answer3.setDisable(true);
         AnswerC.setDisable(true);
+        pointsJoker.setDisable(true);
+        answerJoker.setDisable(true);
 
     }
 
@@ -536,7 +553,12 @@ public class GameScreenCtrl {
         answerIsCorrect = false;
         if(answerCorrect(question,answer)) {
             answerIsCorrect = true;
-            score.setScore(score.getScore() + extraPoints);
+            if (isPointsJoker) {
+                score.setScore(score.getScore() + (extraPoints * 2));
+                isPointsJoker = false;
+            } else {
+                score.setScore(score.getScore() + extraPoints);
+            }
         }
         showAnswers();
     }
@@ -660,12 +682,72 @@ public class GameScreenCtrl {
     }
 
     /**
+     * Set the jokers to be used if they are still available
+     */
+    public void setJokers() {
+        if (!(currentQuestion instanceof GuessXQuestion)) {
+            if (mainCtrl.isAnswerJokerUsed()) {
+                answerJoker.setDisable(true);
+            } else {
+                answerJoker.setDisable(false);
+            }
+        }
+        if (mainCtrl.isPointsJokerUsed()) {
+            pointsJoker.setDisable(true);
+        } else {
+            pointsJoker.setDisable(false);
+        }
+    }
+    
+    /**
      * Sets score text.
      *
      * @param score the score
      */
     public void setScoreText(int score) {
         scoreText.setText("Score : " + String.valueOf(score));
+    }
+
+    /**
+     * Disable a random answer that is not the correct answer.
+     * And disables the button
+     * And notifies the mainControler that it has been used.
+     */
+    public void useAnswerJoker(){
+        answerJoker.setDisable(true);
+        mainCtrl.useAnswerJoker();
+        Random rand = new Random();
+        int answerToDelete = rand.nextInt(3);
+        while (answerCorrect(currentQuestion, answerToDelete+1)){
+            answerToDelete = answerToDelete + 1;
+            if (answerToDelete > 2){
+                answerToDelete = 0;
+            }
+        }
+        switch (answerToDelete){
+            case 0:
+                Answer1.setDisable(true);
+                AnswerA.setDisable(true);
+                break;
+            case 1:
+                Answer2.setDisable(true);
+                AnswerB.setDisable(true);
+                break;
+            case 2:
+                Answer3.setDisable(true);
+                AnswerC.setDisable(true);
+                break;
+        }
+
+    }
+
+    /**
+     * flips a boolean to make dubble points and disables the button.
+     */
+    public void usePointsJoker(){
+        pointsJoker.setDisable(true);
+        isPointsJoker = true;
+        mainCtrl.usePointsJoker();
     }
 
 
