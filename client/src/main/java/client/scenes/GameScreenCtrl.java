@@ -370,8 +370,8 @@ public class GameScreenCtrl {
      */
     public void createInsteadOfQuestion() {
         InsteadOfQuestion currentQuestionI = server.getInsteadOfQuestion();
-        while(mainCtrl.questionList.contains(currentQuestion)) {
-            currentQuestion = server.getInsteadOfQuestion();
+        while(mainCtrl.questionList.contains(currentQuestionI)) {
+            currentQuestionI = server.getInsteadOfQuestion();
         }
         setImageInsteadOfQuestion( currentQuestionI );
         mainCtrl.questionList.add(currentQuestionI);

@@ -27,27 +27,27 @@ public class InsteadOfController {
     public InsteadOfQuestion getAll() {
         List<Activity> activityList = ctrl.getAll();
         Collections.shuffle(activityList);
-        List<Activity> listOfAnswers = activityList.subList(0,4);
-        Activity minimum = listOfAnswers.get(0);
-        for (Activity listOfAnswer : listOfAnswers) {
+        List<Activity> options = activityList.subList(0,4);
+        Activity minimum = options.get(0);
+        for (Activity listOfAnswer : options) {
             if (listOfAnswer.getConsumptionInWh()
                     < minimum.getConsumptionInWh()) {
                 minimum = listOfAnswer;
             }
         }
         Activity correctOption = minimum;
-        listOfAnswers.remove(correctOption);
-        minimum = listOfAnswers.get(0);
-        for (Activity listOfAnswer : listOfAnswers) {
+        options.remove(correctOption);
+        minimum = options.get(0);
+        for (Activity listOfAnswer : options) {
             if (listOfAnswer.getConsumptionInWh()
                     < minimum.getConsumptionInWh()) {
                 minimum = listOfAnswer;
             }
         }
         Activity promptedOption= minimum;
-        listOfAnswers.remove(promptedOption);
-        Activity firstOption = listOfAnswers.get(0);
-        Activity secondOption = listOfAnswers.get(1);
+        options.remove(promptedOption);
+        Activity firstOption = options.get(0);
+        Activity secondOption = options.get(1);
         return new InsteadOfQuestion(promptedOption,
                 correctOption, firstOption, secondOption);
 
