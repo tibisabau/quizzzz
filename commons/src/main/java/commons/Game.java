@@ -39,4 +39,8 @@ public class Game {
     public Object getNextQuestion(){
         return questions.get(counter++);
     }
+
+    public Integer getID(){
+        return this.id;
+    }
 }

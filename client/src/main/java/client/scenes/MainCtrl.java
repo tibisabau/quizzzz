@@ -178,9 +178,9 @@ public class MainCtrl {
         this.meQuestionMPCtrl = meQuestionMP.getKey();
         this.meQuestionMP = new Scene(meQuestionMP.getValue());
 
-        this.
 
-        showStartScreen();
+
+        this.showStartScreen();
         primaryStage.show();
     }
 
@@ -338,23 +338,26 @@ public class MainCtrl {
     }
 
     public void showMEQuestionMP() {
+        System.out.println("inside scene setter");
         primaryStage.setTitle("Quizzzz");
-        primaryStage.setScene(meQuestionScene);
+        primaryStage.setScene(meQuestionMP);
     }
 
     /**
      * Show HMQuestion
      */
     public void showHMQuestionMP() {
+        System.out.println("inside scene setter");
         primaryStage.setTitle("Quizzzz");
-        primaryStage.setScene(hmQuestionScene);
+        primaryStage.setScene(hmQuestionMP);
     }
 
     /**
      * Show GXQuestion
      */
     public void showGXQuestionMP() {
+        System.out.println("inside scene setter");
         primaryStage.setTitle("Quizzzz");
-        primaryStage.setScene(gxQuestionScene);
+        primaryStage.setScene(gxQuestionMP);
     }
 }
