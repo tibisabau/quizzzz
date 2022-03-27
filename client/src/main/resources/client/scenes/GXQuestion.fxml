@@ -88,5 +88,10 @@
             <ImageView fx:id="imageView2" fitHeight="234.0" fitWidth="366.0" layoutX="3.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+         <children>
+            <Button fx:id="pointsJoker" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#usePointsJoker" prefHeight="39.0" prefWidth="96.0" text="Dubbel Points" />
+         </children>
+      </AnchorPane>
    </children>
 </GridPane>

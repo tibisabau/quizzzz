@@ -45,6 +45,10 @@ public class MainCtrl {
      */
     public Set<Object> questionList;
 
+    private boolean pointsJokerUsed;
+
+    private boolean answerJokerUsed;
+
     private Stage primaryStage;
 
     private StartScreenCtrl startScreenCtrl;
@@ -162,6 +166,8 @@ public class MainCtrl {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(startScreen);
         meQuestion.setCounter(20);
+        pointsJokerUsed = false;
+        answerJokerUsed = false;
         meQuestion.setQuestionList();
     }
 
@@ -259,6 +265,36 @@ public class MainCtrl {
         byte[] byteArray = encoder.decode(imageString);
         ByteArrayInputStream inputStream = new ByteArrayInputStream(byteArray);
         return new Image(inputStream);
+    }
+
+    /**
+     *PointsJoker getter
+     * @return pointsJokerUsed
+     */
+    public boolean isPointsJokerUsed() {
+        return pointsJokerUsed;
+    }
+
+    /**
+     *
+     * @return if answerJokerUsed
+     */
+    public boolean isAnswerJokerUsed() {
+        return answerJokerUsed;
+    }
+
+    /**
+     * Sets pointsJoker to true
+     */
+    public void usePointsJoker(){
+        pointsJokerUsed = true;
+    }
+
+    /**
+     * Sets answerJoker to true
+     */
+    public void useAnswerJoker(){
+        answerJokerUsed = true;
     }
 
     /**
