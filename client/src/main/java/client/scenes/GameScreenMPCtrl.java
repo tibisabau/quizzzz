@@ -75,6 +75,18 @@ public class GameScreenMPCtrl {
     @FXML
     public ProgressBar time;
 
+    @FXML
+    public ImageView EmojiMenuPic;
+
+    @FXML
+    public ImageView Emoji1;
+
+    @FXML
+    public ImageView Emoji2;
+
+    @FXML
+    public ImageView Emoji3;
+
     private final ServerUtils server;
 
     private final MainCtrl mainCtrl;
@@ -107,7 +119,7 @@ public class GameScreenMPCtrl {
                             GameScreenCtrl gameScreenCtrl) {
         this.server = server;
         this.mainCtrl = mainCtrl;
-        this.gameScreenCtrl = gameScreenCtrl;
+        this.gameScreenCtrl = gameScreenCtrl;;
     }
 
 
@@ -129,6 +141,9 @@ public class GameScreenMPCtrl {
     }
 
     public void getTypeOfQuestion(){
+//        Emoji1.setImage(mainCtrl.getImage("resources/client/scenes/Emojis/emoji1.png"));
+//        Emoji2.setImage(mainCtrl.getImage("resources/client/scenes/Emojis/emoji2.png"));
+//        Emoji3.setImage(mainCtrl.getImage("resources/client/scenes/Emojis/emoji3.png"));
         Boolean found = false;
         currentQuestion = game.getNextQuestion();
         MostEnergyQuestion question = mapper.convertValue(currentQuestion,

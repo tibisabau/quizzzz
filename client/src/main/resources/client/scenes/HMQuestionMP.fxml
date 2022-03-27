@@ -3,6 +3,8 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -134,6 +136,32 @@
                   <Font size="18.0" />
                </font>
             </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
+         <children>
+            <MenuButton layoutX="9.0" layoutY="89.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="61.0" style="-fx-background-color: #fff;">
+               <items>
+                  <MenuItem mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fx:id="Emoji1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fx:id="Emoji2" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fx:id="Emoji3" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </MenuItem>
+               </items>
+               <graphic>
+                  <ImageView fx:id="EmojiMenuPic" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </MenuButton>
          </children>
       </AnchorPane>
    </children>
