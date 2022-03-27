@@ -119,7 +119,7 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text layoutX="-21.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 300" wrappingWidth="110.40000000000009">
+            <Text fx:id="ScoreText" layoutX="-21.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 300" wrappingWidth="110.40000000000009">
                <font>
                   <Font size="15.0" />
                </font>

@@ -24,6 +24,10 @@ public class Game {
         this.id = id;
     }
 
+    public int getCounter(){
+        return counter;
+    }
+
     public Score getUser() {
         return user;
     }

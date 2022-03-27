@@ -635,7 +635,7 @@ public class GameScreenCtrl {
      */
     public boolean GXCorrectAnswer(Object question, int answer){
         Activity cor = ((GuessXQuestion) question).getCorrectOption();
-        int correctAmount = (int)cor.getConsumptionInWh();
+        int correctAmount = (int) cor.getConsumptionInWh();
         if ((correctAmount * 1.1) > answer && (correctAmount * 0.9) < answer){
             return true;
         }
