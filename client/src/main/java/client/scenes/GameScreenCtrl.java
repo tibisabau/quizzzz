@@ -384,9 +384,10 @@ public class GameScreenCtrl {
         }
         setImageInsteadOfQuestion((InsteadOfQuestion) currentQuestion);
         mainCtrl.questionList.add(currentQuestion);
-//        insteadOfLabel.setText("Instead of : "
-//                + currentQuestionI.getPromptedOption().toStringAnswer()
-//                + " , you could do instead :");
+        insteadOfLabel.setText("Instead of : "
+                + ((InsteadOfQuestion) currentQuestion).
+                getPromptedOption().toStringAnswer()
+                + " , you could do instead :");
         Answer1.setText(String.valueOf
                 (((InsteadOfQuestion)currentQuestion).
                         getFirstOption().getTitle()));
