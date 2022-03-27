@@ -24,7 +24,6 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -58,6 +57,8 @@ public class ServerUtils {
 
     private static final String SERVER = "http://localhost:8080/";
 
+    private static final ExecutorService exec =
+            Executors.newSingleThreadExecutor();
 
     private StompSession session = connect("ws://localhost:8080/websocket");
 
@@ -299,14 +300,14 @@ public class ServerUtils {
                 .get(GuessXQuestion.class);
     }
 
-    private static final ExecutorService exec = Executors.newSingleThreadExecutor();
 
     public void joinGame(List<Score> score){
                 ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/multiplayer/join")
                 .request(APPLICATION_JSON)
                 .accept(APPLICATION_JSON)
-                .post(Entity.entity(score, APPLICATION_JSON), new GenericType<List<Score>>() {});
+                .post(Entity.entity(score, APPLICATION_JSON),
+                        new GenericType<List<Score>>() {});
     }
 
     public void registerForUpdates(Consumer<List<Score>> consumer){
@@ -325,12 +326,14 @@ public class ServerUtils {
             }
         });
     }
+
     private StompSession connect(String url) {
         var client = new StandardWebSocketClient();
         var stomp = new WebSocketStompClient(client);
         stomp.setMessageConverter(new MappingJackson2MessageConverter());
         try {
-            return stomp.connect(url, new StompSessionHandlerAdapter() {}).get();
+            return stomp.connect(url,
+                    new StompSessionHandlerAdapter() {}).get();
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         } catch (ExecutionException e) {
@@ -339,12 +342,14 @@ public class ServerUtils {
         throw new IllegalStateException();
     }
 
-    public <T> void registerForMessages(String dest, Class<T> type, Consumer<T> consumer){
+    public <T> void registerForMessages(String dest,
+                                        Class<T> type, Consumer<T> consumer){
         session.subscribe(dest, new StompFrameHandler() {
             @Override
             public Type getPayloadType(StompHeaders headers) {
                 return type;
             }
+
             @SuppressWarnings("unchecked")
             @Override
             public void handleFrame(StompHeaders headers, Object payload) {

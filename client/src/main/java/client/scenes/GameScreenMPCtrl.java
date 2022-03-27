@@ -1,6 +1,5 @@
 package client.scenes;
 
-import client.Main;
 import client.utils.ServerUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
@@ -18,13 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-import java.awt.desktop.QuitEvent;
-import java.util.HashSet;
 import javafx.scene.image.ImageView;
-import org.apache.catalina.mapper.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
-//import java.util.ArrayList;
-//import java.util.List;
 
 
 public class GameScreenMPCtrl {
@@ -32,7 +25,7 @@ public class GameScreenMPCtrl {
     public Text textGXQuestion;
 
     @FXML
-    public Text Hello;
+    public Text textHMQuestion;
 
     @FXML
     public ImageView imageView1;
@@ -97,16 +90,18 @@ public class GameScreenMPCtrl {
 
     private GameScreenCtrl gameScreenCtrl;
 
-    ObjectMapper mapper = new ObjectMapper();
+    private ObjectMapper mapper = new ObjectMapper();
 
     /**
      * Instantiates a new Game screen ctrl.
      *
      * @param server   the server
      * @param mainCtrl the main ctrl
+     * @param gameScreenCtrl the main ctrl
      */
     @Inject
-    public GameScreenMPCtrl(ServerUtils server, MainCtrl mainCtrl, GameScreenCtrl gameScreenCtrl) {
+    public GameScreenMPCtrl(ServerUtils server, MainCtrl mainCtrl,
+                            GameScreenCtrl gameScreenCtrl) {
         this.server = server;
         this.mainCtrl = mainCtrl;
         this.gameScreenCtrl = gameScreenCtrl;
@@ -133,14 +128,16 @@ public class GameScreenMPCtrl {
     public void getTypeOfQuestion(){
         Boolean found = false;
         currentQuestion = game.getNextQuestion();
-        MostEnergyQuestion question = mapper.convertValue(currentQuestion, MostEnergyQuestion.class);
+        MostEnergyQuestion question = mapper.convertValue(currentQuestion,
+                MostEnergyQuestion.class);
         if (question.getIdentity() != null){
             currentQuestion = question;
             found = true;
             mainCtrl.showMEQuestionMP(currentQuestion);
         }
         if (!found){
-            HowMuchQuestion question2 = mapper.convertValue(currentQuestion, HowMuchQuestion.class);
+            HowMuchQuestion question2 = mapper.convertValue(currentQuestion,
+                    HowMuchQuestion.class);
             if (question.getCorrectOption() != null){
                 currentQuestion = question2;
                 mainCtrl.showHMQuestionMP(currentQuestion);
@@ -148,9 +145,10 @@ public class GameScreenMPCtrl {
             }
         }
         if (!found){
-            GuessXQuestion question2 = mapper.convertValue(currentQuestion, GuessXQuestion.class);
+            GuessXQuestion question2 = mapper.convertValue(currentQuestion,
+                    GuessXQuestion.class);
             currentQuestion = question2;
-            mainCtrl.showHMQuestionMP(currentQuestion);
+            mainCtrl.showGXQuestionMP(currentQuestion);
         }
     }
 
@@ -165,9 +163,8 @@ public class GameScreenMPCtrl {
     public void setHmQuestion() {
         HowMuchQuestion question = (HowMuchQuestion) currentQuestion;
         setImagesHQ(question);
-//        textHMQuestion.setText("- "+ ((HowMuchQuestion) currentQuestion)
-//                .getCorrectOption().getTitle()+ " -");
-//        Hello.setText("Hi");
+        textHMQuestion.setText("- "+ ((HowMuchQuestion) currentQuestion)
+                .getCorrectOption().getTitle()+ " -");
         mainCtrl.questionList.add(currentQuestion);
         Answer1.setText(String.valueOf
                 (((HowMuchQuestion)currentQuestion).
@@ -183,7 +180,8 @@ public class GameScreenMPCtrl {
     public void setGxQuestion() {
         GuessXQuestion question = (GuessXQuestion) currentQuestion;
         setImagesGX(question);
-        textGXQuestion.setText("- "+ question.getCorrectOption().getTitle()+ " -");
+        textGXQuestion.setText("- "+
+                question.getCorrectOption().getTitle()+ " -");
         guessAnswer.setDisable(false);
         guessAnswer.clear();
     }
@@ -334,7 +332,8 @@ public class GameScreenMPCtrl {
     public void ok() {
         stopTime();
         try{
-            answerPoints(currentQuestion, Integer.parseInt(guessAnswer.getText()));}
+            answerPoints(currentQuestion,
+                    Integer.parseInt(guessAnswer.getText()));}
         catch (Exception e){
             answerPoints(currentQuestion, 0);
         }

@@ -8,19 +8,13 @@ import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
-
-import java.io.Console;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
-import java.util.TimerTask;
 
 public class waitingRoomController{
 
@@ -44,10 +38,9 @@ public class waitingRoomController{
 
     private List<Score> oldPlayers;
 
-    Score score;
-    Game game;
+    private Score score;
 
-
+    private Game game;
 
     private final ServerUtils server;
 
@@ -81,7 +74,8 @@ public class waitingRoomController{
                     public ObservableValue<String>
                     call(TableColumn.CellDataFeatures<Score, String> p) {
                         return new ReadOnlyObjectWrapper(
-                                (table.getItems().indexOf(p.getValue()) + 1) + "");
+                                (table.getItems().
+                                        indexOf(p.getValue()) + 1) + "");
                     }
                 });
         id.setSortable(false);

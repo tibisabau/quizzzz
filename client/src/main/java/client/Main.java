@@ -56,11 +56,14 @@ public class Main extends Application {
                 "leaderboardScene.fxml");
         var inBetweenScreen = FXML.load(InBetweenScreenCtrl.class,
                 "client", "scenes", "InBetweenScreen.fxml");
-        var waitingRoom = FXML.load(waitingRoomController.class, "client", "scenes", "waitingRoomScreen.fxml");
-
-        var gxQuestionMP = FXML.load(GameScreenMPCtrl.class, "client", "scenes", "GXQuestionMP.fxml");
-        var hmQuestionMP = FXML.load(GameScreenMPCtrl.class, "client", "scenes", "HMQuestionMP.fxml");
-        var meQuestionMP = FXML.load(GameScreenMPCtrl.class, "client", "scenes", "MEQuestionMP.fxml");
+        var waitingRoom = FXML.load(waitingRoomController.class,
+                "client", "scenes", "waitingRoomScreen.fxml");
+        var gxQuestionMP = FXML.load(GameScreenMPCtrl.class,
+                "client", "scenes", "GXQuestionMP.fxml");
+        var hmQuestionMP = FXML.load(GameScreenMPCtrl.class,
+                "client", "scenes", "HMQuestionMP.fxml");
+        var meQuestionMP = FXML.load(GameScreenMPCtrl.class,
+                "client", "scenes", "MEQuestionMP.fxml");
 
         var adminPanel = FXML.load(AdminPanelCtrl.class,
                 "client", "scenes", "AdminPanel.fxml");
@@ -70,7 +73,8 @@ public class Main extends Application {
                 "client", "scenes", "AddActivity.fxml");
         mainCtrl.initialize(primaryStage, start ,
                 instruction, meQuestion, leaderboard, hmQuestion
-                , gxQuestion, inBetweenScreen, waitingRoom, gxQuestionMP, hmQuestionMP, meQuestionMP, adminPanel, image, add);
+                , gxQuestion, inBetweenScreen, waitingRoom, gxQuestionMP,
+                hmQuestionMP, meQuestionMP, adminPanel, image, add);
 
         primaryStage.setOnCloseRequest(e -> {
             waitingRoom.getKey().stop();

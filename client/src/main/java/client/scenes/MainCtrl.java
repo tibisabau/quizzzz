@@ -119,6 +119,10 @@ public class MainCtrl {
      * @param adminPanel
      * @param image
      * @param add
+     * @param gxQuestionMP
+     * @param hmQuestionMP
+     * @param meQuestionMP
+     * @param waitingRoom
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
@@ -334,6 +338,10 @@ public class MainCtrl {
         });
     }
 
+    /**
+     * Show HMQuestionMP
+     * @param currentQuestion
+     */
     public void showMEQuestionMP(Object currentQuestion) {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(meQuestionMP);
@@ -342,7 +350,8 @@ public class MainCtrl {
     }
 
     /**
-     * Show HMQuestion
+     * Show HMQuestionMP
+     * @param currentQuestion
      */
     public void showHMQuestionMP(Object currentQuestion) {
         primaryStage.setTitle("Quizzzz");
@@ -352,12 +361,13 @@ public class MainCtrl {
     }
 
     /**
-     * Show GXQuestion
+     * Show GXQuestionMP
+     * @param currentQuestion
      */
     public void showGXQuestionMP(Object currentQuestion) {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(gxQuestionMP);
         gxQuestionMPCtrl.setCurrentQuestion(currentQuestion);
-        gxQuestionMPCtrl.setHmQuestion();
+        gxQuestionMPCtrl.setGxQuestion();
     }
 }

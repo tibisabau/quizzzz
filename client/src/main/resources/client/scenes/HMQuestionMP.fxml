@@ -48,7 +48,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Text fx:id="Hello" fill="#1b5e20" layoutX="-97.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="511.20000000000005">
+            <Text fx:id="textHMQuestion" fill="#1b5e20" layoutX="-97.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="511.20000000000005">
                <font>
                   <Font size="20.0" />
                </font>

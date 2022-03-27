@@ -7,17 +7,13 @@ import java.util.List;
 
 public class Game {
 
-    private int id;
-
-    private Score user;
-
     public List<Object> questions;
 
     public int counter = 0;
 
-    public Score getUser() {
-        return user;
-    }
+    private int id;
+
+    private Score user;
 
     public Game(){
 
@@ -26,6 +22,10 @@ public class Game {
     public Game(int id, List <Object> questions){
         this.questions = questions;
         this.id = id;
+    }
+
+    public Score getUser() {
+        return user;
     }
 
     public void updateScore(Score score){
