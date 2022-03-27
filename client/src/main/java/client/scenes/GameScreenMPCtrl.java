@@ -32,7 +32,7 @@ public class GameScreenMPCtrl {
     public Text textGXQuestion;
 
     @FXML
-    public Text textHMQuestion;
+    public Text Hello;
 
     @FXML
     public ImageView imageView1;
@@ -133,41 +133,41 @@ public class GameScreenMPCtrl {
     public void getTypeOfQuestion(){
         Boolean found = false;
         currentQuestion = game.getNextQuestion();
-        System.out.println(game.getUser());
         MostEnergyQuestion question = mapper.convertValue(currentQuestion, MostEnergyQuestion.class);
         if (question.getIdentity() != null){
             currentQuestion = question;
             found = true;
-            setMeQuestion(question);
+            mainCtrl.showMEQuestionMP(currentQuestion);
         }
         if (!found){
             HowMuchQuestion question2 = mapper.convertValue(currentQuestion, HowMuchQuestion.class);
             if (question.getCorrectOption() != null){
                 currentQuestion = question2;
+                mainCtrl.showHMQuestionMP(currentQuestion);
                 found = true;
-                setHmQuestion(question2);
             }
         }
         if (!found){
             GuessXQuestion question2 = mapper.convertValue(currentQuestion, GuessXQuestion.class);
             currentQuestion = question2;
-            setGxQuestion(question2);
+            mainCtrl.showHMQuestionMP(currentQuestion);
         }
     }
 
-    public void setMeQuestion(MostEnergyQuestion question) {
+    public void setMeQuestion() {
+        MostEnergyQuestion question = (MostEnergyQuestion) currentQuestion;
         setImagesME(question);
         Answer1.setText(question.getFirstOption().toStringAnswer());
         Answer2.setText(question.getSecondOption().toStringAnswer());
         Answer3.setText(question.getThirdOption().toStringAnswer());
-        mainCtrl.showMEQuestionMP();
     }
 
-    public void setHmQuestion(HowMuchQuestion question) {
-        mainCtrl.showHMQuestionMP();
+    public void setHmQuestion() {
+        HowMuchQuestion question = (HowMuchQuestion) currentQuestion;
         setImagesHQ(question);
-        textHMQuestion.setText("- "+ ((HowMuchQuestion) currentQuestion)
-                .getCorrectOption().getTitle()+ " -");
+//        textHMQuestion.setText("- "+ ((HowMuchQuestion) currentQuestion)
+//                .getCorrectOption().getTitle()+ " -");
+//        Hello.setText("Hi");
         mainCtrl.questionList.add(currentQuestion);
         Answer1.setText(String.valueOf
                 (((HowMuchQuestion)currentQuestion).
@@ -180,12 +180,12 @@ public class GameScreenMPCtrl {
                         getThirdOption().getConsumptionInWh()));
     }
 
-    public void setGxQuestion(GuessXQuestion question) {
+    public void setGxQuestion() {
+        GuessXQuestion question = (GuessXQuestion) currentQuestion;
         setImagesGX(question);
         textGXQuestion.setText("- "+ question.getCorrectOption().getTitle()+ " -");
         guessAnswer.setDisable(false);
         guessAnswer.clear();
-        mainCtrl.showGXQuestionMP();
     }
 
     public void setImagesME(MostEnergyQuestion question){
@@ -349,8 +349,8 @@ public class GameScreenMPCtrl {
     public void answerPoints(Object question, int answer){
         double multiplier = 0.5 + (2 * timer);
         int extraPoints = (int) Math.round(100 * multiplier);
+        if(gameScreenCtrl.answerCorrect(currentQuestion,answer)) {
 
-        if(gameScreenCtrl.answerCorrect(question,answer)) {
             game.incrementScore(extraPoints);
         }
         showAnswers();
@@ -367,5 +367,9 @@ public class GameScreenMPCtrl {
 
     public void goToStartScene(){
         mainCtrl.showStartScreen();
+    }
+
+    public void setCurrentQuestion(Object currentQuestion) {
+        this.currentQuestion = currentQuestion;
     }
 }

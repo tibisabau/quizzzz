@@ -334,27 +334,30 @@ public class MainCtrl {
         });
     }
 
-    public void showMEQuestionMP() {
-        System.out.println("inside scene setter");
+    public void showMEQuestionMP(Object currentQuestion) {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(meQuestionMP);
+        meQuestionMPCtrl.setCurrentQuestion(currentQuestion);
+        meQuestionMPCtrl.setMeQuestion();
     }
 
     /**
      * Show HMQuestion
      */
-    public void showHMQuestionMP() {
-        System.out.println("inside scene setter");
+    public void showHMQuestionMP(Object currentQuestion) {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(hmQuestionMP);
+        hmQuestionMPCtrl.setCurrentQuestion(currentQuestion);
+        hmQuestionMPCtrl.setHmQuestion();
     }
 
     /**
      * Show GXQuestion
      */
-    public void showGXQuestionMP() {
-        System.out.println("inside scene setter");
+    public void showGXQuestionMP(Object currentQuestion) {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(gxQuestionMP);
+        gxQuestionMPCtrl.setCurrentQuestion(currentQuestion);
+        gxQuestionMPCtrl.setHmQuestion();
     }
 }
