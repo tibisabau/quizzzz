@@ -75,11 +75,11 @@ public class MultiplayerController {
         }
         Game game = new Game(counter++, questions);
         System.out.println(game);
-//        sendString("hi from server");
         currentGames.add(game);
         this.listeners = new HashMap<>();
         this.lobby = new ArrayList<>();
         //game control timer init here
+        
         return game;
     }
 

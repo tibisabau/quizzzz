@@ -2,7 +2,7 @@ package commons;
 
 import java.util.Timer;
 
-public class MPController {
+public class MPController implements Runnable {
 
     int questionNo = 0;
 
@@ -22,4 +22,8 @@ public class MPController {
         return  true;
     }
 
+    @Override
+    public void run() {
+
+    }
 }
