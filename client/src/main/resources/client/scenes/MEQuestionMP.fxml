@@ -14,6 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.layout.VBox?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" style="-fx-background-color: #a9f6caff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.GameScreenMPCtrl">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.20001220703125" minWidth="10.0" prefWidth="72.800048828125" />
@@ -173,5 +174,43 @@
             <ImageView fx:id="testEmoji" fitHeight="60.0" fitWidth="96.0" layoutX="8.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <children>
+                <VBox layoutX="61.0" layoutY="14.0" prefHeight="234.0" prefWidth="138.0">
+                    <children>
+                        <Label fx:id="User6" prefHeight="38.0" prefWidth="206.0">
+                            <graphic>
+                                <ImageView fx:id="Pic6" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                            </graphic>
+                        </Label>
+                        <Label fx:id="User5" prefHeight="38.0" prefWidth="138.0">
+                            <graphic>
+                                <ImageView fx:id="Pic5" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                            </graphic>
+                        </Label>
+                        <Label fx:id="User4" prefHeight="38.0" prefWidth="138.0">
+                            <graphic>
+                                <ImageView fx:id="Pic4" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                            </graphic>
+                        </Label>
+                        <Label fx:id="User3" prefHeight="38.0" prefWidth="138.0">
+                            <graphic>
+                                <ImageView fx:id="Pic3" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                            </graphic>
+                        </Label>
+                        <Label fx:id="User2" prefHeight="38.0" prefWidth="138.0">
+                            <graphic>
+                                <ImageView fx:id="Pic2" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                            </graphic>
+                        </Label>
+                        <Label fx:id="User1" prefHeight="38.0" prefWidth="138.0">
+                            <graphic>
+                                <ImageView fx:id="Pic1" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                            </graphic>
+                        </Label>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
     </children>
 </GridPane>
