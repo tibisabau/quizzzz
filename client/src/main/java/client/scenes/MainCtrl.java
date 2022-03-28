@@ -37,9 +37,19 @@ import javafx.scene.image.Image;
  */
 public class MainCtrl {
 
+    /**
+     * The Counter.
+     */
     public int counter;
 
+    /**
+     * The Question list.
+     */
     public Set<Object> questionList;
+
+    private boolean pointsJokerUsed;
+
+    private boolean answerJokerUsed;
 
     private Stage primaryStage;
 
@@ -74,6 +84,10 @@ public class MainCtrl {
     private GameScreenMPCtrl meQuestionMPCtrl;
 
     private Scene gxQuestionScene;
+
+    private GameScreenCtrl insteadOfQuestion;
+
+    private Scene insteadOfScene;
 
     private Scene leaderboardScene;
 
@@ -123,6 +137,7 @@ public class MainCtrl {
      * @param hmQuestionMP
      * @param meQuestionMP
      * @param waitingRoom
+     * @param insteadOfQuestion
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
@@ -133,6 +148,7 @@ public class MainCtrl {
 
                            Pair<GameScreenCtrl, Parent> hmQuestion,
                            Pair<GameScreenCtrl, Parent> gxQuestion,
+                           Pair<GameScreenCtrl, Parent> insteadOfQuestion,
                            Pair<InBetweenScreenCtrl, Parent> inBetweenScreen,
                            Pair<waitingRoomController, Parent> waitingRoom,
                            Pair<GameScreenMPCtrl, Parent> gxQuestionMP,
@@ -160,7 +176,8 @@ public class MainCtrl {
 
         this.gxQuestion = gxQuestion.getKey();
         this.gxQuestionScene = new Scene(gxQuestion.getValue());
-
+        this.insteadOfQuestion = insteadOfQuestion.getKey();
+        this.insteadOfScene = new Scene(insteadOfQuestion.getValue());
         this.inBetweenCtrl = inBetweenScreen.getKey();
         this.inBetweenScene = new Scene(inBetweenScreen.getValue());
         this.adminPanelScene = new Scene(adminPanel.getValue());
@@ -193,6 +210,8 @@ public class MainCtrl {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(startScreen);
         meQuestion.setCounter(20);
+        pointsJokerUsed = false;
+        answerJokerUsed = false;
         meQuestion.setQuestionList();
     }
 
@@ -214,7 +233,8 @@ public class MainCtrl {
 
     /**
      * Show MEQuestion
-     * @param questionType
+     *
+     * @param questionType the question type
      */
     public void showMEQuestion(int questionType) {
         primaryStage.setTitle("Quizzzz");
@@ -224,7 +244,8 @@ public class MainCtrl {
 
     /**
      * Show HMQuestion
-     * @param questionType
+     *
+     * @param questionType the question type
      */
     public void showHMQuestion(int questionType) {
         primaryStage.setTitle("Quizzzz");
@@ -239,6 +260,17 @@ public class MainCtrl {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(gxQuestionScene);
         gxQuestion.createGXQuestion();
+    }
+
+    /**
+     * Show instead of question.
+     *
+     * @param questionType the question type
+     */
+    public void showInsteadOfQuestion(int questionType) {
+        primaryStage.setTitle("Quizzzz");
+        insteadOfQuestion.setAnswer(questionType);
+        primaryStage.setScene(insteadOfScene);
     }
 
     /**
@@ -262,8 +294,9 @@ public class MainCtrl {
 
     /**
      * show inBetween Screen
-     * @param question
-     * @param score
+     *
+     * @param question the question
+     * @param score    the score
      */
     public void showInBetweenScreen(int question, int score) {
         primaryStage.setTitle("Quizzzz");
@@ -274,7 +307,8 @@ public class MainCtrl {
 
     /**
      * decodes the image as path
-     * @param path
+     *
+     * @param path the path
      * @return a new image
      */
     public Image getImage(String path) {
@@ -294,8 +328,39 @@ public class MainCtrl {
     }
 
     /**
+     *PointsJoker getter
+     * @return pointsJokerUsed
+     */
+    public boolean isPointsJokerUsed() {
+        return pointsJokerUsed;
+    }
+
+    /**
+     *
+     * @return if answerJokerUsed
+     */
+    public boolean isAnswerJokerUsed() {
+        return answerJokerUsed;
+    }
+
+    /**
+     * Sets pointsJoker to true
+     */
+    public void usePointsJoker(){
+        pointsJokerUsed = true;
+    }
+
+    /**
+     * Sets answerJoker to true
+     */
+    public void useAnswerJoker(){
+        answerJokerUsed = true;
+    }
+
+    /**
      * show the image from path
-     * @param path
+     *
+     * @param path the path
      */
     public void displayImage(String path) {
         imageCtrl.imageView.setImage(getImage(path));
@@ -314,7 +379,8 @@ public class MainCtrl {
 
     /**
      * show the edit scene
-     * @param activity
+     *
+     * @param activity the activity
      */
     public void showEdit(Activity activity) {
         primaryStage.setTitle("Quizzzz");
