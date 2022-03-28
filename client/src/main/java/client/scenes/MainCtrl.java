@@ -18,6 +18,7 @@ package client.scenes;
 
 import client.utils.ServerUtils;
 import commons.Game;
+import commons.InsteadOfQuestion;
 import commons.Score;
 import commons.Activity;
 import javafx.application.Platform;
@@ -486,5 +487,10 @@ public class MainCtrl {
         primaryStage.setScene(insteadOfSceneMP);
         insteadOfQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         insteadOfQuestionMPCtrl.setInsteadOfQuestion();
+        server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
+            Platform.runLater(() ->{
+                insteadOfQuestionMPCtrl.setImageViewPic1(emoji);
+            });
+        });
     }
 }
