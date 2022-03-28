@@ -20,6 +20,7 @@ import client.utils.ServerUtils;
 import commons.Game;
 import commons.Score;
 import commons.Activity;
+import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -333,8 +334,15 @@ public class MainCtrl {
         hmQuestionMPCtrl.setGame(game);
         gxQuestionMPCtrl.setGame(game);
         meQuestionMPCtrl.getTypeOfQuestion();
-        server.registerForMessages("/topic/nextQuestion", String.class, x -> {
-            meQuestionMPCtrl.getTypeOfQuestion();
+        server.registerForMessages("/topic/nextQuestion", Integer.class, ID -> {
+            if(ID == game.getID()){
+                Platform.runLater(() -> meQuestionMPCtrl.getTypeOfQuestion());
+            }
+        });
+        server.registerForMessages("/topic/betweenScreen", Integer.class, X -> {
+            if(X == game.getID()){
+                Platform.runLater(() -> showInstructionScreen());
+            }
         });
     }
 

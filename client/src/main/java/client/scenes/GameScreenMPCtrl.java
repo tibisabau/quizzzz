@@ -7,7 +7,6 @@ import com.google.inject.Inject;
 import commons.*;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -112,16 +111,11 @@ public class GameScreenMPCtrl {
 
 
     public void initialize(){
-        //Register for messages and call getTypeOfQuestion
-        server.registerForMessages("/topic/nextQuestion", Integer.class, id -> {
-            if(id == this.game.getID()){
-                Platform.runLater(() -> getTypeOfQuestion());
-            }
-        });
+
     }
 
     public void test(){
-        getTypeOfQuestion();
+
     }
 
     public void setGame(Game game){
@@ -131,6 +125,7 @@ public class GameScreenMPCtrl {
     public void getTypeOfQuestion(){
         Boolean found = false;
         currentQuestion = game.getNextQuestion();
+        
         MostEnergyQuestion question = mapper.convertValue(currentQuestion,
                 MostEnergyQuestion.class);
         if (question.getIdentity() != null){
