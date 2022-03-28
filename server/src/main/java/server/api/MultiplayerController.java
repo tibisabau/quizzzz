@@ -92,9 +92,9 @@ public class MultiplayerController {
 
     @MessageMapping("/emoji")
     @SendTo("/topic/emoji")
-    public Activity sendPath(String path){
-        System.out.println(path);
-        return new Activity("aaaa", path, 1);
+    public Activity sendPath(Activity activity){
+        System.out.println(activity.getTitle());
+        return new Activity(activity.getImagePath(), activity.getTitle(), 1);
     }
 
     @PostMapping(path = "join")

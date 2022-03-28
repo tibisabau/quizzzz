@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -76,9 +77,6 @@ public class GameScreenMPCtrl {
     public ProgressBar time;
 
     @FXML
-    public ImageView EmojiMenuPic;
-
-    @FXML
     public ImageView Emoji1;
 
     @FXML
@@ -89,6 +87,45 @@ public class GameScreenMPCtrl {
 
     @FXML
     public ImageView testEmoji;
+
+    @FXML
+    private ImageView Pic1;
+
+    @FXML
+    private ImageView Pic2;
+
+    @FXML
+    private ImageView Pic3;
+
+    @FXML
+    private ImageView Pic4;
+
+    @FXML
+    private ImageView Pic5;
+
+    @FXML
+    private ImageView Pic6;
+
+    @FXML
+    private Label User1;
+
+    @FXML
+    private Label User2;
+
+    @FXML
+    private Label User3;
+
+    @FXML
+    private Label User4;
+
+    @FXML
+    private Label User5;
+
+    @FXML
+    private Label User6;
+
+    @FXML
+    private ImageView EmojiMenuPic;
 
     private final ServerUtils server;
 
@@ -420,18 +457,59 @@ public class GameScreenMPCtrl {
     }
 
     public void onEmoji1() {
-        server.send("/app/emoji", "emoji1.png");
+        server.send("/app/emoji", new Activity("emoji1.png", game.getUser().getUserName(), 1));
     }
 
     public void onEmoji2() {
-        server.send("/app/emoji", "emoji2.png");
+        server.send("/app/emoji", new Activity("emoji2.png", game.getUser().getUserName(), 1));
     }
 
     public void onEmoji3() {
-        server.send("/app/emoji", "emoji3.png");
+        server.send("/app/emoji", new Activity("emoji3.png", game.getUser().getUserName(), 1));
     }
 
-    public void setImageViewTest(Activity emoji) {
-        testEmoji.setImage(mainCtrl.getEmoji(emoji.getTitle()));
+    public void setImageViewPic1(Activity emoji) {
+        if(Pic1.getOpacity() != 0) {
+            setImageViewPic2(Pic1.getImage(), User1.getText());
+        }
+        Pic1.setImage(mainCtrl.getEmoji(emoji.getImagePath()));
+        User1.setText(emoji.getTitle());
+    }
+
+    public void setImageViewPic2(Image image, String user) {
+        if(Pic2.getOpacity() != 0) {
+            setImageViewPic3(Pic2.getImage(), User2.getText());
+        }
+        Pic2.setImage(image);
+        User2.setText(user);
+    }
+
+    public void setImageViewPic3(Image image, String user) {
+        if(Pic3.getOpacity() != 0) {
+            setImageViewPic4(Pic3.getImage(), User3.getText());
+        }
+        Pic3.setImage(image);
+        User3.setText(user);
+    }
+
+    public void setImageViewPic4(Image image, String user) {
+        if(Pic4.getOpacity() != 0) {
+            setImageViewPic5(Pic4.getImage(), User4.getText());
+        }
+        Pic4.setImage(image);
+        User4.setText(user);
+    }
+
+    public void setImageViewPic5(Image image, String user) {
+        if(Pic5.getOpacity() != 0) {
+            setImageViewPic6(Pic5.getImage(), User5.getText());
+        }
+        Pic5.setImage(image);
+        User5.setText(user);
+    }
+
+    public void setImageViewPic6(Image image, String user) {
+        Pic6.setImage(image);
+        User6.setText(user);
     }
 }
