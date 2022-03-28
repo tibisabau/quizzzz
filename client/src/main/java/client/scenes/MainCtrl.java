@@ -20,12 +20,10 @@ import client.utils.ServerUtils;
 import commons.Game;
 import commons.Score;
 import commons.Activity;
-import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import javafx.util.Pair;
 
 import java.util.Set;

@@ -458,20 +458,24 @@ public class GameScreenMPCtrl {
     }
 
     public void onEmoji1() {
-        server.send("/app/emoji", new Activity("emoji1.png", game.getUser().getUserName(), 1));
+        server.send("/app/emoji", new Activity("emoji1.png",
+                game.getUser().getUserName(), 1));
     }
 
     public void onEmoji2() {
-        server.send("/app/emoji", new Activity("emoji2.png", game.getUser().getUserName(), 1));
+        server.send("/app/emoji", new Activity("emoji2.png",
+                game.getUser().getUserName(), 1));
     }
 
     public void onEmoji3() {
-        server.send("/app/emoji", new Activity("emoji3.png", game.getUser().getUserName(), 1));
+        server.send("/app/emoji", new Activity("emoji3.png",
+                game.getUser().getUserName(), 1));
     }
 
     public void setImageViewPic1(Activity emoji) {
         if(Pic1.getOpacity() != 0) {
-            setImageViewPic2(Pic1.getImage(), User1.getText(), Pic1.getOpacity());
+            setImageViewPic2(Pic1.getImage(), User1.getText(),
+                    Pic1.getOpacity());
         }
         Pic1.setImage(mainCtrl.getEmoji(emoji.getImagePath()));
         User1.setText(emoji.getTitle());
@@ -489,7 +493,8 @@ public class GameScreenMPCtrl {
 
     public void setImageViewPic2(Image image, String user, double opacity) {
         if(Pic2.getOpacity() != 0) {
-            setImageViewPic3(Pic2.getImage(), User2.getText(), Pic2.getOpacity());
+            setImageViewPic3(Pic2.getImage(), User2.getText(),
+                    Pic2.getOpacity());
         }
         Pic2.setImage(image);
         User2.setText(user);
@@ -507,7 +512,8 @@ public class GameScreenMPCtrl {
 
     public void setImageViewPic3(Image image, String user, double opacity) {
         if(Pic3.getOpacity() != 0) {
-            setImageViewPic4(Pic3.getImage(), User3.getText(), Pic3.getOpacity());
+            setImageViewPic4(Pic3.getImage(), User3.getText(),
+                    Pic3.getOpacity());
         }
         Pic3.setImage(image);
         User3.setText(user);
@@ -525,7 +531,8 @@ public class GameScreenMPCtrl {
 
     public void setImageViewPic4(Image image, String user, double opacity) {
         if(Pic4.getOpacity() != 0) {
-            setImageViewPic5(Pic4.getImage(), User4.getText(), Pic4.getOpacity());
+            setImageViewPic5(Pic4.getImage(), User4.getText(),
+                    Pic4.getOpacity());
         }
         Pic4.setImage(image);
         User4.setText(user);
@@ -543,7 +550,8 @@ public class GameScreenMPCtrl {
 
     public void setImageViewPic5(Image image, String user, double opacity) {
         if(Pic5.getOpacity() != 0) {
-            setImageViewPic6(Pic5.getImage(), User5.getText(), Pic5.getOpacity());
+            setImageViewPic6(Pic5.getImage(), User5.getText(),
+                    Pic5.getOpacity());
         }
         Pic5.setImage(image);
         User5.setText(user);
