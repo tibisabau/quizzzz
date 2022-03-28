@@ -19,8 +19,6 @@ import javafx.util.Duration;
 
 import javafx.scene.image.ImageView;
 
-import java.time.temporal.ChronoUnit;
-
 
 public class GameScreenMPCtrl {
     @FXML

@@ -142,6 +142,7 @@ public class MainCtrl {
      * @param meQuestionMP
      * @param waitingRoom
      * @param insteadOfQuestion
+     * @param insteadOfQuestionMP
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
