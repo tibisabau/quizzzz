@@ -75,8 +75,9 @@ public class Main extends Application {
                 "client", "scenes", "InsteadOfQuestion.fxml");
         mainCtrl.initialize(primaryStage, start ,
                 instruction, meQuestion, leaderboard, hmQuestion
-                , gxQuestion, insteadOfQuestion, inBetweenScreen, waitingRoom, gxQuestionMP,
-                hmQuestionMP, meQuestionMP, adminPanel, image, add);
+                , gxQuestion, insteadOfQuestion, inBetweenScreen,
+                waitingRoom, gxQuestionMP, hmQuestionMP,
+                meQuestionMP, adminPanel, image, add);
 
         primaryStage.setOnCloseRequest(e -> {
             waitingRoom.getKey().stop();
