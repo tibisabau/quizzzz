@@ -399,6 +399,13 @@ public class MainCtrl {
         hmQuestionMPCtrl.setGame(game);
         gxQuestionMPCtrl.setGame(game);
         meQuestionMPCtrl.getTypeOfQuestion();
+
+        server.registerForMessages("/topic/joker", Game.class, game1 -> {
+            if (game1.getID() == game.getID() &&
+                    game1.getUser().getUserId() != game.getUser().getUserId()){
+                meQuestionMPCtrl.halfTime();
+            }
+        });
         server.registerForMessages("/topic/nextQuestion", String.class, x -> {
             meQuestionMPCtrl.getTypeOfQuestion();
         });

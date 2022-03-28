@@ -391,6 +391,13 @@ public class ServerUtils {
         session.send(dest, s);
     }
 
+    /**
+     * sents a game object to the server
+     * @param dest destination to send to
+     * @param game game to send
+     */
+    public void sendGame(String dest, Game game) { session.send(dest, game);}
+
     public void stop(){
         exec.shutdownNow();
     }

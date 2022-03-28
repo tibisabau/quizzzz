@@ -19,6 +19,8 @@ import javafx.util.Duration;
 
 import javafx.scene.image.ImageView;
 
+import java.util.Random;
+
 
 public class GameScreenMPCtrl {
     @FXML
@@ -75,6 +77,16 @@ public class GameScreenMPCtrl {
     @FXML
     public ProgressBar time;
 
+    @FXML
+    public Button pointsJoker;
+
+    @FXML
+    public Button answerJoker;
+
+    @FXML
+    public Button timeJoker;
+
+
     private final ServerUtils server;
 
     private final MainCtrl mainCtrl;
@@ -94,6 +106,8 @@ public class GameScreenMPCtrl {
     private GameScreenCtrl gameScreenCtrl;
 
     private ObjectMapper mapper = new ObjectMapper();
+
+    private boolean pointsJokerInUse = false;
 
     /**
      * Instantiates a new Game screen ctrl.
@@ -195,6 +209,15 @@ public class GameScreenMPCtrl {
         AnswerA.setStyle("-fx-background-color: WHITE");
         AnswerB.setStyle("-fx-background-color: WHITE");
         AnswerC.setStyle("-fx-background-color: WHITE");
+        if(game.isAnswerJoker()){
+            answerJoker.setDisable(false);
+        }
+        if(game.isPointsJoker()){
+            answerJoker.setDisable(false);
+        }
+        if(game.isTimeJoker()){
+            timeJoker.setDisable(false);
+        }
     }
 
     public void setGxQuestion() {
@@ -206,6 +229,12 @@ public class GameScreenMPCtrl {
                 question.getCorrectOption().getTitle()+ " -");
         guessAnswer.setDisable(false);
         guessAnswer.clear();
+        if(game.isPointsJoker()){
+            answerJoker.setDisable(false);
+        }
+        if(game.isTimeJoker()){
+            timeJoker.setDisable(false);
+        }
     }
 
     public void setImagesME(MostEnergyQuestion question){
@@ -263,6 +292,7 @@ public class GameScreenMPCtrl {
             }
             if (timer < 0.1){
                 time.setStyle("-fx-accent: #FF0100");
+                timeJoker.setDisable(true);
             }
             if (timer <= 0.002){
                 bar.stop();
@@ -287,14 +317,17 @@ public class GameScreenMPCtrl {
         Answer2.setDisable(true);
         Answer3.setDisable(true);
         AnswerC.setDisable(true);
+        answerJoker.setDisable(true);
     }
 
     public void showAnswers() {
+        pointsJoker.setDisable(true);
         if(currentQuestion instanceof MostEnergyQuestion ||
                 currentQuestion instanceof HowMuchQuestion) {
             AnswerA.setStyle(incorrectColor);
             AnswerB.setStyle(incorrectColor);
             AnswerC.setStyle(incorrectColor);
+
             if (gameScreenCtrl.answerCorrect(currentQuestion, 1)) {
                 AnswerA.setStyle(correctColor);
             } else if (gameScreenCtrl.answerCorrect(currentQuestion, 2)) {
@@ -372,13 +405,18 @@ public class GameScreenMPCtrl {
      * @param answer answer number from 1 to 3, 1 is for a, 2 for b, 3 for c
      *
      */
-    public void answerPoints(Object question, int answer){
+    public void answerPoints(Object question, int answer) {
         double multiplier = 0.5 + (2 * timer);
         int extraPoints = (int) Math.round(100 * multiplier);
-        if(gameScreenCtrl.answerCorrect(currentQuestion,answer)) {
-            game.incrementScore(extraPoints);
+        if (gameScreenCtrl.answerCorrect(currentQuestion, answer)) {
+            if (pointsJokerInUse) {
+                game.incrementScore(extraPoints * 2);
+                pointsJokerInUse = false;
+            } else {
+                game.incrementScore(extraPoints);
+            }
+            showAnswers();
         }
-        showAnswers();
     }
 
     /**
@@ -396,5 +434,64 @@ public class GameScreenMPCtrl {
 
     public void setCurrentQuestion(Object currentQuestion) {
         this.currentQuestion = currentQuestion;
+    }
+
+    /**
+     * Uses answerJoker and disables an answer
+     */
+    public void useAnswerJoker(){
+        answerJoker.setDisable(true);
+        game.useAnswerJoker();
+        Random rand = new Random();
+        int answerToDelete = rand.nextInt(3);
+        while (gameScreenCtrl.answerCorrect (currentQuestion, answerToDelete+1))
+        {
+            answerToDelete = answerToDelete + 1;
+            if (answerToDelete > 2){
+                answerToDelete = 0;
+            }
+        }
+        switch (answerToDelete){
+            case 0:
+                Answer1.setDisable(true);
+                AnswerA.setDisable(true);
+                break;
+            case 1:
+                Answer2.setDisable(true);
+                AnswerB.setDisable(true);
+                break;
+            case 2:
+                Answer3.setDisable(true);
+                AnswerC.setDisable(true);
+                break;
+        }
+
+    }
+
+    /**
+     * flips a boolean to make dubble points and disables the button.
+     */
+    public void usePointsJoker(){
+        pointsJoker.setDisable(true);
+        game.usePointJoker();
+        pointsJokerInUse = true;
+
+    }
+
+    /**
+     * for time joker, sends a message to the server that it has been used.
+      */
+    public void useTimeJoker(){
+        timeJoker.setDisable(true);
+        game.useTimeJoker();
+        server.sendGame("/app/joker", game);
+
+    }
+
+    /**
+     * halfs time on timeline
+     */
+    public void halfTime(){
+        timer = timer/2;
     }
 }

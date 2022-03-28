@@ -111,8 +111,7 @@ public class StartScreenCtrl extends Application {
      */
     public void ok() {
         try {
-            ownScore = getNewScore();
-            server.addScore(ownScore);
+            ownScore = server.addScore(getNewScore());
             mainCtrl.setScore(ownScore);
         } catch (WebApplicationException e) {
 

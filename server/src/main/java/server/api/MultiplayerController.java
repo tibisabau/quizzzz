@@ -89,6 +89,12 @@ public class MultiplayerController {
         return gameID;
     }
 
+    @MessageMapping("/joker")
+    @SendTo("/topic/joker")
+    public Game timeJoker(Game game){
+        return game;
+    }
+
     @PostMapping(path = "join")
     public ResponseEntity<List<Score>>
     joinGame(@RequestBody List<Score> scores){
