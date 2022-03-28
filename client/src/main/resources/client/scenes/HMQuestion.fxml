@@ -137,7 +137,7 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
          <children>
             <Button fx:id="answerJoker" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#useAnswerJoker" prefHeight="39.0" prefWidth="96.0" text="Delete Answer" />
-            <Button fx:id="pointsJoker" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#usePointsJoker" prefHeight="39.0" prefWidth="96.0" text="Dubbel Points" />
+            <Button fx:id="pointsJoker" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#usePointsJoker" prefHeight="39.0" prefWidth="96.0" text="Double Points" />
          </children>
       </AnchorPane>
    </children>

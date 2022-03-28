@@ -30,7 +30,7 @@ public class GameScreenCtrl {
      * The Instead of label.
      */
     @FXML
-    public Text insteadOfLabel;
+    public Label insteadOfLabel;
 
     /**
      * The Score text.
@@ -378,45 +378,25 @@ public class GameScreenCtrl {
      * Create instead of question.
      */
     public void createInsteadOfQuestion() {
-        InsteadOfQuestion currentQuestionI = server.getInsteadOfQuestion();
-        while(mainCtrl.questionList.contains(currentQuestionI)) {
-            currentQuestionI = server.getInsteadOfQuestion();
+        currentQuestion = server.getInsteadOfQuestion();
+        while(mainCtrl.questionList.contains(currentQuestion)) {
+            currentQuestion = server.getInsteadOfQuestion();
         }
-        setImageInsteadOfQuestion( currentQuestionI );
-        mainCtrl.questionList.add(currentQuestionI);
+        setImageInsteadOfQuestion((InsteadOfQuestion) currentQuestion);
+        mainCtrl.questionList.add(currentQuestion);
         insteadOfLabel.setText("Instead of : "
-                + currentQuestionI.getPromptedOption().toStringAnswer()
+                + ((InsteadOfQuestion) currentQuestion).
+                getPromptedOption().toStringAnswer()
                 + " , you could do instead :");
-        Random random = new Random();
-        int numberOfTheButton = random.nextInt(2);
-        switch (numberOfTheButton){
-            case 1 :
-                Answer1.setText(currentQuestionI.
-                        getCorrectOption().toStringAnswer());
-                Answer2.setText(currentQuestionI.
-                        getFirstOption().toStringAnswer());
-                Answer3.setText(currentQuestionI.
-                        getSecondOption().toStringAnswer());
-                break;
-            case 2 :
-                Answer1.setText(currentQuestionI.
-                        getFirstOption().toStringAnswer());
-                Answer2.setText(currentQuestionI.
-                        getCorrectOption().toStringAnswer());
-                Answer3.setText(currentQuestionI.
-                        getSecondOption().toStringAnswer());
-                break;
-            default:
-                Answer1.setText(currentQuestionI.
-                        getFirstOption().toStringAnswer());
-                Answer2.setText(currentQuestionI.
-                        getSecondOption().toStringAnswer());
-                Answer3.setText(currentQuestionI.
-                        getCorrectOption().toStringAnswer());
-                break;
-
-        }
-        currentQuestion = currentQuestionI;
+        Answer1.setText(String.valueOf
+                (((InsteadOfQuestion)currentQuestion).
+                        getFirstOption().getTitle()));
+        Answer2.setText(String.valueOf
+                (((InsteadOfQuestion)currentQuestion).
+                        getSecondOption().getTitle()));
+        Answer3.setText(String.valueOf
+                (((InsteadOfQuestion)currentQuestion).
+                        getThirdOption().getTitle()));
     }
 
     /**
@@ -750,17 +730,20 @@ public class GameScreenCtrl {
         Activity correct = ((InsteadOfQuestion)question).getCorrectOption();
         switch (answer){
             case 1:
-                if (Answer1.getText().equals(correct.toStringAnswer())){
+                if (((InsteadOfQuestion)question).getFirstOption().
+                        equals(correct)){
                     return true;
                 }
                 break;
             case 2:
-                if (Answer2.getText().equals(correct.toStringAnswer())){
+                if (((InsteadOfQuestion)question).getSecondOption().
+                        equals(correct)){
                     return true;
                 }
                 break;
-            default:
-                if (Answer3.getText().equals(correct.toStringAnswer())){
+            case 3:
+                if (((InsteadOfQuestion)question).getThirdOption().
+                        equals(correct)){
                     return true;
                 }
                 break;
