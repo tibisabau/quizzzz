@@ -12,6 +12,6 @@ public class QTypeController {
 
     @GetMapping(path = "")
     public Integer getRandomType(){
-        return new Random().nextInt(3) + 1;
+        return new Random().nextInt(4) + 1;
     }
 }

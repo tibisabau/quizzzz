@@ -57,6 +57,9 @@ public class GameScreenMPCtrl {
     public Text Answer2;
 
     @FXML
+    public Label correctAnswerQX;
+
+    @FXML
     public Button AnswerC;
 
     @FXML
@@ -76,6 +79,9 @@ public class GameScreenMPCtrl {
 
     @FXML
     public ProgressBar time;
+
+    @FXML
+    public Label insteadOfLabel;
 
     @FXML
     public ImageView Emoji1;
@@ -190,17 +196,27 @@ public class GameScreenMPCtrl {
     public void getTypeOfQuestion(){
         Boolean found = false;
         currentQuestion = game.getNextQuestion();
-        MostEnergyQuestion question = mapper.convertValue(currentQuestion,
-                MostEnergyQuestion.class);
-        if (question.getIdentity() != null){
+
+        InsteadOfQuestion question = mapper.convertValue(currentQuestion,
+                InsteadOfQuestion.class);
+        if (question.getPromptedOption() != null){
             currentQuestion = question;
+            mainCtrl.showInsteadOfQuestionMP(currentQuestion);
             found = true;
-            mainCtrl.showMEQuestionMP(currentQuestion);
+        }
+        if (!found){
+            MostEnergyQuestion question2 = mapper.convertValue(currentQuestion,
+                    MostEnergyQuestion.class);
+            if (question2.getIdentity() != null){
+                currentQuestion = question2;
+                found = true;
+                mainCtrl.showMEQuestionMP(currentQuestion);
+            }
         }
         if (!found){
             HowMuchQuestion question2 = mapper.convertValue(currentQuestion,
                     HowMuchQuestion.class);
-            if (question.getSecondOption() != null){
+            if (question2.getSecondOption() != null){
                 currentQuestion = question2;
                 mainCtrl.showHMQuestionMP(currentQuestion);
                 found = true;
@@ -240,6 +256,26 @@ public class GameScreenMPCtrl {
         Answer3.setText(String.valueOf
                 (((HowMuchQuestion)currentQuestion).
                         getThirdOption().getConsumptionInWh()));
+    }
+
+
+    public void setInsteadOfQuestion() {
+        resetStage();
+        InsteadOfQuestion question = (InsteadOfQuestion) currentQuestion;
+        setImageInsteadOfQuestion(question);
+        insteadOfLabel.setText("Instead of : "
+                + ((InsteadOfQuestion) currentQuestion).
+                getPromptedOption().toStringAnswer()
+                + " , you could do instead :");
+        Answer1.setText(String.valueOf
+                (((InsteadOfQuestion)currentQuestion).
+                        getFirstOption().getTitle()));
+        Answer2.setText(String.valueOf
+                (((InsteadOfQuestion)currentQuestion).
+                        getSecondOption().getTitle()));
+        Answer3.setText(String.valueOf
+                (((InsteadOfQuestion)currentQuestion).
+                        getThirdOption().getTitle()));
     }
 
     public void resetStage(){
@@ -286,6 +322,17 @@ public class GameScreenMPCtrl {
     public void setImagesGX(GuessXQuestion question){
         String path2 = question.getCorrectOption().getImagePath();
         imageView2.setImage(mainCtrl.getImage(path2));
+        startTimer();
+    }
+
+    /**
+     * Set image instead of question.
+     *
+     * @param question the question
+     */
+    public void setImageInsteadOfQuestion(InsteadOfQuestion question){
+        String path = question.getPromptedOption().getImagePath();
+        imageView1.setImage(mainCtrl.getImage(path));
         startTimer();
     }
 
@@ -350,7 +397,8 @@ public class GameScreenMPCtrl {
 
     public void showAnswers() {
         if(currentQuestion instanceof MostEnergyQuestion ||
-                currentQuestion instanceof HowMuchQuestion) {
+                currentQuestion instanceof HowMuchQuestion ||
+        currentQuestion instanceof InsteadOfQuestion) {
             AnswerA.setStyle(incorrectColor);
             AnswerB.setStyle(incorrectColor);
             AnswerC.setStyle(incorrectColor);
@@ -362,7 +410,9 @@ public class GameScreenMPCtrl {
                 AnswerC.setStyle(correctColor);
             }
         } else {
-        //Correct answer for Guess x question
+            GuessXQuestion cor = (GuessXQuestion) currentQuestion;
+            long corText = cor.getCorrectOption().getConsumptionInWh();
+            correctAnswerQX.setText("Correct answer: " + corText);
         }
     }
 
@@ -456,6 +506,7 @@ public class GameScreenMPCtrl {
     public void setCurrentQuestion(Object currentQuestion) {
         this.currentQuestion = currentQuestion;
     }
+
 
     public void onEmoji1() {
         server.send("/app/emoji", new Activity("emoji1.png",
