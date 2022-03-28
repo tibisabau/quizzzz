@@ -87,6 +87,9 @@ public class GameScreenMPCtrl {
     @FXML
     public ImageView Emoji3;
 
+    @FXML
+    public ImageView testEmoji;
+
     private final ServerUtils server;
 
     private final MainCtrl mainCtrl;
@@ -131,6 +134,7 @@ public class GameScreenMPCtrl {
                 Platform.runLater(() -> getTypeOfQuestion());
             }
         });
+
         EmojiMenuPic.setImage(mainCtrl.getEmoji("emoji1.png"));
         Emoji1.setImage(mainCtrl.getEmoji("emoji1.png"));
         Emoji2.setImage(mainCtrl.getEmoji("emoji2.png"));
@@ -413,5 +417,21 @@ public class GameScreenMPCtrl {
 
     public void setCurrentQuestion(Object currentQuestion) {
         this.currentQuestion = currentQuestion;
+    }
+
+    public void onEmoji1() {
+        server.send("/app/emoji", "emoji1.png");
+    }
+
+    public void onEmoji2() {
+        server.send("/app/emoji", "emoji2.png");
+    }
+
+    public void onEmoji3() {
+        server.send("/app/emoji", "emoji3.png");
+    }
+
+    public void setImageViewTest(Activity emoji) {
+        testEmoji.setImage(mainCtrl.getEmoji(emoji.getTitle()));
     }
 }

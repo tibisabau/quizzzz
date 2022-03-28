@@ -142,17 +142,17 @@
          <children>
             <MenuButton layoutX="9.0" layoutY="89.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="61.0" style="-fx-background-color: #fff;">
                <items>
-                  <MenuItem mnemonicParsing="false">
+                  <MenuItem mnemonicParsing="false" onAction="#onEmoji1">
                      <graphic>
                         <ImageView fx:id="Emoji1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false">
+                  <MenuItem mnemonicParsing="false" onAction="#onEmoji2">
                      <graphic>
                         <ImageView fx:id="Emoji2" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false">
+                  <MenuItem mnemonicParsing="false" onAction="#onEmoji3">
                      <graphic>
                         <ImageView fx:id="Emoji3" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
@@ -162,6 +162,11 @@
                   <ImageView fx:id="EmojiMenuPic" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </MenuButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+         <children>
+            <ImageView fx:id="testEmoji" fitHeight="60.0" fitWidth="96.0" layoutX="8.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </children>

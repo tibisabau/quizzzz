@@ -94,6 +94,7 @@ public class waitingRoomController{
         server.joinGame(players);
 
         server.registerForMessages("/topic/game", Game.class, game -> {
+            System.out.println("hello from server");
             this.game = game;
             this.game.updateScore(this.score);
             quitButton.setDisable(true);

@@ -20,9 +20,11 @@ import client.utils.ServerUtils;
 import commons.Game;
 import commons.Score;
 import commons.Activity;
+import javafx.animation.FadeTransition;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.util.Pair;
 
 import java.util.Set;
@@ -347,6 +349,7 @@ public class MainCtrl {
         gxQuestionMPCtrl.setGame(game);
         meQuestionMPCtrl.getTypeOfQuestion();
         server.registerForMessages("/topic/nextQuestion", String.class, x -> {
+            System.out.println("test this stuff");
             meQuestionMPCtrl.getTypeOfQuestion();
         });
     }
@@ -360,6 +363,16 @@ public class MainCtrl {
         primaryStage.setScene(meQuestionMP);
         meQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         meQuestionMPCtrl.setMeQuestion();
+        server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
+            System.out.println(emoji.getTitle());
+            meQuestionMPCtrl.setImageViewTest(emoji);
+            FadeTransition fadeTransition = new
+                    FadeTransition(Duration.seconds(1),
+                    meQuestionMPCtrl.testEmoji);
+            fadeTransition.setFromValue(1.0);
+            fadeTransition.setToValue(0.0);
+            fadeTransition.play();
+        });
     }
 
     /**
@@ -371,6 +384,15 @@ public class MainCtrl {
         primaryStage.setScene(hmQuestionMP);
         hmQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         hmQuestionMPCtrl.setHmQuestion();
+        server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
+            System.out.println(emoji.getTitle());
+            hmQuestionMPCtrl.setImageViewTest(emoji);
+            FadeTransition fadeTransition = new FadeTransition
+                    (Duration.seconds(1), hmQuestionMPCtrl.testEmoji);
+            fadeTransition.setFromValue(1.0);
+            fadeTransition.setToValue(0.0);
+            fadeTransition.play();
+        });
     }
 
     /**
@@ -382,5 +404,14 @@ public class MainCtrl {
         primaryStage.setScene(gxQuestionMP);
         gxQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         gxQuestionMPCtrl.setGxQuestion();
+        server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
+            System.out.println(emoji.getTitle());
+            gxQuestionMPCtrl.setImageViewTest(emoji);
+            FadeTransition fadeTransition = new FadeTransition
+                    (Duration.seconds(1), gxQuestionMPCtrl.testEmoji);
+            fadeTransition.setFromValue(1.0);
+            fadeTransition.setToValue(0.0);
+            fadeTransition.play();
+        });
     }
 }
