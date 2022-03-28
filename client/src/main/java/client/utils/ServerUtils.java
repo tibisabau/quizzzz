@@ -18,11 +18,21 @@ package client.utils;
 
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.io.*;
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.function.Consumer;
+
 import commons.*;
 import jakarta.ws.rs.client.*;
+import jakarta.ws.rs.core.Response;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -32,6 +42,13 @@ import org.apache.http.impl.client.HttpClients;
 import org.glassfish.jersey.client.ClientConfig;
 
 import jakarta.ws.rs.core.GenericType;
+import org.springframework.messaging.converter.MappingJackson2MessageConverter;
+import org.springframework.messaging.simp.stomp.StompFrameHandler;
+import org.springframework.messaging.simp.stomp.StompHeaders;
+import org.springframework.messaging.simp.stomp.StompSession;
+import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
+import org.springframework.web.socket.client.standard.StandardWebSocketClient;
+import org.springframework.web.socket.messaging.WebSocketStompClient;
 
 /**
  * The type Server utils.
@@ -39,6 +56,13 @@ import jakarta.ws.rs.core.GenericType;
 public class ServerUtils {
 
     private static final String SERVER = "http://localhost:8080/";
+
+    private static final ExecutorService exec =
+            Executors.newSingleThreadExecutor();
+
+    private StompSession session = connect("ws://localhost:8080/websocket");
+
+
 
     /**
      * Gets quotes the hard way.
@@ -289,6 +313,87 @@ public class ServerUtils {
                 .get(GuessXQuestion.class);
     }
 
+
+    public void joinGame(List<Score> score){
+                ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/multiplayer/join")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .post(Entity.entity(score, APPLICATION_JSON),
+                        new GenericType<List<Score>>() {});
+    }
+
+    public void registerForUpdates(Consumer<List<Score>> consumer){
+        exec.submit(() -> {
+            while(!Thread.interrupted()){
+                var res = ClientBuilder.newClient(new ClientConfig())
+                        .target(SERVER).path("/api/multiplayer/update")
+                        .request(APPLICATION_JSON)
+                        .accept(APPLICATION_JSON)
+                        .get(Response.class);
+                if(res.getStatus() == 204){
+                    continue;
+                }
+                var s = res.readEntity(new GenericType<List<Score>>() {});
+                consumer.accept(s);
+            }
+        });
+    }
+
+    private StompSession connect(String url) {
+        var client = new StandardWebSocketClient();
+        var stomp = new WebSocketStompClient(client);
+        stomp.setMessageConverter(new MappingJackson2MessageConverter());
+        try {
+            return stomp.connect(url,
+                    new StompSessionHandlerAdapter() {}).get();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } catch (ExecutionException e) {
+            throw new RuntimeException();
+        }
+        throw new IllegalStateException();
+    }
+
+    public <T> void registerForMessages(String dest,
+                                        Class<T> type, Consumer<T> consumer){
+        session.subscribe(dest, new StompFrameHandler() {
+            @Override
+            public Type getPayloadType(StompHeaders headers) {
+                return type;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public void handleFrame(StompHeaders headers, Object payload) {
+                consumer.accept((T) payload);
+            }
+        });
+    }
+
+//    public void registerForString1(String dest, Consumer<String> consumer){
+//        System.out.println("im inside register method");
+//        session.subscribe(dest, new StompFrameHandler() {
+//            @Override
+//            public Type getPayloadType(StompHeaders headers) {
+//                return String.class;
+//            }
+//
+//            @SuppressWarnings("unchecked")
+//            @Override
+//            public void handleFrame(StompHeaders headers, Object payload) {
+//                consumer.accept((String) payload);
+//            }
+//        });
+//    }
+
+    public void send(String dest, String s){
+        session.send(dest, s);
+    }
+
+    public void stop(){
+        exec.shutdownNow();
+    }
 
     /**
      * Get instead of question instead of question.

@@ -16,6 +16,8 @@ public class MostEnergyQuestion {
 
     private Activity correctOption;
 
+    private String identity;
+
     /**
      * default constructor for ObjectMapper
      */
@@ -37,6 +39,11 @@ public class MostEnergyQuestion {
         this.secondOption = secondOption;
         this.thirdOption = thirdOption;
         this.correctOption = correctOption;
+        this.identity = "this is me";
+    }
+
+    public String getIdentity(){
+        return identity;
     }
 
     public Activity getFirstOption() {

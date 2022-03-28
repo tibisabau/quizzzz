@@ -18,6 +18,8 @@ public class InsteadOfQuestion {
 
     private Activity thirdOption;
 
+    private String identity;
+
     /**
      * Instantiates a new Instead of question.
      */
@@ -43,6 +45,7 @@ public class InsteadOfQuestion {
         this.firstOption = firstOption;
         this.secondOption = secondOption;
         this.thirdOption = thirdOption;
+        this.identity = "this is me";
     }
 
     /**
@@ -52,6 +55,15 @@ public class InsteadOfQuestion {
      */
     public Activity getPromptedOption() {
         return promptedOption;
+    }
+
+    /**
+     * Gets identity option.
+     *
+     * @return the prompted option
+     */
+    public String getIdentity() {
+        return identity;
     }
 
     /**

@@ -111,7 +111,9 @@ public class StartScreenCtrl extends Application {
      */
     public void ok() {
         try {
-            ownScore = server.addScore(getNewScore());
+            ownScore = getNewScore();
+            server.addScore(ownScore);
+            mainCtrl.setScore(ownScore);
         } catch (WebApplicationException e) {
 
             var alert = new Alert(Alert.AlertType.ERROR);
@@ -163,6 +165,10 @@ public class StartScreenCtrl extends Application {
             return;
         }
 
+    }
+
+    public void goToWaitingRoom() throws  IOException{
+        mainCtrl.showWaitingRoom();
     }
 
     /**

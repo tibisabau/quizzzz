@@ -41,7 +41,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="multiPlayerButton" layoutX="-112.0" layoutY="25.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="221.0" style="-fx-background-color: #1b5e20; -fx-border-color: WHITE; -fx-border-width: 4;" text="Multiplayer" textFill="WHITE" AnchorPane.bottomAnchor="-27.0" AnchorPane.leftAnchor="-112.0" AnchorPane.rightAnchor="186.0" AnchorPane.topAnchor="25.0">
+            <Button fx:id="multiPlayerButton" layoutX="-112.0" layoutY="25.0" mnemonicParsing="false" onAction="#goToWaitingRoom" prefHeight="75.0" prefWidth="221.0" style="-fx-background-color: #1b5e20; -fx-border-color: WHITE; -fx-border-width: 4;" text="Multiplayer" textFill="WHITE" AnchorPane.bottomAnchor="-27.0" AnchorPane.leftAnchor="-112.0" AnchorPane.rightAnchor="186.0" AnchorPane.topAnchor="25.0">
                <font>
                   <Font name="Candara" size="18.0" />
                </font>

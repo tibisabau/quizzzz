@@ -17,6 +17,8 @@
 package client.scenes;
 
 import client.utils.ServerUtils;
+import commons.Game;
+import commons.Score;
 import commons.Activity;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -69,6 +71,22 @@ public class MainCtrl {
 
     private GameScreenCtrl gxQuestion;
 
+    private Scene gxQuestionMP;
+
+    private GameScreenMPCtrl gxQuestionMPCtrl;
+
+    private Scene insteadOfSceneMP;
+
+    private GameScreenMPCtrl insteadOfQuestionMPCtrl;
+
+    private Scene hmQuestionMP;
+
+    private GameScreenMPCtrl hmQuestionMPCtrl;
+
+    private Scene meQuestionMP;
+
+    private GameScreenMPCtrl meQuestionMPCtrl;
+
     private Scene gxQuestionScene;
 
     private GameScreenCtrl insteadOfQuestion;
@@ -95,27 +113,36 @@ public class MainCtrl {
 
     private Scene inBetweenScene;
 
+    private Scene waitingRoomScene;
 
+    private waitingRoomController waitingRoomCtrl;
 
+    private Score score;
+
+    private String userName;
 
     @Inject
     private ServerUtils server;
 
     /**
      * Initialize.
-     *
-     * @param primaryStage      the primary stage
-     * @param startScreen       the start screen
-     * @param instructionScene  the instruction scene
-     * @param meQuestion        the me question
-     * @param leaderboardScreen the leaderboard screen
-     * @param hmQuestion        the hm question
-     * @param gxQuestion        the gx question
-     * @param insteadOfQuestion the instead of question
-     * @param inBetweenScreen   the in between screen
-     * @param adminPanel        the admin panel
-     * @param image             the image
-     * @param add               the add
+     * @param primaryStage the primary stage
+     * @param startScreen  the start screen
+     * @param instructionScene
+     * @param meQuestion
+     * @param leaderboardScreen
+     * @param hmQuestion
+     * @param gxQuestion
+     * @param inBetweenScreen
+     * @param adminPanel
+     * @param image
+     * @param add
+     * @param gxQuestionMP
+     * @param hmQuestionMP
+     * @param meQuestionMP
+     * @param waitingRoom
+     * @param insteadOfQuestion
+     * @param insteadOfQuestionMP
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
@@ -127,21 +154,32 @@ public class MainCtrl {
                            Pair<GameScreenCtrl, Parent> hmQuestion,
                            Pair<GameScreenCtrl, Parent> gxQuestion,
                            Pair<GameScreenCtrl, Parent> insteadOfQuestion,
-                           Pair<InBetweenScreenCtrl, Parent> inBetweenScreen
-            , Pair<AdminPanelCtrl, Parent> adminPanel,
+                           Pair<InBetweenScreenCtrl, Parent> inBetweenScreen,
+                           Pair<waitingRoomController, Parent> waitingRoom,
+                           Pair<GameScreenMPCtrl, Parent> gxQuestionMP,
+                           Pair<GameScreenMPCtrl, Parent> hmQuestionMP,
+                           Pair<GameScreenMPCtrl, Parent> meQuestionMP,
+                           Pair<GameScreenMPCtrl, Parent> insteadOfQuestionMP,
+                           Pair<AdminPanelCtrl, Parent> adminPanel,
                            Pair<DisplayImageCtrl, Parent> image
             , Pair<AddActivityCtrl, Parent> add) {
         this.primaryStage = primaryStage;
+
         this.startScreenCtrl = startScreen.getKey();
         this.startScreen = new Scene(startScreen.getValue());
+
         this.instructionScene = new Scene(instructionScene.getValue());
         this.instructionSceneCtrl = instructionScene.getKey();
+
         this.leaderboardScene = new Scene(leaderboardScreen.getValue());
         this.leaderboardSceneCtrl = leaderboardScreen.getKey();
+
         this.meQuestion = meQuestion.getKey();
         this.meQuestionScene = new Scene(meQuestion.getValue());
+
         this.hmQuestion = hmQuestion.getKey();
         this.hmQuestionScene = new Scene(hmQuestion.getValue());
+
         this.gxQuestion = gxQuestion.getKey();
         this.gxQuestionScene = new Scene(gxQuestion.getValue());
         this.insteadOfQuestion = insteadOfQuestion.getKey();
@@ -154,6 +192,21 @@ public class MainCtrl {
         this.imageCtrl = image.getKey();
         this.addScene = new Scene(add.getValue());
         this.addCtrl = add.getKey();
+
+        this.waitingRoomCtrl = waitingRoom.getKey();
+        this.waitingRoomScene = new Scene(waitingRoom.getValue());
+
+        this.gxQuestionMPCtrl = gxQuestionMP.getKey();
+        this.gxQuestionMP = new Scene(gxQuestionMP.getValue());
+
+        this.hmQuestionMPCtrl = hmQuestionMP.getKey();
+        this.hmQuestionMP = new Scene(hmQuestionMP.getValue());
+
+        this.meQuestionMPCtrl = meQuestionMP.getKey();
+        this.meQuestionMP = new Scene(meQuestionMP.getValue());
+
+        this.insteadOfQuestionMPCtrl = insteadOfQuestionMP.getKey();
+        this.insteadOfSceneMP = new Scene(insteadOfQuestionMP.getValue());
 
         showStartScreen();
         primaryStage.show();
@@ -169,6 +222,14 @@ public class MainCtrl {
         pointsJokerUsed = false;
         answerJokerUsed = false;
         meQuestion.setQuestionList();
+    }
+
+    public void setScore(Score score){
+        this.score = score;
+    }
+
+    public void setUserName(String userName){
+        this.userName = userName;
     }
 
     /**
@@ -267,6 +328,14 @@ public class MainCtrl {
         return new Image(inputStream);
     }
 
+    public void showWaitingRoom(){
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(waitingRoomScene);
+        waitingRoomCtrl.setScore(this.score);
+        waitingRoomCtrl.load();
+
+    }
+
     /**
      *PointsJoker getter
      * @return pointsJokerUsed
@@ -332,5 +401,60 @@ public class MainCtrl {
                 .substring(activity.getImagePath().indexOf("/") + 1).trim());
         addCtrl.toAdd = false;
         addCtrl.editActivity = activity;
+    }
+
+    public void showMpGameScreen(Game game){
+        meQuestionMPCtrl.setGame(game);
+        hmQuestionMPCtrl.setGame(game);
+        gxQuestionMPCtrl.setGame(game);
+        insteadOfQuestionMPCtrl.setGame(game);
+        meQuestionMPCtrl.getTypeOfQuestion();
+        server.registerForMessages("/topic/nextQuestion", String.class, x -> {
+            meQuestionMPCtrl.getTypeOfQuestion();
+        });
+    }
+
+    /**
+     * Show HMQuestionMP
+     * @param currentQuestion
+     */
+    public void showMEQuestionMP(Object currentQuestion) {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(meQuestionMP);
+        meQuestionMPCtrl.setCurrentQuestion(currentQuestion);
+        meQuestionMPCtrl.setMeQuestion();
+    }
+
+    /**
+     * Show HMQuestionMP
+     * @param currentQuestion
+     */
+    public void showHMQuestionMP(Object currentQuestion) {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(hmQuestionMP);
+        hmQuestionMPCtrl.setCurrentQuestion(currentQuestion);
+        hmQuestionMPCtrl.setHmQuestion();
+    }
+
+    /**
+     * Show GXQuestionMP
+     * @param currentQuestion
+     */
+    public void showGXQuestionMP(Object currentQuestion) {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(gxQuestionMP);
+        gxQuestionMPCtrl.setCurrentQuestion(currentQuestion);
+        gxQuestionMPCtrl.setGxQuestion();
+    }
+
+    /**
+     * Show InsteadOfQuestionMP
+     * @param currentQuestion
+     */
+    public void showInsteadOfQuestionMP(Object currentQuestion) {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(insteadOfSceneMP);
+        insteadOfQuestionMPCtrl.setCurrentQuestion(currentQuestion);
+        insteadOfQuestionMPCtrl.setInsteadOfQuestion();
     }
 }
