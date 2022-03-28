@@ -30,25 +30,21 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
-            <ImageView fx:id="imageView2" fitHeight="144.0" fitWidth="158.0" layoutX="104.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
-         </children></AnchorPane>
+            <ImageView fx:id="imageView1" fitHeight="232.0" fitWidth="333.0" layoutX="16.0" layoutY="-31.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
       <AnchorPane prefHeight="92.0" prefWidth="380.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <children>
-            <Label alignment="CENTER" layoutX="-96.0" layoutY="32.0" prefHeight="46.0" prefWidth="511.0" style="-fx-background-color: #1b5e20;" text="How much energy does this activity take?" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="insteadOfLabel" alignment="CENTER" layoutX="-132.0" layoutY="32.0" prefHeight="46.0" prefWidth="590.0" style="-fx-background-color: #1b5e20;" text="Instead of this which one of these?" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font size="20.0" />
+                  <Font size="16.0" />
                </font>
             </Label>
-            <Text fx:id="textHMQuestion" fill="#1b5e20" layoutX="-97.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="511.20000000000005">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="AnswerA" layoutX="98.0" layoutY="1.0" mnemonicParsing="false" onAction="#selectAnswerA" prefHeight="81.0" prefWidth="245.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" textFill="#1b5e20">
+            <Button fx:id="AnswerA" layoutX="98.0" layoutY="1.0" mnemonicParsing="false" onMouseReleased="#selectAnswerA" prefHeight="81.0" prefWidth="245.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" textFill="#1b5e20">
                <font>
                   <Font size="10.0" />
                </font>
@@ -56,18 +52,19 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Text fx:id="Answer1" fill="#1b5e20" layoutX="157.0" layoutY="52.0" onMouseClicked="#selectAnswerA" strokeType="OUTSIDE" strokeWidth="0.0" text="5000" textAlignment="CENTER" wrappingWidth="127.9999877929688">
+            <Text fx:id="Answer1" fill="#1b5e20" layoutX="101.0" layoutY="19.0" onMouseClicked="#selectAnswerA" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="239.20000000000005">
                <font>
-                  <Font size="29.0" />
+                  <Font size="15.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Text>
+               </cursor>
+            </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="AnswerB" layoutX="45.0" layoutY="1.0" mnemonicParsing="false" onAction="#selectAnswerB" prefHeight="82.0" prefWidth="246.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" textFill="#1b5e20">
+            <Button fx:id="AnswerB" layoutX="45.0" layoutY="1.0" mnemonicParsing="false" onMouseReleased="#selectAnswerB" prefHeight="82.0" prefWidth="246.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" textFill="#1b5e20">
                <font>
                   <Font size="13.0" />
                </font>
@@ -75,18 +72,19 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Text fx:id="Answer2" fill="#1b5e20" layoutX="110.0" layoutY="53.0" onMouseClicked="#selectAnswerB" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="116.5367431640625">
+            <Text fx:id="Answer2" fill="#1b5e20" layoutX="48.0" layoutY="19.0" onMouseClicked="#selectAnswerA" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="239.20000000000005">
                <font>
-                  <Font size="29.0" />
+                  <Font size="15.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Text>
+               </cursor>
+            </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="AnswerC" layoutX="-13.0" mnemonicParsing="false" onAction="#selectAnswerC" prefHeight="82.0" prefWidth="246.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" textFill="#1b5e20">
+            <Button fx:id="AnswerC" layoutX="-13.0" mnemonicParsing="false" onMouseReleased="#selectAnswerC" prefHeight="82.0" prefWidth="246.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" textFill="#1b5e20">
                <font>
                   <Font size="13.0" />
                </font>
@@ -94,13 +92,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Text fx:id="Answer3" fill="#1b5e20" layoutX="46.0" layoutY="52.0" onMouseClicked="#selectAnswerC" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="127.9999877929688">
+            <Text fx:id="Answer3" fill="#1b5e20" layoutX="-10.0" layoutY="20.0" onMouseClicked="#selectAnswerA" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="239.20000000000005">
                <font>
-                  <Font size="29.0" />
+                  <Font size="15.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Text>
+               </cursor>
+            </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
