@@ -75,6 +75,9 @@ public class GameScreenMPCtrl {
     @FXML
     public ProgressBar time;
 
+    @FXML
+    public Label insteadOfLabel;
+
     private final ServerUtils server;
 
     private final MainCtrl mainCtrl;
@@ -139,6 +142,15 @@ public class GameScreenMPCtrl {
             mainCtrl.showMEQuestionMP(currentQuestion);
         }
         if (!found){
+            InsteadOfQuestion question2 = mapper.convertValue(currentQuestion,
+                    InsteadOfQuestion.class);
+            if (question2.getPromptedOption() != null){
+                currentQuestion = question2;
+                mainCtrl.showInsteadOfQuestionMP(currentQuestion);
+                found = true;
+            }
+        }
+        if (!found){
             HowMuchQuestion question2 = mapper.convertValue(currentQuestion,
                     HowMuchQuestion.class);
             if (question.getSecondOption() != null){
@@ -181,6 +193,24 @@ public class GameScreenMPCtrl {
         Answer3.setText(String.valueOf
                 (((HowMuchQuestion)currentQuestion).
                         getThirdOption().getConsumptionInWh()));
+    }
+
+
+    public void setInsteadOfQuestion() {
+        resetStage();
+        insteadOfLabel.setText("Instead of : "
+                + ((InsteadOfQuestion) currentQuestion).
+                getPromptedOption().toStringAnswer()
+                + " , you could do instead :");
+        Answer1.setText(String.valueOf
+                (((InsteadOfQuestion)currentQuestion).
+                        getFirstOption().getTitle()));
+        Answer2.setText(String.valueOf
+                (((InsteadOfQuestion)currentQuestion).
+                        getSecondOption().getTitle()));
+        Answer3.setText(String.valueOf
+                (((InsteadOfQuestion)currentQuestion).
+                        getThirdOption().getTitle()));
     }
 
     public void resetStage(){
@@ -397,4 +427,5 @@ public class GameScreenMPCtrl {
     public void setCurrentQuestion(Object currentQuestion) {
         this.currentQuestion = currentQuestion;
     }
+
 }

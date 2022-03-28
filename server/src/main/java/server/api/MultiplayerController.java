@@ -33,6 +33,9 @@ public class MultiplayerController {
     private HMQuestionController hmQuestionController;
 
     @Autowired
+    private InsteadOfController insteadOfController;
+
+    @Autowired
     private MEQuestionController meQuestionController;
 
     @Autowired
@@ -70,6 +73,9 @@ public class MultiplayerController {
                     break;
                 case 3:
                     questions.add(meQuestionController.getAll());
+                    break;
+                case 4:
+                    questions.add(insteadOfController.getAll());
                     break;
             }
         }
