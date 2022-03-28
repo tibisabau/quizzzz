@@ -18,7 +18,6 @@ package client.scenes;
 
 import client.utils.ServerUtils;
 import commons.Game;
-import commons.InsteadOfQuestion;
 import commons.Score;
 import commons.Activity;
 import javafx.application.Platform;
