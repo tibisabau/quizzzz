@@ -205,7 +205,7 @@ public class MainCtrl {
         this.meQuestionMP = new Scene(meQuestionMP.getValue());
 
         this.insteadOfQuestionMPCtrl = insteadOfQuestionMP.getKey();
-        this.insteadOfScene = new Scene(insteadOfQuestionMP.getValue());
+        this.insteadOfSceneMP = new Scene(insteadOfQuestionMP.getValue());
 
         showStartScreen();
         primaryStage.show();
@@ -406,6 +406,7 @@ public class MainCtrl {
         meQuestionMPCtrl.setGame(game);
         hmQuestionMPCtrl.setGame(game);
         gxQuestionMPCtrl.setGame(game);
+        insteadOfQuestionMPCtrl.setGame(game);
         meQuestionMPCtrl.getTypeOfQuestion();
         server.registerForMessages("/topic/nextQuestion", String.class, x -> {
             meQuestionMPCtrl.getTypeOfQuestion();

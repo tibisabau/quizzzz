@@ -134,26 +134,27 @@ public class GameScreenMPCtrl {
     public void getTypeOfQuestion(){
         Boolean found = false;
         currentQuestion = game.getNextQuestion();
-        MostEnergyQuestion question = mapper.convertValue(currentQuestion,
-                MostEnergyQuestion.class);
-        if (question.getIdentity() != null){
+
+        InsteadOfQuestion question = mapper.convertValue(currentQuestion,
+                InsteadOfQuestion.class);
+        if (question.getPromptedOption() != null){
             currentQuestion = question;
+            mainCtrl.showInsteadOfQuestionMP(currentQuestion);
             found = true;
-            mainCtrl.showMEQuestionMP(currentQuestion);
         }
         if (!found){
-            InsteadOfQuestion question2 = mapper.convertValue(currentQuestion,
-                    InsteadOfQuestion.class);
-            if (question2.getPromptedOption() != null){
+            MostEnergyQuestion question2 = mapper.convertValue(currentQuestion,
+                    MostEnergyQuestion.class);
+            if (question2.getIdentity() != null){
                 currentQuestion = question2;
-                mainCtrl.showInsteadOfQuestionMP(currentQuestion);
                 found = true;
+                mainCtrl.showMEQuestionMP(currentQuestion);
             }
         }
         if (!found){
             HowMuchQuestion question2 = mapper.convertValue(currentQuestion,
                     HowMuchQuestion.class);
-            if (question.getSecondOption() != null){
+            if (question2.getSecondOption() != null){
                 currentQuestion = question2;
                 mainCtrl.showHMQuestionMP(currentQuestion);
                 found = true;
