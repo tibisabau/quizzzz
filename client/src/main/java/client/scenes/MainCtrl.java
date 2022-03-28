@@ -365,14 +365,9 @@ public class MainCtrl {
         meQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         meQuestionMPCtrl.setMeQuestion();
         server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
-            System.out.println(emoji.getTitle());
-            meQuestionMPCtrl.setImageViewPic1(emoji);
-            FadeTransition fadeTransition = new
-                    FadeTransition(Duration.seconds(1),
-                    meQuestionMPCtrl.testEmoji);
-            fadeTransition.setFromValue(1.0);
-            fadeTransition.setToValue(0.0);
-            fadeTransition.play();
+            Platform.runLater(() -> {
+                meQuestionMPCtrl.setImageViewPic1(emoji);
+            });
         });
     }
 
@@ -386,17 +381,8 @@ public class MainCtrl {
         hmQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         hmQuestionMPCtrl.setHmQuestion();
         server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
-            System.out.println(emoji.getTitle());
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    hmQuestionMPCtrl.setImageViewPic1(emoji);
-//                    FadeTransition fadeTransition = new FadeTransition
-//                            (Duration.seconds(1), hmQuestionMPCtrl.testEmoji);
-//                    fadeTransition.setFromValue(1.0);
-//                    fadeTransition.setToValue(0.0);
-//                    fadeTransition.play();
-                }
+            Platform.runLater(() ->{
+                hmQuestionMPCtrl.setImageViewPic1(emoji);
             });
         });
     }
@@ -411,13 +397,9 @@ public class MainCtrl {
         gxQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         gxQuestionMPCtrl.setGxQuestion();
         server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
-            System.out.println(emoji.getTitle());
-            gxQuestionMPCtrl.setImageViewPic1(emoji);
-            FadeTransition fadeTransition = new FadeTransition
-                    (Duration.seconds(1), gxQuestionMPCtrl.testEmoji);
-            fadeTransition.setFromValue(1.0);
-            fadeTransition.setToValue(0.0);
-            fadeTransition.play();
+            Platform.runLater(() ->{
+                gxQuestionMPCtrl.setImageViewPic1(emoji);
+            });
         });
     }
 }

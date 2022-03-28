@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 
 import commons.*;
+import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.application.Platform;
@@ -89,40 +90,40 @@ public class GameScreenMPCtrl {
     public ImageView testEmoji;
 
     @FXML
-    private ImageView Pic1;
+    public ImageView Pic1;
 
     @FXML
-    private ImageView Pic2;
+    public ImageView Pic2;
 
     @FXML
-    private ImageView Pic3;
+    public ImageView Pic3;
 
     @FXML
-    private ImageView Pic4;
+    public ImageView Pic4;
 
     @FXML
-    private ImageView Pic5;
+    public ImageView Pic5;
 
     @FXML
-    private ImageView Pic6;
+    public ImageView Pic6;
 
     @FXML
-    private Label User1;
+    public Label User1;
 
     @FXML
-    private Label User2;
+    public Label User2;
 
     @FXML
-    private Label User3;
+    public Label User3;
 
     @FXML
-    private Label User4;
+    public Label User4;
 
     @FXML
-    private Label User5;
+    public Label User5;
 
     @FXML
-    private Label User6;
+    public Label User6;
 
     @FXML
     private ImageView EmojiMenuPic;
@@ -470,46 +471,106 @@ public class GameScreenMPCtrl {
 
     public void setImageViewPic1(Activity emoji) {
         if(Pic1.getOpacity() != 0) {
-            setImageViewPic2(Pic1.getImage(), User1.getText());
+            setImageViewPic2(Pic1.getImage(), User1.getText(), Pic1.getOpacity());
         }
         Pic1.setImage(mainCtrl.getEmoji(emoji.getImagePath()));
         User1.setText(emoji.getTitle());
+        FadeTransition fadeTransition = new FadeTransition
+                (Duration.seconds(3), Pic1);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+        fadeTransition.play();
+        FadeTransition fadeTransition1 = new FadeTransition
+                (Duration.seconds(3), User1);
+        fadeTransition1.setFromValue(1.0);
+        fadeTransition1.setToValue(0.0);
+        fadeTransition1.play();
     }
 
-    public void setImageViewPic2(Image image, String user) {
+    public void setImageViewPic2(Image image, String user, double opacity) {
         if(Pic2.getOpacity() != 0) {
-            setImageViewPic3(Pic2.getImage(), User2.getText());
+            setImageViewPic3(Pic2.getImage(), User2.getText(), Pic2.getOpacity());
         }
         Pic2.setImage(image);
         User2.setText(user);
+        FadeTransition fadeTransition = new FadeTransition
+                (Duration.seconds(3 * opacity), Pic2);
+        fadeTransition.setFromValue(opacity);
+        fadeTransition.setToValue(0.0);
+        fadeTransition.play();
+        FadeTransition fadeTransition1 = new FadeTransition
+                (Duration.seconds(3 * opacity), User2);
+        fadeTransition1.setFromValue(opacity);
+        fadeTransition1.setToValue(0.0);
+        fadeTransition1.play();
     }
 
-    public void setImageViewPic3(Image image, String user) {
+    public void setImageViewPic3(Image image, String user, double opacity) {
         if(Pic3.getOpacity() != 0) {
-            setImageViewPic4(Pic3.getImage(), User3.getText());
+            setImageViewPic4(Pic3.getImage(), User3.getText(), Pic3.getOpacity());
         }
         Pic3.setImage(image);
         User3.setText(user);
+        FadeTransition fadeTransition = new FadeTransition
+                (Duration.seconds(3 * opacity), Pic3);
+        fadeTransition.setFromValue(opacity);
+        fadeTransition.setToValue(0.0);
+        fadeTransition.play();
+        FadeTransition fadeTransition1 = new FadeTransition
+                (Duration.seconds(3 * opacity), User3);
+        fadeTransition1.setFromValue(opacity);
+        fadeTransition1.setToValue(0.0);
+        fadeTransition1.play();
     }
 
-    public void setImageViewPic4(Image image, String user) {
+    public void setImageViewPic4(Image image, String user, double opacity) {
         if(Pic4.getOpacity() != 0) {
-            setImageViewPic5(Pic4.getImage(), User4.getText());
+            setImageViewPic5(Pic4.getImage(), User4.getText(), Pic4.getOpacity());
         }
         Pic4.setImage(image);
         User4.setText(user);
+        FadeTransition fadeTransition = new FadeTransition
+                (Duration.seconds(3 * opacity), Pic4);
+        fadeTransition.setFromValue(opacity);
+        fadeTransition.setToValue(0.0);
+        fadeTransition.play();
+        FadeTransition fadeTransition1 = new FadeTransition
+                (Duration.seconds(3 * opacity), User4);
+        fadeTransition1.setFromValue(opacity);
+        fadeTransition1.setToValue(0.0);
+        fadeTransition1.play();
     }
 
-    public void setImageViewPic5(Image image, String user) {
+    public void setImageViewPic5(Image image, String user, double opacity) {
         if(Pic5.getOpacity() != 0) {
-            setImageViewPic6(Pic5.getImage(), User5.getText());
+            setImageViewPic6(Pic5.getImage(), User5.getText(), Pic5.getOpacity());
         }
         Pic5.setImage(image);
         User5.setText(user);
+        FadeTransition fadeTransition = new FadeTransition
+                (Duration.seconds(3 * opacity), Pic5);
+        fadeTransition.setFromValue(opacity);
+        fadeTransition.setToValue(0.0);
+        fadeTransition.play();
+        FadeTransition fadeTransition1 = new FadeTransition
+                (Duration.seconds(3 * opacity), User5);
+        fadeTransition1.setFromValue(opacity);
+        fadeTransition1.setToValue(0.0);
+        fadeTransition1.play();
     }
 
-    public void setImageViewPic6(Image image, String user) {
+    public void setImageViewPic6(Image image, String user, double opacity) {
         Pic6.setImage(image);
         User6.setText(user);
+        FadeTransition fadeTransition = new FadeTransition
+                (Duration.seconds(3 * opacity), Pic6);
+        fadeTransition.setFromValue(opacity);
+        fadeTransition.setToValue(0.0);
+        fadeTransition.play();
+        FadeTransition fadeTransition1 = new FadeTransition
+                (Duration.seconds(3 * opacity), User6);
+        fadeTransition1.setFromValue(opacity);
+        fadeTransition1.setToValue(0.0);
+        fadeTransition1.play();
     }
 }
