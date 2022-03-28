@@ -19,6 +19,8 @@ import javafx.util.Duration;
 
 import javafx.scene.image.ImageView;
 
+import java.time.temporal.ChronoUnit;
+
 
 public class GameScreenMPCtrl {
     @FXML
@@ -53,6 +55,9 @@ public class GameScreenMPCtrl {
 
     @FXML
     public Text Answer2;
+
+    @FXML
+    public Label correctAnswerQX;
 
     @FXML
     public Button AnswerC;
@@ -199,6 +204,8 @@ public class GameScreenMPCtrl {
 
     public void setInsteadOfQuestion() {
         resetStage();
+        InsteadOfQuestion question = (InsteadOfQuestion) currentQuestion;
+        setImageInsteadOfQuestion(question);
         insteadOfLabel.setText("Instead of : "
                 + ((InsteadOfQuestion) currentQuestion).
                 getPromptedOption().toStringAnswer()
@@ -258,6 +265,17 @@ public class GameScreenMPCtrl {
     public void setImagesGX(GuessXQuestion question){
         String path2 = question.getCorrectOption().getImagePath();
         imageView2.setImage(mainCtrl.getImage(path2));
+        startTimer();
+    }
+
+    /**
+     * Set image instead of question.
+     *
+     * @param question the question
+     */
+    public void setImageInsteadOfQuestion(InsteadOfQuestion question){
+        String path = question.getPromptedOption().getImagePath();
+        imageView1.setImage(mainCtrl.getImage(path));
         startTimer();
     }
 
@@ -322,7 +340,8 @@ public class GameScreenMPCtrl {
 
     public void showAnswers() {
         if(currentQuestion instanceof MostEnergyQuestion ||
-                currentQuestion instanceof HowMuchQuestion) {
+                currentQuestion instanceof HowMuchQuestion ||
+        currentQuestion instanceof InsteadOfQuestion) {
             AnswerA.setStyle(incorrectColor);
             AnswerB.setStyle(incorrectColor);
             AnswerC.setStyle(incorrectColor);
@@ -334,7 +353,9 @@ public class GameScreenMPCtrl {
                 AnswerC.setStyle(correctColor);
             }
         } else {
-        //Correct answer for Guess x question
+            GuessXQuestion cor = (GuessXQuestion) currentQuestion;
+            long corText = cor.getCorrectOption().getConsumptionInWh();
+            correctAnswerQX.setText("Correct answer: " + corText);
         }
     }
 

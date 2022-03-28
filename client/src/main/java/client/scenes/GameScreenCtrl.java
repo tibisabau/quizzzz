@@ -236,7 +236,7 @@ public class GameScreenCtrl {
             else {
                 guessAnswer.setStyle(incorrectColor);
                 //extra 2 lines because of checkstyle not above 80 character
-                GuessXQuestion cor = (GuessXQuestion)currentQuestion;
+                GuessXQuestion cor = (GuessXQuestion) currentQuestion;
                 long corText = cor.getCorrectOption().getConsumptionInWh();
                 correctAnswerQX.setText("Correct answer: " + corText);
             }
