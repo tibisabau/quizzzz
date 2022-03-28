@@ -11,9 +11,6 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
-import org.yaml.snakeyaml.events.Event;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Timer;
 
 import java.util.*;
@@ -26,6 +23,7 @@ public class MultiplayerController {
     private int counter;
 
     private Random random;
+
     private SimpMessagingTemplate msg;
 
     @Autowired
