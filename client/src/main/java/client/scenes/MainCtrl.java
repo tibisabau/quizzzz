@@ -75,6 +75,10 @@ public class MainCtrl {
 
     private GameScreenMPCtrl gxQuestionMPCtrl;
 
+    private Scene insteadOfSceneMP;
+
+    private GameScreenMPCtrl insteadOfQuestionMPCtrl;
+
     private Scene hmQuestionMP;
 
     private GameScreenMPCtrl hmQuestionMPCtrl;
@@ -154,6 +158,7 @@ public class MainCtrl {
                            Pair<GameScreenMPCtrl, Parent> gxQuestionMP,
                            Pair<GameScreenMPCtrl, Parent> hmQuestionMP,
                            Pair<GameScreenMPCtrl, Parent> meQuestionMP,
+                           Pair<GameScreenMPCtrl, Parent> insteadOfQuestionMP,
                            Pair<AdminPanelCtrl, Parent> adminPanel,
                            Pair<DisplayImageCtrl, Parent> image
             , Pair<AddActivityCtrl, Parent> add) {
@@ -198,6 +203,9 @@ public class MainCtrl {
 
         this.meQuestionMPCtrl = meQuestionMP.getKey();
         this.meQuestionMP = new Scene(meQuestionMP.getValue());
+
+        this.insteadOfQuestionMPCtrl = insteadOfQuestionMP.getKey();
+        this.insteadOfSceneMP = new Scene(insteadOfQuestionMP.getValue());
 
         showStartScreen();
         primaryStage.show();
@@ -398,6 +406,7 @@ public class MainCtrl {
         meQuestionMPCtrl.setGame(game);
         hmQuestionMPCtrl.setGame(game);
         gxQuestionMPCtrl.setGame(game);
+        insteadOfQuestionMPCtrl.setGame(game);
         meQuestionMPCtrl.getTypeOfQuestion();
         server.registerForMessages("/topic/nextQuestion", String.class, x -> {
             meQuestionMPCtrl.getTypeOfQuestion();
@@ -435,5 +444,16 @@ public class MainCtrl {
         primaryStage.setScene(gxQuestionMP);
         gxQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         gxQuestionMPCtrl.setGxQuestion();
+    }
+
+    /**
+     * Show InsteadOfQuestionMP
+     * @param currentQuestion
+     */
+    public void showInsteadOfQuestionMP(Object currentQuestion) {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(insteadOfSceneMP);
+        insteadOfQuestionMPCtrl.setCurrentQuestion(currentQuestion);
+        insteadOfQuestionMPCtrl.setInsteadOfQuestion();
     }
 }

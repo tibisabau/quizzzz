@@ -83,6 +83,7 @@
                   <Font size="20.0" />
                </font>
             </TextField>
+            <Label fx:id="correctAnswerQX" layoutX="271.0" layoutY="55.0" prefHeight="52.0" prefWidth="96.0" wrapText="true" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
