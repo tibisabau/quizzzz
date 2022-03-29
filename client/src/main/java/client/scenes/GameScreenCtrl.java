@@ -796,6 +796,7 @@ public class GameScreenCtrl {
         scoreText.setText("Score : " + String.valueOf(score));
     }
 
+
     /**
      * Disable a random answer that is not the correct answer.
      * And disables the button
