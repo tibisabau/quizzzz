@@ -59,11 +59,17 @@ public class waitingRoomController{
         this.players = new ArrayList<>();
     }
 
+    /**
+     * Setter for the score
+     * @param score
+     */
     public void setScore(Score score){
         this.score = score;
     }
 
-
+    /**
+     * Subscribing the to the server for the lobby and starting the game
+     */
     public void load() {
         System.out.println("i was in load");
         username.setCellValueFactory(new PropertyValueFactory<>("userName"));
@@ -103,16 +109,24 @@ public class waitingRoomController{
         });
     }
 
+    /**
+     * Stating a new multiplayer game
+     */
     public void startGame(){
         server.send("/app/game", "hello from the client");
     }
 
+    /**
+     * getter for the game
+     * @return
+     */
     public Game getGame(){
         return this.game;
     }
 
-
-
+    /**
+     * When someone leaves the lobby
+     */
     public void stop(){
         server.stop();
     }
