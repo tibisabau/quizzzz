@@ -60,18 +60,23 @@ public class Game {
     public void usePointJoker(){
         pointsJoker = false;
     }
+
     public void useAnswerJoker(){
         answerJoker = false;
     }
+
     public void useTimeJoker(){
         timeJoker = false;
     }
+
     public boolean isPointsJoker(){
         return pointsJoker;
     }
+
     public boolean isAnswerJoker(){
         return answerJoker;
     }
+
     public boolean isTimeJoker(){
         return timeJoker;
     }
