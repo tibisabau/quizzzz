@@ -101,11 +101,6 @@ public class MultiplayerController {
     }
 
 
-    @SendTo("/topic/nextQuestion")
-    public Integer sendString(Integer gameID){
-        return gameID;
-    }
-
     @MessageMapping("/joker")
     @SendTo("/topic/joker")
     public Game timeJoker(Game game){

@@ -182,6 +182,7 @@ public class GameScreenMPCtrl {
     }
 
     public void setMeQuestion() {
+
         resetStage();
         MostEnergyQuestion question = (MostEnergyQuestion) currentQuestion;
         setImagesME(question);
@@ -241,18 +242,12 @@ public class GameScreenMPCtrl {
         AnswerA.setStyle("-fx-background-color: WHITE");
         AnswerB.setStyle("-fx-background-color: WHITE");
         AnswerC.setStyle("-fx-background-color: WHITE");
-        Answer1.setStyle("-fx-font-weight: regular");
-        Answer2.setStyle("-fx-font-weight: regular");
-        Answer3.setStyle("-fx-font-weight: regular");
-        if(game.isAnswerJoker()){
-            answerJoker.setDisable(false);
-        }
-        if(game.isPointsJoker()){
-            pointsJoker.setDisable(false);
-        }
-        if(game.isTimeJoker()){
-            timeJoker.setDisable(false);
-        }
+        Answer1.setStyle("-fx-font-weight: normal");
+        Answer2.setStyle("-fx-font-weight: normal");
+        Answer3.setStyle("-fx-font-weight: normal");
+        answerJoker.setDisable(!game.isAnswerJoker());
+        pointsJoker.setDisable(!game.isPointsJoker());
+        timeJoker.setDisable(!game.isTimeJoker());
     }
 
     public void setGxQuestion() {
@@ -264,12 +259,11 @@ public class GameScreenMPCtrl {
                 question.getCorrectOption().getTitle()+ " -");
         guessAnswer.setDisable(false);
         guessAnswer.clear();
-        if(game.isPointsJoker()){
-            pointsJoker.setDisable(false);
-        }
-        if(game.isTimeJoker()){
-            timeJoker.setDisable(false);
-        }
+        guessAnswer.setStyle("-fx-background-color: WHITE");
+        correctAnswerQX.setText("");
+        pointsJoker.setDisable(!game.isPointsJoker());
+        timeJoker.setDisable(!game.isTimeJoker());
+
     }
 
     public void setImagesME(MostEnergyQuestion question){
@@ -345,8 +339,8 @@ public class GameScreenMPCtrl {
                 if(currentQuestion instanceof MostEnergyQuestion ||
                         currentQuestion instanceof HowMuchQuestion) {
                     disableAnswers();
-                    showAnswers();
                 }
+                showAnswers();
                 answerPoints(currentQuestion,answer);
             }
         }));
@@ -384,6 +378,12 @@ public class GameScreenMPCtrl {
                 AnswerC.setStyle(correctColor);
             }
         } else {
+            if(gameScreenCtrl.answerCorrect(currentQuestion, answer)){
+                guessAnswer.setStyle(correctColor);
+            }
+            else {
+                guessAnswer.setStyle(incorrectColor);
+            }
             GuessXQuestion cor = (GuessXQuestion) currentQuestion;
             long corText = cor.getCorrectOption().getConsumptionInWh();
             correctAnswerQX.setText("Correct answer: " + corText);
