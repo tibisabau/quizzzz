@@ -15,6 +15,12 @@ public class Game {
 
     private Score user;
 
+    private boolean pointsJoker;
+
+    private boolean answerJoker;
+
+    private boolean timeJoker;
+
     public Game(){
 
     }
@@ -22,6 +28,9 @@ public class Game {
     public Game(int id, List <Object> questions){
         this.questions = questions;
         this.id = id;
+        pointsJoker = true;
+        answerJoker = true;
+        timeJoker = true;
     }
 
     public int getCounter(){
@@ -46,5 +55,29 @@ public class Game {
 
     public Integer getID(){
         return this.id;
+    }
+
+    public void usePointJoker(){
+        pointsJoker = false;
+    }
+
+    public void useAnswerJoker(){
+        answerJoker = false;
+    }
+
+    public void useTimeJoker(){
+        timeJoker = false;
+    }
+
+    public boolean isPointsJoker(){
+        return pointsJoker;
+    }
+
+    public boolean isAnswerJoker(){
+        return answerJoker;
+    }
+
+    public boolean isTimeJoker(){
+        return timeJoker;
     }
 }

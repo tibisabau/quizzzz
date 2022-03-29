@@ -423,9 +423,22 @@ public class MainCtrl {
         gxQuestionMPCtrl.setGame(game);
         insteadOfQuestionMPCtrl.setGame(game);
         meQuestionMPCtrl.getTypeOfQuestion();
-        server.registerForMessages("/topic/nextQuestion", String.class, x -> {
-            System.out.println("test this stuff");
-            meQuestionMPCtrl.getTypeOfQuestion();
+
+        server.registerForMessages("/topic/joker", Game.class, game1 -> {
+            if (game1.getID() == game.getID() &&
+                    game1.getUser().getUserId() != game.getUser().getUserId()){
+                meQuestionMPCtrl.halfTime();
+            }
+        });
+        server.registerForMessages("/topic/nextQuestion", Integer.class, ID -> {
+            if(ID == game.getID()){
+                Platform.runLater(() -> meQuestionMPCtrl.getTypeOfQuestion());
+            }
+        });
+        server.registerForMessages("/topic/betweenScreen", Integer.class, X -> {
+            if(X == game.getID()){
+                Platform.runLater(() -> showInstructionScreen());
+            }
         });
     }
 
