@@ -117,8 +117,8 @@ public class waitingRoomController{
     }
 
     /**
-     * getter for the game
-     * @return
+     * Getter for the game
+     * @return game
      */
     public Game getGame(){
         return this.game;

@@ -60,7 +60,7 @@ public class MultiplayerController {
     /**
      * Create a new game and return it to everyone in the lobby
      * @param s
-     * @return
+     * @return game
      */
     @MessageMapping("/game")
     @SendTo("/topic/game")
@@ -104,7 +104,7 @@ public class MultiplayerController {
     /**
      * Send the emoji to the client
      * @param activity
-     * @return
+     * @return emoji
      */
     @MessageMapping("/emoji")
     @SendTo("/topic/emoji")
@@ -115,7 +115,7 @@ public class MultiplayerController {
     /**
      * Join the waiting room and return the list of scores
      * @param scores
-     * @return
+     * @return List of scores
      */
     @PostMapping(path = "join")
     public ResponseEntity<List<Score>>
@@ -128,7 +128,7 @@ public class MultiplayerController {
 
     /**
      * Accepts a listener for the long polling
-     * @return
+     * @return DeferredResult
      */
     @GetMapping(path = "update")
     public DeferredResult<ResponseEntity<List<Score>>> getLobby(){
