@@ -23,9 +23,10 @@ Note taker:     Stavros Alexandros Dimakos
  
 
 # Questions for the TA
-- Feedback on multiplayer mode - 10 minutes
+- Feedback on multiplayer mode - 15 minutes
 - Feedback on improved merge requests - 3 minutes
 - Feedback on comments - 3 minutes
+- Presentation week 10 - 3 minutes
 
 # Question round
 Any more questions?
