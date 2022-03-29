@@ -11,6 +11,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
+import java.util.Timer;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -23,6 +24,8 @@ public class MultiplayerController {
 
     private Random random;
 
+    private SimpMessagingTemplate msg;
+
     @Autowired
     private SimpMessagingTemplate simpMess;
 
@@ -31,6 +34,9 @@ public class MultiplayerController {
 
     @Autowired
     private HMQuestionController hmQuestionController;
+
+    @Autowired
+    private InsteadOfController insteadOfController;
 
     @Autowired
     private MEQuestionController meQuestionController;
@@ -49,13 +55,21 @@ public class MultiplayerController {
 
     private List<Game> currentGames = new ArrayList<>();
 
-    public MultiplayerController(Random random){
+    public MultiplayerController(Random random, SimpMessagingTemplate msg){
         this.random = random;
+        this.msg = msg;
+    }
+
+    //@MessageMapping("/nextQuestion")
+    @SendTo("/topic/nextQuestion")
+    public Integer sendString(Integer gameID){
+        System.out.println(gameID);
+        return gameID;
     }
 
     @MessageMapping("/game")
     @SendTo("/topic/game")
-    public Game createGame(@Payload String s){
+    public Game createGame(@Payload Integer s){
         System.out.println("_____\n"+s+"\n_____");
 
         List<Object> questions = new ArrayList<>();
@@ -71,6 +85,9 @@ public class MultiplayerController {
                 case 3:
                     questions.add(meQuestionController.getAll());
                     break;
+                case 4:
+                    questions.add(insteadOfController.getAll());
+                    break;
             }
         }
         Game game = new Game(counter++, questions);
@@ -79,7 +96,7 @@ public class MultiplayerController {
         this.listeners = new HashMap<>();
         this.lobby = new ArrayList<>();
         //game control timer init here
-        
+        gameSync(game);
         return game;
     }
 
@@ -119,6 +136,37 @@ public class MultiplayerController {
             listeners.remove(key);
         });
         return res;
+    }
+
+    /**
+     * Gets a multiplayer game in sync.
+     * @param game
+     */
+    public void gameSync(Game game){
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            int counter = 0;
+            @Override
+            public void run() {
+                counter++;
+                if (counter>9){
+                    timer.cancel();
+                    timer.purge();
+                    return;
+                }
+                msg.convertAndSend("/topic/nextQuestion", game.getID());
+            }
+        }, 15000, 15000);
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                msg.convertAndSend("/topic/betweenScreen", game.getID());
+            }
+        },12000, 15000);
+
+
+
     }
 
 }

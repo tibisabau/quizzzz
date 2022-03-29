@@ -387,7 +387,7 @@ public class ServerUtils {
 //        });
 //    }
 
-    public void send(String dest, String s){
+    public void send(String dest, Integer s){
         session.send(dest, s);
     }
 

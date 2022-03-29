@@ -7,7 +7,6 @@ import com.google.inject.Inject;
 import commons.*;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -57,6 +56,9 @@ public class GameScreenMPCtrl {
     public Text Answer2;
 
     @FXML
+    public Label correctAnswerQX;
+
+    @FXML
     public Button AnswerC;
 
     @FXML
@@ -76,6 +78,9 @@ public class GameScreenMPCtrl {
 
     @FXML
     public ProgressBar time;
+
+    @FXML
+    public Label insteadOfLabel;
 
     @FXML
     public Button pointsJoker;
@@ -109,6 +114,8 @@ public class GameScreenMPCtrl {
 
     private boolean pointsJokerInUse = false;
 
+    private int answer;
+
     /**
      * Instantiates a new Game screen ctrl.
      *
@@ -126,16 +133,11 @@ public class GameScreenMPCtrl {
 
 
     public void initialize(){
-        //Register for messages and call getTypeOfQuestion
-        server.registerForMessages("/topic/nextQuestion", Integer.class, id -> {
-            if(id == this.game.getID()){
-                Platform.runLater(() -> getTypeOfQuestion());
-            }
-        });
+
     }
 
     public void test(){
-        getTypeOfQuestion();
+
     }
 
     public void setGame(Game game){
@@ -145,17 +147,27 @@ public class GameScreenMPCtrl {
     public void getTypeOfQuestion(){
         Boolean found = false;
         currentQuestion = game.getNextQuestion();
-        MostEnergyQuestion question = mapper.convertValue(currentQuestion,
-                MostEnergyQuestion.class);
-        if (question.getIdentity() != null){
+
+        InsteadOfQuestion question = mapper.convertValue(currentQuestion,
+                InsteadOfQuestion.class);
+        if (question.getPromptedOption() != null){
             currentQuestion = question;
+            mainCtrl.showInsteadOfQuestionMP(currentQuestion);
             found = true;
-            mainCtrl.showMEQuestionMP(currentQuestion);
+        }
+        if (!found){
+            MostEnergyQuestion question2 = mapper.convertValue(currentQuestion,
+                    MostEnergyQuestion.class);
+            if (question2.getIdentity() != null){
+                currentQuestion = question2;
+                found = true;
+                mainCtrl.showMEQuestionMP(currentQuestion);
+            }
         }
         if (!found){
             HowMuchQuestion question2 = mapper.convertValue(currentQuestion,
                     HowMuchQuestion.class);
-            if (question.getSecondOption() != null){
+            if (question2.getSecondOption() != null){
                 currentQuestion = question2;
                 mainCtrl.showHMQuestionMP(currentQuestion);
                 found = true;
@@ -197,6 +209,26 @@ public class GameScreenMPCtrl {
                         getThirdOption().getConsumptionInWh()));
     }
 
+
+    public void setInsteadOfQuestion() {
+        resetStage();
+        InsteadOfQuestion question = (InsteadOfQuestion) currentQuestion;
+        setImageInsteadOfQuestion(question);
+        insteadOfLabel.setText("Instead of : "
+                + ((InsteadOfQuestion) currentQuestion).
+                getPromptedOption().toStringAnswer()
+                + " , you could do instead :");
+        Answer1.setText(String.valueOf
+                (((InsteadOfQuestion)currentQuestion).
+                        getFirstOption().getTitle()));
+        Answer2.setText(String.valueOf
+                (((InsteadOfQuestion)currentQuestion).
+                        getSecondOption().getTitle()));
+        Answer3.setText(String.valueOf
+                (((InsteadOfQuestion)currentQuestion).
+                        getThirdOption().getTitle()));
+    }
+
     public void resetStage(){
         qcounter.setText("Question: " + game.getCounter() + "/20");
         ScoreText.setText("Score : " + game.getUser().getScore());
@@ -209,6 +241,9 @@ public class GameScreenMPCtrl {
         AnswerA.setStyle("-fx-background-color: WHITE");
         AnswerB.setStyle("-fx-background-color: WHITE");
         AnswerC.setStyle("-fx-background-color: WHITE");
+        Answer1.setStyle("-fx-font-weight: regular");
+        Answer2.setStyle("-fx-font-weight: regular");
+        Answer3.setStyle("-fx-font-weight: regular");
         if(game.isAnswerJoker()){
             answerJoker.setDisable(false);
         }
@@ -260,6 +295,17 @@ public class GameScreenMPCtrl {
     }
 
     /**
+     * Set image instead of question.
+     *
+     * @param question the question
+     */
+    public void setImageInsteadOfQuestion(InsteadOfQuestion question){
+        String path = question.getPromptedOption().getImagePath();
+        imageView1.setImage(mainCtrl.getImage(path));
+        startTimer();
+    }
+
+    /**
      * Starts the time bar
      */
     public void startTimer(){
@@ -301,6 +347,7 @@ public class GameScreenMPCtrl {
                     disableAnswers();
                     showAnswers();
                 }
+                answerPoints(currentQuestion,answer);
             }
         }));
         bar.setCycleCount(1000);
@@ -323,7 +370,8 @@ public class GameScreenMPCtrl {
     public void showAnswers() {
         pointsJoker.setDisable(true);
         if(currentQuestion instanceof MostEnergyQuestion ||
-                currentQuestion instanceof HowMuchQuestion) {
+                currentQuestion instanceof HowMuchQuestion ||
+        currentQuestion instanceof InsteadOfQuestion) {
             AnswerA.setStyle(incorrectColor);
             AnswerB.setStyle(incorrectColor);
             AnswerC.setStyle(incorrectColor);
@@ -336,7 +384,9 @@ public class GameScreenMPCtrl {
                 AnswerC.setStyle(correctColor);
             }
         } else {
-        //Correct answer for Guess x question
+            GuessXQuestion cor = (GuessXQuestion) currentQuestion;
+            long corText = cor.getCorrectOption().getConsumptionInWh();
+            correctAnswerQX.setText("Correct answer: " + corText);
         }
     }
 
@@ -344,27 +394,27 @@ public class GameScreenMPCtrl {
      * Selecting answer A
      */
     public void selectAnswerA() throws InterruptedException {
-        stopTime();
+        Answer1.setStyle("-fx-font-weight: bold");
         disableAnswers();
-        answerPoints(currentQuestion, 1);
+        answer = 1;
     }
 
     /**
      * Selecting answer B
      */
     public void selectAnswerB() throws InterruptedException {
-        stopTime();
+        Answer2.setStyle("-fx-font-weight: bold");
         disableAnswers();
-        answerPoints(currentQuestion,2);
+        answer = 2;
     }
 
     /**
      * Selecting answer C
      */
     public void selectAnswerC() throws InterruptedException {
-        stopTime();
+        Answer3.setStyle("-fx-font-weight: bold");
         disableAnswers();
-        answerPoints(currentQuestion, 3);
+        answer = 3;
     }
 
     /**
@@ -390,12 +440,10 @@ public class GameScreenMPCtrl {
      * question
      */
     public void ok() {
-        stopTime();
         try{
-            answerPoints(currentQuestion,
-                    Integer.parseInt(guessAnswer.getText()));}
+            answer = Integer.parseInt(guessAnswer.getText());}
         catch (Exception e){
-            answerPoints(currentQuestion, 0);
+            answer = 0;
         }
     }
 
