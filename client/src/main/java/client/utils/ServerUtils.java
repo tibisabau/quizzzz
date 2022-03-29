@@ -301,6 +301,19 @@ public class ServerUtils {
     }
 
     /**
+     * gets the encoded image for the emojis
+     * @param path
+     * @return an encoded image
+     */
+    public String getEmoji(String path) {
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/entry/emoji/get")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .post(Entity.entity(path, APPLICATION_JSON), String.class);
+    }
+
+    /**
      * generates a "Guess The Amount Of Energy" question
      *
      * @return a "Guess The Amount Of Energy" question
@@ -387,7 +400,7 @@ public class ServerUtils {
 //        });
 //    }
 
-    public void send(String dest, String s){
+    public void send(String dest, Object s){
         session.send(dest, s);
     }
 

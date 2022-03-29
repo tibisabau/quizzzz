@@ -1,5 +1,6 @@
 package server.api;
 
+import commons.Activity;
 import commons.Game;
 import commons.Score;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,12 @@ public class MultiplayerController {
     @SendTo("/topic/nextQuestion")
     public Integer sendString(Integer gameID){
         return gameID;
+    }
+
+    @MessageMapping("/emoji")
+    @SendTo("/topic/emoji")
+    public Activity sendPath(Activity activity){
+        return new Activity(activity.getImagePath(), activity.getTitle(), 1);
     }
 
     @PostMapping(path = "join")

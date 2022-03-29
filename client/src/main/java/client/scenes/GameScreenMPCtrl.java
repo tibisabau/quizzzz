@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 
 import commons.*;
+import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.application.Platform;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -81,6 +83,57 @@ public class GameScreenMPCtrl {
     @FXML
     public Label insteadOfLabel;
 
+    @FXML
+    public ImageView Emoji1;
+
+    @FXML
+    public ImageView Emoji2;
+
+    @FXML
+    public ImageView Emoji3;
+
+    @FXML
+    public ImageView testEmoji;
+
+    @FXML
+    public ImageView Pic1;
+
+    @FXML
+    public ImageView Pic2;
+
+    @FXML
+    public ImageView Pic3;
+
+    @FXML
+    public ImageView Pic4;
+
+    @FXML
+    public ImageView Pic5;
+
+    @FXML
+    public ImageView Pic6;
+
+    @FXML
+    public Label User1;
+
+    @FXML
+    public Label User2;
+
+    @FXML
+    public Label User3;
+
+    @FXML
+    public Label User4;
+
+    @FXML
+    public Label User5;
+
+    @FXML
+    public Label User6;
+
+    @FXML
+    private ImageView EmojiMenuPic;
+
     private final ServerUtils server;
 
     private final MainCtrl mainCtrl;
@@ -114,6 +167,7 @@ public class GameScreenMPCtrl {
         this.server = server;
         this.mainCtrl = mainCtrl;
         this.gameScreenCtrl = gameScreenCtrl;
+
     }
 
 
@@ -124,6 +178,11 @@ public class GameScreenMPCtrl {
                 Platform.runLater(() -> getTypeOfQuestion());
             }
         });
+
+        EmojiMenuPic.setImage(mainCtrl.getEmoji("emoji1.png"));
+        Emoji1.setImage(mainCtrl.getEmoji("emoji1.png"));
+        Emoji2.setImage(mainCtrl.getEmoji("emoji2.png"));
+        Emoji3.setImage(mainCtrl.getEmoji("emoji3.png"));
     }
 
     public void test(){
@@ -448,4 +507,89 @@ public class GameScreenMPCtrl {
         this.currentQuestion = currentQuestion;
     }
 
+
+    public void onEmoji1() {
+        server.send("/app/emoji", new Activity("emoji1.png",
+                game.getUser().getUserName(), 1));
+    }
+
+    public void onEmoji2() {
+        server.send("/app/emoji", new Activity("emoji2.png",
+                game.getUser().getUserName(), 1));
+    }
+
+    public void onEmoji3() {
+        server.send("/app/emoji", new Activity("emoji3.png",
+                game.getUser().getUserName(), 1));
+    }
+
+    public void setImageViewPic1(Activity emoji) {
+        if(Pic1.getOpacity() != 0) {
+            setImageViewPic2(Pic1.getImage(), User1.getText(),
+                    Pic1.getOpacity());
+        }
+        Pic1.setImage(mainCtrl.getEmoji(emoji.getImagePath()));
+        User1.setText(emoji.getTitle());
+        fade(1, Pic1, User1);
+    }
+
+    public void setImageViewPic2(Image image, String user, double opacity) {
+        if(Pic2.getOpacity() != 0) {
+            setImageViewPic3(Pic2.getImage(), User2.getText(),
+                    Pic2.getOpacity());
+        }
+        Pic2.setImage(image);
+        User2.setText(user);
+        fade(opacity, Pic2, User2);
+    }
+
+    public void setImageViewPic3(Image image, String user, double opacity) {
+        if(Pic3.getOpacity() != 0) {
+            setImageViewPic4(Pic3.getImage(), User3.getText(),
+                    Pic3.getOpacity());
+        }
+        Pic3.setImage(image);
+        User3.setText(user);
+        fade(opacity, Pic3, User3);
+    }
+
+
+    public void setImageViewPic4(Image image, String user, double opacity) {
+        if(Pic4.getOpacity() != 0) {
+            setImageViewPic5(Pic4.getImage(), User4.getText(),
+                    Pic4.getOpacity());
+        }
+        Pic4.setImage(image);
+        User4.setText(user);
+        fade(opacity, Pic4, User4);
+    }
+
+    public void setImageViewPic5(Image image, String user, double opacity) {
+        if(Pic5.getOpacity() != 0) {
+            setImageViewPic6(Pic5.getImage(), User5.getText(),
+                    Pic5.getOpacity());
+        }
+        Pic5.setImage(image);
+        User5.setText(user);
+        fade(opacity, Pic5, User5);
+    }
+
+    public void setImageViewPic6(Image image, String user, double opacity) {
+        Pic6.setImage(image);
+        User6.setText(user);
+        fade(opacity, Pic6, User6);
+    }
+
+    private void fade(double opacity, ImageView pic3, Label user3) {
+        FadeTransition fadeTransition = new FadeTransition
+                (Duration.seconds(3 * opacity), pic3);
+        fadeTransition.setFromValue(opacity);
+        fadeTransition.setToValue(0.0);
+        fadeTransition.play();
+        FadeTransition fadeTransition1 = new FadeTransition
+                (Duration.seconds(3 * opacity), user3);
+        fadeTransition1.setFromValue(opacity);
+        fadeTransition1.setToValue(0.0);
+        fadeTransition1.play();
+    }
 }
