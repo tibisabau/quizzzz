@@ -21,6 +21,10 @@ public class InstructionSceneCtrl {
         this.mainCtrl = mainCtrl;
     }
 
+    /**
+     * show the start screen
+     * @param event
+     */
     public void gotItButtonClick(MouseEvent event){
         mainCtrl.showStartScreen();
     }

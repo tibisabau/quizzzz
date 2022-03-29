@@ -33,19 +33,11 @@ import java.io.ByteArrayInputStream;
 import java.util.Base64;
 import javafx.scene.image.Image;
 
-/**
- * The type Main ctrl.
- */
+
 public class MainCtrl {
 
-    /**
-     * The Counter.
-     */
     public int counter;
 
-    /**
-     * The Question list.
-     */
     public Set<Object> questionList;
 
     private boolean pointsJokerUsed;
@@ -225,10 +217,18 @@ public class MainCtrl {
         meQuestion.setQuestionList();
     }
 
+    /**
+     * Setter for Score
+     * @param score
+     */
     public void setScore(Score score){
         this.score = score;
     }
 
+    /**
+     * Setter for userName
+     * @param userName
+     */
     public void setUserName(String userName){
         this.userName = userName;
     }
@@ -342,6 +342,9 @@ public class MainCtrl {
         return new Image(inputStream);
     }
 
+    /**
+     * Show the waitting room
+     */
     public void showWaitingRoom(){
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(waitingRoomScene);
@@ -417,6 +420,10 @@ public class MainCtrl {
         addCtrl.editActivity = activity;
     }
 
+    /**
+     * Show the Multiplayer Game screen
+     * @param game
+     */
     public void showMpGameScreen(Game game){
         meQuestionMPCtrl.setGame(game);
         hmQuestionMPCtrl.setGame(game);
