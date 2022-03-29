@@ -152,7 +152,7 @@ public class MultiplayerController {
             public void run() {
                 msg.convertAndSend("/topic/betweenScreen", game.getID());
             }
-        },10000, 15000);
+        },12000, 15000);
 
 
 

@@ -100,6 +100,8 @@ public class GameScreenMPCtrl {
 
     private ObjectMapper mapper = new ObjectMapper();
 
+    private int answer;
+
     /**
      * Instantiates a new Game screen ctrl.
      *
@@ -225,6 +227,9 @@ public class GameScreenMPCtrl {
         AnswerA.setStyle("-fx-background-color: WHITE");
         AnswerB.setStyle("-fx-background-color: WHITE");
         AnswerC.setStyle("-fx-background-color: WHITE");
+        Answer1.setStyle("-fx-font-weight: regular");
+        Answer2.setStyle("-fx-font-weight: regular");
+        Answer3.setStyle("-fx-font-weight: regular");
     }
 
     public void setGxQuestion() {
@@ -312,6 +317,7 @@ public class GameScreenMPCtrl {
                     disableAnswers();
                     showAnswers();
                 }
+                answerPoints(currentQuestion,answer);
             }
         }));
         bar.setCycleCount(1000);
@@ -355,27 +361,27 @@ public class GameScreenMPCtrl {
      * Selecting answer A
      */
     public void selectAnswerA() throws InterruptedException {
-        stopTime();
+        Answer1.setStyle("-fx-font-weight: bold");
         disableAnswers();
-        answerPoints(currentQuestion, 1);
+        answer = 1;
     }
 
     /**
      * Selecting answer B
      */
     public void selectAnswerB() throws InterruptedException {
-        stopTime();
+        Answer2.setStyle("-fx-font-weight: bold");
         disableAnswers();
-        answerPoints(currentQuestion,2);
+        answer = 2;
     }
 
     /**
      * Selecting answer C
      */
     public void selectAnswerC() throws InterruptedException {
-        stopTime();
+        Answer3.setStyle("-fx-font-weight: bold");
         disableAnswers();
-        answerPoints(currentQuestion, 3);
+        answer = 3;
     }
 
     /**
@@ -401,12 +407,10 @@ public class GameScreenMPCtrl {
      * question
      */
     public void ok() {
-        stopTime();
         try{
-            answerPoints(currentQuestion,
-                    Integer.parseInt(guessAnswer.getText()));}
+            answer = Integer.parseInt(guessAnswer.getText());}
         catch (Exception e){
-            answerPoints(currentQuestion, 0);
+            answer = 0;
         }
     }
 
