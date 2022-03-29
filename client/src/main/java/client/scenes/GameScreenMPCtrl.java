@@ -213,7 +213,7 @@ public class GameScreenMPCtrl {
             answerJoker.setDisable(false);
         }
         if(game.isPointsJoker()){
-            answerJoker.setDisable(false);
+            pointsJoker.setDisable(false);
         }
         if(game.isTimeJoker()){
             timeJoker.setDisable(false);
@@ -230,7 +230,7 @@ public class GameScreenMPCtrl {
         guessAnswer.setDisable(false);
         guessAnswer.clear();
         if(game.isPointsJoker()){
-            answerJoker.setDisable(false);
+            pointsJoker.setDisable(false);
         }
         if(game.isTimeJoker()){
             timeJoker.setDisable(false);
