@@ -116,6 +116,13 @@ public class MultiplayerController {
         return ResponseEntity.ok(lobby);
     }
 
+
+    @GetMapping(path = "getPlayers")
+    public List<Score> getScores(){
+        List<Score> players = lobby;
+        return players;
+    }
+
     @GetMapping(path = "update")
     public DeferredResult<ResponseEntity<List<Score>>> getLobby(){
         var noContent =

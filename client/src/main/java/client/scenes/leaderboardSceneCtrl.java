@@ -67,8 +67,8 @@ public class leaderboardSceneCtrl {
         if( isSinlgePlayer ) {
             scores = server.getTopScores();
         } else {
+            scores = server.getMultiplayerScores();
         }
-
         for(int i = 0; i < scores.size(); i++){
             table.getItems().add(scores.get(i));
         }

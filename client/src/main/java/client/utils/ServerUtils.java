@@ -313,6 +313,14 @@ public class ServerUtils {
                 .get(GuessXQuestion.class);
     }
 
+    public List<Score> getMultiplayerScores() {
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/multiplayer/getPlayers")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .get( new GenericType<List<Score>>() {});
+    }
+
 
     public void joinGame(List<Score> score){
                 ClientBuilder.newClient(new ClientConfig())
