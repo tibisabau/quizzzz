@@ -483,7 +483,7 @@ public class GameScreenCtrl {
             this.createTimer();
         }else{
             server.updateScore(StartScreenCtrl.getOwnScore());
-            mainCtrl.showLeaderboard();
+            mainCtrl.showLeaderboard(true);
         }
     }
 
@@ -578,7 +578,7 @@ public class GameScreenCtrl {
                                 score.getScore());
                     } else {
                         server.updateScore(score);
-                        mainCtrl.showLeaderboard();
+                        mainCtrl.showLeaderboard(true);
                     }
         }));
         wait.play();

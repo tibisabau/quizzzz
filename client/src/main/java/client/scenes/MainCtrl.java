@@ -286,9 +286,9 @@ public class MainCtrl {
     /**
      * Show leaderboard screen.
      */
-    public void showLeaderboard(){
+    public void showLeaderboard(boolean isSinglePlayer){
         primaryStage.setTitle("Quizzzz");
-        leaderboardSceneCtrl.load();
+        leaderboardSceneCtrl.load(isSinglePlayer);
         primaryStage.setScene(leaderboardScene);
     }
 
@@ -424,7 +424,7 @@ public class MainCtrl {
         });
         server.registerForMessages("/topic/betweenScreen", Integer.class, X -> {
             if(X == game.getID()){
-                Platform.runLater(() -> showInstructionScreen());
+                Platform.runLater(() -> showLeaderboard(false));
             }
         });
     }

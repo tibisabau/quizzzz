@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class leaderboardSceneCtrl {
@@ -48,7 +49,7 @@ public class leaderboardSceneCtrl {
     /**
      * Fills the leaderboard with scores queried from the database.
      */
-    public void load(){
+    public void load(boolean isSinlgePlayer){
         name.setCellValueFactory(new PropertyValueFactory<>("userName"));
         value.setCellValueFactory(new PropertyValueFactory<>("score"));
         rank.setCellValueFactory(
@@ -62,7 +63,12 @@ public class leaderboardSceneCtrl {
         });
         rank.setSortable(false);
 
-        List<Score> scores = server.getTopScores();
+        List<Score> scores = new ArrayList<>();
+        if( isSinlgePlayer ) {
+            scores = server.getTopScores();
+        } else {
+        }
+
         for(int i = 0; i < scores.size(); i++){
             table.getItems().add(scores.get(i));
         }
