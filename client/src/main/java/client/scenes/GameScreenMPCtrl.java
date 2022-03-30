@@ -133,9 +133,6 @@ public class GameScreenMPCtrl {
     public Label User6;
 
     @FXML
-    private ImageView EmojiMenuPic;
-
-    @FXML
     public Button pointsJoker;
 
     @FXML
@@ -144,6 +141,8 @@ public class GameScreenMPCtrl {
     @FXML
     public Button timeJoker;
 
+    @FXML
+    private ImageView EmojiMenuPic;
 
     private final ServerUtils server;
 
@@ -428,7 +427,8 @@ public class GameScreenMPCtrl {
             if (timer <= 0.002){
                 bar.stop();
                 if(currentQuestion instanceof MostEnergyQuestion ||
-                        currentQuestion instanceof HowMuchQuestion) {
+                        currentQuestion instanceof HowMuchQuestion ||
+                        currentQuestion instanceof InsteadOfQuestion) {
                     disableAnswers();
                 }
                 showAnswers();
@@ -718,6 +718,7 @@ public class GameScreenMPCtrl {
         fadeTransition1.setToValue(0.0);
         fadeTransition1.play();
     }
+    
     /**
      * Uses answerJoker and disables an answer
      */
