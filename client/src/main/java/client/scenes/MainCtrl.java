@@ -34,19 +34,11 @@ import java.io.ByteArrayInputStream;
 import java.util.Base64;
 import javafx.scene.image.Image;
 
-/**
- * The type Main ctrl.
- */
+
 public class MainCtrl {
 
-    /**
-     * The Counter.
-     */
     public int counter;
 
-    /**
-     * The Question list.
-     */
     public Set<Object> questionList;
 
     private boolean pointsJokerUsed;
@@ -226,10 +218,18 @@ public class MainCtrl {
         meQuestion.setQuestionList();
     }
 
+    /**
+     * Setter for Score
+     * @param score
+     */
     public void setScore(Score score){
         this.score = score;
     }
 
+    /**
+     * Setter for userName
+     * @param userName
+     */
     public void setUserName(String userName){
         this.userName = userName;
     }
@@ -330,6 +330,22 @@ public class MainCtrl {
         return new Image(inputStream);
     }
 
+    /**
+     * decodes the emoji image as path
+     * @param path
+     * @return a new image
+     */
+    public Image getEmoji(String path) {
+        String imageString = server.getEmoji(path);
+        Base64.Decoder encoder = Base64.getDecoder();
+        byte[] byteArray = encoder.decode(imageString);
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(byteArray);
+        return new Image(inputStream);
+    }
+
+    /**
+     * Show the waitting room
+     */
     public void showWaitingRoom(){
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(waitingRoomScene);
@@ -405,6 +421,10 @@ public class MainCtrl {
         addCtrl.editActivity = activity;
     }
 
+    /**
+     * Show the Multiplayer Game screen
+     * @param game
+     */
     public void showMpGameScreen(Game game){
         meQuestionMPCtrl.setGame(game);
         hmQuestionMPCtrl.setGame(game);
@@ -444,6 +464,11 @@ public class MainCtrl {
         primaryStage.setScene(meQuestionMP);
         meQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         meQuestionMPCtrl.setMeQuestion();
+        server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
+            Platform.runLater(() -> {
+                meQuestionMPCtrl.setImageViewPic1(emoji);
+            });
+        });
     }
 
     /**
@@ -455,6 +480,11 @@ public class MainCtrl {
         primaryStage.setScene(hmQuestionMP);
         hmQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         hmQuestionMPCtrl.setHmQuestion();
+        server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
+            Platform.runLater(() ->{
+                hmQuestionMPCtrl.setImageViewPic1(emoji);
+            });
+        });
     }
 
     /**
@@ -466,6 +496,11 @@ public class MainCtrl {
         primaryStage.setScene(gxQuestionMP);
         gxQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         gxQuestionMPCtrl.setGxQuestion();
+        server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
+            Platform.runLater(() ->{
+                gxQuestionMPCtrl.setImageViewPic1(emoji);
+            });
+        });
     }
 
     /**
@@ -477,5 +512,10 @@ public class MainCtrl {
         primaryStage.setScene(insteadOfSceneMP);
         insteadOfQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         insteadOfQuestionMPCtrl.setInsteadOfQuestion();
+        server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
+            Platform.runLater(() ->{
+                insteadOfQuestionMPCtrl.setImageViewPic1(emoji);
+            });
+        });
     }
 }

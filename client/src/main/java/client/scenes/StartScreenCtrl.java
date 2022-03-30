@@ -166,6 +166,10 @@ public class StartScreenCtrl extends Application {
 
     }
 
+    /**
+     * show the waiting room
+     * @throws IOException
+     */
     public void goToWaitingRoom() throws  IOException{
         mainCtrl.showWaitingRoom();
     }

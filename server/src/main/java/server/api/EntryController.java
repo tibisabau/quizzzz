@@ -187,6 +187,28 @@ public class EntryController {
         return ResponseEntity.badRequest().build();
     }
 
+    /**
+     * encodes an image as param
+     * @param path
+     * @return a response entity
+     */
+    @PostMapping("emoji/get")
+    public ResponseEntity<String> getEmoji(@RequestBody String path) {
+        try {
+            BufferedImage img = ImageIO.read(
+                    new File("./Emojis/" + path));
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ImageIO.write(img, path.split("\\.")[1], outputStream);
+            Base64.Encoder encoder = Base64.getEncoder();
+            String encodedImage = encoder.
+                    encodeToString(outputStream.toByteArray());
+            return ResponseEntity.ok(encodedImage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
 
     /**
      * creates the image on the server

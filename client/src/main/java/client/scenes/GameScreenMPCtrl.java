@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 
 import commons.*;
+import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -83,6 +85,57 @@ public class GameScreenMPCtrl {
     public Label insteadOfLabel;
 
     @FXML
+    public ImageView Emoji1;
+
+    @FXML
+    public ImageView Emoji2;
+
+    @FXML
+    public ImageView Emoji3;
+
+    @FXML
+    public ImageView testEmoji;
+
+    @FXML
+    public ImageView Pic1;
+
+    @FXML
+    public ImageView Pic2;
+
+    @FXML
+    public ImageView Pic3;
+
+    @FXML
+    public ImageView Pic4;
+
+    @FXML
+    public ImageView Pic5;
+
+    @FXML
+    public ImageView Pic6;
+
+    @FXML
+    public Label User1;
+
+    @FXML
+    public Label User2;
+
+    @FXML
+    public Label User3;
+
+    @FXML
+    public Label User4;
+
+    @FXML
+    public Label User5;
+
+    @FXML
+    public Label User6;
+
+    @FXML
+    private ImageView EmojiMenuPic;
+
+    @FXML
     public Button pointsJoker;
 
     @FXML
@@ -129,21 +182,34 @@ public class GameScreenMPCtrl {
         this.server = server;
         this.mainCtrl = mainCtrl;
         this.gameScreenCtrl = gameScreenCtrl;
+
     }
 
-
+    /**
+     *  Initialize the pictures for the reactions
+     */
     public void initialize(){
-
+        EmojiMenuPic.setImage(mainCtrl.getEmoji("emoji1.png"));
+        Emoji1.setImage(mainCtrl.getEmoji("emoji1.png"));
+        Emoji2.setImage(mainCtrl.getEmoji("emoji2.png"));
+        Emoji3.setImage(mainCtrl.getEmoji("emoji3.png"));
     }
 
     public void test(){
 
     }
 
+    /**
+     * Setter for the game object
+     * @param game
+     */
     public void setGame(Game game){
         this.game = game;
     }
 
+    /**
+     * Gets the type of the next question
+     */
     public void getTypeOfQuestion(){
         Boolean found = false;
         currentQuestion = game.getNextQuestion();
@@ -181,6 +247,9 @@ public class GameScreenMPCtrl {
         }
     }
 
+    /**
+     * Creates the visuals for the Most Energy question
+     */
     public void setMeQuestion() {
 
         resetStage();
@@ -189,9 +258,11 @@ public class GameScreenMPCtrl {
         Answer1.setText(question.getFirstOption().toStringAnswer());
         Answer2.setText(question.getSecondOption().toStringAnswer());
         Answer3.setText(question.getThirdOption().toStringAnswer());
-
     }
 
+    /**
+     * Creates the visuals for the How Much question
+     */
     public void setHmQuestion() {
         resetStage();
         HowMuchQuestion question = (HowMuchQuestion) currentQuestion;
@@ -210,7 +281,9 @@ public class GameScreenMPCtrl {
                         getThirdOption().getConsumptionInWh()));
     }
 
-
+    /**
+     * Creates the visuals for the Instead of question
+     */
     public void setInsteadOfQuestion() {
         resetStage();
         InsteadOfQuestion question = (InsteadOfQuestion) currentQuestion;
@@ -230,6 +303,9 @@ public class GameScreenMPCtrl {
                         getThirdOption().getTitle()));
     }
 
+    /**
+     * Resets the buttons after each question
+     */
     public void resetStage(){
         qcounter.setText("Question: " + game.getCounter() + "/20");
         ScoreText.setText("Score : " + game.getUser().getScore());
@@ -250,6 +326,9 @@ public class GameScreenMPCtrl {
         timeJoker.setDisable(!game.isTimeJoker());
     }
 
+    /**
+     * Creates the visuals for the Guess X of question
+     */
     public void setGxQuestion() {
         qcounter.setText("Question: " + game.getCounter() + "/20");
         ScoreText.setText("Score : " + game.getUser().getScore());
@@ -266,6 +345,10 @@ public class GameScreenMPCtrl {
 
     }
 
+    /**
+     * Sets the images for Most Energy question
+     * @param question
+     */
     public void setImagesME(MostEnergyQuestion question){
         String path1 = question.getFirstOption().getImagePath();
         String path2 = question.getSecondOption().getImagePath();
@@ -276,12 +359,20 @@ public class GameScreenMPCtrl {
         startTimer();
     }
 
+    /**
+     * Sets the images for How much question
+     * @param question
+     */
     public void setImagesHQ(HowMuchQuestion question){
         String path2 = question.getSecondOption().getImagePath();
         imageView2.setImage(mainCtrl.getImage(path2));
         startTimer();
     }
 
+    /**
+     * Sets the images for Guess X question
+     * @param question
+     */
     public void setImagesGX(GuessXQuestion question){
         String path2 = question.getCorrectOption().getImagePath();
         imageView2.setImage(mainCtrl.getImage(path2));
@@ -361,6 +452,9 @@ public class GameScreenMPCtrl {
         answerJoker.setDisable(true);
     }
 
+    /**
+     * Shows the correct Answer of the current question
+     */
     public void showAnswers() {
         pointsJoker.setDisable(true);
         if(currentQuestion instanceof MostEnergyQuestion ||
@@ -476,14 +570,154 @@ public class GameScreenMPCtrl {
         }
     }
 
+    /**
+     * Change screen to start screen
+     */
     public void goToStartScene(){
         mainCtrl.showStartScreen();
     }
 
+    /**
+     * Setter currentQuestion
+     * @param currentQuestion
+     */
     public void setCurrentQuestion(Object currentQuestion) {
         this.currentQuestion = currentQuestion;
     }
 
+
+    /**
+     * Clicking on the first Emoji
+     */
+    public void onEmoji1() {
+        server.send("/app/emoji", new Activity("emoji1.png",
+                game.getUser().getUserName(), 1));
+    }
+
+    /**
+     * Clicking on the Second Emoji
+     */
+    public void onEmoji2() {
+        server.send("/app/emoji", new Activity("emoji2.png",
+                game.getUser().getUserName(), 1));
+    }
+
+    /**
+     * Clicking on the Third Emoji
+     */
+    public void onEmoji3() {
+        server.send("/app/emoji", new Activity("emoji3.png",
+                game.getUser().getUserName(), 1));
+    }
+
+    /**
+     * Set the first emoji slot to the picture and user
+     * @param emoji
+     */
+    public void setImageViewPic1(Activity emoji) {
+        if(Pic1.getOpacity() != 0) {
+            setImageViewPic2(Pic1.getImage(), User1.getText(),
+                    Pic1.getOpacity());
+        }
+        Pic1.setImage(mainCtrl.getEmoji(emoji.getImagePath()));
+        User1.setText(emoji.getTitle());
+        fade(1, Pic1, User1);
+    }
+
+    /**
+     * Set the second emoji slot to the picture and user
+     * @param image
+     * @param user
+     * @param opacity
+     */
+    public void setImageViewPic2(Image image, String user, double opacity) {
+        if(Pic2.getOpacity() != 0) {
+            setImageViewPic3(Pic2.getImage(), User2.getText(),
+                    Pic2.getOpacity());
+        }
+        Pic2.setImage(image);
+        User2.setText(user);
+        fade(opacity, Pic2, User2);
+    }
+
+    /**
+     * Set the third emoji slot to the picture and user
+     * @param image
+     * @param user
+     * @param opacity
+     */
+    public void setImageViewPic3(Image image, String user, double opacity) {
+        if(Pic3.getOpacity() != 0) {
+            setImageViewPic4(Pic3.getImage(), User3.getText(),
+                    Pic3.getOpacity());
+        }
+        Pic3.setImage(image);
+        User3.setText(user);
+        fade(opacity, Pic3, User3);
+    }
+
+    /**
+     * Set the fourth emoji slot to the picture and user
+     * @param image
+     * @param user
+     * @param opacity
+     */
+    public void setImageViewPic4(Image image, String user, double opacity) {
+        if(Pic4.getOpacity() != 0) {
+            setImageViewPic5(Pic4.getImage(), User4.getText(),
+                    Pic4.getOpacity());
+        }
+        Pic4.setImage(image);
+        User4.setText(user);
+        fade(opacity, Pic4, User4);
+    }
+
+    /**
+     * Set the fifth emoji slot to the picture and user
+     * @param image
+     * @param user
+     * @param opacity
+     */
+    public void setImageViewPic5(Image image, String user, double opacity) {
+        if(Pic5.getOpacity() != 0) {
+            setImageViewPic6(Pic5.getImage(), User5.getText(),
+                    Pic5.getOpacity());
+        }
+        Pic5.setImage(image);
+        User5.setText(user);
+        fade(opacity, Pic5, User5);
+    }
+
+    /**
+     * Set the sixth emoji slot to the picture and user
+     * @param image
+     * @param user
+     * @param opacity
+     */
+    public void setImageViewPic6(Image image, String user, double opacity) {
+        Pic6.setImage(image);
+        User6.setText(user);
+        fade(opacity, Pic6, User6);
+    }
+
+    /**
+     * fading animation
+     * @param opacity
+     * @param pic
+     * @param user
+     */
+    private void fade(double opacity, ImageView pic, Label user) {
+        FadeTransition fadeTransition = new FadeTransition
+                (Duration.seconds(3 * opacity), pic);
+        fadeTransition.setFromValue(opacity);
+        fadeTransition.setToValue(0.0);
+        fadeTransition.play();
+        FadeTransition fadeTransition1 = new FadeTransition
+                (Duration.seconds(3 * opacity), user);
+        fadeTransition1.setFromValue(opacity);
+        fadeTransition1.setToValue(0.0);
+        fadeTransition1.play();
+    }
     /**
      * Uses answerJoker and disables an answer
      */
