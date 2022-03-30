@@ -532,7 +532,8 @@ public class GameScreenMPCtrl {
     public void useTimeJoker(){
         timeJoker.setDisable(true);
         game.useTimeJoker();
-        server.sendGame("/app/joker", game);
+        server.sendGame("/app/joker",
+                new Joker(game.getUser().getUserId(), game.getID()));
 
     }
 

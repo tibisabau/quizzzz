@@ -1,6 +1,7 @@
 package server.api;
 
 import commons.Game;
+import commons.Joker;
 import commons.Score;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -103,8 +104,9 @@ public class MultiplayerController {
 
     @MessageMapping("/joker")
     @SendTo("/topic/joker")
-    public Game timeJoker(Game game){
-        return game;
+    public Joker timeJoker(Joker joker){
+        System.out.println("joker gebruikt");
+        return joker;
     }
 
     @PostMapping(path = "join")

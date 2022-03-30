@@ -18,6 +18,7 @@ package client.scenes;
 
 import client.utils.ServerUtils;
 import commons.Game;
+import commons.Joker;
 import commons.Score;
 import commons.Activity;
 import javafx.application.Platform;
@@ -411,10 +412,15 @@ public class MainCtrl {
         insteadOfQuestionMPCtrl.setGame(game);
         meQuestionMPCtrl.getTypeOfQuestion();
 
-        server.registerForMessages("/topic/joker", Game.class, game1 -> {
-            if (game1.getID() == game.getID() &&
-                    game1.getUser().getUserId() != game.getUser().getUserId()){
+        server.registerForMessages("/topic/joker", Joker.class, joker -> {
+            System.out.println("Time Joker is used");
+            if (joker.getGameID() == game.getID() &&
+                    joker.getUserID() != game.getUser().getUserId()){
+
                 meQuestionMPCtrl.halfTime();
+                gxQuestionMPCtrl.halfTime();
+                insteadOfQuestionMPCtrl.halfTime();
+                hmQuestionMPCtrl.halfTime();
             }
         });
         server.registerForMessages("/topic/nextQuestion", Integer.class, ID -> {
