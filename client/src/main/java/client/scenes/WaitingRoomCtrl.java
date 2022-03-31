@@ -105,7 +105,6 @@ public class WaitingRoomCtrl {
                 startButton.setDisable(true);
                 Platform.runLater(() -> mainCtrl.showMpGameScreen(game));
             });
-
     }
 
     /**

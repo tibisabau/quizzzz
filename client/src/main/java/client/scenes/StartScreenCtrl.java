@@ -191,6 +191,7 @@ public class StartScreenCtrl extends Application {
             nicknameField.setDisable(false);
             singlePlayerButton.setDisable(false);
             multiPlayerButton.setDisable(false);
+            adminPanel.setDisable(false);
         }
         catch(Exception e) {
             var alert = new Alert(Alert.AlertType.ERROR);
@@ -216,5 +217,6 @@ public class StartScreenCtrl extends Application {
         singlePlayerButton.setDisable(true);
         multiPlayerButton.setDisable(true);
         nicknameField.setDisable(true);
+        adminPanel.setDisable(true);
     }
 }
