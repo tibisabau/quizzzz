@@ -71,7 +71,6 @@ public class WaitingRoomCtrl {
      * Subscribing the to the server for the lobby and starting the game
      */
     public void load() {
-        System.out.println("i was in load");
         username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         id.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Score, String>,
@@ -100,7 +99,6 @@ public class WaitingRoomCtrl {
         server.joinGame(players);
 
             server.registerForMessages("/topic/game", Game.class, game -> {
-                System.out.println("hello from server");
                 this.game = game;
                 this.game.updateScore(this.score);
                 quitButton.setDisable(true);

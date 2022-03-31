@@ -251,7 +251,6 @@ public class MainCtrl {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(meQuestionScene);
         meQuestion.setAnswer(questionType);
-        System.out.println(server.getSession());
     }
 
     /**
@@ -263,7 +262,6 @@ public class MainCtrl {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(hmQuestionScene);
         hmQuestion.setAnswer(questionType);
-        System.out.println(server.getSession());
     }
 
     /**
@@ -273,7 +271,6 @@ public class MainCtrl {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(gxQuestionScene);
         gxQuestion.createGXQuestion();
-        System.out.println(server.getSession());
     }
 
     /**
@@ -285,7 +282,6 @@ public class MainCtrl {
         primaryStage.setTitle("Quizzzz");
         insteadOfQuestion.setAnswer(questionType);
         primaryStage.setScene(insteadOfScene);
-        System.out.println(server.getSession());
     }
 
     /**

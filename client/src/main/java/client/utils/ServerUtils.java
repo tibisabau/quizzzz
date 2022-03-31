@@ -393,7 +393,6 @@ public class ServerUtils {
      */
     public <T> void registerForMessages(String dest,
                                         Class<T> type, Consumer<T> consumer){
-        System.out.println(session);
         session.subscribe(dest, new StompFrameHandler() {
             @Override
             public Type getPayloadType(StompHeaders headers) {
