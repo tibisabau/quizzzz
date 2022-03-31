@@ -85,7 +85,6 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
          <children>
             <Button fx:id="instructionsButton" layoutX="185.0" mnemonicParsing="false" onMouseClicked="#instructionButtonClick" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: #b9f6caff;" text="How to play?" textFill="#1b5e20" underline="true">
->>>>>>> main
                <font>
                   <Font size="14.0" />
                </font>

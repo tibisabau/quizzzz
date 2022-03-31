@@ -463,7 +463,7 @@ public class ServerUtils {
         catch(Exception e) {
             e.printStackTrace();
         }
-        return "400 BAD_REQUEST";
+        throw new RuntimeException();
     }
 
     /**
