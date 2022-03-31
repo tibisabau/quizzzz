@@ -64,7 +64,8 @@ public class AddActivityCtrl {
      */
     public void ok() {
         try {
-            if(title.getText().isEmpty() || consumption.getText().isEmpty() || imageFile == null) {
+            if(title.getText().isEmpty() || consumption.getText().isEmpty()
+                    || imageFile == null) {
                 throw new IllegalStateException();
             }
             if(toAdd) {
@@ -101,7 +102,8 @@ public class AddActivityCtrl {
             e.printStackTrace();
             var alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.APPLICATION_MODAL);
-            alert.setContentText("The image should be of the type: \"name.extension\"");
+            alert.setContentText("The image should be of the type: " +
+                    "\"name.extension\"");
             alert.showAndWait();
             return;
         }
