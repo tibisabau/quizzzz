@@ -718,7 +718,7 @@ public class GameScreenMPCtrl {
         fadeTransition1.setToValue(0.0);
         fadeTransition1.play();
     }
-    
+
     /**
      * Uses answerJoker and disables an answer
      */

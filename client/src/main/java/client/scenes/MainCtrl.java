@@ -423,6 +423,8 @@ public class MainCtrl {
 
     /**
      * Show the Multiplayer Game screen
+     * and registers for 3 websockets
+     * for next question, betweenScreen and Time joker.
      * @param game
      */
     public void showMpGameScreen(Game game){
