@@ -285,6 +285,7 @@ public class MainCtrl {
 
     /**
      * Show leaderboard screen.
+     * @param isSinglePlayer checks if the game is single player
      */
     public void showLeaderboard(boolean isSinglePlayer){
         primaryStage.setTitle("Quizzzz");

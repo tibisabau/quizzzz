@@ -11,6 +11,8 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
+import server.database.ScoreRepository;
+
 import java.util.Timer;
 
 import java.util.*;
@@ -44,6 +46,9 @@ public class MultiplayerController {
     @Autowired
     private GuessXController guessXController;
 
+    private final ScoreRepository repo;
+
+
     //when starting a game the lobby should be added here,
     // so ids of all players in each game are here,
     // we'll figure sth out from there
@@ -55,9 +60,14 @@ public class MultiplayerController {
 
     private List<Game> currentGames = new ArrayList<>();
 
-    public MultiplayerController(Random random, SimpMessagingTemplate msg){
+    private List<Score> players = new ArrayList<>();
+
+    public MultiplayerController(Random random,
+                                 SimpMessagingTemplate msg,
+                                 ScoreRepository repo){
         this.random = random;
         this.msg = msg;
+        this.repo = repo;
     }
 
     //@MessageMapping("/nextQuestion")
@@ -111,16 +121,10 @@ public class MultiplayerController {
     public ResponseEntity<List<Score>>
     joinGame(@RequestBody List<Score> scores){
         lobby.addAll(scores);
+        players.addAll(scores);
         System.out.println(lobby.toString());
         listeners.forEach((k, l) -> l.accept(lobby));
         return ResponseEntity.ok(lobby);
-    }
-
-
-    @GetMapping(path = "getPlayers")
-    public List<Score> getScores(){
-        List<Score> players = lobby;
-        return players;
     }
 
     @GetMapping(path = "update")
@@ -138,6 +142,20 @@ public class MultiplayerController {
             listeners.remove(key);
         });
         return res;
+    }
+
+    @GetMapping(path = "getMP")
+    public List<Score> getPlayers() {
+        List<Score> allScores = repo.findAll();
+        List<Score> result = new ArrayList<>();
+        for(Score score1 : players ) {
+            for(Score score2 : allScores ) {
+                if(score1.getUserName().equals(score2.getUserName())) {
+                    result.add(score2);
+                }
+            }
+        }
+        return result;
     }
 
     /**
@@ -170,6 +188,9 @@ public class MultiplayerController {
 
 
     }
+
+
+
 
 }
 
