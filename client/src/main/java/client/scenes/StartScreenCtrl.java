@@ -187,7 +187,7 @@ public class StartScreenCtrl extends Application {
 
     public void tryServer() {
         try{
-            server.setSession(chooseServer.getText());
+            mainCtrl.setWs(chooseServer.getText());
             nicknameField.setDisable(false);
             singlePlayerButton.setDisable(false);
             multiPlayerButton.setDisable(false);

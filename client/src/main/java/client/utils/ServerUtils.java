@@ -60,10 +60,13 @@ public class ServerUtils {
     private static final ExecutorService exec =
             Executors.newSingleThreadExecutor();
 
-    private StompSession session;
+    private static StompSession session;
 
+    /**
+     * set the websocket url
+     * @param server
+     */
     public void setSession(String server) {
-
         SERVER = "http://" + server + "/";
         session = connect("ws://" + server + "/websocket");
     }
@@ -374,6 +377,7 @@ public class ServerUtils {
 
     public <T> void registerForMessages(String dest,
                                         Class<T> type, Consumer<T> consumer){
+        System.out.println(session);
         session.subscribe(dest, new StompFrameHandler() {
             @Override
             public Type getPayloadType(StompHeaders headers) {
@@ -465,5 +469,9 @@ public class ServerUtils {
         String url = "/api/entry/save";
         String response = updateImage(image, url);
         return response;
+    }
+
+    public StompSession getSession() {
+        return session;
     }
 }
