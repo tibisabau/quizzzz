@@ -36,6 +36,9 @@ public class StartScreenCtrl extends Application {
     private TextField nicknameField;
 
     @FXML
+    private TextField chooseServer;
+
+    @FXML
     private Button singlePlayerButton;
 
     @FXML
@@ -123,7 +126,7 @@ public class StartScreenCtrl extends Application {
             return;
         }
         cancel();
-        mainCtrl.showStartScreen();
+//        mainCtrl.showStartScreen();
     }
 
     /**
@@ -182,11 +185,33 @@ public class StartScreenCtrl extends Application {
         mainCtrl.showAdminPanel();
     }
 
+    public void tryServer() {
+        try{
+            server.setSession(chooseServer.getText());
+            nicknameField.setDisable(false);
+            singlePlayerButton.setDisable(false);
+            multiPlayerButton.setDisable(false);
+        }
+        catch(Exception e) {
+            var alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setContentText("THE SERVER DOES NOT EXIST!");
+            alert.showAndWait();
+            return;
+        }
+    }
+
     /**
      * getter for ownScore
      * @return ownScore
      */
     public static Score getOwnScore() {
         return ownScore;
+    }
+
+    public void disableButtons() {
+        singlePlayerButton.setDisable(true);
+        multiPlayerButton.setDisable(true);
+        nicknameField.setDisable(true);
     }
 }

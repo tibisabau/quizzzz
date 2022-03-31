@@ -55,15 +55,17 @@ import org.springframework.web.socket.messaging.WebSocketStompClient;
  */
 public class ServerUtils {
 
-    private static String SERVER = "http://localhost:8080/";
+    private static String SERVER;
 
     private static final ExecutorService exec =
             Executors.newSingleThreadExecutor();
 
     private StompSession session;
 
-    public void setSession(String url) {
-        this.session = connect(url);
+    public void setSession(String server) {
+
+        SERVER = "http://" + server + "/";
+        session = connect("ws://" + server + "/websocket");
     }
 
     /**
