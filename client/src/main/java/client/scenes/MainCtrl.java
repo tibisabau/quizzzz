@@ -88,7 +88,7 @@ public class MainCtrl {
 
     private Scene leaderboardScene;
 
-    private leaderboardSceneCtrl leaderboardSceneCtrl;
+    private LeaderboardSceneCtrl leaderboardSceneCtrl;
 
     private Scene adminPanelScene;
 
@@ -108,7 +108,7 @@ public class MainCtrl {
 
     private Scene waitingRoomScene;
 
-    private waitingRoomController waitingRoomCtrl;
+    private WaitingRoomCtrl waitingRoomCtrl;
 
     private Score score;
 
@@ -141,14 +141,14 @@ public class MainCtrl {
             Parent> startScreen
             , Pair<InstructionSceneCtrl, Parent> instructionScene,
                            Pair<GameScreenCtrl, Parent> meQuestion,
-                           Pair<leaderboardSceneCtrl,
+                           Pair<LeaderboardSceneCtrl,
                                    Parent> leaderboardScreen,
 
                            Pair<GameScreenCtrl, Parent> hmQuestion,
                            Pair<GameScreenCtrl, Parent> gxQuestion,
                            Pair<GameScreenCtrl, Parent> insteadOfQuestion,
                            Pair<InBetweenScreenCtrl, Parent> inBetweenScreen,
-                           Pair<waitingRoomController, Parent> waitingRoom,
+                           Pair<WaitingRoomCtrl, Parent> waitingRoom,
                            Pair<GameScreenMPCtrl, Parent> gxQuestionMP,
                            Pair<GameScreenMPCtrl, Parent> hmQuestionMP,
                            Pair<GameScreenMPCtrl, Parent> meQuestionMP,

@@ -14,7 +14,7 @@ import javafx.util.Callback;
 
 import java.util.List;
 
-public class leaderboardSceneCtrl {
+public class LeaderboardSceneCtrl {
 
     @FXML
     public TableView table;
@@ -34,12 +34,12 @@ public class leaderboardSceneCtrl {
 
 
     /**
-     * A constructor for the leaderboardSceneCtrl class.
+     * A constructor for the LeaderboardSceneCtrl class.
      * @param server
      * @param mainCtrl
      */
     @Inject
-    public leaderboardSceneCtrl(ServerUtils server, MainCtrl mainCtrl) {
+    public LeaderboardSceneCtrl(ServerUtils server, MainCtrl mainCtrl) {
         this.server = server;
         this.mainCtrl = mainCtrl;
     }

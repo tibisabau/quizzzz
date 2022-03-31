@@ -34,8 +34,8 @@ public class MyModule implements Module {
 //        binder.bind(GameScreenMPCtrl.class).in(Scopes.SINGLETON);
 //        binder.bind(InBetweenScreenCtrl.class).in(Scopes.SINGLETON);
 //        binder.bind(InstructionSceneCtrl.class).in(Scopes.SINGLETON);
-//        binder.bind(leaderboardSceneCtrl.class).in(Scopes.SINGLETON);
+//        binder.bind(LeaderboardSceneCtrl.class).in(Scopes.SINGLETON);
 //        binder.bind(StartScreenCtrl.class).in(Scopes.SINGLETON);
-//        binder.bind(waitingRoomController.class).in(Scopes.SINGLETON);
+//        binder.bind(WaitingRoomCtrl.class).in(Scopes.SINGLETON);
     }
 }
