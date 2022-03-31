@@ -441,6 +441,7 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showMEQuestionMP(Object currentQuestion) {
+        meQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(meQuestionMP);
         meQuestionMPCtrl.setCurrentQuestion(currentQuestion);
@@ -457,6 +458,7 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showHMQuestionMP(Object currentQuestion) {
+        hmQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(hmQuestionMP);
         hmQuestionMPCtrl.setCurrentQuestion(currentQuestion);
@@ -473,6 +475,7 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showGXQuestionMP(Object currentQuestion) {
+        gxQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(gxQuestionMP);
         gxQuestionMPCtrl.setCurrentQuestion(currentQuestion);
@@ -489,6 +492,7 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showInsteadOfQuestionMP(Object currentQuestion) {
+        insteadOfQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(insteadOfSceneMP);
         insteadOfQuestionMPCtrl.setCurrentQuestion(currentQuestion);
@@ -499,4 +503,5 @@ public class MainCtrl {
             });
         });
     }
+
 }

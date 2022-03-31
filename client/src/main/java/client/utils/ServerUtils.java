@@ -55,14 +55,16 @@ import org.springframework.web.socket.messaging.WebSocketStompClient;
  */
 public class ServerUtils {
 
-    private static final String SERVER = "http://localhost:8080/";
+    private static String SERVER = "http://localhost:8080/";
 
     private static final ExecutorService exec =
             Executors.newSingleThreadExecutor();
 
-    private StompSession session = connect("ws://localhost:8080/websocket");
+    private StompSession session;
 
-
+    public void setSession(String url) {
+        this.session = connect(url);
+    }
 
     /**
      * Gets quotes the hard way.
