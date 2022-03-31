@@ -28,7 +28,8 @@ class InsteadOfQuestionTest {
         activity3 = new Activity("path3","title3",1003);
         activity4 = new Activity("path4","title4",1004);
         activity5 = new Activity("path5","title5",1005);
-        insteadOfQuestion = new InsteadOfQuestion(activity1, activity2, activity3, activity4, activity5);
+        insteadOfQuestion = new InsteadOfQuestion(activity1,
+                activity2, activity3, activity4, activity5);
     }
 
     @Test
@@ -99,17 +100,21 @@ class InsteadOfQuestionTest {
 
     @Test
     void testEquals() {
-        equalsTestQuestion = new InsteadOfQuestion(null, null, null, null, null);
+        equalsTestQuestion = new InsteadOfQuestion(null,
+                null, null, null, null);
         assertFalse(insteadOfQuestion.equals(equalsTestQuestion));
-        equalsTestQuestion = new InsteadOfQuestion(activity1, activity2, activity3, activity4, activity5);
+        equalsTestQuestion = new InsteadOfQuestion(activity1, activity2,
+                activity3, activity4, activity5);
         assertTrue(insteadOfQuestion.equals(equalsTestQuestion));
     }
 
     @Test
     void testHashCode() {
         assertNotNull(insteadOfQuestion.hashCode());
-        equalsTestQuestion = new InsteadOfQuestion(activity1, activity3, activity3, activity5, activity5);
-        assertNotEquals(equalsTestQuestion.hashCode(), insteadOfQuestion.hashCode());
+        equalsTestQuestion = new InsteadOfQuestion(activity1, activity3,
+                activity3, activity5, activity5);
+        assertNotEquals(equalsTestQuestion.hashCode(),
+                insteadOfQuestion.hashCode());
     }
 
     @Test

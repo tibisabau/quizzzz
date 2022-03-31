@@ -2,7 +2,6 @@ package commons;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
