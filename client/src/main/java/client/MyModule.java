@@ -28,14 +28,5 @@ public class MyModule implements Module {
         binder.bind(MainCtrl.class).in(Scopes.SINGLETON);
         binder.bind(AddQuoteCtrl.class).in(Scopes.SINGLETON);
         binder.bind(AddActivityCtrl.class).in(Scopes.SINGLETON);
-//        binder.bind(AdminPanelCtrl.class).in(Scopes.SINGLETON);
-//        binder.bind(DisplayImageCtrl.class).in(Scopes.SINGLETON);
-//        binder.bind(GameScreenCtrl.class).in(Scopes.SINGLETON);
-//        binder.bind(GameScreenMPCtrl.class).in(Scopes.SINGLETON);
-//        binder.bind(InBetweenScreenCtrl.class).in(Scopes.SINGLETON);
-//        binder.bind(InstructionSceneCtrl.class).in(Scopes.SINGLETON);
-//        binder.bind(LeaderboardSceneCtrl.class).in(Scopes.SINGLETON);
-//        binder.bind(StartScreenCtrl.class).in(Scopes.SINGLETON);
-//        binder.bind(WaitingRoomCtrl.class).in(Scopes.SINGLETON);
     }
 }

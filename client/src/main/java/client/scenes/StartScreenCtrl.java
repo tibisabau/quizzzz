@@ -18,9 +18,6 @@ import javafx.stage.Modality;
 import java.io.IOException;
 
 
-/**
- * The type Start screen ctrl.
- */
 public class StartScreenCtrl extends Application {
 
     private static Score ownScore;
@@ -185,9 +182,12 @@ public class StartScreenCtrl extends Application {
         mainCtrl.showAdminPanel();
     }
 
+    /**
+     * Check if the selected server is running
+     */
     public void tryServer() {
         try{
-            mainCtrl.setWs(chooseServer.getText());
+            mainCtrl.setServer(chooseServer.getText());
             nicknameField.setDisable(false);
             singlePlayerButton.setDisable(false);
             multiPlayerButton.setDisable(false);
@@ -209,6 +209,9 @@ public class StartScreenCtrl extends Application {
         return ownScore;
     }
 
+    /**
+     * Disable all of the buttons
+     */
     public void disableButtons() {
         singlePlayerButton.setDisable(true);
         multiPlayerButton.setDisable(true);

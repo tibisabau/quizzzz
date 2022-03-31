@@ -436,7 +436,6 @@ public class MainCtrl {
         insteadOfQuestionMPCtrl.setGame(game);
         meQuestionMPCtrl.getTypeOfQuestion();
         server.registerForMessages("/topic/nextQuestion", String.class, x -> {
-            System.out.println("test this stuff");
             meQuestionMPCtrl.getTypeOfQuestion();
         });
     }
@@ -509,8 +508,11 @@ public class MainCtrl {
         });
     }
 
-    public void setWs(String url) {
+    /**
+     * Setter for the session
+     * @param url
+     */
+    public void setServer(String url) {
         server.setSession(url);
     }
-
 }
