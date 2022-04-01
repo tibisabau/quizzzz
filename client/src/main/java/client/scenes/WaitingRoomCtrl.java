@@ -133,11 +133,12 @@ public class WaitingRoomCtrl {
      * Return to start scene.
      */
     public void goToStartScene(){
-        mainCtrl.showStartScreen();
         players.remove(score);
         server.quitGame(players);
+        this.players = new ArrayList<>();
         server.stop();
         server.wsDisconnect();
+        mainCtrl.showStartScreen();
     }
 
 }

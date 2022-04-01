@@ -46,14 +46,10 @@ public class MultiplayerController {
     @Autowired
     private GuessXController guessXController;
 
-    //when starting a game the lobby should be added here,
-    // so ids of all players in each game are here,
-    // we'll figure sth out from there
-
     private Map<Object, Consumer<List<Score>>> listeners = new HashMap<>();
 
-    //all scores containing usernames and ids are stored here
     private List<Score> lobby = new ArrayList<>();
+
 
     private List<Game> currentGames = new ArrayList<>();
 

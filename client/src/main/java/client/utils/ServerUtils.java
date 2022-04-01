@@ -333,7 +333,10 @@ public class ServerUtils {
                 .get(GuessXQuestion.class);
     }
 
-
+    /**
+     * Join an online waiting room via long polling
+     * @param score
+     */
     public void joinGame(List<Score> score){
                 ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/multiplayer/join")
@@ -343,6 +346,10 @@ public class ServerUtils {
                         new GenericType<List<Score>>() {});
     }
 
+    /**
+     * Quit the waiting room and inform the server
+     * @param score
+     */
     public void quitGame(List<Score> score){
         ClientBuilder.newClient(new ClientConfig())
                 .target(SERVER).path("/api/multiplayer/quit")
@@ -498,7 +505,12 @@ public class ServerUtils {
         return session;
     }
 
+    /**
+     * Close the websocket connection
+     */
     public void wsDisconnect(){
         session.disconnect();
+        session = null;
+        SERVER = null;
     }
 }
