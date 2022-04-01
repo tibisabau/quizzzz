@@ -76,7 +76,7 @@ public class MultiplayerController {
      */
     @MessageMapping("/game")
     @SendTo("/topic/game")
-    public Game createGame(@Payload Integer s){
+    public Game createGame(@Payload String s){
         System.out.println("_____\n"+s+"\n_____");
 
         List<Object> questions = new ArrayList<>();

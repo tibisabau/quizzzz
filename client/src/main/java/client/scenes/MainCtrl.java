@@ -324,12 +324,21 @@ public class MainCtrl {
      * @return a new image
      */
     public Image getImage(String path) {
-        String imageString = server.getImage(path);
+        String imageString;
+        try {
+            imageString = server.getImage(path);
+        }
+        catch (Exception e){
+            imageString = server.getImage("notFound/ImageNotFound.png");
+        }
         Base64.Decoder encoder = Base64.getDecoder();
         byte[] byteArray = encoder.decode(imageString);
         ByteArrayInputStream inputStream = new ByteArrayInputStream(byteArray);
-        return new Image(inputStream);
-    }
+        return new Image(inputStream);}
+
+
+
+
 
     /**
      * decodes the emoji image as path
