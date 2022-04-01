@@ -52,7 +52,7 @@ public class Main extends Application {
         var gxQuestion = FXML.load(GameScreenCtrl.class,
                 "client", "scenes", "GXQuestion.fxml");
         var leaderboard = FXML.load(
-                leaderboardSceneCtrl.class, "client", "scenes",
+                LeaderboardSceneCtrl.class, "client", "scenes",
                 "leaderboardScene.fxml");
         var inBetweenScreen = FXML.load(InBetweenScreenCtrl.class,
                 "client", "scenes", "InBetweenScreen.fxml");

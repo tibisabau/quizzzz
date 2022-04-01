@@ -89,7 +89,7 @@ public class MainCtrl {
 
     private Scene leaderboardScene;
 
-    private leaderboardSceneCtrl leaderboardSceneCtrl;
+    private LeaderboardSceneCtrl leaderboardSceneCtrl;
 
     private Scene adminPanelScene;
 
@@ -142,7 +142,7 @@ public class MainCtrl {
             Parent> startScreen
             , Pair<InstructionSceneCtrl, Parent> instructionScene,
                            Pair<GameScreenCtrl, Parent> meQuestion,
-                           Pair<leaderboardSceneCtrl,
+                           Pair<LeaderboardSceneCtrl,
                                    Parent> leaderboardScreen,
 
                            Pair<GameScreenCtrl, Parent> hmQuestion,
@@ -212,6 +212,7 @@ public class MainCtrl {
     public void showStartScreen() {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(startScreen);
+        startScreenCtrl.disableButtons();
         meQuestion.setCounter(20);
         pointsJokerUsed = false;
         answerJokerUsed = false;
@@ -435,7 +436,6 @@ public class MainCtrl {
         meQuestionMPCtrl.getTypeOfQuestion();
 
         server.registerForMessages("/topic/joker", Joker.class, joker -> {
-            System.out.println("Time Joker is used");
             if (joker.getGameID() == game.getID() &&
                     joker.getUserID() != game.getUser().getUserId()){
 
@@ -462,6 +462,7 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showMEQuestionMP(Object currentQuestion) {
+        meQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(meQuestionMP);
         meQuestionMPCtrl.setCurrentQuestion(currentQuestion);
@@ -478,6 +479,7 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showHMQuestionMP(Object currentQuestion) {
+        hmQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(hmQuestionMP);
         hmQuestionMPCtrl.setCurrentQuestion(currentQuestion);
@@ -494,6 +496,7 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showGXQuestionMP(Object currentQuestion) {
+        gxQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(gxQuestionMP);
         gxQuestionMPCtrl.setCurrentQuestion(currentQuestion);
@@ -510,6 +513,7 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showInsteadOfQuestionMP(Object currentQuestion) {
+        insteadOfQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(insteadOfSceneMP);
         insteadOfQuestionMPCtrl.setCurrentQuestion(currentQuestion);
@@ -519,5 +523,13 @@ public class MainCtrl {
                 insteadOfQuestionMPCtrl.setImageViewPic1(emoji);
             });
         });
+    }
+
+    /**
+     * Setter for the session
+     * @param url
+     */
+    public void setServer(String url) {
+        server.setSession(url);
     }
 }

@@ -48,7 +48,7 @@ public class WaitingRoomCtrl {
 
 
     /**
-     * A constructor for the leaderboardSceneCtrl class.
+     * A constructor for the LeaderboardSceneCtrl class.
      * @param server
      * @param mainCtrl
      */
@@ -71,7 +71,6 @@ public class WaitingRoomCtrl {
      * Subscribing the to the server for the lobby and starting the game
      */
     public void load() {
-        System.out.println("i was in load");
         username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         id.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Score, String>,
@@ -99,21 +98,23 @@ public class WaitingRoomCtrl {
         });
         server.joinGame(players);
 
-        server.registerForMessages("/topic/game", Game.class, game -> {
-            if (this.game == null) {
-                this.game = game;
-                this.game.updateScore(this.score);
-                quitButton.setDisable(true);
-                startButton.setDisable(true);
-                Platform.runLater(() -> mainCtrl.showMpGameScreen(game));
-            }});
+            server.registerForMessages("/topic/game", Game.class, game -> {
+                if(this.game == null)
+                {   
+                    this.game = game;
+                    this.game.updateScore(this.score);
+                    quitButton.setDisable(true);
+                    startButton.setDisable(true);
+                    Platform.runLater(() -> mainCtrl.showMpGameScreen(game));
+                }
+            });
     }
 
     /**
      * Stating a new multiplayer game
      */
     public void startGame(){
-        server.send("/app/game", 1);
+        server.send("/app/game", "hello from the client");
     }
 
     /**

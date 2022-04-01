@@ -187,7 +187,7 @@ public class GameScreenMPCtrl {
     /**
      *  Initialize the pictures for the reactions
      */
-    public void initialize(){
+    public void init(){
         EmojiMenuPic.setImage(mainCtrl.getEmoji("emoji1.png"));
         Emoji1.setImage(mainCtrl.getEmoji("emoji1.png"));
         Emoji2.setImage(mainCtrl.getEmoji("emoji2.png"));
