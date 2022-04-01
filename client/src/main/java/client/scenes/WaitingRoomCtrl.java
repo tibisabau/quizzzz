@@ -83,8 +83,7 @@ public class WaitingRoomCtrl {
                 });
         id.setSortable(false);
         players.add(score);
-
-
+        server.joinGame(players);
         server.registerForUpdates(p -> {
             players = p;
             table.getItems().clear();
@@ -93,7 +92,8 @@ public class WaitingRoomCtrl {
                 table.getItems().add(score);
             }
         });
-        server.joinGame(players);
+        server.joinGame(new ArrayList<Score>());
+
 
             server.registerForMessages("/topic/game", Game.class, game -> {
                 if(this.game == null)
@@ -102,6 +102,7 @@ public class WaitingRoomCtrl {
                     this.game.updateScore(this.score);
                     quitButton.setDisable(true);
                     startButton.setDisable(true);
+                    server.stop();
                     Platform.runLater(() -> mainCtrl.showMpGameScreen(game));
                 }
             });
@@ -112,6 +113,7 @@ public class WaitingRoomCtrl {
      */
     public void startGame(){
         server.send("/app/game", "hello from the client");
+        Platform.runLater(() -> server.quitGame(new ArrayList<>()));
     }
 
     /**
@@ -136,9 +138,9 @@ public class WaitingRoomCtrl {
         players.remove(score);
         server.quitGame(players);
         this.players = new ArrayList<>();
-        server.stop();
+//        server.stop();
         server.wsDisconnect();
-        mainCtrl.showStartScreen();
+        Platform.runLater(() -> mainCtrl.showStartScreen());
     }
 
 }
