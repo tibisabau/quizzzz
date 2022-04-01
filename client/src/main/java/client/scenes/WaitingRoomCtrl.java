@@ -16,7 +16,7 @@ import javafx.util.Callback;
 import java.util.ArrayList;
 import java.util.List;
 
-public class waitingRoomController{
+public class WaitingRoomCtrl {
 
 
     @FXML
@@ -48,12 +48,12 @@ public class waitingRoomController{
 
 
     /**
-     * A constructor for the leaderboardSceneCtrl class.
+     * A constructor for the LeaderboardSceneCtrl class.
      * @param server
      * @param mainCtrl
      */
     @Inject
-    public waitingRoomController(ServerUtils server, MainCtrl mainCtrl) {
+    public WaitingRoomCtrl(ServerUtils server, MainCtrl mainCtrl) {
         this.server = server;
         this.mainCtrl = mainCtrl;
         this.players = new ArrayList<>();
@@ -71,7 +71,6 @@ public class waitingRoomController{
      * Subscribing the to the server for the lobby and starting the game
      */
     public void load() {
-        System.out.println("i was in load");
         username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         id.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Score, String>,
@@ -99,14 +98,13 @@ public class waitingRoomController{
         });
         server.joinGame(players);
 
-        server.registerForMessages("/topic/game", Game.class, game -> {
-            System.out.println("hello from server");
-            this.game = game;
-            this.game.updateScore(this.score);
-            quitButton.setDisable(true);
-            startButton.setDisable(true);
-            Platform.runLater(() -> mainCtrl.showMpGameScreen(game));
-        });
+            server.registerForMessages("/topic/game", Game.class, game -> {
+                this.game = game;
+                this.game.updateScore(this.score);
+                quitButton.setDisable(true);
+                startButton.setDisable(true);
+                Platform.runLater(() -> mainCtrl.showMpGameScreen(game));
+            });
     }
 
     /**

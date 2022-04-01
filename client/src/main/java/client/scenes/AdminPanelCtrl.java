@@ -40,7 +40,7 @@ public class AdminPanelCtrl {
 
 
         /**
-         * A constructor for the leaderboardSceneCtrl class.
+         * A constructor for the LeaderboardSceneCtrl class.
          * @param server
          * @param mainCtrl
          */

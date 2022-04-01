@@ -101,25 +101,34 @@
                   <MenuItem mnemonicParsing="false" onAction="#onEmoji1">
                      <graphic>
                         <ImageView fx:id="Emoji1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                        </ImageView>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></ImageView>
                      </graphic>
                   </MenuItem>
                 <MenuItem mnemonicParsing="false" onAction="#onEmoji2">
                      <graphic>
                         <ImageView fx:id="Emoji2" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                        </ImageView>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></ImageView>
                      </graphic>
                   </MenuItem>
                 <MenuItem mnemonicParsing="false" onAction="#onEmoji3">
                      <graphic>
                         <ImageView fx:id="Emoji3" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                        </ImageView>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></ImageView>
                      </graphic>
                   </MenuItem>
               </items>
                <graphic>
                   <ImageView fx:id="EmojiMenuPic" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </MenuButton>
          </children>
       </AnchorPane>

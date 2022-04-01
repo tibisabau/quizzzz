@@ -173,7 +173,7 @@ public class GameScreenMPCtrl {
     /**
      *  Initialize the pictures for the reactions
      */
-    public void initialize(){
+    public void init(){
         //Register for messages and call getTypeOfQuestion
         server.registerForMessages("/topic/nextQuestion", Integer.class, id -> {
             if(id == this.game.getID()){

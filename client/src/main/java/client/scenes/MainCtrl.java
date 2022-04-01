@@ -88,7 +88,7 @@ public class MainCtrl {
 
     private Scene leaderboardScene;
 
-    private leaderboardSceneCtrl leaderboardSceneCtrl;
+    private LeaderboardSceneCtrl leaderboardSceneCtrl;
 
     private Scene adminPanelScene;
 
@@ -108,7 +108,7 @@ public class MainCtrl {
 
     private Scene waitingRoomScene;
 
-    private waitingRoomController waitingRoomCtrl;
+    private WaitingRoomCtrl waitingRoomCtrl;
 
     private Score score;
 
@@ -141,14 +141,14 @@ public class MainCtrl {
             Parent> startScreen
             , Pair<InstructionSceneCtrl, Parent> instructionScene,
                            Pair<GameScreenCtrl, Parent> meQuestion,
-                           Pair<leaderboardSceneCtrl,
+                           Pair<LeaderboardSceneCtrl,
                                    Parent> leaderboardScreen,
 
                            Pair<GameScreenCtrl, Parent> hmQuestion,
                            Pair<GameScreenCtrl, Parent> gxQuestion,
                            Pair<GameScreenCtrl, Parent> insteadOfQuestion,
                            Pair<InBetweenScreenCtrl, Parent> inBetweenScreen,
-                           Pair<waitingRoomController, Parent> waitingRoom,
+                           Pair<WaitingRoomCtrl, Parent> waitingRoom,
                            Pair<GameScreenMPCtrl, Parent> gxQuestionMP,
                            Pair<GameScreenMPCtrl, Parent> hmQuestionMP,
                            Pair<GameScreenMPCtrl, Parent> meQuestionMP,
@@ -211,6 +211,7 @@ public class MainCtrl {
     public void showStartScreen() {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(startScreen);
+        startScreenCtrl.disableButtons();
         meQuestion.setCounter(20);
         pointsJokerUsed = false;
         answerJokerUsed = false;
@@ -431,7 +432,6 @@ public class MainCtrl {
         insteadOfQuestionMPCtrl.setGame(game);
         meQuestionMPCtrl.getTypeOfQuestion();
         server.registerForMessages("/topic/nextQuestion", String.class, x -> {
-            System.out.println("test this stuff");
             meQuestionMPCtrl.getTypeOfQuestion();
         });
     }
@@ -441,6 +441,7 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showMEQuestionMP(Object currentQuestion) {
+        meQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(meQuestionMP);
         meQuestionMPCtrl.setCurrentQuestion(currentQuestion);
@@ -457,6 +458,7 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showHMQuestionMP(Object currentQuestion) {
+        hmQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(hmQuestionMP);
         hmQuestionMPCtrl.setCurrentQuestion(currentQuestion);
@@ -473,6 +475,7 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showGXQuestionMP(Object currentQuestion) {
+        gxQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(gxQuestionMP);
         gxQuestionMPCtrl.setCurrentQuestion(currentQuestion);
@@ -489,6 +492,7 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showInsteadOfQuestionMP(Object currentQuestion) {
+        insteadOfQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(insteadOfSceneMP);
         insteadOfQuestionMPCtrl.setCurrentQuestion(currentQuestion);
@@ -498,5 +502,13 @@ public class MainCtrl {
                 insteadOfQuestionMPCtrl.setImageViewPic1(emoji);
             });
         });
+    }
+
+    /**
+     * Setter for the session
+     * @param url
+     */
+    public void setServer(String url) {
+        server.setSession(url);
     }
 }

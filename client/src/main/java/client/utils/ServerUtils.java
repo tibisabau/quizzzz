@@ -55,14 +55,21 @@ import org.springframework.web.socket.messaging.WebSocketStompClient;
  */
 public class ServerUtils {
 
-    private static final String SERVER = "http://localhost:8080/";
+    private static String SERVER;
 
     private static final ExecutorService exec =
             Executors.newSingleThreadExecutor();
 
-    private StompSession session = connect("ws://localhost:8080/websocket");
+    private static StompSession session;
 
-
+    /**
+     * set the websocket url
+     * @param server
+     */
+    public void setSession(String server) {
+        SERVER = "http://" + server + "/";
+        this.session = connect("ws://" + server + "/websocket");
+    }
 
     /**
      * Gets quotes the hard way.
@@ -336,6 +343,10 @@ public class ServerUtils {
                         new GenericType<List<Score>>() {});
     }
 
+    /**
+     * Register for updates for long polling
+     * @param consumer
+     */
     public void registerForUpdates(Consumer<List<Score>> consumer){
         exec.submit(() -> {
             while(!Thread.interrupted()){
@@ -353,6 +364,11 @@ public class ServerUtils {
         });
     }
 
+    /**
+     * Connect to the server
+     * @param url
+     * @return A stompSession
+     */
     private StompSession connect(String url) {
         var client = new StandardWebSocketClient();
         var stomp = new WebSocketStompClient(client);
@@ -368,6 +384,13 @@ public class ServerUtils {
         throw new IllegalStateException();
     }
 
+    /**
+     * Register for updates in a certain path
+     * @param dest
+     * @param type
+     * @param consumer
+     * @param <T>
+     */
     public <T> void registerForMessages(String dest,
                                         Class<T> type, Consumer<T> consumer){
         session.subscribe(dest, new StompFrameHandler() {
@@ -384,26 +407,18 @@ public class ServerUtils {
         });
     }
 
-//    public void registerForString1(String dest, Consumer<String> consumer){
-//        System.out.println("im inside register method");
-//        session.subscribe(dest, new StompFrameHandler() {
-//            @Override
-//            public Type getPayloadType(StompHeaders headers) {
-//                return String.class;
-//            }
-//
-//            @SuppressWarnings("unchecked")
-//            @Override
-//            public void handleFrame(StompHeaders headers, Object payload) {
-//                consumer.accept((String) payload);
-//            }
-//        });
-//    }
-
+    /**
+     * Send an object to the server
+     * @param dest
+     * @param s The object that will be sent
+     */
     public void send(String dest, Object s){
         session.send(dest, s);
     }
 
+    /**
+     * shutdown the long polling
+     */
     public void stop(){
         exec.shutdownNow();
     }
@@ -448,7 +463,7 @@ public class ServerUtils {
         catch(Exception e) {
             e.printStackTrace();
         }
-        return "400 BAD_REQUEST";
+        throw new RuntimeException();
     }
 
     /**
@@ -461,5 +476,9 @@ public class ServerUtils {
         String url = "/api/entry/save";
         String response = updateImage(image, url);
         return response;
+    }
+
+    public StompSession getSession() {
+        return session;
     }
 }
