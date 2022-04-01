@@ -8,7 +8,6 @@ import commons.*;
 import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,6 +19,8 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import javafx.scene.image.ImageView;
+
+import java.util.Random;
 
 
 public class GameScreenMPCtrl {
@@ -132,6 +133,15 @@ public class GameScreenMPCtrl {
     public Label User6;
 
     @FXML
+    public Button pointsJoker;
+
+    @FXML
+    public Button answerJoker;
+
+    @FXML
+    public Button timeJoker;
+
+    @FXML
     private ImageView EmojiMenuPic;
 
     private final ServerUtils server;
@@ -154,6 +164,10 @@ public class GameScreenMPCtrl {
 
     private ObjectMapper mapper = new ObjectMapper();
 
+    private boolean pointsJokerInUse = false;
+
+    private int answer;
+
     /**
      * Instantiates a new Game screen ctrl.
      *
@@ -174,13 +188,6 @@ public class GameScreenMPCtrl {
      *  Initialize the pictures for the reactions
      */
     public void init(){
-        //Register for messages and call getTypeOfQuestion
-        server.registerForMessages("/topic/nextQuestion", Integer.class, id -> {
-            if(id == this.game.getID()){
-                Platform.runLater(() -> getTypeOfQuestion());
-            }
-        });
-
         EmojiMenuPic.setImage(mainCtrl.getEmoji("emoji1.png"));
         Emoji1.setImage(mainCtrl.getEmoji("emoji1.png"));
         Emoji2.setImage(mainCtrl.getEmoji("emoji2.png"));
@@ -188,7 +195,7 @@ public class GameScreenMPCtrl {
     }
 
     public void test(){
-        getTypeOfQuestion();
+
     }
 
     /**
@@ -243,6 +250,7 @@ public class GameScreenMPCtrl {
      * Creates the visuals for the Most Energy question
      */
     public void setMeQuestion() {
+
         resetStage();
         MostEnergyQuestion question = (MostEnergyQuestion) currentQuestion;
         setImagesME(question);
@@ -309,6 +317,12 @@ public class GameScreenMPCtrl {
         AnswerA.setStyle("-fx-background-color: WHITE");
         AnswerB.setStyle("-fx-background-color: WHITE");
         AnswerC.setStyle("-fx-background-color: WHITE");
+        Answer1.setStyle("-fx-font-weight: normal");
+        Answer2.setStyle("-fx-font-weight: normal");
+        Answer3.setStyle("-fx-font-weight: normal");
+        answerJoker.setDisable(!game.isAnswerJoker());
+        pointsJoker.setDisable(!game.isPointsJoker());
+        timeJoker.setDisable(!game.isTimeJoker());
     }
 
     /**
@@ -323,6 +337,11 @@ public class GameScreenMPCtrl {
                 question.getCorrectOption().getTitle()+ " -");
         guessAnswer.setDisable(false);
         guessAnswer.clear();
+        guessAnswer.setStyle("-fx-background-color: WHITE");
+        correctAnswerQX.setText("");
+        pointsJoker.setDisable(!game.isPointsJoker());
+        timeJoker.setDisable(!game.isTimeJoker());
+
     }
 
     /**
@@ -403,14 +422,17 @@ public class GameScreenMPCtrl {
             }
             if (timer < 0.1){
                 time.setStyle("-fx-accent: #FF0100");
+                timeJoker.setDisable(true);
             }
             if (timer <= 0.002){
                 bar.stop();
                 if(currentQuestion instanceof MostEnergyQuestion ||
-                        currentQuestion instanceof HowMuchQuestion) {
+                        currentQuestion instanceof HowMuchQuestion ||
+                        currentQuestion instanceof InsteadOfQuestion) {
                     disableAnswers();
-                    showAnswers();
                 }
+                showAnswers();
+                answerPoints(currentQuestion,answer);
             }
         }));
         bar.setCycleCount(1000);
@@ -427,18 +449,21 @@ public class GameScreenMPCtrl {
         Answer2.setDisable(true);
         Answer3.setDisable(true);
         AnswerC.setDisable(true);
+        answerJoker.setDisable(true);
     }
 
     /**
      * Shows the correct Answer of the current question
      */
     public void showAnswers() {
+        pointsJoker.setDisable(true);
         if(currentQuestion instanceof MostEnergyQuestion ||
                 currentQuestion instanceof HowMuchQuestion ||
         currentQuestion instanceof InsteadOfQuestion) {
             AnswerA.setStyle(incorrectColor);
             AnswerB.setStyle(incorrectColor);
             AnswerC.setStyle(incorrectColor);
+
             if (gameScreenCtrl.answerCorrect(currentQuestion, 1)) {
                 AnswerA.setStyle(correctColor);
             } else if (gameScreenCtrl.answerCorrect(currentQuestion, 2)) {
@@ -447,6 +472,12 @@ public class GameScreenMPCtrl {
                 AnswerC.setStyle(correctColor);
             }
         } else {
+            if(gameScreenCtrl.answerCorrect(currentQuestion, answer)){
+                guessAnswer.setStyle(correctColor);
+            }
+            else {
+                guessAnswer.setStyle(incorrectColor);
+            }
             GuessXQuestion cor = (GuessXQuestion) currentQuestion;
             long corText = cor.getCorrectOption().getConsumptionInWh();
             correctAnswerQX.setText("Correct answer: " + corText);
@@ -457,27 +488,27 @@ public class GameScreenMPCtrl {
      * Selecting answer A
      */
     public void selectAnswerA() throws InterruptedException {
-        stopTime();
+        Answer1.setStyle("-fx-font-weight: bold");
         disableAnswers();
-        answerPoints(currentQuestion, 1);
+        answer = 1;
     }
 
     /**
      * Selecting answer B
      */
     public void selectAnswerB() throws InterruptedException {
-        stopTime();
+        Answer2.setStyle("-fx-font-weight: bold");
         disableAnswers();
-        answerPoints(currentQuestion,2);
+        answer = 2;
     }
 
     /**
      * Selecting answer C
      */
     public void selectAnswerC() throws InterruptedException {
-        stopTime();
+        Answer3.setStyle("-fx-font-weight: bold");
         disableAnswers();
-        answerPoints(currentQuestion, 3);
+        answer = 3;
     }
 
     /**
@@ -503,12 +534,10 @@ public class GameScreenMPCtrl {
      * question
      */
     public void ok() {
-        stopTime();
         try{
-            answerPoints(currentQuestion,
-                    Integer.parseInt(guessAnswer.getText()));}
+            answer = Integer.parseInt(guessAnswer.getText());}
         catch (Exception e){
-            answerPoints(currentQuestion, 0);
+            answer = 0;
         }
     }
 
@@ -518,13 +547,18 @@ public class GameScreenMPCtrl {
      * @param answer answer number from 1 to 3, 1 is for a, 2 for b, 3 for c
      *
      */
-    public void answerPoints(Object question, int answer){
+    public void answerPoints(Object question, int answer) {
         double multiplier = 0.5 + (2 * timer);
         int extraPoints = (int) Math.round(100 * multiplier);
-        if(gameScreenCtrl.answerCorrect(currentQuestion,answer)) {
-            game.incrementScore(extraPoints);
+        if (gameScreenCtrl.answerCorrect(currentQuestion, answer)) {
+            if (pointsJokerInUse) {
+                game.incrementScore(extraPoints * 2);
+                pointsJokerInUse = false;
+            } else {
+                game.incrementScore(extraPoints);
+            }
+            showAnswers();
         }
-        showAnswers();
     }
 
     /**
@@ -683,5 +717,65 @@ public class GameScreenMPCtrl {
         fadeTransition1.setFromValue(opacity);
         fadeTransition1.setToValue(0.0);
         fadeTransition1.play();
+    }
+
+    /**
+     * Uses answerJoker and disables an answer
+     */
+    public void useAnswerJoker(){
+        answerJoker.setDisable(true);
+        game.useAnswerJoker();
+        Random rand = new Random();
+        int answerToDelete = rand.nextInt(3);
+        while (gameScreenCtrl.answerCorrect (currentQuestion, answerToDelete+1))
+        {
+            answerToDelete = answerToDelete + 1;
+            if (answerToDelete > 2){
+                answerToDelete = 0;
+            }
+        }
+        switch (answerToDelete){
+            case 0:
+                Answer1.setDisable(true);
+                AnswerA.setDisable(true);
+                break;
+            case 1:
+                Answer2.setDisable(true);
+                AnswerB.setDisable(true);
+                break;
+            case 2:
+                Answer3.setDisable(true);
+                AnswerC.setDisable(true);
+                break;
+        }
+
+    }
+
+    /**
+     * flips a boolean to make dubble points and disables the button.
+     */
+    public void usePointsJoker(){
+        pointsJoker.setDisable(true);
+        game.usePointJoker();
+        pointsJokerInUse = true;
+
+    }
+
+    /**
+     * for time joker, sends a message to the server that it has been used.
+      */
+    public void useTimeJoker(){
+        timeJoker.setDisable(true);
+        game.useTimeJoker();
+        server.sendGame("/app/joker",
+                new Joker(game.getUser().getUserId(), game.getID()));
+
+    }
+
+    /**
+     * halfs time on timeline
+     */
+    public void halfTime(){
+        timer = timer/2;
     }
 }

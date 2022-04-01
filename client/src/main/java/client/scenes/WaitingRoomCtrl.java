@@ -99,11 +99,14 @@ public class WaitingRoomCtrl {
         server.joinGame(players);
 
             server.registerForMessages("/topic/game", Game.class, game -> {
-                this.game = game;
-                this.game.updateScore(this.score);
-                quitButton.setDisable(true);
-                startButton.setDisable(true);
-                Platform.runLater(() -> mainCtrl.showMpGameScreen(game));
+                if(this.game == null)
+                {   
+                    this.game = game;
+                    this.game.updateScore(this.score);
+                    quitButton.setDisable(true);
+                    startButton.setDisable(true);
+                    Platform.runLater(() -> mainCtrl.showMpGameScreen(game));
+                }
             });
     }
 

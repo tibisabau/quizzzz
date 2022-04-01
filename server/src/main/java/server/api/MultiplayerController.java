@@ -2,6 +2,7 @@ package server.api;
 
 import commons.Activity;
 import commons.Game;
+import commons.Joker;
 import commons.Score;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
+import java.util.Timer;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -23,6 +25,8 @@ public class MultiplayerController {
     private int counter;
 
     private Random random;
+
+    private SimpMessagingTemplate msg;
 
     @Autowired
     private SimpMessagingTemplate simpMess;
@@ -53,8 +57,16 @@ public class MultiplayerController {
 
     private List<Game> currentGames = new ArrayList<>();
 
-    public MultiplayerController(Random random){
+    public MultiplayerController(Random random, SimpMessagingTemplate msg){
         this.random = random;
+        this.msg = msg;
+    }
+
+    //@MessageMapping("/nextQuestion")
+    @SendTo("/topic/nextQuestion")
+    public Integer sendString(Integer gameID){
+        System.out.println(gameID);
+        return gameID;
     }
 
     /**
@@ -91,14 +103,16 @@ public class MultiplayerController {
         this.listeners = new HashMap<>();
         this.lobby = new ArrayList<>();
         //game control timer init here
-        
+        gameSync(game);
         return game;
     }
 
 
-    @SendTo("/topic/nextQuestion")
-    public Integer sendString(Integer gameID){
-        return gameID;
+    @MessageMapping("/joker")
+    @SendTo("/topic/joker")
+    public Joker timeJoker(Joker joker){
+        System.out.println("joker gebruikt");
+        return joker;
     }
 
     /**
@@ -145,6 +159,37 @@ public class MultiplayerController {
             listeners.remove(key);
         });
         return res;
+    }
+
+    /**
+     * Gets a multiplayer game in sync.
+     * @param game
+     */
+    public void gameSync(Game game){
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            int counter = 0;
+            @Override
+            public void run() {
+                counter++;
+                if (counter>9){
+                    timer.cancel();
+                    timer.purge();
+                    return;
+                }
+                msg.convertAndSend("/topic/nextQuestion", game.getID());
+            }
+        }, 15000, 15000);
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                msg.convertAndSend("/topic/betweenScreen", game.getID());
+            }
+        },12000, 15000);
+
+
+
     }
 
 }

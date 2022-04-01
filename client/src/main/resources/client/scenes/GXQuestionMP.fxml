@@ -170,5 +170,11 @@
             </VBox>
          </children>
       </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+         <children>
+            <Button fx:id="pointsJoker" layoutY="66.0" mnemonicParsing="false" onMouseClicked="#usePointsJoker" prefHeight="39.0" prefWidth="96.0" text="Double Points" />
+            <Button fx:id="timeJoker" layoutY="118.0" mnemonicParsing="false" onAction="#useTimeJoker" prefHeight="39.0" prefWidth="96.0" text="Half Time" />
+         </children>
+      </AnchorPane>
    </children>
 </GridPane>

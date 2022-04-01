@@ -417,6 +417,13 @@ public class ServerUtils {
     }
 
     /**
+     * sents a game object to the server
+     * @param dest destination to send to
+     * @param joker joker to send
+     */
+    public void sendGame(String dest, Joker joker) { session.send(dest, joker);}
+
+    /**
      * shutdown the long polling
      */
     public void stop(){

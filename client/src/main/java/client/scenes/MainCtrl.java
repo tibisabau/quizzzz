@@ -18,6 +18,7 @@ package client.scenes;
 
 import client.utils.ServerUtils;
 import commons.Game;
+import commons.Joker;
 import commons.Score;
 import commons.Activity;
 import javafx.application.Platform;
@@ -323,12 +324,21 @@ public class MainCtrl {
      * @return a new image
      */
     public Image getImage(String path) {
-        String imageString = server.getImage(path);
+        String imageString;
+        try {
+            imageString = server.getImage(path);
+        }
+        catch (Exception e){
+            imageString = server.getImage("notFound/ImageNotFound.png");
+        }
         Base64.Decoder encoder = Base64.getDecoder();
         byte[] byteArray = encoder.decode(imageString);
         ByteArrayInputStream inputStream = new ByteArrayInputStream(byteArray);
-        return new Image(inputStream);
-    }
+        return new Image(inputStream);}
+
+
+
+
 
     /**
      * decodes the emoji image as path
@@ -423,6 +433,8 @@ public class MainCtrl {
 
     /**
      * Show the Multiplayer Game screen
+     * and registers for 3 websockets
+     * for next question, betweenScreen and Time joker.
      * @param game
      */
     public void showMpGameScreen(Game game){
@@ -431,8 +443,26 @@ public class MainCtrl {
         gxQuestionMPCtrl.setGame(game);
         insteadOfQuestionMPCtrl.setGame(game);
         meQuestionMPCtrl.getTypeOfQuestion();
-        server.registerForMessages("/topic/nextQuestion", String.class, x -> {
-            meQuestionMPCtrl.getTypeOfQuestion();
+
+        server.registerForMessages("/topic/joker", Joker.class, joker -> {
+            if (joker.getGameID() == game.getID() &&
+                    joker.getUserID() != game.getUser().getUserId()){
+
+                meQuestionMPCtrl.halfTime();
+                gxQuestionMPCtrl.halfTime();
+                insteadOfQuestionMPCtrl.halfTime();
+                hmQuestionMPCtrl.halfTime();
+            }
+        });
+        server.registerForMessages("/topic/nextQuestion", Integer.class, ID -> {
+            if(ID == game.getID()){
+                Platform.runLater(() -> meQuestionMPCtrl.getTypeOfQuestion());
+            }
+        });
+        server.registerForMessages("/topic/betweenScreen", Integer.class, X -> {
+            if(X == game.getID()){
+                Platform.runLater(() -> showInstructionScreen());
+            }
         });
     }
 
