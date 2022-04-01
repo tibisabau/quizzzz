@@ -36,8 +36,6 @@ public class WaitingRoomCtrl {
 
     private List<Score> players;
 
-    private List<Score> oldPlayers;
-
     private Score score;
 
     private Game game;
@@ -89,11 +87,10 @@ public class WaitingRoomCtrl {
 
         server.registerForUpdates(p -> {
             players = p;
+            table.getItems().clear();
             for (int i = 0; i < players.size(); i++) {
                 Score score = players.get(i);
-                if (!table.getItems().contains(score)) {
-                    table.getItems().add(score);
-                }
+                table.getItems().add(score);
             }
         });
         server.joinGame(players);
@@ -137,7 +134,10 @@ public class WaitingRoomCtrl {
      */
     public void goToStartScene(){
         mainCtrl.showStartScreen();
+        players.remove(score);
+        server.quitGame(players);
+        server.stop();
+        server.wsDisconnect();
     }
-
 
 }

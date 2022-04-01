@@ -343,6 +343,15 @@ public class ServerUtils {
                         new GenericType<List<Score>>() {});
     }
 
+    public void quitGame(List<Score> score){
+        ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/multiplayer/quit")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .post(Entity.entity(score, APPLICATION_JSON),
+                        new GenericType<List<Score>>() {});
+    }
+
     /**
      * Register for updates for long polling
      * @param consumer
@@ -487,5 +496,9 @@ public class ServerUtils {
 
     public StompSession getSession() {
         return session;
+    }
+
+    public void wsDisconnect(){
+        session.disconnect();
     }
 }

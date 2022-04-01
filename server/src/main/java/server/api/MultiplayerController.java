@@ -140,6 +140,15 @@ public class MultiplayerController {
         return ResponseEntity.ok(lobby);
     }
 
+    @PostMapping(path = "quit")
+    public ResponseEntity<List<Score>>
+    quitGame(@RequestBody List<Score> scores){
+        lobby = scores;
+        System.out.println(lobby.toString());
+        listeners.forEach((k, l) -> l.accept(lobby));
+        return ResponseEntity.ok(lobby);
+    }
+
     /**
      * Accepts a listener for the long polling
      * @return DeferredResult
