@@ -16,7 +16,7 @@ import javafx.util.Callback;
 import java.util.ArrayList;
 import java.util.List;
 
-public class waitingRoomController{
+public class WaitingRoomCtrl {
 
 
     @FXML
@@ -53,7 +53,7 @@ public class waitingRoomController{
      * @param mainCtrl
      */
     @Inject
-    public waitingRoomController(ServerUtils server, MainCtrl mainCtrl) {
+    public WaitingRoomCtrl(ServerUtils server, MainCtrl mainCtrl) {
         this.server = server;
         this.mainCtrl = mainCtrl;
         this.players = new ArrayList<>();

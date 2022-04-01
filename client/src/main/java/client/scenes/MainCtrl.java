@@ -109,7 +109,7 @@ public class MainCtrl {
 
     private Scene waitingRoomScene;
 
-    private waitingRoomController waitingRoomCtrl;
+    private WaitingRoomCtrl waitingRoomCtrl;
 
     private Score score;
 
@@ -149,7 +149,7 @@ public class MainCtrl {
                            Pair<GameScreenCtrl, Parent> gxQuestion,
                            Pair<GameScreenCtrl, Parent> insteadOfQuestion,
                            Pair<InBetweenScreenCtrl, Parent> inBetweenScreen,
-                           Pair<waitingRoomController, Parent> waitingRoom,
+                           Pair<WaitingRoomCtrl, Parent> waitingRoom,
                            Pair<GameScreenMPCtrl, Parent> gxQuestionMP,
                            Pair<GameScreenMPCtrl, Parent> hmQuestionMP,
                            Pair<GameScreenMPCtrl, Parent> meQuestionMP,

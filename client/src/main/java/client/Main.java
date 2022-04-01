@@ -56,8 +56,8 @@ public class Main extends Application {
                 "leaderboardScene.fxml");
         var inBetweenScreen = FXML.load(InBetweenScreenCtrl.class,
                 "client", "scenes", "InBetweenScreen.fxml");
-        var waitingRoom = FXML.load(waitingRoomController.class,
-                "client", "scenes", "waitingRoomScreen.fxml");
+        var waitingRoom = FXML.load(WaitingRoomCtrl.class,
+                "client", "scenes", "WaitingRoomScreen.fxml");
         var gxQuestionMP = FXML.load(GameScreenMPCtrl.class,
                 "client", "scenes", "GXQuestionMP.fxml");
         var hmQuestionMP = FXML.load(GameScreenMPCtrl.class,
