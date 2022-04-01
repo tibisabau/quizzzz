@@ -130,7 +130,12 @@ public class MultiplayerController {
     @PostMapping(path = "join")
     public ResponseEntity<List<Score>>
     joinGame(@RequestBody List<Score> scores){
-        lobby.addAll(scores);
+        for(int i = 0; i < scores.size(); i++){
+            if(!lobby.contains(scores.get(i))){
+                lobby.add(scores.get(i));
+            }
+        }
+//        lobby.addAll(scores);
         System.out.println(lobby.toString());
         listeners.forEach((k, l) -> l.accept(lobby));
         return ResponseEntity.ok(lobby);

@@ -86,6 +86,7 @@ public class WaitingRoomCtrl {
         server.joinGame(players);
         server.registerForUpdates(p -> {
             players = p;
+            System.out.println(players.toString());
             table.getItems().clear();
             for (int i = 0; i < players.size(); i++) {
                 Score score = players.get(i);
@@ -138,7 +139,6 @@ public class WaitingRoomCtrl {
         players.remove(score);
         server.quitGame(players);
         this.players = new ArrayList<>();
-//        server.stop();
         server.wsDisconnect();
         Platform.runLater(() -> mainCtrl.showStartScreen());
     }
