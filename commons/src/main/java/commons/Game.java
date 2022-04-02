@@ -1,14 +1,12 @@
 package commons;
 
 
-import java.util.List;
-
 
 public class Game {
 
-    public List<Object> questions;
+    public Object currentQuestion;
 
-    public int counter = 0;
+    public int counter = -1;
 
     private int id;
 
@@ -32,10 +30,8 @@ public class Game {
     /**
      * Constructor for Game
      * @param id of the game
-     * @param questions list of questions
      */
-    public Game(int id, List <Object> questions, int playerCount){
-        this.questions = questions;
+    public Game(int id, int playerCount){
         this.id = id;
         pointsJoker = true;
         answerJoker = true;
@@ -76,14 +72,14 @@ public class Game {
         this.user.incrementScore(value);
     }
 
-    /**
-     * incresses the question counter and sends the question
-     * @return Question
-     */
-    public Object getNextQuestion(){
-        Object question = questions.get(counter);
-        counter++;
-        return question;
+
+    public void setCurrentQuestion(Object question){
+        currentQuestion = question;
+    }
+
+    public Object getCurrentQuestion() {
+        counter ++;
+        return currentQuestion;
     }
 
     /**

@@ -460,8 +460,12 @@ public class MainCtrl {
                 hmQuestionMPCtrl.halfTime();
             }
         });
-        server.registerForMessages("/topic/nextQuestion", Integer.class, ID -> {
-            if(ID == game.getID()){
+        server.registerForMessages("/topic/nextQuestion", Game.class, g -> {
+            if(g.getID() == game.getID()){
+                meQuestionMPCtrl.setQuestion(g.getCurrentQuestion());
+                hmQuestionMPCtrl.setQuestion(g.getCurrentQuestion());
+                gxQuestionMPCtrl.setQuestion(g.getCurrentQuestion());
+                insteadOfQuestionMPCtrl.setQuestion(g.getCurrentQuestion());
                 Platform.runLater(() -> meQuestionMPCtrl.getTypeOfQuestion());
             }
         });
