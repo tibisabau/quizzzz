@@ -159,6 +159,8 @@ public class GameScreenMPCtrl {
 
     private double timer;
 
+    private double multiplier;
+
     private Timeline bar;
 
     private Game game;
@@ -436,6 +438,8 @@ public class GameScreenMPCtrl {
                         currentQuestion instanceof HowMuchQuestion ||
                         currentQuestion instanceof InsteadOfQuestion) {
                     disableAnswers();
+                } else {
+                    guessAnswer.setDisable(true);
                 }
                 showAnswers();
                 answerPoints(currentQuestion,answer);
@@ -494,6 +498,7 @@ public class GameScreenMPCtrl {
      * Selecting answer A
      */
     public void selectAnswerA() throws InterruptedException {
+        multiplier = timer;
         Answer1.setStyle("-fx-font-weight: bold");
         disableAnswers();
         answer = 1;
@@ -503,6 +508,7 @@ public class GameScreenMPCtrl {
      * Selecting answer B
      */
     public void selectAnswerB() throws InterruptedException {
+        multiplier = timer;
         Answer2.setStyle("-fx-font-weight: bold");
         disableAnswers();
         answer = 2;
@@ -512,6 +518,7 @@ public class GameScreenMPCtrl {
      * Selecting answer C
      */
     public void selectAnswerC() throws InterruptedException {
+        multiplier = timer;
         Answer3.setStyle("-fx-font-weight: bold");
         disableAnswers();
         answer = 3;
@@ -526,10 +533,9 @@ public class GameScreenMPCtrl {
     public void keyPressed(KeyEvent e) {
         switch (e.getCode()) {
             case ENTER:
-            {guessAnswer.setDisable(true);
-                ok();}
-            break;
-            default:
+                multiplier = timer;
+                guessAnswer.setDisable(true);
+                ok();
                 break;
         }
     }
@@ -554,8 +560,8 @@ public class GameScreenMPCtrl {
      *
      */
     public void answerPoints(Object question, int answer) {
-        double multiplier = 0.5 + (2 * timer);
-        int extraPoints = (int) Math.round(100 * multiplier);
+        double extra = 0.5 + (2 * multiplier);
+        int extraPoints = (int) Math.round(100 * extra);
         if (gameScreenCtrl.answerCorrect(currentQuestion, answer)) {
             if (pointsJokerInUse) {
                 game.incrementScore(extraPoints * 2);
