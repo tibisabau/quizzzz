@@ -63,7 +63,7 @@ public class LeaderboardSceneCtrl {
         rank.setSortable(false);
 
         List<Score> scores = server.getTopScores();
-        for(int i = 0; i < scores.size(); i++){
+        for(int i = 0; i < 10; i++){
             table.getItems().add(scores.get(i));
         }
     }
