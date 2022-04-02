@@ -31,6 +31,9 @@ public class GameScreenMPCtrl {
     public Text textHMQuestion;
 
     @FXML
+    public Text playerCount;
+
+    @FXML
     public ImageView imageView1;
 
     @FXML
@@ -777,5 +780,30 @@ public class GameScreenMPCtrl {
      */
     public void halfTime(){
         timer = timer/2;
+    }
+
+    /**
+     * Quit the game
+     */
+    public void quitGame(){
+        server.send("/app/playerLeft", game.getID());
+        mainCtrl.disconnect();
+        mainCtrl.showStartScreen();
+    }
+
+    /**
+     * Get the player count
+     * @return
+     */
+    public int getPlayerCount() {
+        return Integer.parseInt(playerCount.getText());
+    }
+
+    /**
+     * set the player count
+     * @param count
+     */
+    public void setPlayerCount(int count) {
+        playerCount.setText(String.valueOf(count));
     }
 }

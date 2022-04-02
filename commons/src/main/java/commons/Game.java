@@ -20,6 +20,8 @@ public class Game {
 
     private boolean timeJoker;
 
+    private int playerCount;
+
     /**
      * Constructor for game
      */
@@ -32,12 +34,13 @@ public class Game {
      * @param id of the game
      * @param questions list of questions
      */
-    public Game(int id, List <Object> questions){
+    public Game(int id, List <Object> questions, int playerCount){
         this.questions = questions;
         this.id = id;
         pointsJoker = true;
         answerJoker = true;
         timeJoker = true;
+        this.playerCount = playerCount;
     }
 
     /**
@@ -134,5 +137,13 @@ public class Game {
      */
     public boolean isTimeJoker(){
         return timeJoker;
+    }
+
+    /**
+     * Getter for the playerCount
+     * @return
+     */
+    public int getPlayerCount() {
+        return this.playerCount;
     }
 }

@@ -93,7 +93,7 @@ public class MultiplayerController {
                     break;
             }
         }
-        Game game = new Game(counter++, questions);
+        Game game = new Game(counter++, questions, Integer.parseInt(s));
         System.out.println(game);
         currentGames.add(game);
         this.listeners = new HashMap<>();
@@ -107,8 +107,14 @@ public class MultiplayerController {
     @MessageMapping("/joker")
     @SendTo("/topic/joker")
     public Joker timeJoker(Joker joker){
-        System.out.println("joker gebruikt");
         return joker;
+    }
+
+
+    @MessageMapping("/playerLeft")
+    @SendTo("/topic/playerLeft")
+    public Integer playerLeft(@Payload Integer i){
+        return i;
     }
 
     /**

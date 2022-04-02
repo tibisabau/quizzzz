@@ -437,11 +437,17 @@ public class MainCtrl {
      * for next question, betweenScreen and Time joker.
      * @param game
      */
-    public void showMpGameScreen(Game game){
+    public void showMpGameScreen(Game game, int playerCount){
         meQuestionMPCtrl.setGame(game);
         hmQuestionMPCtrl.setGame(game);
         gxQuestionMPCtrl.setGame(game);
         insteadOfQuestionMPCtrl.setGame(game);
+
+        meQuestionMPCtrl.setPlayerCount(playerCount);
+        hmQuestionMPCtrl.setPlayerCount(playerCount);
+        gxQuestionMPCtrl.setPlayerCount(playerCount);
+        insteadOfQuestionMPCtrl.setPlayerCount(playerCount);
+
         meQuestionMPCtrl.getTypeOfQuestion();
 
         server.registerForMessages("/topic/joker", Joker.class, joker -> {
@@ -464,6 +470,22 @@ public class MainCtrl {
                 Platform.runLater(() -> showInstructionScreen());
             }
         });
+        server.registerForMessages("/topic/playerLeft", Integer.class, X -> {
+            if(X == game.getID()){
+                Platform.runLater(() -> decrementCounter());
+            }
+        });
+    }
+
+    /**
+     * Decrement player count when someone leaves the game
+     */
+    private void decrementCounter() {
+        int playerCount = meQuestionMPCtrl.getPlayerCount() - 1;
+        meQuestionMPCtrl.setPlayerCount(playerCount);
+        gxQuestionMPCtrl.setPlayerCount(playerCount);
+        insteadOfQuestionMPCtrl.setPlayerCount(playerCount);
+        hmQuestionMPCtrl.setPlayerCount(playerCount);
     }
 
     /**
@@ -540,5 +562,12 @@ public class MainCtrl {
      */
     public void setServer(String url) {
         server.setSession(url);
+    }
+
+    /**
+     * disconnect from the websockets
+     */
+    public void disconnect() {
+        server.wsDisconnect();
     }
 }
