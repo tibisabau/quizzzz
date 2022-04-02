@@ -514,7 +514,6 @@ public class GameScreenCtrl {
                                 score.getScore());
                     } else {
                         server.updateScore(score);
-                        mainCtrl.showLeaderboard();
                     }
         }));
         wait.play();

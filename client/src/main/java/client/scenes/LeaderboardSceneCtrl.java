@@ -61,10 +61,18 @@ public class LeaderboardSceneCtrl {
             }
         });
         rank.setSortable(false);
+        try {
+            table.getItems().remove(0, 10);
+        } catch (Exception e){
 
+        }
         List<Score> scores = server.getTopScores();
         for(int i = 0; i < 10; i++){
-            table.getItems().add(scores.get(i));
+            try{
+                table.getItems().add(scores.get(i));
+            } catch (Exception e){
+                break;
+            }
         }
     }
 
