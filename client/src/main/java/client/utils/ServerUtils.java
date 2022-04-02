@@ -496,8 +496,8 @@ public class ServerUtils {
                     .request(APPLICATION_JSON)
                     .accept(APPLICATION_JSON)
                     .get(new GenericType<List<Score>>() {});
-        }
     }
+
 
     public StompSession getSession() {
         return session;
