@@ -395,7 +395,7 @@ public class GameScreenMPCtrl {
     public void startTimer(){
         time.setStyle("-fx-accent: #00FF01");
         timer = 1;
-        bar = new Timeline(new KeyFrame(Duration.millis(8), ev ->{
+        bar = new Timeline(new KeyFrame(Duration.millis(10), ev ->{
             timer -= 0.001;
             time.setProgress(timer);
             countdown.setText(String.valueOf((int) Math.round(timer*10)));

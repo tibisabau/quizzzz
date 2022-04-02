@@ -46,14 +46,10 @@ public class MultiplayerController {
     @Autowired
     private GuessXController guessXController;
 
-    //when starting a game the lobby should be added here,
-    // so ids of all players in each game are here,
-    // we'll figure sth out from there
-
     private Map<Object, Consumer<List<Score>>> listeners = new HashMap<>();
 
-    //all scores containing usernames and ids are stored here
     private List<Score> lobby = new ArrayList<>();
+
 
     private List<Game> currentGames = new ArrayList<>();
 
@@ -134,7 +130,21 @@ public class MultiplayerController {
     @PostMapping(path = "join")
     public ResponseEntity<List<Score>>
     joinGame(@RequestBody List<Score> scores){
-        lobby.addAll(scores);
+        for(int i = 0; i < scores.size(); i++){
+            if(!lobby.contains(scores.get(i))){
+                lobby.add(scores.get(i));
+            }
+        }
+//        lobby.addAll(scores);
+        System.out.println(lobby.toString());
+        listeners.forEach((k, l) -> l.accept(lobby));
+        return ResponseEntity.ok(lobby);
+    }
+
+    @PostMapping(path = "quit")
+    public ResponseEntity<List<Score>>
+    quitGame(@RequestBody List<Score> scores){
+        lobby = scores;
         System.out.println(lobby.toString());
         listeners.forEach((k, l) -> l.accept(lobby));
         return ResponseEntity.ok(lobby);
