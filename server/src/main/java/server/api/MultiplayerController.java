@@ -61,7 +61,6 @@ public class MultiplayerController {
     //@MessageMapping("/nextQuestion")
     @SendTo("/topic/nextQuestion")
     public Integer sendString(Integer gameID){
-        System.out.println(gameID);
         return gameID;
     }
 
@@ -73,8 +72,6 @@ public class MultiplayerController {
     @MessageMapping("/game")
     @SendTo("/topic/game")
     public Game createGame(@Payload String s){
-        System.out.println("_____\n"+s+"\n_____");
-
         Game game = new Game(counter++, Integer.parseInt(s));
         game.setCurrentQuestion(getQuestion());
         currentGames.add(game);
@@ -156,7 +153,6 @@ public class MultiplayerController {
             }
         }
 //        lobby.addAll(scores);
-        System.out.println(lobby.toString());
         listeners.forEach((k, l) -> l.accept(lobby));
         return ResponseEntity.ok(lobby);
     }
@@ -165,7 +161,6 @@ public class MultiplayerController {
     public ResponseEntity<List<Score>>
     quitGame(@RequestBody List<Score> scores){
         lobby = scores;
-        System.out.println(lobby.toString());
         listeners.forEach((k, l) -> l.accept(lobby));
         return ResponseEntity.ok(lobby);
     }

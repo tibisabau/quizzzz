@@ -74,6 +74,7 @@ public class WaitingRoomCtrl {
      * Subscribing the to the server for the lobby and starting the game
      */
     public void load() {
+        game = null;
         username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         id.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Score, String>,
@@ -106,7 +107,7 @@ public class WaitingRoomCtrl {
                 {
                     this.game = game;
                     this.game.updateScore(this.score);
-                    server.stop();
+//                    server.stop();
                     Platform.runLater(() -> mainCtrl.showMpGameScreen(game,
                             game.getPlayerCount()));
                 }
