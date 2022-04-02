@@ -9,6 +9,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,6 +21,9 @@ import java.util.List;
 import java.util.Set;
 
 public class LeaderboardSceneCtrl {
+
+    @FXML
+    public Button playAgainButton;
 
     @FXML
     public TableView table;
@@ -54,8 +58,10 @@ public class LeaderboardSceneCtrl {
     /**
      * Fills the leaderboard with scores queried from the database.
      * @param isSinlgePlayer checks if the game is single player or not
+     * @param showButton checks if the 'play again'
+     * button should be displayed or not
      */
-    public void load(boolean isSinlgePlayer){
+    public void load(boolean isSinlgePlayer, boolean showButton){
         name.setCellValueFactory(new PropertyValueFactory<>("userName"));
         value.setCellValueFactory(new PropertyValueFactory<>("score"));
         rank.setCellValueFactory(
@@ -72,10 +78,19 @@ public class LeaderboardSceneCtrl {
         List<Score> scores = new ArrayList<>();
         if( isSinlgePlayer ) {
             scores = server.getTopScores();
+
         } else {
             List<Score> allScores = server.getMP();
             scores = removeDuplicates(allScores);
+            if(showButton == false) {
+                playAgainButton.setVisible(false);
+                playAgainButton.setDisable(true);
+            }else {
+                playAgainButton.setVisible(true);
+                playAgainButton.setDisable(false);
+            }
         }
+
         scores.sort((x,y) -> Integer.compare(y.getScore(), x.getScore()));
         ObservableList<Score> list = FXCollections.observableList(scores);
         table.setItems(list);

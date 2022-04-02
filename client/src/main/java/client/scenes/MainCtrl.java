@@ -288,10 +288,11 @@ public class MainCtrl {
     /**
      * Show leaderboard screen.
      * @param isSinglePlayer checks if the game is single player
+     * @param showButton checks if this is the final display of the leaderboard
      */
-    public void showLeaderboard(boolean isSinglePlayer){
+    public void showLeaderboard(boolean isSinglePlayer, boolean showButton){
         primaryStage.setTitle("Quizzzz");
-        leaderboardSceneCtrl.load(isSinglePlayer);
+        leaderboardSceneCtrl.load(isSinglePlayer, showButton);
         primaryStage.setScene(leaderboardScene);
     }
 
@@ -462,7 +463,11 @@ public class MainCtrl {
         });
         server.registerForMessages("/topic/betweenScreen", Integer.class, X -> {
             if(X == game.getID()){
-                Platform.runLater(() -> showLeaderboard(false));
+                if(game.getCounter() < 10){
+                    Platform.runLater(() -> showLeaderboard(false, false));
+                } else {
+                    Platform.runLater(() -> showLeaderboard(false, true));
+                }
             }
         });
     }
