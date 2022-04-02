@@ -26,8 +26,6 @@ public class StartScreenCtrl extends Application {
 
     private final MainCtrl mainCtrl;
 
-    private boolean isCompleted;
-
 
     @FXML
     private TextField nicknameField;
@@ -60,7 +58,6 @@ public class StartScreenCtrl extends Application {
     public StartScreenCtrl(ServerUtils server, MainCtrl mainCtrl) {
         this.mainCtrl = mainCtrl;
         this.server = server;
-        this.isCompleted = false;
     }
 
     /**
@@ -127,12 +124,10 @@ public class StartScreenCtrl extends Application {
 
     /**
      * Get new score .
-     *
      * @return the score
      */
     public Score getNewScore(){
             Score score = new Score(nicknameField.getText(), 0);
-            isCompleted = true;
             return score;
     }
 
@@ -147,23 +142,22 @@ public class StartScreenCtrl extends Application {
      * Change screen to Single Player GameScreen
      */
     public void goToGameScreen() throws IOException {
-        if(isCompleted == true){
+        if(ownScore != null){
             int questionType = server.getQuestionType();
-            if(questionType == 1) {
-                mainCtrl.showMEQuestion(questionType);
-            }
-            else
-                if(questionType == 2) {
+            switch (questionType){
+                case 1:
+                    mainCtrl.showMEQuestion(questionType);
+                    break;
+                case 2:
                     mainCtrl.showHMQuestion(questionType);
-                }
-                    else {
-                        mainCtrl.showGXQuestion();
-                }
-            isCompleted = false;
-        }else{
-            return;
+                    break;
+                case 3:
+                    mainCtrl.showGXQuestion();
+                    break;
+                case 4:
+                    mainCtrl.showInsteadOfQuestion(questionType);
+            }
         }
-
     }
 
     /**
@@ -171,7 +165,9 @@ public class StartScreenCtrl extends Application {
      * @throws IOException
      */
     public void goToWaitingRoom() throws  IOException{
-        mainCtrl.showWaitingRoom();
+        if (ownScore != null){
+            mainCtrl.showWaitingRoom();
+        }
     }
 
     /**
@@ -217,5 +213,14 @@ public class StartScreenCtrl extends Application {
         multiPlayerButton.setDisable(true);
         nicknameField.setDisable(true);
         adminPanel.setDisable(true);
+    }
+
+    /**
+     * set username
+     */
+    public void setUsername() {
+        if (ownScore != null){
+            nicknameField.setText(ownScore.getUserName());
+        }
     }
 }

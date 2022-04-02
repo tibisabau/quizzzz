@@ -211,6 +211,10 @@ public class MainCtrl {
      */
     public void showStartScreen() {
         primaryStage.setTitle("Quizzzz");
+        if (this.score != null) {
+            score.setScore(0);
+        }
+        startScreenCtrl.setUsername();
         primaryStage.setScene(startScreen);
         startScreenCtrl.disableButtons();
         meQuestion.setCounter(20);
