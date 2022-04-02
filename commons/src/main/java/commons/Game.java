@@ -30,6 +30,7 @@ public class Game {
     /**
      * Constructor for Game
      * @param id of the game
+     * @param playerCount of the game
      */
     public Game(int id, int playerCount){
         this.id = id;
@@ -137,7 +138,7 @@ public class Game {
 
     /**
      * Getter for the playerCount
-     * @return
+     * @return Number of players
      */
     public int getPlayerCount() {
         return this.playerCount;

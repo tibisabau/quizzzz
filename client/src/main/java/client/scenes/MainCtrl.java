@@ -436,6 +436,7 @@ public class MainCtrl {
      * and registers for 3 websockets
      * for next question, betweenScreen and Time joker.
      * @param game
+     * @param playerCount
      */
     public void showMpGameScreen(Game game, int playerCount){
         meQuestionMPCtrl.setGame(game);

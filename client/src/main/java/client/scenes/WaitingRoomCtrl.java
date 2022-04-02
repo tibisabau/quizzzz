@@ -109,7 +109,8 @@ public class WaitingRoomCtrl {
                     quitButton.setDisable(true);
                     startButton.setDisable(true);
                     server.stop();
-                    Platform.runLater(() -> mainCtrl.showMpGameScreen(game, game.getPlayerCount()));
+                    Platform.runLater(() -> mainCtrl.showMpGameScreen(game,
+                            game.getPlayerCount()));
                 }
             });
     }

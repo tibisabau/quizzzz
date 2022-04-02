@@ -796,7 +796,7 @@ public class GameScreenMPCtrl {
 
     /**
      * Get the player count
-     * @return
+     * @return player count
      */
     public int getPlayerCount() {
         return Integer.parseInt(playerCount.getText());
