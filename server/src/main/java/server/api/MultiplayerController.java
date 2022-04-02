@@ -84,7 +84,10 @@ public class MultiplayerController {
         return game;
     }
 
-
+    /**
+     * get a random question
+     * @return a question
+     */
     public Object getQuestion() {
         Object question = new Object();
         int type = qTypeController.getRandomType();
@@ -105,13 +108,23 @@ public class MultiplayerController {
         return question;
     }
 
+    /**
+     * send the time joker
+     * @param joker
+     * @return a time joker
+     */
     @MessageMapping("/joker")
     @SendTo("/topic/joker")
     public Joker timeJoker(Joker joker){
         return joker;
     }
 
-
+    /**
+     * send the number of players
+     * in the game
+     * @param i
+     * @return the number of players
+     */
     @MessageMapping("/playerLeft")
     @SendTo("/topic/playerLeft")
     public Integer playerLeft(@Payload Integer i){

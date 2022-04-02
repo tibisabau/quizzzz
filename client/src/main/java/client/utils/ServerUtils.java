@@ -501,9 +501,6 @@ public class ServerUtils {
         return response;
     }
 
-    public StompSession getSession() {
-        return session;
-    }
 
     /**
      * Close the websocket connection
