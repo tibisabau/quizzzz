@@ -205,6 +205,10 @@ public class GameScreenMPCtrl {
         this.game = game;
     }
 
+    /**
+     * set the current question
+     * @param question
+     */
     public void setQuestion(Object question) {
         game.setCurrentQuestion(question);
     }
