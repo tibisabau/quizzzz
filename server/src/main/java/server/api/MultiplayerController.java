@@ -79,25 +79,8 @@ public class MultiplayerController {
     public Game createGame(@Payload String s){
         System.out.println("_____\n"+s+"\n_____");
 
-        List<Object> questions = new ArrayList<>();
-        for (int i = 0; i < 10; i++){
-            int type = qTypeController.getRandomType();
-            switch (type){
-                case 1:
-                    questions.add(hmQuestionController.getAll());
-                    break;
-                case 2:
-                    questions.add(guessXController.getQuestion());
-                    break;
-                case 3:
-                    questions.add(meQuestionController.getAll());
-                    break;
-                case 4:
-                    questions.add(insteadOfController.getAll());
-                    break;
-            }
-        }
-        Game game = new Game(counter++, questions);
+        Game game = new Game(counter++);
+        game.setCurrentQuestion(getQuestion());
         System.out.println(game);
         currentGames.add(game);
         this.listeners = new HashMap<>();
@@ -107,6 +90,26 @@ public class MultiplayerController {
         return game;
     }
 
+
+    public Object getQuestion() {
+        Object question = new Object();
+        int type = qTypeController.getRandomType();
+        switch (type){
+            case 1:
+                question = hmQuestionController.getAll();
+                break;
+            case 2:
+                question = guessXController.getQuestion();
+                break;
+            case 3:
+                question = meQuestionController.getAll();
+                break;
+            case 4:
+                question = insteadOfController.getAll();
+                break;
+        }
+        return question;
+    }
 
     @MessageMapping("/joker")
     @SendTo("/topic/joker")
@@ -172,12 +175,14 @@ public class MultiplayerController {
             @Override
             public void run() {
                 counter++;
-                if (counter>9){
+                if (counter > 19){
                     timer.cancel();
                     timer.purge();
                     return;
                 }
-                msg.convertAndSend("/topic/nextQuestion", game.getID());
+                game.setCurrentQuestion(getQuestion());
+                msg.convertAndSend("/topic/nextQuestion", game);
+
             }
         }, 15000, 15000);
         timer.schedule(new TimerTask() {

@@ -206,13 +206,16 @@ public class GameScreenMPCtrl {
         this.game = game;
     }
 
+    public void setQuestion(Object question) {
+        game.setCurrentQuestion(question);
+    }
+
     /**
      * Gets the type of the next question
      */
     public void getTypeOfQuestion(){
         Boolean found = false;
-        currentQuestion = game.getNextQuestion();
-
+        currentQuestion = game.getCurrentQuestion();
         InsteadOfQuestion question = mapper.convertValue(currentQuestion,
                 InsteadOfQuestion.class);
         if (question.getPromptedOption() != null){
