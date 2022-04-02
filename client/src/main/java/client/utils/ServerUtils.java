@@ -55,12 +55,22 @@ import org.springframework.web.socket.messaging.WebSocketStompClient;
  */
 public class ServerUtils {
 
-    private static final String SERVER = "http://localhost:8080/";
+    private static String SERVER;
 
     private static final ExecutorService exec =
             Executors.newSingleThreadExecutor();
 
-    private StompSession session = connect("ws://localhost:8080/websocket");
+    private static StompSession session;
+
+
+    /**
+     * set the websocket url
+     * @param server
+     */
+    public void setSession(String server) {
+        SERVER = "http://" + server + "/";
+        this.session = connect("ws://" + server + "/websocket");
+    }
 
 
     /**
@@ -302,6 +312,19 @@ public class ServerUtils {
     }
 
     /**
+     * gets the encoded image for the emojis
+     * @param path
+     * @return an encoded image
+     */
+    public String getEmoji(String path) {
+        return ClientBuilder.newClient(new ClientConfig())
+                .target(SERVER).path("/api/entry/emoji/get")
+                .request(APPLICATION_JSON)
+                .accept(APPLICATION_JSON)
+                .post(Entity.entity(path, APPLICATION_JSON), String.class);
+    }
+
+    /**
      * generates a "Guess The Amount Of Energy" question
      *
      * @return a "Guess The Amount Of Energy" question
@@ -324,6 +347,10 @@ public class ServerUtils {
                         new GenericType<List<Score>>() {});
     }
 
+    /**
+     * Register for updates for long polling
+     * @param consumer
+     */
     public void registerForUpdates(Consumer<List<Score>> consumer){
         exec.submit(() -> {
             while(!Thread.interrupted()){
@@ -341,6 +368,11 @@ public class ServerUtils {
         });
     }
 
+    /**
+     * Connect to the server
+     * @param url
+     * @return A stompSession
+     */
     private StompSession connect(String url) {
         var client = new StandardWebSocketClient();
         var stomp = new WebSocketStompClient(client);
@@ -356,6 +388,13 @@ public class ServerUtils {
         throw new IllegalStateException();
     }
 
+    /**
+     * Register for updates in a certain path
+     * @param dest
+     * @param type
+     * @param consumer
+     * @param <T>
+     */
     public <T> void registerForMessages(String dest,
                                         Class<T> type, Consumer<T> consumer){
         session.subscribe(dest, new StompFrameHandler() {
@@ -372,33 +411,25 @@ public class ServerUtils {
         });
     }
 
-//    public void registerForString1(String dest, Consumer<String> consumer){
-//        System.out.println("im inside register method");
-//        session.subscribe(dest, new StompFrameHandler() {
-//            @Override
-//            public Type getPayloadType(StompHeaders headers) {
-//                return String.class;
-//            }
-//
-//            @SuppressWarnings("unchecked")
-//            @Override
-//            public void handleFrame(StompHeaders headers, Object payload) {
-//                consumer.accept((String) payload);
-//            }
-//        });
-//    }
-
-    public void send(String dest, Integer s){
+    /**
+     * Send an object to the server
+     * @param dest
+     * @param s The object that will be sent
+     */
+    public void send(String dest, Object s){
         session.send(dest, s);
     }
 
     /**
      * sents a game object to the server
      * @param dest destination to send to
-     * @param game game to send
+     * @param joker joker to send
      */
-    public void sendGame(String dest, Game game) { session.send(dest, game);}
+    public void sendGame(String dest, Joker joker) { session.send(dest, joker);}
 
+    /**
+     * shutdown the long polling
+     */
     public void stop(){
         exec.shutdownNow();
     }
@@ -443,7 +474,7 @@ public class ServerUtils {
         catch(Exception e) {
             e.printStackTrace();
         }
-        return "400 BAD_REQUEST";
+        throw new RuntimeException();
     }
 
     /**
@@ -458,6 +489,7 @@ public class ServerUtils {
         return response;
     }
 
+
     public List<Score> getMP() {
             return ClientBuilder.newClient(new ClientConfig())
                     .target(SERVER).path("/api/multiplayer/getMP")
@@ -466,3 +498,9 @@ public class ServerUtils {
                     .get(new GenericType<List<Score>>() {});
         }
     }
+
+    public StompSession getSession() {
+        return session;
+    }
+}
+

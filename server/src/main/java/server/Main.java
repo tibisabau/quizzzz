@@ -21,12 +21,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.io.IOException;
+import java.util.Collections;
 
 @SpringBootApplication
 @EntityScan(basePackages = { "commons", "server" })
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        SpringApplication.run(Main.class, args);
+        SpringApplication app = new SpringApplication(Main.class);
+        app.setDefaultProperties(Collections
+                .singletonMap("server.port", "8080"));
+        app.run(args);
     }
 }

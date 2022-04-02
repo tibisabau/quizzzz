@@ -18,9 +18,6 @@ import javafx.stage.Modality;
 import java.io.IOException;
 
 
-/**
- * The type Start screen ctrl.
- */
 public class StartScreenCtrl extends Application {
 
     private static Score ownScore;
@@ -34,6 +31,9 @@ public class StartScreenCtrl extends Application {
 
     @FXML
     private TextField nicknameField;
+
+    @FXML
+    private TextField chooseServer;
 
     @FXML
     private Button singlePlayerButton;
@@ -122,7 +122,7 @@ public class StartScreenCtrl extends Application {
             return;
         }
         cancel();
-        mainCtrl.showStartScreen();
+//        mainCtrl.showStartScreen();
     }
 
     /**
@@ -166,6 +166,10 @@ public class StartScreenCtrl extends Application {
 
     }
 
+    /**
+     * show the waiting room
+     * @throws IOException
+     */
     public void goToWaitingRoom() throws  IOException{
         mainCtrl.showWaitingRoom();
     }
@@ -178,10 +182,40 @@ public class StartScreenCtrl extends Application {
     }
 
     /**
+     * Check if the selected server is running
+     */
+    public void tryServer() {
+        try{
+            mainCtrl.setServer(chooseServer.getText());
+            nicknameField.setDisable(false);
+            singlePlayerButton.setDisable(false);
+            multiPlayerButton.setDisable(false);
+            adminPanel.setDisable(false);
+        }
+        catch(Exception e) {
+            var alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setContentText("THE SERVER DOES NOT EXIST!");
+            alert.showAndWait();
+            return;
+        }
+    }
+
+    /**
      * getter for ownScore
      * @return ownScore
      */
     public static Score getOwnScore() {
         return ownScore;
+    }
+
+    /**
+     * Disable all of the buttons
+     */
+    public void disableButtons() {
+        singlePlayerButton.setDisable(true);
+        multiPlayerButton.setDisable(true);
+        nicknameField.setDisable(true);
+        adminPanel.setDisable(true);
     }
 }

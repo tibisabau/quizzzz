@@ -3,6 +3,8 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
@@ -10,6 +12,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -89,6 +92,82 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
             <ImageView fx:id="imageView2" fitHeight="234.0" fitWidth="366.0" layoutX="3.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
+         <children>
+            <MenuButton layoutX="9.0" layoutY="89.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="61.0" style="-fx-background-color: #fff;">
+              <items>
+                  <MenuItem mnemonicParsing="false" onAction="#onEmoji1">
+                     <graphic>
+                        <ImageView fx:id="Emoji1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></ImageView>
+                     </graphic>
+                  </MenuItem>
+                <MenuItem mnemonicParsing="false" onAction="#onEmoji2">
+                     <graphic>
+                        <ImageView fx:id="Emoji2" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></ImageView>
+                     </graphic>
+                  </MenuItem>
+                <MenuItem mnemonicParsing="false" onAction="#onEmoji3">
+                     <graphic>
+                        <ImageView fx:id="Emoji3" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></ImageView>
+                     </graphic>
+                  </MenuItem>
+              </items>
+               <graphic>
+                  <ImageView fx:id="EmojiMenuPic" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MenuButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+         <children>
+            <VBox layoutX="9.0" layoutY="-67.0" prefHeight="234.0" prefWidth="138.0">
+               <children>
+                  <Label fx:id="User6" prefHeight="38.0" prefWidth="206.0">
+                     <graphic>
+                        <ImageView fx:id="Pic6" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Label>
+                  <Label fx:id="User5" prefHeight="38.0" prefWidth="138.0">
+                     <graphic>
+                        <ImageView fx:id="Pic5" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Label>
+                  <Label fx:id="User4" prefHeight="38.0" prefWidth="138.0">
+                     <graphic>
+                        <ImageView fx:id="Pic4" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Label>
+                  <Label fx:id="User3" prefHeight="38.0" prefWidth="138.0">
+                     <graphic>
+                        <ImageView fx:id="Pic3" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Label>
+                  <Label fx:id="User2" prefHeight="38.0" prefWidth="138.0">
+                     <graphic>
+                        <ImageView fx:id="Pic2" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Label>
+                  <Label fx:id="User1" prefHeight="38.0" prefWidth="138.0">
+                     <graphic>
+                        <ImageView fx:id="Pic1" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Label>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">

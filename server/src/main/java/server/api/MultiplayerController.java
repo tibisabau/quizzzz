@@ -1,6 +1,8 @@
 package server.api;
 
+import commons.Activity;
 import commons.Game;
+import commons.Joker;
 import commons.Score;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -77,9 +79,14 @@ public class MultiplayerController {
         return gameID;
     }
 
+    /**
+     * Create a new game and return it to everyone in the lobby
+     * @param s
+     * @return game
+     */
     @MessageMapping("/game")
     @SendTo("/topic/game")
-    public Game createGame(@Payload Integer s){
+    public Game createGame(@Payload String s){
         System.out.println("_____\n"+s+"\n_____");
 
         List<Object> questions = new ArrayList<>();
@@ -113,10 +120,27 @@ public class MultiplayerController {
 
     @MessageMapping("/joker")
     @SendTo("/topic/joker")
-    public Game timeJoker(Game game){
-        return game;
+    public Joker timeJoker(Joker joker){
+        System.out.println("joker gebruikt");
+        return joker;
     }
 
+    /**
+     * Send the emoji to the client
+     * @param activity
+     * @return emoji
+     */
+    @MessageMapping("/emoji")
+    @SendTo("/topic/emoji")
+    public Activity sendPath(Activity activity){
+        return new Activity(activity.getImagePath(), activity.getTitle(), 1);
+    }
+
+    /**
+     * Join the waiting room and return the list of scores
+     * @param scores
+     * @return List of scores
+     */
     @PostMapping(path = "join")
     public ResponseEntity<List<Score>>
     joinGame(@RequestBody List<Score> scores){
@@ -127,6 +151,10 @@ public class MultiplayerController {
         return ResponseEntity.ok(lobby);
     }
 
+    /**
+     * Accepts a listener for the long polling
+     * @return DeferredResult
+     */
     @GetMapping(path = "update")
     public DeferredResult<ResponseEntity<List<Score>>> getLobby(){
         var noContent =

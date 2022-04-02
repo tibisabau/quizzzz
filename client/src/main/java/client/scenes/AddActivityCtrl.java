@@ -64,8 +64,9 @@ public class AddActivityCtrl {
      */
     public void ok() {
         try {
-            if(title.getText().isEmpty() || consumption.getText().isEmpty()) {
-                throw new Exception();
+            if(title.getText().isEmpty() || consumption.getText().isEmpty()
+                    || imageFile == null) {
+                throw new IllegalStateException();
             }
             if(toAdd) {
                 server.addEntry(new Activity(server.addImage(imageFile),
@@ -81,11 +82,28 @@ public class AddActivityCtrl {
                         (Long.parseLong(consumption.getText()));
                 server.updateEntry(editActivity);
             }
-        } catch (Exception e) {
+        } catch (IllegalStateException e) {
             e.printStackTrace();
             var alert = new Alert(Alert.AlertType.ERROR);
             alert.initModality(Modality.APPLICATION_MODAL);
             alert.setContentText("Not all fields are completed!");
+            alert.showAndWait();
+            return;
+        }
+        catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            var alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setContentText("The consumption should be a number!");
+            alert.showAndWait();
+            return;
+        }
+        catch (RuntimeException e) {
+            e.printStackTrace();
+            var alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setContentText("The image should be of the type: " +
+                    "\"name.extension\"");
             alert.showAndWait();
             return;
         }

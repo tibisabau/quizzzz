@@ -18,6 +18,7 @@ package client.scenes;
 
 import client.utils.ServerUtils;
 import commons.Game;
+import commons.Joker;
 import commons.Score;
 import commons.Activity;
 import javafx.application.Platform;
@@ -33,19 +34,11 @@ import java.io.ByteArrayInputStream;
 import java.util.Base64;
 import javafx.scene.image.Image;
 
-/**
- * The type Main ctrl.
- */
+
 public class MainCtrl {
 
-    /**
-     * The Counter.
-     */
     public int counter;
 
-    /**
-     * The Question list.
-     */
     public Set<Object> questionList;
 
     private boolean pointsJokerUsed;
@@ -96,7 +89,7 @@ public class MainCtrl {
 
     private Scene leaderboardScene;
 
-    private leaderboardSceneCtrl leaderboardSceneCtrl;
+    private LeaderboardSceneCtrl leaderboardSceneCtrl;
 
     private Scene adminPanelScene;
 
@@ -116,7 +109,7 @@ public class MainCtrl {
 
     private Scene waitingRoomScene;
 
-    private waitingRoomController waitingRoomCtrl;
+    private WaitingRoomCtrl waitingRoomCtrl;
 
     private Score score;
 
@@ -149,14 +142,14 @@ public class MainCtrl {
             Parent> startScreen
             , Pair<InstructionSceneCtrl, Parent> instructionScene,
                            Pair<GameScreenCtrl, Parent> meQuestion,
-                           Pair<leaderboardSceneCtrl,
+                           Pair<LeaderboardSceneCtrl,
                                    Parent> leaderboardScreen,
 
                            Pair<GameScreenCtrl, Parent> hmQuestion,
                            Pair<GameScreenCtrl, Parent> gxQuestion,
                            Pair<GameScreenCtrl, Parent> insteadOfQuestion,
                            Pair<InBetweenScreenCtrl, Parent> inBetweenScreen,
-                           Pair<waitingRoomController, Parent> waitingRoom,
+                           Pair<WaitingRoomCtrl, Parent> waitingRoom,
                            Pair<GameScreenMPCtrl, Parent> gxQuestionMP,
                            Pair<GameScreenMPCtrl, Parent> hmQuestionMP,
                            Pair<GameScreenMPCtrl, Parent> meQuestionMP,
@@ -219,16 +212,25 @@ public class MainCtrl {
     public void showStartScreen() {
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(startScreen);
+        startScreenCtrl.disableButtons();
         meQuestion.setCounter(20);
         pointsJokerUsed = false;
         answerJokerUsed = false;
         meQuestion.setQuestionList();
     }
 
+    /**
+     * Setter for Score
+     * @param score
+     */
     public void setScore(Score score){
         this.score = score;
     }
 
+    /**
+     * Setter for userName
+     * @param userName
+     */
     public void setUserName(String userName){
         this.userName = userName;
     }
@@ -323,13 +325,38 @@ public class MainCtrl {
      * @return a new image
      */
     public Image getImage(String path) {
-        String imageString = server.getImage(path);
+        String imageString;
+        try {
+            imageString = server.getImage(path);
+        }
+        catch (Exception e){
+            imageString = server.getImage("notFound/ImageNotFound.png");
+        }
+        Base64.Decoder encoder = Base64.getDecoder();
+        byte[] byteArray = encoder.decode(imageString);
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(byteArray);
+        return new Image(inputStream);}
+
+
+
+
+
+    /**
+     * decodes the emoji image as path
+     * @param path
+     * @return a new image
+     */
+    public Image getEmoji(String path) {
+        String imageString = server.getEmoji(path);
         Base64.Decoder encoder = Base64.getDecoder();
         byte[] byteArray = encoder.decode(imageString);
         ByteArrayInputStream inputStream = new ByteArrayInputStream(byteArray);
         return new Image(inputStream);
     }
 
+    /**
+     * Show the waitting room
+     */
     public void showWaitingRoom(){
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(waitingRoomScene);
@@ -405,6 +432,12 @@ public class MainCtrl {
         addCtrl.editActivity = activity;
     }
 
+    /**
+     * Show the Multiplayer Game screen
+     * and registers for 3 websockets
+     * for next question, betweenScreen and Time joker.
+     * @param game
+     */
     public void showMpGameScreen(Game game){
         meQuestionMPCtrl.setGame(game);
         hmQuestionMPCtrl.setGame(game);
@@ -412,10 +445,14 @@ public class MainCtrl {
         insteadOfQuestionMPCtrl.setGame(game);
         meQuestionMPCtrl.getTypeOfQuestion();
 
-        server.registerForMessages("/topic/joker", Game.class, game1 -> {
-            if (game1.getID() == game.getID() &&
-                    game1.getUser().getUserId() != game.getUser().getUserId()){
+        server.registerForMessages("/topic/joker", Joker.class, joker -> {
+            if (joker.getGameID() == game.getID() &&
+                    joker.getUserID() != game.getUser().getUserId()){
+
                 meQuestionMPCtrl.halfTime();
+                gxQuestionMPCtrl.halfTime();
+                insteadOfQuestionMPCtrl.halfTime();
+                hmQuestionMPCtrl.halfTime();
             }
         });
         server.registerForMessages("/topic/nextQuestion", Integer.class, ID -> {
@@ -435,10 +472,16 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showMEQuestionMP(Object currentQuestion) {
+        meQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(meQuestionMP);
         meQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         meQuestionMPCtrl.setMeQuestion();
+        server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
+            Platform.runLater(() -> {
+                meQuestionMPCtrl.setImageViewPic1(emoji);
+            });
+        });
     }
 
     /**
@@ -446,10 +489,16 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showHMQuestionMP(Object currentQuestion) {
+        hmQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(hmQuestionMP);
         hmQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         hmQuestionMPCtrl.setHmQuestion();
+        server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
+            Platform.runLater(() ->{
+                hmQuestionMPCtrl.setImageViewPic1(emoji);
+            });
+        });
     }
 
     /**
@@ -457,10 +506,16 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showGXQuestionMP(Object currentQuestion) {
+        gxQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(gxQuestionMP);
         gxQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         gxQuestionMPCtrl.setGxQuestion();
+        server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
+            Platform.runLater(() ->{
+                gxQuestionMPCtrl.setImageViewPic1(emoji);
+            });
+        });
     }
 
     /**
@@ -468,9 +523,23 @@ public class MainCtrl {
      * @param currentQuestion
      */
     public void showInsteadOfQuestionMP(Object currentQuestion) {
+        insteadOfQuestionMPCtrl.init();
         primaryStage.setTitle("Quizzzz");
         primaryStage.setScene(insteadOfSceneMP);
         insteadOfQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         insteadOfQuestionMPCtrl.setInsteadOfQuestion();
+        server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
+            Platform.runLater(() ->{
+                insteadOfQuestionMPCtrl.setImageViewPic1(emoji);
+            });
+        });
+    }
+
+    /**
+     * Setter for the session
+     * @param url
+     */
+    public void setServer(String url) {
+        server.setSession(url);
     }
 }
