@@ -122,7 +122,6 @@ public class StartScreenCtrl extends Application {
             return;
         }
         cancel();
-//        mainCtrl.showStartScreen();
     }
 
     /**

@@ -197,10 +197,6 @@ public class GameScreenMPCtrl {
         Emoji3.setImage(mainCtrl.getEmoji("emoji3.png"));
     }
 
-    public void test(){
-
-    }
-
     /**
      * Setter for the game object
      * @param game
