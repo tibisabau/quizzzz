@@ -17,10 +17,7 @@
 package client.scenes;
 
 import client.utils.ServerUtils;
-import commons.Game;
-import commons.Joker;
-import commons.Score;
-import commons.Activity;
+import commons.*;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -481,9 +478,11 @@ public class MainCtrl {
         });
         server.registerForMessages("/topic/" + game.getID(), List.class, l -> {
             if(game.getCounter() < 20){
-                Platform.runLater(() -> showLeaderboard(false, false, l));
+                Platform.runLater(() -> showLeaderboard(false,
+                        false, l));
             } else {
-                Platform.runLater(() -> showLeaderboard(false, true, l));
+                Platform.runLater(() -> showLeaderboard(false,
+                        true, l));
             }
         });
         server.registerForMessages("/topic/playerLeft", Integer.class, X -> {
