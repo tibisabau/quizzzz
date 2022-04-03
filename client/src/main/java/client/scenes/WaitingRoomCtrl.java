@@ -16,7 +16,7 @@ import javafx.util.Callback;
 import java.util.ArrayList;
 import java.util.List;
 
-public class waitingRoomController{
+public class WaitingRoomCtrl {
 
 
     @FXML
@@ -36,8 +36,6 @@ public class waitingRoomController{
 
     private List<Score> players;
 
-    private List<Score> oldPlayers;
-
     private Score score;
 
     private Game game;
@@ -48,24 +46,29 @@ public class waitingRoomController{
 
 
     /**
-     * A constructor for the leaderboardSceneCtrl class.
+     * A constructor for the LeaderboardSceneCtrl class.
      * @param server
      * @param mainCtrl
      */
     @Inject
-    public waitingRoomController(ServerUtils server, MainCtrl mainCtrl) {
+    public WaitingRoomCtrl(ServerUtils server, MainCtrl mainCtrl) {
         this.server = server;
         this.mainCtrl = mainCtrl;
         this.players = new ArrayList<>();
     }
 
+    /**
+     * Setter for the score
+     * @param score
+     */
     public void setScore(Score score){
         this.score = score;
     }
 
-
+    /**
+     * Subscribing the to the server for the lobby and starting the game
+     */
     public void load() {
-        System.out.println("i was in load");
         username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         id.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Score, String>,
@@ -80,38 +83,51 @@ public class waitingRoomController{
                 });
         id.setSortable(false);
         players.add(score);
-
-
+        server.joinGame(players);
         server.registerForUpdates(p -> {
             players = p;
+            System.out.println(players.toString());
+            table.getItems().clear();
             for (int i = 0; i < players.size(); i++) {
                 Score score = players.get(i);
-                if (!table.getItems().contains(score)) {
-                    table.getItems().add(score);
-                }
+                table.getItems().add(score);
             }
         });
-        server.joinGame(players);
+        server.joinGame(new ArrayList<Score>());
 
-        server.registerForMessages("/topic/game", Game.class, game -> {
-            this.game = game;
-            this.game.updateScore(this.score);
-            quitButton.setDisable(true);
-            startButton.setDisable(true);
-            Platform.runLater(() -> mainCtrl.showMpGameScreen(game));
-        });
+
+            server.registerForMessages("/topic/game", Game.class, game -> {
+                if(this.game == null)
+                {   
+                    this.game = game;
+                    this.game.updateScore(this.score);
+                    quitButton.setDisable(true);
+                    startButton.setDisable(true);
+                    server.stop();
+                    Platform.runLater(() -> mainCtrl.showMpGameScreen(game));
+                }
+            });
     }
 
+    /**
+     * Stating a new multiplayer game
+     */
     public void startGame(){
         server.send("/app/game", "hello from the client");
+        Platform.runLater(() -> server.quitGame(new ArrayList<>()));
     }
 
+    /**
+     * Getter for the game
+     * @return game
+     */
     public Game getGame(){
         return this.game;
     }
 
-
-
+    /**
+     * When someone leaves the lobby
+     */
     public void stop(){
         server.stop();
     }
@@ -120,8 +136,11 @@ public class waitingRoomController{
      * Return to start scene.
      */
     public void goToStartScene(){
-        mainCtrl.showStartScreen();
+        players.remove(score);
+        server.quitGame(players);
+        this.players = new ArrayList<>();
+        server.wsDisconnect();
+        Platform.runLater(() -> mainCtrl.showStartScreen());
     }
-
 
 }

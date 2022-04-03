@@ -22,129 +22,66 @@ import javafx.scene.image.ImageView;
 
 
 
-/**
- * The type Game screen ctrl.
- */
+
 public class GameScreenCtrl {
-    /**
-     * The Instead of label.
-     */
+
     @FXML
     public Label insteadOfLabel;
 
-    /**
-     * The Score text.
-     */
     @FXML
     public Text scoreText;
 
-    /**
-     * The Text gx question.
-     */
     @FXML
     public Text textGXQuestion;
 
-    /**
-     * The Text hm question.
-     */
     @FXML
     public Text textHMQuestion;
 
-    /**
-     * The Image view 1.
-     */
     @FXML
     public ImageView imageView1;
 
-    /**
-     * The Image view 2.
-     */
     @FXML
     public ImageView imageView2;
 
-    /**
-     * The Image view 3.
-     */
     @FXML
     public ImageView imageView3;
 
-    /**
-     * The Question label.
-     */
     @FXML
     public Label questionLabel;
 
-    /**
-     * The Quit button.
-     */
     @FXML
     public Button QuitButton;
 
-    /**
-     * The Answer a.
-     */
     @FXML
     public Button AnswerA;
 
-    /**
-     * The Answer 1.
-     */
     @FXML
     public Text Answer1;
 
-    /**
-     * The Answer b.
-     */
     @FXML
     public Button AnswerB;
 
-    /**
-     * The Answer 2.
-     */
     @FXML
     public Text Answer2;
 
-    /**
-     * The Answer c.
-     */
     @FXML
     public Button AnswerC;
 
-    /**
-     * The Answer 3.
-     */
     @FXML
     public Text Answer3;
 
-    /**
-     * The Qcounter.
-     */
     @FXML
     public Text qcounter;
 
-    /**
-     * The Countdown.
-     */
     @FXML
     public Text countdown;
 
-    /**
-     * The Guess answer.
-     */
     @FXML
     public TextField guessAnswer;
 
-    /**
-     * The Time.
-     */
     @FXML
     public ProgressBar time;
 
-    /**
-     * The Correct answer qx.
-     *
-     * @FXML public Label scoreDisplay;
-     */
     @FXML
     public Label correctAnswerQX;
 
@@ -504,7 +441,7 @@ public class GameScreenCtrl {
         scoreText.setText(Integer.toString(scoreAmount));
         time.setStyle("-fx-accent: #00FF01");
         timer = 1;
-        bar = new Timeline(new KeyFrame(Duration.millis(8), ev ->{
+        bar = new Timeline(new KeyFrame(Duration.millis(10), ev ->{
             timer -= 0.001;
             time.setProgress(timer);
             countdown.setText(String.valueOf((int) Math.round(timer*10)));
@@ -539,12 +476,11 @@ public class GameScreenCtrl {
                 }
                 else {
                     disableAnswers();
-                    pointsJoker.setDisable(true);
                 }
+                pointsJoker.setDisable(true);
                 showAnswers();
                 mainCtrl.counter--;
                 createTimer();
-                disableAnswers();
             }
         }));
         bar.setCycleCount(1000);
