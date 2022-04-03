@@ -62,9 +62,6 @@ public class InsteadOfController {
                     (activityList.size()));
         }
         List<Activity> list = new ArrayList<>();
-        System.out.println(activity1);
-        System.out.println(activity2);
-        System.out.println(activity3);
         list.add(activity1);
         list.add(activity2);
         list.add(activity3);

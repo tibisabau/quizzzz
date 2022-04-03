@@ -554,13 +554,12 @@ public class GameScreenMPCtrl {
             if (pointsJokerInUse) {
                 game.incrementScore(extraPoints * 2);
                 pointsJokerInUse = false;
-                server.addScore(game.getUser());
             } else {
                 game.incrementScore(extraPoints);
-                server.addScore(game.getUser());
             }
             showAnswers();
         }
+        server.send("/app/scoreUpdate", game);
     }
 
     /**

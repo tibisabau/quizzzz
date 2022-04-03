@@ -1,6 +1,7 @@
 package client.scenes;
 
 import client.utils.ServerUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 
 import commons.Score;
@@ -15,10 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LeaderboardSceneCtrl {
 
@@ -36,6 +34,8 @@ public class LeaderboardSceneCtrl {
 
     @FXML
     public TableColumn<Score, String> value;
+
+    private ObjectMapper mapper = new ObjectMapper();
 
     private final ServerUtils server;
 
@@ -60,8 +60,9 @@ public class LeaderboardSceneCtrl {
      * @param isSinlgePlayer checks if the game is single player or not
      * @param showButton checks if the 'play again'
      * button should be displayed or not
+     * @param l list of scores
      */
-    public void load(boolean isSinlgePlayer, boolean showButton){
+    public void load(boolean isSinlgePlayer, boolean showButton, List l){
         name.setCellValueFactory(new PropertyValueFactory<>("userName"));
         value.setCellValueFactory(new PropertyValueFactory<>("score"));
         rank.setCellValueFactory(
@@ -76,12 +77,13 @@ public class LeaderboardSceneCtrl {
 
         rank.setSortable(false);
         List<Score> scores = new ArrayList<>();
+        System.out.println(scores);
         if( isSinlgePlayer ) {
             scores = server.getTopScores();
-
         } else {
-            List<Score> allScores = server.getMP();
-            scores = removeDuplicates(allScores);
+            for(int i = 0; i < l.size(); i++){
+                scores.add(mapper.convertValue(l.get(i), Score.class));
+            }
             if(showButton == false) {
                 playAgainButton.setVisible(false);
                 playAgainButton.setDisable(true);

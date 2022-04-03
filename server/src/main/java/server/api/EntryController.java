@@ -220,7 +220,6 @@ public class EntryController {
     public String save(@RequestParam("File") MultipartFile multipartFile)
             throws IOException {
 
-        System.out.println(multipartFile);
         String fileName = StringUtils.cleanPath(
                 multipartFile.getOriginalFilename());
 

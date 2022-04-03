@@ -48,9 +48,9 @@ public class MultiplayerController {
     @Autowired
     private GuessXController guessXController;
 
-
     private final ScoreRepository repo;
 
+    private HashMap<Integer, List<Score>> gameScores;
 
     //when starting a game the lobby should be added here,
     // so ids of all players in each game are here
@@ -71,12 +71,12 @@ public class MultiplayerController {
         this.random = random;
         this.msg = msg;
         this.repo = repo;
+        gameScores = new HashMap<>();
     }
 
     //@MessageMapping("/nextQuestion")
     @SendTo("/topic/nextQuestion")
     public Integer sendString(Integer gameID){
-        System.out.println(gameID);
         return gameID;
     }
 
@@ -88,7 +88,6 @@ public class MultiplayerController {
     @MessageMapping("/game")
     @SendTo("/topic/game")
     public Game createGame(@Payload String s){
-        System.out.println("_____\n"+s+"\n_____");
 
         List<Object> questions = new ArrayList<>();
         for (int i = 0; i < 10; i++){
@@ -109,7 +108,7 @@ public class MultiplayerController {
             }
         }
         Game game = new Game(counter++, questions);
-        System.out.println(game);
+        gameScores.put(game.getID(), new ArrayList<Score>());
         currentGames.add(game);
         this.listeners = new HashMap<>();
         this.lobby = new ArrayList<>();
@@ -122,7 +121,6 @@ public class MultiplayerController {
     @MessageMapping("/joker")
     @SendTo("/topic/joker")
     public Joker timeJoker(Joker joker){
-        System.out.println("joker gebruikt");
         return joker;
     }
 
@@ -153,7 +151,6 @@ public class MultiplayerController {
             }
         }
 //        lobby.addAll(scores);
-        System.out.println(lobby.toString());
         listeners.forEach((k, l) -> l.accept(lobby));
         return ResponseEntity.ok(lobby);
     }
@@ -162,7 +159,6 @@ public class MultiplayerController {
     public ResponseEntity<List<Score>>
     quitGame(@RequestBody List<Score> scores){
         lobby = scores;
-        System.out.println(lobby.toString());
         listeners.forEach((k, l) -> l.accept(lobby));
         return ResponseEntity.ok(lobby);
     }
@@ -225,16 +221,29 @@ public class MultiplayerController {
 
             @Override
             public void run() {
-                msg.convertAndSend("/topic/betweenScreen", game.getID());
+                msg.convertAndSend("/topic/" +
+                        game.getID(), gameScores.get(game.getID()));
             }
         },12000, 15000);
-
-
-
     }
 
-
-
+    /**
+     * Update the score of a player
+     * @param g
+     */
+    @MessageMapping("/scoreUpdate")
+    public void updateScore(@Payload Game g){
+        boolean scoreExists = false;
+        for (Score s :gameScores.get(g.getID())){
+            if (s.getUserName().equals(g.getUser().getUserName())){
+                s.setScore(g.getUser().getScore());
+                scoreExists = true;
+            }
+        }
+        if (!scoreExists){
+            gameScores.get(g.getID()).add(g.getUser());
+        }
+    }
 
 }
 
