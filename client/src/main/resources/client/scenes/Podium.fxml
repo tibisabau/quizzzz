@@ -32,7 +32,7 @@
             <Font name="Times New Roman" size="70.0" />
          </font>
       </Text>
-      <Button layoutX="255.0" layoutY="574.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="170.0" style="-fx-background-color: #1b5e20;" text="Home" textFill="WHITE">
+      <Button layoutX="255.0" layoutY="574.0" mnemonicParsing="false" onMouseClicked="#quitGame" prefHeight="57.0" prefWidth="170.0" style="-fx-background-color: #1b5e20;" text="Home" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

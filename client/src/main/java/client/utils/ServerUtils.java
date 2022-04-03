@@ -57,7 +57,7 @@ public class ServerUtils {
 
     private static String SERVER;
 
-    private static final ExecutorService exec =
+    private static ExecutorService exec =
             Executors.newSingleThreadExecutor();
 
     private static StompSession session;
@@ -448,6 +448,8 @@ public class ServerUtils {
      */
     public void stop(){
         exec.shutdownNow();
+        exec = null;
+        exec = Executors.newSingleThreadExecutor();
     }
 
     /**

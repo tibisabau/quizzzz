@@ -75,6 +75,7 @@ public class WaitingRoomCtrl {
      * Subscribing the to the server for the lobby and starting the game
      */
     public void load() {
+        players = new ArrayList<>();
         game = null;
         username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         id.setCellValueFactory(

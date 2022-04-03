@@ -93,4 +93,8 @@ public class PodiumCtrl {
             third.setText("");
         }
     }
+
+    public void quitGame(){
+        mainCtrl.showStartScreen();
+    }
 }

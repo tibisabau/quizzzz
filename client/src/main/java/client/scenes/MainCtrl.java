@@ -488,7 +488,6 @@ public class MainCtrl {
         server.registerForMessages("/topic/" + game.getID(), List.class, l -> {
             podiumCtrl.setPodium(l, score);
             if(game.getCounter() < 20){
-                server.stop();
                 Platform.runLater(() -> showLeaderboard(false,
                         false, l));
             } else {
@@ -598,6 +597,7 @@ public class MainCtrl {
 
     public void showPodium() {
         primaryStage.setTitle("Quizzzz");
+        server.stop();
         primaryStage.setScene(podiumScene);
     }
 }
