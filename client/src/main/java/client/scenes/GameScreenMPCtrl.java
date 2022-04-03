@@ -518,14 +518,27 @@ public class GameScreenMPCtrl {
      * @param e the e
      */
     public void keyPressed(KeyEvent e) {
+        if  (e.getCode().getCode() < 91){
+            guessAnswer.setText(guessAnswer.getText().replaceAll("[^\\d]", ""));
+        }
         switch (e.getCode()) {
             case ENTER:
             {guessAnswer.setDisable(true);
                 ok();}
             break;
+            case W:
+                if(!pointsJoker.isDisable()){
+                    usePointsJoker();
+                }
+                break;
+            case E:
+                if(!timeJoker.isDisable()){
+                    useTimeJoker();
+                }
             default:
                 break;
         }
+
     }
 
     /**
@@ -777,5 +790,59 @@ public class GameScreenMPCtrl {
      */
     public void halfTime(){
         timer = timer/2;
+    }
+
+    /**
+     * direct key presses to methods
+     * @param e key that is pressed
+     * @throws InterruptedException
+     */
+    public void hotKeys(KeyEvent e) throws InterruptedException {
+        if (currentQuestion instanceof GuessXQuestion){
+            switch (e.getCode()){
+                case W:
+                    if(!pointsJoker.isDisable()){
+                        usePointsJoker();
+                    }
+                    break;
+                case E:
+                    if(!timeJoker.isDisable()){
+                        useTimeJoker();
+                    }
+            }
+        }
+        else {
+            switch (e.getCode()) {
+                case Q:
+                    if (!answerJoker.isDisable()) {
+                        useAnswerJoker();
+                    }
+                    break;
+                case W:
+                    if (!pointsJoker.isDisable()) {
+                        usePointsJoker();
+                    }
+                    break;
+                case E:
+                    if (!timeJoker.isDisable()) {
+                        useTimeJoker();
+                    }
+                case DIGIT1:
+                    if (!AnswerA.isDisable()) {
+                        selectAnswerA();
+                    }
+                    break;
+                case DIGIT2:
+                    if (!AnswerB.isDisable()) {
+                        selectAnswerB();
+                    }
+                    break;
+                case DIGIT3:
+                    if (!AnswerC.isDisable()) {
+                        selectAnswerC();
+                    }
+                    break;
+            }
+        }
     }
 }

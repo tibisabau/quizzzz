@@ -129,6 +129,9 @@ public class GameScreenCtrl {
      * @throws InterruptedException the interrupted exception
      */
     public void selectAnswerA() throws InterruptedException {
+        if (AnswerA.isDisable()){
+            return;
+        }
         stopTime();
         disableAnswers();
         answerPoints(currentQuestion, 1);
@@ -142,6 +145,9 @@ public class GameScreenCtrl {
      * @throws InterruptedException the interrupted exception
      */
     public void selectAnswerB() throws InterruptedException {
+        if (AnswerB.isDisable()){
+            return;
+        }
         stopTime();
         disableAnswers();
         answerPoints(currentQuestion,2);
@@ -155,6 +161,9 @@ public class GameScreenCtrl {
      * @throws InterruptedException the interrupted exception
      */
     public void selectAnswerC() throws InterruptedException {
+        if (AnswerC.isDisable()){
+            return;
+        }
         stopTime();
         disableAnswers();
         answerPoints(currentQuestion, 3);
@@ -343,6 +352,9 @@ public class GameScreenCtrl {
      * @param e the e
      */
     public void keyPressed(KeyEvent e) {
+        if  (e.getCode().getCode() < 91){
+            guessAnswer.setText(guessAnswer.getText().replaceAll("[^\\d]", ""));
+        }
         switch (e.getCode()) {
             case ENTER:
             {
@@ -350,6 +362,11 @@ public class GameScreenCtrl {
                 pointsJoker.setDisable(true);
                 ok();
             }
+                break;
+            case W:
+                if(!pointsJoker.isDisable()){
+                    usePointsJoker();
+                }
             break;
             default:
                 break;
@@ -772,6 +789,54 @@ public class GameScreenCtrl {
         pointsJoker.setDisable(true);
         isPointsJoker = true;
         mainCtrl.usePointsJoker();
+    }
+
+    /**
+     * direct key presses to methods
+     * @param e key that is pressed
+     * @throws InterruptedException
+     */
+    public void hotKeys(KeyEvent e) throws InterruptedException {
+        if (currentQuestion instanceof GuessXQuestion){
+            switch (e.getCode()){
+                case W:
+                    if(!pointsJoker.isDisable()){
+                        usePointsJoker();
+                    }
+                    break;
+            }
+        }
+        else {
+            switch (e.getCode()) {
+
+                case Q:
+                    if (!answerJoker.isDisable()) {
+                        useAnswerJoker();
+                    }
+                    break;
+                case W:
+                    if (!pointsJoker.isDisable()) {
+                        usePointsJoker();
+                    }
+                    break;
+                case DIGIT1:
+                    if (!AnswerA.isDisable()) {
+                        selectAnswerA();
+                    }
+                    break;
+                case DIGIT2:
+                    if (!AnswerB.isDisable()) {
+                        selectAnswerB();
+                    }
+                    break;
+                case DIGIT3:
+                    if (!AnswerC.isDisable()) {
+                        selectAnswerC();
+                    }
+                    break;
+            }
+        }
+
     }
 
 

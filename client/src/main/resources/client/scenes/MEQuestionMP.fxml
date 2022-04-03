@@ -31,6 +31,11 @@
         <RowConstraints maxHeight="82.60001220703123" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onKeyReleased="#hotKeys" opacity="0.0" text="Button" />
+         </children>
+      </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
             <children>
                 <Button fx:id="test" layoutX="14.0" layoutY="-22.0" mnemonicParsing="false" onAction="#test" prefHeight="52.0" prefWidth="96.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20">

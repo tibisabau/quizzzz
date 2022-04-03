@@ -32,6 +32,11 @@
       <RowConstraints maxHeight="82.60001220703123" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onKeyReleased="#hotKeys" opacity="0.0" text="Button" />
+         </children>
+      </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
          <children>
             <Button layoutX="14.0" layoutY="-22.0" mnemonicParsing="false" onAction="#test" prefHeight="52.0" prefWidth="96.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20">
@@ -81,7 +86,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <children>
-            <TextField fx:id="guessAnswer" alignment="CENTER" layoutX="109.0" layoutY="43.0" onKeyPressed="#keyPressed" prefHeight="76.0" prefWidth="150.0">
+            <TextField fx:id="guessAnswer" alignment="CENTER" layoutX="109.0" layoutY="43.0" onKeyReleased="#keyPressed" prefHeight="76.0" prefWidth="150.0">
                <font>
                   <Font size="20.0" />
                </font>
