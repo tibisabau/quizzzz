@@ -230,7 +230,7 @@ public class MultiplayerController {
             @Override
             public void run() {
                 counter++;
-                if (counter > 19){
+                if (counter > 0){
                     timer.cancel();
                     timer.purge();
                     return;

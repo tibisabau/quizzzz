@@ -112,6 +112,10 @@ public class MainCtrl {
 
     private WaitingRoomCtrl waitingRoomCtrl;
 
+    private Scene podiumScene;
+
+    private PodiumCtrl podiumCtrl;
+
     private Score score;
 
     private String userName;
@@ -128,16 +132,17 @@ public class MainCtrl {
      * @param leaderboardScreen
      * @param hmQuestion
      * @param gxQuestion
+     * @param insteadOfQuestion
      * @param inBetweenScreen
-     * @param adminPanel
-     * @param image
-     * @param add
+     * @param waitingRoom
      * @param gxQuestionMP
      * @param hmQuestionMP
      * @param meQuestionMP
-     * @param waitingRoom
-     * @param insteadOfQuestion
      * @param insteadOfQuestionMP
+     * @param adminPanel
+     * @param image
+     * @param add
+     * @param podium
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
@@ -157,7 +162,8 @@ public class MainCtrl {
                            Pair<GameScreenMPCtrl, Parent> insteadOfQuestionMP,
                            Pair<AdminPanelCtrl, Parent> adminPanel,
                            Pair<DisplayImageCtrl, Parent> image
-            , Pair<AddActivityCtrl, Parent> add) {
+            , Pair<AddActivityCtrl, Parent> add, Pair<PodiumCtrl,
+            Parent> podium) {
         this.primaryStage = primaryStage;
 
         this.startScreenCtrl = startScreen.getKey();
@@ -202,6 +208,9 @@ public class MainCtrl {
 
         this.insteadOfQuestionMPCtrl = insteadOfQuestionMP.getKey();
         this.insteadOfSceneMP = new Scene(insteadOfQuestionMP.getValue());
+
+        this.podiumCtrl = podium.getKey();
+        this.podiumScene = new Scene(podium.getValue());
 
         showStartScreen();
         primaryStage.show();
@@ -480,10 +489,11 @@ public class MainCtrl {
             }
         });
         server.registerForMessages("/topic/" + game.getID(), List.class, l -> {
-            if(game.getCounter() < 20){
+            Platform.runLater(() -> podiumCtrl.setPodium(l));
+            if(game.getCounter() < 1){
                 Platform.runLater(() -> showLeaderboard(false, false, l));
             } else {
-                Platform.runLater(() -> showLeaderboard(false, true, l));
+                Platform.runLater(() -> showPodium());
             }
         });
         server.registerForMessages("/topic/playerLeft", Integer.class, X -> {
@@ -585,5 +595,10 @@ public class MainCtrl {
      */
     public void disconnect() {
         server.wsDisconnect();
+    }
+
+    public void showPodium() {
+        primaryStage.setTitle("Quizzzz");
+        primaryStage.setScene(podiumScene);
     }
 }
