@@ -108,8 +108,8 @@ public class WaitingRoomCtrl {
                 {
                     this.game = game;
                     this.game.updateScore(this.score);
-//                    server.stop();
-                    Platform.runLater(() -> mainCtrl.showMpGameScreen(game,
+                    Platform.runLater(() ->
+                    mainCtrl.showMpGameScreen(game,
                             game.getPlayerCount()));
                 }
             });
