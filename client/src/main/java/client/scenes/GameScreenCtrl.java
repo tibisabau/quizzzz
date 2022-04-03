@@ -441,7 +441,7 @@ public class GameScreenCtrl {
         scoreText.setText(Integer.toString(scoreAmount));
         time.setStyle("-fx-accent: #00FF01");
         timer = 1;
-        bar = new Timeline(new KeyFrame(Duration.millis(8), ev ->{
+        bar = new Timeline(new KeyFrame(Duration.millis(10), ev ->{
             timer -= 0.001;
             time.setProgress(timer);
             countdown.setText(String.valueOf((int) Math.round(timer*10)));
@@ -476,12 +476,11 @@ public class GameScreenCtrl {
                 }
                 else {
                     disableAnswers();
-                    pointsJoker.setDisable(true);
                 }
+                pointsJoker.setDisable(true);
                 showAnswers();
                 mainCtrl.counter--;
                 createTimer();
-                disableAnswers();
             }
         }));
         bar.setCycleCount(1000);
