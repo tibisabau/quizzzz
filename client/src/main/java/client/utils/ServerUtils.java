@@ -506,15 +506,6 @@ public class ServerUtils {
     }
 
 
-    public List<Score> getMP() {
-            return ClientBuilder.newClient(new ClientConfig())
-                    .target(SERVER).path("/api/multiplayer/getMP")
-                    .request(APPLICATION_JSON)
-                    .accept(APPLICATION_JSON)
-                    .get(new GenericType<List<Score>>() {});
-    }
-
-
     public StompSession getSession() {
         return session;
     }
