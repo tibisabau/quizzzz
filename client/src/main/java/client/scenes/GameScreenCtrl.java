@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -420,7 +421,7 @@ public class GameScreenCtrl {
             this.createTimer();
         }else{
             server.updateScore(StartScreenCtrl.getOwnScore());
-            mainCtrl.showLeaderboard();
+            mainCtrl.showLeaderboard(true,true, new ArrayList());
         }
     }
 
@@ -514,7 +515,7 @@ public class GameScreenCtrl {
                                 score.getScore());
                     } else {
                         server.updateScore(score);
-                        mainCtrl.showLeaderboard();
+                        mainCtrl.showLeaderboard(true,true, new ArrayList());
                     }
         }));
         wait.play();
