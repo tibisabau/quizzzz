@@ -57,12 +57,12 @@ public class LeaderboardSceneCtrl {
 
     /**
      * Fills the leaderboard with scores queried from the database.
-     * @param isSinlgePlayer checks if the game is single player or not
+     * @param isSinglePlayer checks if the game is single player or not
      * @param showButton checks if the 'play again'
      * button should be displayed or not
      * @param l list of scores
      */
-    public void load(boolean isSinlgePlayer, boolean showButton, List l){
+    public void load(boolean isSinglePlayer, boolean showButton, List l){
         name.setCellValueFactory(new PropertyValueFactory<>("userName"));
         value.setCellValueFactory(new PropertyValueFactory<>("score"));
         rank.setCellValueFactory(
@@ -78,19 +78,19 @@ public class LeaderboardSceneCtrl {
         rank.setSortable(false);
         List<Score> scores = new ArrayList<>();
         System.out.println(scores);
-        if( isSinlgePlayer ) {
+        if(isSinglePlayer) {
             scores = server.getTopScores();
         } else {
             for(int i = 0; i < l.size(); i++){
                 scores.add(mapper.convertValue(l.get(i), Score.class));
             }
-            if(showButton == false) {
-                playAgainButton.setVisible(false);
-                playAgainButton.setDisable(true);
-            }else {
-                playAgainButton.setVisible(true);
-                playAgainButton.setDisable(false);
-            }
+        }
+        if(showButton == false) {
+            playAgainButton.setVisible(false);
+            playAgainButton.setDisable(true);
+        }else {
+            playAgainButton.setVisible(true);
+            playAgainButton.setDisable(false);
         }
 
         scores.sort((x,y) -> Integer.compare(y.getScore(), x.getScore()));
