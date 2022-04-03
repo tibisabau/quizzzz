@@ -568,7 +568,8 @@ public class GameScreenCtrl {
             else {
                 if(question instanceof GuessXQuestion){
                     return  GXCorrectAnswer(question, answer);
-                }else{
+                }
+                else{
                     return insteadOfCorrectAnswer(question, answer);
                 }
 

@@ -80,7 +80,6 @@ public class LeaderboardSceneCtrl {
             table.getItems().remove(0, 10);
         } catch (Exception e){
         List<Score> scores = new ArrayList<>();
-        System.out.println(scores);
         if(isSinglePlayer) {
             List<Score> allScores = server.getTopScores();
             for(int i = 0; i < 10; i++){

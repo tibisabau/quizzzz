@@ -80,13 +80,22 @@
          <effect>
             <Reflection fraction="0.43" topOpacity="0.28" />
          </effect></Rectangle>
-      <Text fill="WHITE" layoutX="285.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Congratulations! You Finished X" textAlignment="CENTER" wrappingWidth="677.3203277587891">
+      <Text fx:id="message" fill="WHITE" layoutX="285.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Congratulations! You Finished X" textAlignment="CENTER" wrappingWidth="677.3203277587891">
          <font>
             <Font name="Times New Roman" size="40.0" />
          </font>
       </Text>
-      <Text fx:id="second" layoutX="408.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Text fx:id="first" layoutX="613.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Text fx:id="third" layoutX="811.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="second" fill="WHITE" layoutX="353.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="144.7999267578125">
+         <font>
+            <Font name="Times New Roman" size="38.0" />
+         </font></Text>
+      <Text fx:id="first" fill="WHITE" layoutX="552.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="144.7999267578124">
+         <font>
+            <Font name="Times New Roman" size="38.0" />
+         </font></Text>
+      <Text fx:id="third" fill="WHITE" layoutX="750.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="144.7999267578124">
+         <font>
+            <Font name="Times New Roman" size="38.0" />
+         </font></Text>
    </children>
 </AnchorPane>

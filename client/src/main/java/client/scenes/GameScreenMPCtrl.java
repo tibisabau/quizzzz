@@ -571,7 +571,10 @@ public class GameScreenMPCtrl {
             }
             showAnswers();
         }
-        server.send("/app/scoreUpdate", game);
+        Score score = new Score(game.getUser().getUserName(),
+                game.getUser().getScore());
+        score.setGame(game.getID());
+        server.send("/app/scoreUpdate", score);
     }
 
     /**

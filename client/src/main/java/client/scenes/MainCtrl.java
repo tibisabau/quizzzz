@@ -17,10 +17,7 @@
 package client.scenes;
 
 import client.utils.ServerUtils;
-import commons.Game;
-import commons.Joker;
-import commons.Score;
-import commons.Activity;
+import commons.*;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -489,9 +486,10 @@ public class MainCtrl {
             }
         });
         server.registerForMessages("/topic/" + game.getID(), List.class, l -> {
-            Platform.runLater(() -> podiumCtrl.setPodium(l));
-            if(game.getCounter() < 1){
-                Platform.runLater(() -> showLeaderboard(false, false, l));
+            podiumCtrl.setPodium(l, score);
+            if(game.getCounter() < 20){
+                Platform.runLater(() -> showLeaderboard(false,
+                        false, l));
             } else {
                 Platform.runLater(() -> showPodium());
             }
