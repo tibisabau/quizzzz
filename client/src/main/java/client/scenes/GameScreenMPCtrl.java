@@ -571,6 +571,7 @@ public class GameScreenMPCtrl {
             }
             showAnswers();
         }
+        server.send("/app/scoreUpdate", game);
     }
 
     /**

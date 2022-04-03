@@ -70,6 +70,7 @@ public class WaitingRoomCtrl {
         this.score = score;
     }
 
+
     /**
      * Subscribing the to the server for the lobby and starting the game
      */

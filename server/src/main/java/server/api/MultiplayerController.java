@@ -13,6 +13,8 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
+import server.database.ScoreRepository;
+
 import java.util.Timer;
 
 import java.util.*;
@@ -46,6 +48,14 @@ public class MultiplayerController {
     @Autowired
     private GuessXController guessXController;
 
+    private final ScoreRepository repo;
+
+    private HashMap<Integer, List<Score>> gameScores;
+
+    //when starting a game the lobby should be added here,
+    // so ids of all players in each game are here
+
+
     private Map<Object, Consumer<List<Score>>> listeners = new HashMap<>();
 
     private List<Score> lobby = new ArrayList<>();
@@ -53,9 +63,15 @@ public class MultiplayerController {
 
     private List<Game> currentGames = new ArrayList<>();
 
-    public MultiplayerController(Random random, SimpMessagingTemplate msg){
+    private List<Score> players = new ArrayList<>();
+
+    public MultiplayerController(Random random,
+                                 SimpMessagingTemplate msg,
+                                 ScoreRepository repo){
         this.random = random;
         this.msg = msg;
+        this.repo = repo;
+        gameScores = new HashMap<>();
     }
 
     //@MessageMapping("/nextQuestion")
@@ -77,6 +93,7 @@ public class MultiplayerController {
         currentGames.add(game);
         this.listeners = new HashMap<>();
         this.lobby = new ArrayList<>();
+        gameScores.put(game.getID(), new ArrayList<>());
         gameSync(game);
         return game;
     }
@@ -147,6 +164,8 @@ public class MultiplayerController {
     @PostMapping(path = "join")
     public ResponseEntity<List<Score>>
     joinGame(@RequestBody List<Score> scores){
+        players.addAll(scores);
+
         for(int i = 0; i < scores.size(); i++){
             if(!lobby.contains(scores.get(i))){
                 lobby.add(scores.get(i));
@@ -186,6 +205,20 @@ public class MultiplayerController {
         return res;
     }
 
+    @GetMapping(path = "getMP")
+    public List<Score> getPlayers() {
+        List<Score> allScores = repo.findAll();
+        List<Score> result = new ArrayList<>();
+        for(Score score1 : players ) {
+            for(Score score2 : allScores ) {
+                if(score1.getUserName().equals(score2.getUserName())) {
+                    result.add(score2);
+                }
+            }
+        }
+        return result;
+    }
+
     /**
      * Gets a multiplayer game in sync.
      * @param game
@@ -211,12 +244,28 @@ public class MultiplayerController {
 
             @Override
             public void run() {
-                msg.convertAndSend("/topic/betweenScreen", game.getID());
+                msg.convertAndSend("/topic/" +
+                        game.getID(), gameScores.get(game.getID()));
             }
         },12000, 15000);
+    }
 
-
-
+    /**
+     * Update the score of a player
+     * @param g
+     */
+    @MessageMapping("/scoreUpdate")
+    public void updateScore(@Payload Game g){
+        boolean scoreExists = false;
+        for (Score s :gameScores.get(g.getID())){
+            if (s.getUserName().equals(g.getUser().getUserName())){
+                s.setScore(g.getUser().getScore());
+                scoreExists = true;
+            }
+        }
+        if (!scoreExists){
+            gameScores.get(g.getID()).add(g.getUser());
+        }
     }
 
 }

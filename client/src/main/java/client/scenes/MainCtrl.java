@@ -27,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -291,10 +292,14 @@ public class MainCtrl {
 
     /**
      * Show leaderboard screen.
+     * @param isSinglePlayer checks if the game is single player
+     * @param showButton checks if this is the final display of the leaderboard
+     * @param l
      */
-    public void showLeaderboard(){
+    public void showLeaderboard(boolean isSinglePlayer,
+                                boolean showButton, List l){
         primaryStage.setTitle("Quizzzz");
-        leaderboardSceneCtrl.load();
+        leaderboardSceneCtrl.load(isSinglePlayer, showButton, l);
         primaryStage.setScene(leaderboardScene);
     }
 
@@ -474,9 +479,11 @@ public class MainCtrl {
                 Platform.runLater(() -> meQuestionMPCtrl.getTypeOfQuestion());
             }
         });
-        server.registerForMessages("/topic/betweenScreen", Integer.class, X -> {
-            if(X == game.getID()){
-                Platform.runLater(() -> showInstructionScreen());
+        server.registerForMessages("/topic/" + game.getID(), List.class, l -> {
+            if(game.getCounter() < 20){
+                Platform.runLater(() -> showLeaderboard(false, false, l));
+            } else {
+                Platform.runLater(() -> showLeaderboard(false, true, l));
             }
         });
         server.registerForMessages("/topic/playerLeft", Integer.class, X -> {

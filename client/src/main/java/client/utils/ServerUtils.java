@@ -62,6 +62,7 @@ public class ServerUtils {
 
     private static StompSession session;
 
+
     /**
      * set the websocket url
      * @param server
@@ -70,6 +71,7 @@ public class ServerUtils {
         SERVER = "http://" + server + "/";
         this.session = connect("ws://" + server + "/websocket");
     }
+
 
     /**
      * Gets quotes the hard way.
@@ -125,6 +127,8 @@ public class ServerUtils {
                 .accept(APPLICATION_JSON)
                 .get(new GenericType<List<Score>>() {});
     }
+
+
 
     /**
      * Add score score.
@@ -500,7 +504,6 @@ public class ServerUtils {
         String response = updateImage(image, url);
         return response;
     }
-
 
     /**
      * Close the websocket connection
