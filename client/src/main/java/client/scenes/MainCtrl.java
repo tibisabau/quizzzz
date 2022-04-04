@@ -228,10 +228,15 @@ public class MainCtrl {
         this.score = score;
     }
 
+
+    public Score getScore() { return this.score; }
+
+
     /**
      * Setter for userName
      * @param userName
      */
+
     public void setUserName(String userName){
         this.userName = userName;
     }
@@ -398,6 +403,9 @@ public class MainCtrl {
     public void useAnswerJoker(){
         answerJokerUsed = true;
     }
+
+
+
 
     /**
      * show the image from path

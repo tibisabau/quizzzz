@@ -71,7 +71,6 @@ public class AdminPanelCtrl {
         /**
          * Return to start scene.
          */
-
         public void goToStartScene(){
             mainCtrl.showStartScreen();
         }
