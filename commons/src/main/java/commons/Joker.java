@@ -20,6 +20,8 @@ public class Joker {
      * Constructor for Joker
      * @param userID user who send the joker
      * @param gameID the game to send to
+     * @param type type of joker send
+     * @param userName name of person who send
      */
     public Joker (long userID, Integer gameID, int type, String userName){
         this.userID = userID;

@@ -31,7 +31,6 @@ import javax.inject.Inject;
 import java.io.ByteArrayInputStream;
 import java.util.Base64;
 import javafx.scene.image.Image;
-import org.checkerframework.checker.units.qual.A;
 
 
 public class MainCtrl {
@@ -480,21 +479,24 @@ public class MainCtrl {
                     joker.getUserID() != game.getUser().getUserId()){
                 switch (joker.getType()){
                     case 1:
-                        Activity answer = new Activity("AnswerJoker.jpg", joker.getUserName(), 1);
+                        Activity answer = new Activity("AnswerJoker.jpg",
+                                joker.getUserName(), 1);
                         meQuestionMPCtrl.setImageViewPic1(answer);
                         gxQuestionMPCtrl.setImageViewPic1(answer);
                         insteadOfQuestionMPCtrl.setImageViewPic1(answer);
                         hmQuestionMPCtrl.setImageViewPic1(answer);
                         break;
                     case 2:
-                        Activity points = new Activity("PointsJoker.jpg", joker.getUserName(), 1);
+                        Activity points = new Activity("PointsJoker.jpg",
+                                joker.getUserName(), 1);
                         meQuestionMPCtrl.setImageViewPic1(points);
                         gxQuestionMPCtrl.setImageViewPic1(points);
                         insteadOfQuestionMPCtrl.setImageViewPic1(points);
                         hmQuestionMPCtrl.setImageViewPic1(points);
                         break;
                     case 3:
-                        Activity time = new Activity("Time.jpg", joker.getUserName(), 1);
+                        Activity time = new Activity("Time.jpg",
+                                joker.getUserName(), 1);
                         meQuestionMPCtrl.setImageViewPic1(time);
                         gxQuestionMPCtrl.setImageViewPic1(time);
                         insteadOfQuestionMPCtrl.setImageViewPic1(time);
