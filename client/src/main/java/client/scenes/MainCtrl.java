@@ -479,8 +479,26 @@ public class MainCtrl {
             if (joker.getGameID() == game.getID() &&
                     joker.getUserID() != game.getUser().getUserId()){
                 switch (joker.getType()){
+                    case 1:
+                        Activity answer = new Activity("AnswerJoker.jpg", joker.getUserName(), 1);
+                        meQuestionMPCtrl.setImageViewPic1(answer);
+                        gxQuestionMPCtrl.setImageViewPic1(answer);
+                        insteadOfQuestionMPCtrl.setImageViewPic1(answer);
+                        hmQuestionMPCtrl.setImageViewPic1(answer);
+                        break;
+                    case 2:
+                        Activity points = new Activity("PointsJoker.jpg", joker.getUserName(), 1);
+                        meQuestionMPCtrl.setImageViewPic1(points);
+                        gxQuestionMPCtrl.setImageViewPic1(points);
+                        insteadOfQuestionMPCtrl.setImageViewPic1(points);
+                        hmQuestionMPCtrl.setImageViewPic1(points);
+                        break;
                     case 3:
-                        meQuestionMPCtrl.setImageViewPic1(new Activity("Time.jpg", joker.getUserName(), 1));
+                        Activity time = new Activity("Time.jpg", joker.getUserName(), 1);
+                        meQuestionMPCtrl.setImageViewPic1(time);
+                        gxQuestionMPCtrl.setImageViewPic1(time);
+                        insteadOfQuestionMPCtrl.setImageViewPic1(time);
+                        hmQuestionMPCtrl.setImageViewPic1(time);
                         meQuestionMPCtrl.halfTime();
                         gxQuestionMPCtrl.halfTime();
                         insteadOfQuestionMPCtrl.halfTime();
