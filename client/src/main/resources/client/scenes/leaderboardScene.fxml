@@ -14,7 +14,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #a9f6caff;" VBox.vgrow="ALWAYS">
       <children>
-            <Button layoutX="590.0" layoutY="539.0" mnemonicParsing="false" onAction="#goToStartScene" prefHeight="42.0" prefWidth="146.0" style="-fx-border-color: #1b5e20; -fx-background-color: #fff; -fx-border-width: 1px;" text="PLAY AGAIN" textAlignment="CENTER" textFill="#1b5e20">
+            <Button fx:id="playAgainButton" layoutX="590.0" layoutY="539.0" mnemonicParsing="false" onAction="#goToStartScene" prefHeight="42.0" prefWidth="146.0" style="-fx-border-color: #1b5e20; -fx-background-color: #fff; -fx-border-width: 1px;" text="PLAY AGAIN" textAlignment="CENTER" textFill="#1b5e20">
                <font>
                   <Font name="Candara Bold" size="17.0" />
                </font>
@@ -22,11 +22,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TableView fx:id="table" layoutX="369.0" layoutY="146.0" prefHeight="332.0" prefWidth="567.0" style="-fx-border-color: #1b5e20; -fx-padding: -0.3;" stylesheets="@tableViewStyle.css">
+            <TableView fx:id="table" layoutX="369.0" layoutY="146.0" prefHeight="332.0" prefWidth="567.0" style="-fx-border-color: #1b5e20; -fx-padding: -0.3;" styleClass="table" stylesheets="@/CSS/WaitingRoomCSS.css">
               <columns>
-                <TableColumn fx:id="rank" editable="false" prefWidth="50.0" sortable="false" text="RANK" />
-                <TableColumn fx:id="name" editable="false" prefWidth="170.0" sortable="false" text="NAME" />
-                  <TableColumn fx:id="value" editable="false" prefWidth="160.0" sortable="false" text="SCORE" />
+                <TableColumn fx:id="rank" editable="false" prefWidth="83.20001220703125" sortable="false" text="RANK" />
+                <TableColumn fx:id="name" editable="false" prefWidth="352.80010986328125" sortable="false" text="NAME" />
+                  <TableColumn fx:id="value" editable="false" prefWidth="128.79997558593755" sortable="false" text="SCORE" />
               </columns>
             </TableView>
             <Text fill="#1b5e20" layoutX="547.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEADERBOARD" textAlignment="CENTER" wrappingWidth="241.97894287109375">

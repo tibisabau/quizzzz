@@ -57,10 +57,11 @@ public class ServerUtils {
 
     private static String SERVER;
 
-    private static final ExecutorService exec =
+    private static ExecutorService exec =
             Executors.newSingleThreadExecutor();
 
     private static StompSession session;
+
 
     /**
      * set the websocket url
@@ -70,6 +71,7 @@ public class ServerUtils {
         SERVER = "http://" + server + "/";
         this.session = connect("ws://" + server + "/websocket");
     }
+
 
     /**
      * Gets quotes the hard way.
@@ -125,6 +127,8 @@ public class ServerUtils {
                 .accept(APPLICATION_JSON)
                 .get(new GenericType<List<Score>>() {});
     }
+
+
 
     /**
      * Add score score.
@@ -444,6 +448,8 @@ public class ServerUtils {
      */
     public void stop(){
         exec.shutdownNow();
+        exec = null;
+        exec = Executors.newSingleThreadExecutor();
     }
 
     /**
@@ -499,10 +505,6 @@ public class ServerUtils {
         String url = "/api/entry/save";
         String response = updateImage(image, url);
         return response;
-    }
-
-    public StompSession getSession() {
-        return session;
     }
 
     /**

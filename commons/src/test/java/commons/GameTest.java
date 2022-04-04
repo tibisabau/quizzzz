@@ -30,16 +30,15 @@ class GameTest {
     score = new Score("user",1000);
 
     questions.add(o1);
-    questions.add(o2);
 
-    game = new Game(20, questions);
-
+    game = new Game(20, 0);
+    game.setCurrentQuestion(o1);
     game.updateScore(score);
     }
 
     @Test
     void getCounter() {
-        assertEquals(0, game.getCounter());
+        assertEquals(-1, game.getCounter());
     }
 
     @Test
@@ -62,7 +61,7 @@ class GameTest {
 
     @Test
     void getNextQuestion() {
-        assertEquals(o1, game.getNextQuestion());
+        assertEquals(o1, game.getCurrentQuestion());
     }
 
     @Test

@@ -75,11 +75,14 @@ public class Main extends Application {
                 "client", "scenes", "InsteadOfQuestion.fxml");
         var insteadOfQuestionMP = FXML.load(GameScreenMPCtrl.class,
                 "client", "scenes", "InsteadOfQuestionMP.fxml");
+        var podium = FXML.load(PodiumCtrl.class,
+                "client", "scenes", "Podium.fxml");
         mainCtrl.initialize(primaryStage, start ,
                 instruction, meQuestion, leaderboard, hmQuestion
                 , gxQuestion, insteadOfQuestion, inBetweenScreen,
                 waitingRoom, gxQuestionMP, hmQuestionMP,
-                meQuestionMP, insteadOfQuestionMP, adminPanel, image, add);
+                meQuestionMP, insteadOfQuestionMP, adminPanel, image, add,
+                podium);
 
         primaryStage.setOnCloseRequest(e -> {
             waitingRoom.getKey().stop();

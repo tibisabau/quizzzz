@@ -30,6 +30,8 @@ public class Score {
 
     private int score;
 
+    private int game;
+
     @SuppressWarnings("unused")
     private Score() {
         // for object mapper
@@ -44,7 +46,26 @@ public class Score {
     public Score(String userName, int score) {
         this.userName = userName;
         this.score = score;
+        game = 0;
     }
+
+    /**
+     * Setter for the game
+     * @param game
+     */
+    public void setGame(int game){
+        this.game = game;
+    }
+
+    /**
+     * getter for the game
+     * @return game
+     */
+    public int getGame(){
+        return game;
+    }
+
+
 
     /**
      * Gets user id.

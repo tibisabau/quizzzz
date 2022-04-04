@@ -39,7 +39,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
          <children>
-            <Button layoutX="14.0" layoutY="-22.0" mnemonicParsing="false" onAction="#test" prefHeight="52.0" prefWidth="96.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20">
+            <Button layoutX="14.0" layoutY="-22.0" mnemonicParsing="false" onMouseClicked="#quitGame" prefHeight="52.0" prefWidth="96.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -92,6 +92,16 @@
                </font>
             </TextField>
             <Label fx:id="correctAnswerQX" layoutX="271.0" layoutY="55.0" prefHeight="52.0" prefWidth="96.0" wrapText="true" />
+            <Text fill="#1b5e20" layoutX="122.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active players" wrappingWidth="127.9999877929688">
+               <font>
+                  <Font name="Times New Roman" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="playerCount" fill="#1b5e20" layoutX="99.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER" wrappingWidth="23.30316162109375">
+               <font>
+                  <Font name="Times New Roman" size="18.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">

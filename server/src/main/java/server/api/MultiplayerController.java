@@ -1,9 +1,6 @@
 package server.api;
 
-import commons.Activity;
-import commons.Game;
-import commons.Joker;
-import commons.Score;
+import commons.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +10,8 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
+import server.database.ScoreRepository;
+
 import java.util.Timer;
 
 import java.util.*;
@@ -46,6 +45,14 @@ public class MultiplayerController {
     @Autowired
     private GuessXController guessXController;
 
+    private final ScoreRepository repo;
+
+    private HashMap<Integer, List<Score>> gameScores;
+
+    //when starting a game the lobby should be added here,
+    // so ids of all players in each game are here
+
+
     private Map<Object, Consumer<List<Score>>> listeners = new HashMap<>();
 
     private List<Score> lobby = new ArrayList<>();
@@ -53,15 +60,20 @@ public class MultiplayerController {
 
     private List<Game> currentGames = new ArrayList<>();
 
-    public MultiplayerController(Random random, SimpMessagingTemplate msg){
+    private List<Score> players = new ArrayList<>();
+
+    public MultiplayerController(Random random,
+                                 SimpMessagingTemplate msg,
+                                 ScoreRepository repo){
         this.random = random;
         this.msg = msg;
+        this.repo = repo;
+        gameScores = new HashMap<>();
     }
 
     //@MessageMapping("/nextQuestion")
     @SendTo("/topic/nextQuestion")
     public Integer sendString(Integer gameID){
-        System.out.println(gameID);
         return gameID;
     }
 
@@ -73,42 +85,61 @@ public class MultiplayerController {
     @MessageMapping("/game")
     @SendTo("/topic/game")
     public Game createGame(@Payload String s){
-        System.out.println("_____\n"+s+"\n_____");
-
-        List<Object> questions = new ArrayList<>();
-        for (int i = 0; i < 10; i++){
-            int type = qTypeController.getRandomType();
-            switch (type){
-                case 1:
-                    questions.add(hmQuestionController.getAll());
-                    break;
-                case 2:
-                    questions.add(guessXController.getQuestion());
-                    break;
-                case 3:
-                    questions.add(meQuestionController.getAll());
-                    break;
-                case 4:
-                    questions.add(insteadOfController.getAll());
-                    break;
-            }
-        }
-        Game game = new Game(counter++, questions);
-        System.out.println(game);
+        Game game = new Game(counter++, Integer.parseInt(s));
+        game.setCurrentQuestion(getQuestion());
         currentGames.add(game);
         this.listeners = new HashMap<>();
         this.lobby = new ArrayList<>();
-        //game control timer init here
+        gameScores.put(game.getID(), new ArrayList<>());
         gameSync(game);
         return game;
     }
 
+    /**
+     * get a random question
+     * @return a question
+     */
+    public Object getQuestion() {
+        Object question = new Object();
+        int type = qTypeController.getRandomType();
+        switch (type){
+            case 1:
+                question = hmQuestionController.getAll();
+                break;
+            case 2:
+                question = guessXController.getQuestion();
+                break;
+            case 3:
+                question = meQuestionController.getAll();
+                break;
+            case 4:
+                question = insteadOfController.getAll();
+//                break;
+        }
+        return question;
+    }
 
+    /**
+     * send the time joker
+     * @param joker
+     * @return a time joker
+     */
     @MessageMapping("/joker")
     @SendTo("/topic/joker")
     public Joker timeJoker(Joker joker){
-        System.out.println("joker gebruikt");
         return joker;
+    }
+
+    /**
+     * send the number of players
+     * in the game
+     * @param i
+     * @return the number of players
+     */
+    @MessageMapping("/playerLeft")
+    @SendTo("/topic/playerLeft")
+    public Integer playerLeft(@Payload Integer i){
+        return i;
     }
 
     /**
@@ -130,13 +161,14 @@ public class MultiplayerController {
     @PostMapping(path = "join")
     public ResponseEntity<List<Score>>
     joinGame(@RequestBody List<Score> scores){
+        players.addAll(scores);
+
         for(int i = 0; i < scores.size(); i++){
             if(!lobby.contains(scores.get(i))){
                 lobby.add(scores.get(i));
             }
         }
 //        lobby.addAll(scores);
-        System.out.println(lobby.toString());
         listeners.forEach((k, l) -> l.accept(lobby));
         return ResponseEntity.ok(lobby);
     }
@@ -145,7 +177,6 @@ public class MultiplayerController {
     public ResponseEntity<List<Score>>
     quitGame(@RequestBody List<Score> scores){
         lobby = scores;
-        System.out.println(lobby.toString());
         listeners.forEach((k, l) -> l.accept(lobby));
         return ResponseEntity.ok(lobby);
     }
@@ -171,6 +202,20 @@ public class MultiplayerController {
         return res;
     }
 
+    @GetMapping(path = "getMP")
+    public List<Score> getPlayers() {
+        List<Score> allScores = repo.findAll();
+        List<Score> result = new ArrayList<>();
+        for(Score score1 : players ) {
+            for(Score score2 : allScores ) {
+                if(score1.getUserName().equals(score2.getUserName())) {
+                    result.add(score2);
+                }
+            }
+        }
+        return result;
+    }
+
     /**
      * Gets a multiplayer game in sync.
      * @param game
@@ -182,24 +227,42 @@ public class MultiplayerController {
             @Override
             public void run() {
                 counter++;
-                if (counter>9){
+                if (counter > 19){
                     timer.cancel();
                     timer.purge();
                     return;
                 }
-                msg.convertAndSend("/topic/nextQuestion", game.getID());
+                game.setCurrentQuestion(getQuestion());
+                msg.convertAndSend("/topic/nextQuestion", game);
+
             }
         }, 15000, 15000);
         timer.schedule(new TimerTask() {
 
             @Override
             public void run() {
-                msg.convertAndSend("/topic/betweenScreen", game.getID());
+                msg.convertAndSend("/topic/" +
+                        game.getID(), gameScores.get(game.getID()));
             }
         },12000, 15000);
+    }
 
-
-
+    /**
+     * Update the score of a player
+     * @param score Score
+     */
+    @MessageMapping("/scoreUpdate")
+    public void updateScore(@Payload Score score){
+        boolean scoreExists = false;
+        for (Score s :gameScores.get(score.getGame())){
+            if (s.getUserName().equals(score.getUserName())){
+                s.setScore(score.getScore());
+                scoreExists = true;
+            }
+        }
+        if (!scoreExists){
+            gameScores.get(score.getGame()).add(score);
+        }
     }
 
 }

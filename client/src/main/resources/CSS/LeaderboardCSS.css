@@ -1,0 +1,37 @@
+.table-view {
+    -fx-background-color: linear-gradient(to bottom, #48b67d, rgba(142, 238, 178, 0.27));
+    -fx-padding: 0 0 3px 0;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: rgba(144, 239, 179, 0.07);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+    -fx-text-alignment: center;
+}
+
+.table-view .table-cell{
+    -fx-border-color: rgba(2, 2, 2, 0);
+    -fx-padding: 2 0 2 10px;
+}
+
+.table-view .table-column {
+    -fx-alignment: CENTER;
+    -fx-font-size: 15;
+    -fx-font-family: "Times New Roman";
+
+}
+
+.table-row-cell:even{
+    -fx-background-color: #1dbbdd11;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+    -fx-text-alignment: center;
+
+}
+
+.table-view .column-header {
+    -fx-background-color: #a2eac1;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 18;
+}

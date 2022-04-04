@@ -31,6 +31,9 @@ public class GameScreenMPCtrl {
     public Text textHMQuestion;
 
     @FXML
+    public Text playerCount;
+
+    @FXML
     public ImageView imageView1;
 
     @FXML
@@ -156,6 +159,8 @@ public class GameScreenMPCtrl {
 
     private double timer;
 
+    private double multiplier;
+
     private Timeline bar;
 
     private Game game;
@@ -194,10 +199,6 @@ public class GameScreenMPCtrl {
         Emoji3.setImage(mainCtrl.getEmoji("emoji3.png"));
     }
 
-    public void test(){
-
-    }
-
     /**
      * Setter for the game object
      * @param game
@@ -207,12 +208,19 @@ public class GameScreenMPCtrl {
     }
 
     /**
+     * set the current question
+     * @param question
+     */
+    public void setQuestion(Object question) {
+        game.setCurrentQuestion(question);
+    }
+
+    /**
      * Gets the type of the next question
      */
     public void getTypeOfQuestion(){
         Boolean found = false;
-        currentQuestion = game.getNextQuestion();
-
+        currentQuestion = game.getCurrentQuestion();
         InsteadOfQuestion question = mapper.convertValue(currentQuestion,
                 InsteadOfQuestion.class);
         if (question.getPromptedOption() != null){
@@ -430,6 +438,8 @@ public class GameScreenMPCtrl {
                         currentQuestion instanceof HowMuchQuestion ||
                         currentQuestion instanceof InsteadOfQuestion) {
                     disableAnswers();
+                } else {
+                    guessAnswer.setDisable(true);
                 }
                 showAnswers();
                 answerPoints(currentQuestion,answer);
@@ -488,6 +498,7 @@ public class GameScreenMPCtrl {
      * Selecting answer A
      */
     public void selectAnswerA() throws InterruptedException {
+        multiplier = timer;
         Answer1.setStyle("-fx-font-weight: bold");
         disableAnswers();
         answer = 1;
@@ -497,6 +508,7 @@ public class GameScreenMPCtrl {
      * Selecting answer B
      */
     public void selectAnswerB() throws InterruptedException {
+        multiplier = timer;
         Answer2.setStyle("-fx-font-weight: bold");
         disableAnswers();
         answer = 2;
@@ -506,6 +518,7 @@ public class GameScreenMPCtrl {
      * Selecting answer C
      */
     public void selectAnswerC() throws InterruptedException {
+        multiplier = timer;
         Answer3.setStyle("-fx-font-weight: bold");
         disableAnswers();
         answer = 3;
@@ -523,6 +536,7 @@ public class GameScreenMPCtrl {
         }
         switch (e.getCode()) {
             case ENTER:
+                multiplier = timer;
             {guessAnswer.setDisable(true);
                 ok();}
             break;
@@ -561,8 +575,8 @@ public class GameScreenMPCtrl {
      *
      */
     public void answerPoints(Object question, int answer) {
-        double multiplier = 0.5 + (2 * timer);
-        int extraPoints = (int) Math.round(100 * multiplier);
+        double extra = 0.5 + (2 * multiplier);
+        int extraPoints = (int) Math.round(100 * extra);
         if (gameScreenCtrl.answerCorrect(currentQuestion, answer)) {
             if (pointsJokerInUse) {
                 game.incrementScore(extraPoints * 2);
@@ -572,6 +586,10 @@ public class GameScreenMPCtrl {
             }
             showAnswers();
         }
+        Score score = new Score(game.getUser().getUserName(),
+                game.getUser().getScore());
+        score.setGame(game.getID());
+        server.send("/app/scoreUpdate", score);
     }
 
     /**
@@ -790,6 +808,31 @@ public class GameScreenMPCtrl {
      */
     public void halfTime(){
         timer = timer/2;
+    }
+
+    /**
+     * Quit the game
+     */
+    public void quitGame(){
+        server.send("/app/playerLeft", game.getID());
+        mainCtrl.disconnect();
+        mainCtrl.showStartScreen();
+    }
+
+    /**
+     * Get the player count
+     * @return player count
+     */
+    public int getPlayerCount() {
+        return Integer.parseInt(playerCount.getText());
+    }
+
+    /**
+     * set the player count
+     * @param count
+     */
+    public void setPlayerCount(int count) {
+        playerCount.setText(String.valueOf(count));
     }
 
     /**
