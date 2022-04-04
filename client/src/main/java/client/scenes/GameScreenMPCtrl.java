@@ -756,6 +756,8 @@ public class GameScreenMPCtrl {
     public void useAnswerJoker(){
         answerJoker.setDisable(true);
         game.useAnswerJoker();
+        server.send("/app/joker",
+                new Joker(game.getUser().getUserId(), game.getID(), 1, game.getUser().getUserName()));
         Random rand = new Random();
         int answerToDelete = rand.nextInt(3);
         while (gameScreenCtrl.answerCorrect (currentQuestion, answerToDelete+1))
@@ -789,6 +791,8 @@ public class GameScreenMPCtrl {
         pointsJoker.setDisable(true);
         game.usePointJoker();
         pointsJokerInUse = true;
+        server.send("/app/joker",
+                new Joker(game.getUser().getUserId(), game.getID(), 2, game.getUser().getUserName()));
 
     }
 
@@ -799,7 +803,7 @@ public class GameScreenMPCtrl {
         timeJoker.setDisable(true);
         game.useTimeJoker();
         server.sendGame("/app/joker",
-                new Joker(game.getUser().getUserId(), game.getID()));
+                new Joker(game.getUser().getUserId(), game.getID(), 3, game.getUser().getUserName()));
 
     }
 

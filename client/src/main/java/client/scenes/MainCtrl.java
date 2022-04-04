@@ -31,6 +31,7 @@ import javax.inject.Inject;
 import java.io.ByteArrayInputStream;
 import java.util.Base64;
 import javafx.scene.image.Image;
+import org.checkerframework.checker.units.qual.A;
 
 
 public class MainCtrl {
@@ -477,11 +478,16 @@ public class MainCtrl {
         server.registerForMessages("/topic/joker", Joker.class, joker -> {
             if (joker.getGameID() == game.getID() &&
                     joker.getUserID() != game.getUser().getUserId()){
+                switch (joker.getType()){
+                    case 3:
+                        meQuestionMPCtrl.setImageViewPic1(new Activity("Time.jpg", joker.getUserName(), 1));
+                        meQuestionMPCtrl.halfTime();
+                        gxQuestionMPCtrl.halfTime();
+                        insteadOfQuestionMPCtrl.halfTime();
+                        hmQuestionMPCtrl.halfTime();
+                        break;
+                }
 
-                meQuestionMPCtrl.halfTime();
-                gxQuestionMPCtrl.halfTime();
-                insteadOfQuestionMPCtrl.halfTime();
-                hmQuestionMPCtrl.halfTime();
             }
         });
         server.registerForMessages("/topic/nextQuestion", Game.class, g -> {
