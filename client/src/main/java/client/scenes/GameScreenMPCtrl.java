@@ -607,7 +607,7 @@ public class GameScreenMPCtrl {
      */
     public void onEmoji1() {
         server.send("/app/emoji", new Activity("emoji1.png",
-                game.getUser().getUserName(), 1));
+                game.getUser().getUserName(), game.getID()));
     }
 
     /**
@@ -615,7 +615,7 @@ public class GameScreenMPCtrl {
      */
     public void onEmoji2() {
         server.send("/app/emoji", new Activity("emoji2.png",
-                game.getUser().getUserName(), 1));
+                game.getUser().getUserName(), game.getID()));
     }
 
     /**
@@ -623,7 +623,7 @@ public class GameScreenMPCtrl {
      */
     public void onEmoji3() {
         server.send("/app/emoji", new Activity("emoji3.png",
-                game.getUser().getUserName(), 1));
+                game.getUser().getUserName(), game.getID()));
     }
 
     /**
