@@ -17,10 +17,7 @@
 package client.scenes;
 
 import client.utils.ServerUtils;
-import commons.Game;
-import commons.Joker;
-import commons.Score;
-import commons.Activity;
+import commons.*;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -112,6 +109,10 @@ public class MainCtrl {
 
     private WaitingRoomCtrl waitingRoomCtrl;
 
+    private Scene podiumScene;
+
+    private PodiumCtrl podiumCtrl;
+
     private Score score;
 
     private String userName;
@@ -128,16 +129,17 @@ public class MainCtrl {
      * @param leaderboardScreen
      * @param hmQuestion
      * @param gxQuestion
+     * @param insteadOfQuestion
      * @param inBetweenScreen
-     * @param adminPanel
-     * @param image
-     * @param add
+     * @param waitingRoom
      * @param gxQuestionMP
      * @param hmQuestionMP
      * @param meQuestionMP
-     * @param waitingRoom
-     * @param insteadOfQuestion
      * @param insteadOfQuestionMP
+     * @param adminPanel
+     * @param image
+     * @param add
+     * @param podium
      */
     public void initialize(Stage primaryStage, Pair<StartScreenCtrl,
             Parent> startScreen
@@ -157,7 +159,8 @@ public class MainCtrl {
                            Pair<GameScreenMPCtrl, Parent> insteadOfQuestionMP,
                            Pair<AdminPanelCtrl, Parent> adminPanel,
                            Pair<DisplayImageCtrl, Parent> image
-            , Pair<AddActivityCtrl, Parent> add) {
+            , Pair<AddActivityCtrl, Parent> add, Pair<PodiumCtrl,
+            Parent> podium) {
         this.primaryStage = primaryStage;
 
         this.startScreenCtrl = startScreen.getKey();
@@ -203,6 +206,9 @@ public class MainCtrl {
         this.insteadOfQuestionMPCtrl = insteadOfQuestionMP.getKey();
         this.insteadOfSceneMP = new Scene(insteadOfQuestionMP.getValue());
 
+        this.podiumCtrl = podium.getKey();
+        this.podiumScene = new Scene(podium.getValue());
+
         showStartScreen();
         primaryStage.show();
     }
@@ -212,6 +218,10 @@ public class MainCtrl {
      */
     public void showStartScreen() {
         primaryStage.setTitle("Quizzzz");
+        if (this.score != null) {
+            score.setScore(0);
+        }
+        startScreenCtrl.setUsername();
         primaryStage.setScene(startScreen);
         startScreenCtrl.disableButtons();
         meQuestion.setCounter(20);
@@ -449,12 +459,19 @@ public class MainCtrl {
      * and registers for 3 websockets
      * for next question, betweenScreen and Time joker.
      * @param game
+     * @param playerCount
      */
-    public void showMpGameScreen(Game game){
+    public void showMpGameScreen(Game game, int playerCount){
         meQuestionMPCtrl.setGame(game);
         hmQuestionMPCtrl.setGame(game);
         gxQuestionMPCtrl.setGame(game);
         insteadOfQuestionMPCtrl.setGame(game);
+
+        meQuestionMPCtrl.setPlayerCount(playerCount);
+        hmQuestionMPCtrl.setPlayerCount(playerCount);
+        gxQuestionMPCtrl.setPlayerCount(playerCount);
+        insteadOfQuestionMPCtrl.setPlayerCount(playerCount);
+
         meQuestionMPCtrl.getTypeOfQuestion();
 
         server.registerForMessages("/topic/joker", Joker.class, joker -> {
@@ -467,18 +484,40 @@ public class MainCtrl {
                 hmQuestionMPCtrl.halfTime();
             }
         });
-        server.registerForMessages("/topic/nextQuestion", Integer.class, ID -> {
-            if(ID == game.getID()){
+        server.registerForMessages("/topic/nextQuestion", Game.class, g -> {
+            if(g.getID() == game.getID()){
+                meQuestionMPCtrl.setQuestion(g.getCurrentQuestion());
+                hmQuestionMPCtrl.setQuestion(g.getCurrentQuestion());
+                gxQuestionMPCtrl.setQuestion(g.getCurrentQuestion());
+                insteadOfQuestionMPCtrl.setQuestion(g.getCurrentQuestion());
                 Platform.runLater(() -> meQuestionMPCtrl.getTypeOfQuestion());
             }
         });
         server.registerForMessages("/topic/" + game.getID(), List.class, l -> {
-            if(game.getCounter() < 10){
-                Platform.runLater(() -> showLeaderboard(false, false, l));
+            podiumCtrl.setPodium(l, score);
+            if(game.getCounter() < 20){
+                Platform.runLater(() -> showLeaderboard(false,
+                        false, l));
             } else {
-                Platform.runLater(() -> showLeaderboard(false, true, l));
+                Platform.runLater(() -> showPodium());
             }
         });
+        server.registerForMessages("/topic/playerLeft", Integer.class, X -> {
+            if(X == game.getID()){
+                Platform.runLater(() -> decrementCounter());
+            }
+        });
+    }
+
+    /**
+     * Decrement player count when someone leaves the game
+     */
+    private void decrementCounter() {
+        int playerCount = meQuestionMPCtrl.getPlayerCount() - 1;
+        meQuestionMPCtrl.setPlayerCount(playerCount);
+        gxQuestionMPCtrl.setPlayerCount(playerCount);
+        insteadOfQuestionMPCtrl.setPlayerCount(playerCount);
+        hmQuestionMPCtrl.setPlayerCount(playerCount);
     }
 
     /**
@@ -555,5 +594,18 @@ public class MainCtrl {
      */
     public void setServer(String url) {
         server.setSession(url);
+    }
+
+    /**
+     * disconnect from the websockets
+     */
+    public void disconnect() {
+        server.wsDisconnect();
+    }
+
+    public void showPodium() {
+        primaryStage.setTitle("Quizzzz");
+        server.stop();
+        primaryStage.setScene(podiumScene);
     }
 }

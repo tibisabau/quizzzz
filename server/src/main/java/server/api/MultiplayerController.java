@@ -1,9 +1,6 @@
 package server.api;
 
-import commons.Activity;
-import commons.Game;
-import commons.Joker;
-import commons.Score;
+import commons.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -88,40 +85,61 @@ public class MultiplayerController {
     @MessageMapping("/game")
     @SendTo("/topic/game")
     public Game createGame(@Payload String s){
-
-        List<Object> questions = new ArrayList<>();
-        for (int i = 0; i < 10; i++){
-            int type = qTypeController.getRandomType();
-            switch (type){
-                case 1:
-                    questions.add(hmQuestionController.getAll());
-                    break;
-                case 2:
-                    questions.add(guessXController.getQuestion());
-                    break;
-                case 3:
-                    questions.add(meQuestionController.getAll());
-                    break;
-                case 4:
-                    questions.add(insteadOfController.getAll());
-                    break;
-            }
-        }
-        Game game = new Game(counter++, questions);
-        gameScores.put(game.getID(), new ArrayList<Score>());
+        Game game = new Game(counter++, Integer.parseInt(s));
+        game.setCurrentQuestion(getQuestion());
         currentGames.add(game);
         this.listeners = new HashMap<>();
         this.lobby = new ArrayList<>();
-        //game control timer init here
+        gameScores.put(game.getID(), new ArrayList<>());
         gameSync(game);
         return game;
     }
 
+    /**
+     * get a random question
+     * @return a question
+     */
+    public Object getQuestion() {
+        Object question = new Object();
+        int type = qTypeController.getRandomType();
+        switch (type){
+            case 1:
+                question = hmQuestionController.getAll();
+                break;
+            case 2:
+                question = guessXController.getQuestion();
+                break;
+            case 3:
+                question = meQuestionController.getAll();
+                break;
+            case 4:
+                question = insteadOfController.getAll();
+//                break;
+        }
+        return question;
+    }
 
+    /**
+     * send the time joker
+     * @param joker
+     * @return a time joker
+     */
     @MessageMapping("/joker")
     @SendTo("/topic/joker")
     public Joker timeJoker(Joker joker){
         return joker;
+    }
+
+    /**
+     * send the number of players
+     * in the game
+     * @param i
+     * @return the number of players
+     */
+    @MessageMapping("/playerLeft")
+    @SendTo("/topic/playerLeft")
+    public Integer playerLeft(@Payload Integer i){
+        return i;
     }
 
     /**
@@ -209,12 +227,14 @@ public class MultiplayerController {
             @Override
             public void run() {
                 counter++;
-                if (counter>9){
+                if (counter > 19){
                     timer.cancel();
                     timer.purge();
                     return;
                 }
-                msg.convertAndSend("/topic/nextQuestion", game.getID());
+                game.setCurrentQuestion(getQuestion());
+                msg.convertAndSend("/topic/nextQuestion", game);
+
             }
         }, 15000, 15000);
         timer.schedule(new TimerTask() {
@@ -229,19 +249,19 @@ public class MultiplayerController {
 
     /**
      * Update the score of a player
-     * @param g
+     * @param score Score
      */
     @MessageMapping("/scoreUpdate")
-    public void updateScore(@Payload Game g){
+    public void updateScore(@Payload Score score){
         boolean scoreExists = false;
-        for (Score s :gameScores.get(g.getID())){
-            if (s.getUserName().equals(g.getUser().getUserName())){
-                s.setScore(g.getUser().getScore());
+        for (Score s :gameScores.get(score.getGame())){
+            if (s.getUserName().equals(score.getUserName())){
+                s.setScore(score.getScore());
                 scoreExists = true;
             }
         }
         if (!scoreExists){
-            gameScores.get(g.getID()).add(g.getUser());
+            gameScores.get(score.getGame()).add(score);
         }
     }
 

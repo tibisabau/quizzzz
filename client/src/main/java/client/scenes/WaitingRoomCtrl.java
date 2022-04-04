@@ -12,7 +12,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,9 @@ public class WaitingRoomCtrl {
 
     @FXML
     public Button quitButton;
+
+    @FXML
+    public Text playerCount;
 
     @FXML
     public  Button startButton;
@@ -65,10 +70,13 @@ public class WaitingRoomCtrl {
         this.score = score;
     }
 
+
     /**
      * Subscribing the to the server for the lobby and starting the game
      */
     public void load() {
+        players = new ArrayList<>();
+        game = null;
         username.setCellValueFactory(new PropertyValueFactory<>("userName"));
         id.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Score, String>,
@@ -83,28 +91,27 @@ public class WaitingRoomCtrl {
                 });
         id.setSortable(false);
         players.add(score);
-        server.joinGame(players);
         server.registerForUpdates(p -> {
             players = p;
-            System.out.println(players.toString());
             table.getItems().clear();
+            playerCount.setText(String.valueOf(players.size()));
             for (int i = 0; i < players.size(); i++) {
                 Score score = players.get(i);
                 table.getItems().add(score);
             }
         });
+        server.joinGame(players);
         server.joinGame(new ArrayList<Score>());
 
 
             server.registerForMessages("/topic/game", Game.class, game -> {
                 if(this.game == null)
-                {   
+                {
                     this.game = game;
                     this.game.updateScore(this.score);
-                    quitButton.setDisable(true);
-                    startButton.setDisable(true);
-                    server.stop();
-                    Platform.runLater(() -> mainCtrl.showMpGameScreen(game));
+                    Platform.runLater(() ->
+                    mainCtrl.showMpGameScreen(game,
+                            game.getPlayerCount()));
                 }
             });
     }
@@ -113,7 +120,7 @@ public class WaitingRoomCtrl {
      * Stating a new multiplayer game
      */
     public void startGame(){
-        server.send("/app/game", "hello from the client");
+        server.send("/app/game", playerCount.getText());
         Platform.runLater(() -> server.quitGame(new ArrayList<>()));
     }
 

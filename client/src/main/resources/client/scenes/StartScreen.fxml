@@ -63,7 +63,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <children>
-            <Text fill="#1b5e20" layoutX="88.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quizzz!" textAlignment="CENTER">
+            <Text fill="#1b5e20" layoutX="66.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quizzzz!" textAlignment="CENTER">
                <font>
                   <Font name="Candara" size="96.0" />
                </font>

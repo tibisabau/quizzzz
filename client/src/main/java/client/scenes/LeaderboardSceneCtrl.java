@@ -76,10 +76,19 @@ public class LeaderboardSceneCtrl {
         });
 
         rank.setSortable(false);
+        try {
+            table.getItems().remove(0, 10);
+        } catch (Exception e){
         List<Score> scores = new ArrayList<>();
-        System.out.println(scores);
         if(isSinglePlayer) {
-            scores = server.getTopScores();
+            List<Score> allScores = server.getTopScores();
+            for(int i = 0; i < 10; i++){
+                try{
+                    scores.add(allScores.get(i));
+                } catch (Exception b){
+                    break;
+                }
+            }
         } else {
             for(int i = 0; i < l.size(); i++){
                 scores.add(mapper.convertValue(l.get(i), Score.class));
@@ -93,9 +102,12 @@ public class LeaderboardSceneCtrl {
             playAgainButton.setDisable(false);
         }
 
+
         scores.sort((x,y) -> Integer.compare(y.getScore(), x.getScore()));
         ObservableList<Score> list = FXCollections.observableList(scores);
         table.setItems(list);
+        }
+        
     }
 
     /**

@@ -33,7 +33,7 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
          <children>
-            <Button fx:id="test" layoutX="14.0" layoutY="-22.0" mnemonicParsing="false" onAction="#test" prefHeight="52.0" prefWidth="96.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20">
+            <Button layoutX="14.0" layoutY="-22.0" mnemonicParsing="false" onMouseClicked="#quitGame" prefHeight="52.0" prefWidth="96.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Quit Game" textFill="#1b5e20">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
@@ -41,7 +41,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
-            <ImageView fx:id="imageView2" fitHeight="246.0" fitWidth="346.0" layoutX="10.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageView2" fitHeight="246.0" fitWidth="346.0" layoutX="-6.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="92.0" prefWidth="380.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -93,7 +93,18 @@
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Text>
+               </cursor>
+            </Text>
+            <Text fill="#1b5e20" layoutX="122.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active players" wrappingWidth="127.9999877929688">
+               <font>
+                  <Font name="Times New Roman" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="playerCount" fill="#1b5e20" layoutX="99.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER" wrappingWidth="23.30316162109375">
+               <font>
+                  <Font name="Times New Roman" size="18.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
@@ -227,5 +238,7 @@
             <Button fx:id="timeJoker" layoutY="118.0" mnemonicParsing="false" onAction="#useTimeJoker" prefHeight="39.0" prefWidth="96.0" text="Half Time" />
          </children>
       </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
    </children>
 </GridPane>

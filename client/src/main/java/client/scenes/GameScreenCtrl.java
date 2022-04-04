@@ -439,7 +439,7 @@ public class GameScreenCtrl {
      */
     public void startTimer(){
         int scoreAmount = StartScreenCtrl.getOwnScore().getScore();
-        scoreText.setText(Integer.toString(scoreAmount));
+        scoreText.setText("Score: " + scoreAmount);
         time.setStyle("-fx-accent: #00FF01");
         timer = 1;
         bar = new Timeline(new KeyFrame(Duration.millis(10), ev ->{
@@ -568,7 +568,8 @@ public class GameScreenCtrl {
             else {
                 if(question instanceof GuessXQuestion){
                     return  GXCorrectAnswer(question, answer);
-                }else{
+                }
+                else{
                     return insteadOfCorrectAnswer(question, answer);
                 }
 
@@ -730,7 +731,7 @@ public class GameScreenCtrl {
      * @param score the score
      */
     public void setScoreText(int score) {
-        scoreText.setText("Score : " + String.valueOf(score));
+        scoreText.setText("Score: " + score);
     }
 
 
