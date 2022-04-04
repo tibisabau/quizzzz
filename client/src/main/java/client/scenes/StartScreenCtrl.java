@@ -68,6 +68,13 @@ public class StartScreenCtrl extends Application {
     }
 
     /**
+     * Reset score
+     */
+    public static void resetScore(){
+        ownScore.setScore(0);
+    }
+
+    /**
      * Display message that check
      * if the user really wants to exit the application.
      *
@@ -219,7 +226,15 @@ public class StartScreenCtrl extends Application {
      */
     public void setUsername() {
         if (ownScore != null){
+            ownScore = new Score(ownScore.getUserName(), 0);
             nicknameField.setText(ownScore.getUserName());
         }
+    }
+
+    /**
+     * Playing again with same user
+     */
+    public void newGame(){
+        ownScore = new Score(ownScore.getUserName(), 0);
     }
 }

@@ -42,6 +42,11 @@ public class PodiumCtrl {
         this.mainCtrl = mainCtrl;
     }
 
+    /**
+     * Setting the podium
+     * @param list
+     * @param score
+     */
     public void setPodium(List list, Score score) {
         int place = 0;
         String str;
@@ -94,7 +99,17 @@ public class PodiumCtrl {
         }
     }
 
+    /**
+     * Quit Game
+     */
     public void quitGame(){
         mainCtrl.showStartScreen();
+    }
+
+    /**
+     * Play Again
+     */
+    public void playAgain(){
+        mainCtrl.showWaitingRoom();
     }
 }
