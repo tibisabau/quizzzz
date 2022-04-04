@@ -531,9 +531,12 @@ public class MainCtrl {
         meQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         meQuestionMPCtrl.setMeQuestion();
         server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
-            Platform.runLater(() -> {
-                meQuestionMPCtrl.setImageViewPic1(emoji);
-            });
+            if (emoji.getConsumptionInWh() ==
+                    waitingRoomCtrl.getGame().getID()) {
+                Platform.runLater(() -> {
+                    meQuestionMPCtrl.setImageViewPic1(emoji);
+                });
+            }
         });
     }
 
@@ -548,9 +551,12 @@ public class MainCtrl {
         hmQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         hmQuestionMPCtrl.setHmQuestion();
         server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
-            Platform.runLater(() ->{
-                hmQuestionMPCtrl.setImageViewPic1(emoji);
-            });
+            if (emoji.getConsumptionInWh() ==
+                    waitingRoomCtrl.getGame().getID()) {
+                Platform.runLater(() -> {
+                    hmQuestionMPCtrl.setImageViewPic1(emoji);
+                });
+            }
         });
     }
 
@@ -565,9 +571,12 @@ public class MainCtrl {
         gxQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         gxQuestionMPCtrl.setGxQuestion();
         server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
-            Platform.runLater(() ->{
-                gxQuestionMPCtrl.setImageViewPic1(emoji);
-            });
+            if (emoji.getConsumptionInWh() ==
+                    waitingRoomCtrl.getGame().getID()) {
+                Platform.runLater(() -> {
+                    gxQuestionMPCtrl.setImageViewPic1(emoji);
+                });
+            }
         });
     }
 
@@ -582,9 +591,12 @@ public class MainCtrl {
         insteadOfQuestionMPCtrl.setCurrentQuestion(currentQuestion);
         insteadOfQuestionMPCtrl.setInsteadOfQuestion();
         server.registerForMessages("/topic/emoji", Activity.class, emoji -> {
-            Platform.runLater(() ->{
-                insteadOfQuestionMPCtrl.setImageViewPic1(emoji);
-            });
+            if (emoji.getConsumptionInWh() ==
+                    waitingRoomCtrl.getGame().getID()) {
+                Platform.runLater(() -> {
+                    insteadOfQuestionMPCtrl.setImageViewPic1(emoji);
+                });
+            }
         });
     }
 

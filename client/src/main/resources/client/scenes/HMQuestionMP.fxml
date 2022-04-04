@@ -233,9 +233,18 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
          <children>
-            <Button fx:id="answerJoker" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#useAnswerJoker" prefHeight="39.0" prefWidth="96.0" text="Delete Answer" />
-            <Button fx:id="pointsJoker" layoutY="66.0" mnemonicParsing="false" onMouseClicked="#usePointsJoker" prefHeight="39.0" prefWidth="96.0" text="Double Points" />
-            <Button fx:id="timeJoker" layoutY="118.0" mnemonicParsing="false" onAction="#useTimeJoker" prefHeight="39.0" prefWidth="96.0" text="Half Time" />
+            <Button fx:id="answerJoker" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#useAnswerJoker" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Delete Answer" textFill="#1b5e20">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font></Button>
+            <Button fx:id="pointsJoker" layoutY="66.0" mnemonicParsing="false" onMouseClicked="#usePointsJoker" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: #fff; -fx-border-color: #1b5e20;" text="Double Points" textFill="#1b5e20">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font></Button>
+            <Button fx:id="timeJoker" layoutY="118.0" mnemonicParsing="false" onAction="#useTimeJoker" prefHeight="39.0" prefWidth="96.0" style="-fx-border-color: #1b5e20; -fx-background-color: #fff;" text="Half Time" textFill="#1b5e20">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font></Button>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />

@@ -108,6 +108,7 @@ public class WaitingRoomCtrl {
                 if(this.game == null)
                 {
                     this.game = game;
+                    this.score.setScore(0);
                     this.game.updateScore(this.score);
                     Platform.runLater(() ->
                     mainCtrl.showMpGameScreen(game,

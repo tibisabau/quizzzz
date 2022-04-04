@@ -150,7 +150,8 @@ public class MultiplayerController {
     @MessageMapping("/emoji")
     @SendTo("/topic/emoji")
     public Activity sendPath(Activity activity){
-        return new Activity(activity.getImagePath(), activity.getTitle(), 1);
+        return new Activity(activity.getImagePath(),
+                activity.getTitle(), activity.getConsumptionInWh());
     }
 
     /**

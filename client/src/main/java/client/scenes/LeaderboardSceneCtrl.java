@@ -16,12 +16,16 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
+import java.io.IOException;
 import java.util.*;
 
 public class LeaderboardSceneCtrl {
 
     @FXML
     public Button playAgainButton;
+
+    @FXML
+    public Button homeButton;
 
     @FXML
     public TableView table;
@@ -41,17 +45,22 @@ public class LeaderboardSceneCtrl {
 
     private final MainCtrl mainCtrl;
 
+    private final StartScreenCtrl startScreenCtrl;
+
     private boolean isFirstQuestion = true;
 
     /**
      * A constructor for the LeaderboardSceneCtrl class.
      * @param server
      * @param mainCtrl
+     * @param startScreenCtrl
      */
     @Inject
-    public LeaderboardSceneCtrl(ServerUtils server, MainCtrl mainCtrl) {
+    public LeaderboardSceneCtrl(ServerUtils server, MainCtrl mainCtrl,
+                                StartScreenCtrl startScreenCtrl) {
         this.server = server;
         this.mainCtrl = mainCtrl;
+        this.startScreenCtrl = startScreenCtrl;
     }
 
 
@@ -97,9 +106,14 @@ public class LeaderboardSceneCtrl {
         if(showButton == false) {
             playAgainButton.setVisible(false);
             playAgainButton.setDisable(true);
+            homeButton.setVisible(false);
+            homeButton.setDisable(true);
+
         }else {
             playAgainButton.setVisible(true);
             playAgainButton.setDisable(false);
+            homeButton.setVisible(true);
+            homeButton.setDisable(false);
         }
 
 
@@ -117,7 +131,11 @@ public class LeaderboardSceneCtrl {
         mainCtrl.showStartScreen();
     }
 
-
+    /**
+     * Remove the duplicates from the list
+     * @param scoreList
+     * @return new list
+     */
     public List<Score> removeDuplicates(List<Score> scoreList) {
         List<Score> result = new ArrayList<>();
         Set<String> names = new HashSet<>();
@@ -128,6 +146,16 @@ public class LeaderboardSceneCtrl {
             }
         }
         return result;
+    }
+
+    /**
+     * Play again
+     * @throws IOException
+     */
+    public void playAgain() throws IOException {
+        StartScreenCtrl.resetScore();
+        startScreenCtrl.newGame();
+        startScreenCtrl.goToGameScreen();
     }
 
 }
