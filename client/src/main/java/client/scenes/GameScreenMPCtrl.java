@@ -531,13 +531,28 @@ public class GameScreenMPCtrl {
      * @param e the e
      */
     public void keyPressed(KeyEvent e) {
+        if  (e.getCode().getCode() < 91){
+            guessAnswer.setText(guessAnswer.getText().replaceAll("[^\\d]", ""));
+        }
         switch (e.getCode()) {
             case ENTER:
                 multiplier = timer;
-                guessAnswer.setDisable(true);
-                ok();
+            {guessAnswer.setDisable(true);
+                ok();}
+            break;
+            case W:
+                if(!pointsJoker.isDisable()){
+                    usePointsJoker();
+                }
+                break;
+            case E:
+                if(!timeJoker.isDisable()){
+                    useTimeJoker();
+                }
+            default:
                 break;
         }
+
     }
 
     /**
@@ -741,6 +756,9 @@ public class GameScreenMPCtrl {
     public void useAnswerJoker(){
         answerJoker.setDisable(true);
         game.useAnswerJoker();
+        server.send("/app/joker",
+                new Joker(game.getUser().getUserId(), game.getID(),
+                        1, game.getUser().getUserName()));
         Random rand = new Random();
         int answerToDelete = rand.nextInt(3);
         while (gameScreenCtrl.answerCorrect (currentQuestion, answerToDelete+1))
@@ -774,6 +792,9 @@ public class GameScreenMPCtrl {
         pointsJoker.setDisable(true);
         game.usePointJoker();
         pointsJokerInUse = true;
+        server.send("/app/joker",
+                new Joker(game.getUser().getUserId(), game.getID(),
+                        2, game.getUser().getUserName()));
 
     }
 
@@ -784,7 +805,8 @@ public class GameScreenMPCtrl {
         timeJoker.setDisable(true);
         game.useTimeJoker();
         server.sendGame("/app/joker",
-                new Joker(game.getUser().getUserId(), game.getID()));
+                new Joker(game.getUser().getUserId(), game.getID(),
+                        3, game.getUser().getUserName()));
 
     }
 
@@ -818,5 +840,59 @@ public class GameScreenMPCtrl {
      */
     public void setPlayerCount(int count) {
         playerCount.setText(String.valueOf(count));
+    }
+
+    /**
+     * direct key presses to methods
+     * @param e key that is pressed
+     * @throws InterruptedException
+     */
+    public void hotKeys(KeyEvent e) throws InterruptedException {
+        if (currentQuestion instanceof GuessXQuestion){
+            switch (e.getCode()){
+                case W:
+                    if(!pointsJoker.isDisable()){
+                        usePointsJoker();
+                    }
+                    break;
+                case E:
+                    if(!timeJoker.isDisable()){
+                        useTimeJoker();
+                    }
+            }
+        }
+        else {
+            switch (e.getCode()) {
+                case Q:
+                    if (!answerJoker.isDisable()) {
+                        useAnswerJoker();
+                    }
+                    break;
+                case W:
+                    if (!pointsJoker.isDisable()) {
+                        usePointsJoker();
+                    }
+                    break;
+                case E:
+                    if (!timeJoker.isDisable()) {
+                        useTimeJoker();
+                    }
+                case DIGIT1:
+                    if (!AnswerA.isDisable()) {
+                        selectAnswerA();
+                    }
+                    break;
+                case DIGIT2:
+                    if (!AnswerB.isDisable()) {
+                        selectAnswerB();
+                    }
+                    break;
+                case DIGIT3:
+                    if (!AnswerC.isDisable()) {
+                        selectAnswerC();
+                    }
+                    break;
+            }
+        }
     }
 }

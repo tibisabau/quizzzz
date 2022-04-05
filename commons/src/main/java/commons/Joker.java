@@ -7,6 +7,10 @@ public class Joker {
 
     private Integer gameID;
 
+    private int type;
+
+    private String userName;
+
     /**
      * Constructor for Joker
      */
@@ -16,10 +20,15 @@ public class Joker {
      * Constructor for Joker
      * @param userID user who send the joker
      * @param gameID the game to send to
+     * @param type type of joker send
+     * @param userName name of person who send
      */
-    public Joker (long userID, Integer gameID){
+    public Joker (long userID, Integer gameID, int type, String userName){
         this.userID = userID;
         this.gameID = gameID;
+        this.type = type;
+        this.userName = userName;
+
     }
 
     /**
@@ -36,5 +45,21 @@ public class Joker {
      */
     public Integer getGameID() {
         return gameID;
+    }
+
+    /**
+     * getter for Type
+     * @return int type
+     */
+    public int getType() {
+        return type;
+    }
+
+    /**
+     * getter username
+     * @return String userName
+     */
+    public String getUserName() {
+        return userName;
     }
 }

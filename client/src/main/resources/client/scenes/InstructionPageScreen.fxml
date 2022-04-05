@@ -46,7 +46,7 @@
          <center>
             <AnchorPane prefHeight="262.0" prefWidth="529.0" style="-fx-background-color: White; -fx-border-color: #1b5c1f;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="#1b5e20" layoutX="7.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="    Select a nickname and whether to play solo or multiplayer. Start a   game. &#10;    You will be presented with 20 questions one question at a time. &#10;    Select the one answer to the question on screen you consider to be   right.&#10;    You receive points per correct answer. The faster you answer correctly   the more points you can get.&#10;     You can use 3 power-ups in this game. Each power-up is good for 1   use/game.  " wrappingWidth="752.7860107421875">
+                  <Text fill="#1b5e20" layoutX="15.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a nickname and whether to play solo or multiplayer. Start a   game. &#10;You will be presented with 20 questions one question at a time. &#10;Select the one answer to the question on screen you consider to be   right.&#10;You receive points per correct answer. The faster you answer correctly   the more points you can get.&#10;You can use 3 power-ups in this game. Each power-up is good for 1   use/game.  &#10;Hotkeys that are available: 1,2,3 for the answers. &#10;Q,W,E are for the power-ups." wrappingWidth="737.7860107421875">
                      <font>
                         <Font size="22.0" />
                      </font>

@@ -477,11 +477,28 @@ public class MainCtrl {
         server.registerForMessages("/topic/joker", Joker.class, joker -> {
             if (joker.getGameID() == game.getID() &&
                     joker.getUserID() != game.getUser().getUserId()){
+                switch (joker.getType()){
+                    case 1:
+                        Activity answer = new Activity("AnswerJoker.jpg",
+                                joker.getUserName(), 1);
+                        Platform.runLater(() -> setJokers(answer));
+                        break;
+                    case 2:
+                        Activity points = new Activity("PointsJoker.jpg",
+                                joker.getUserName(), 1);
+                        Platform.runLater(() -> setJokers(points));
+                        break;
+                    case 3:
+                        Activity time = new Activity("Time.jpg",
+                                joker.getUserName(), 1);
+                        Platform.runLater(() -> setJokers(time));
+                        meQuestionMPCtrl.halfTime();
+                        gxQuestionMPCtrl.halfTime();
+                        insteadOfQuestionMPCtrl.halfTime();
+                        hmQuestionMPCtrl.halfTime();
+                        break;
+                }
 
-                meQuestionMPCtrl.halfTime();
-                gxQuestionMPCtrl.halfTime();
-                insteadOfQuestionMPCtrl.halfTime();
-                hmQuestionMPCtrl.halfTime();
             }
         });
         server.registerForMessages("/topic/nextQuestion", Game.class, g -> {
@@ -507,6 +524,17 @@ public class MainCtrl {
                 Platform.runLater(() -> decrementCounter());
             }
         });
+    }
+
+    /**
+     * show jokers on the game screen
+     * @param jokers joker you want to show
+     */
+    public void setJokers(Activity jokers){
+        meQuestionMPCtrl.setImageViewPic1(jokers);
+        gxQuestionMPCtrl.setImageViewPic1(jokers);
+        insteadOfQuestionMPCtrl.setImageViewPic1(jokers);
+        hmQuestionMPCtrl.setImageViewPic1(jokers);
     }
 
     /**
