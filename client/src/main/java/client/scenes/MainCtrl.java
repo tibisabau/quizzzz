@@ -481,26 +481,17 @@ public class MainCtrl {
                     case 1:
                         Activity answer = new Activity("AnswerJoker.jpg",
                                 joker.getUserName(), 1);
-                        meQuestionMPCtrl.setImageViewPic1(answer);
-                        gxQuestionMPCtrl.setImageViewPic1(answer);
-                        insteadOfQuestionMPCtrl.setImageViewPic1(answer);
-                        hmQuestionMPCtrl.setImageViewPic1(answer);
+                        Platform.runLater(() -> setJokers(answer));
                         break;
                     case 2:
                         Activity points = new Activity("PointsJoker.jpg",
                                 joker.getUserName(), 1);
-                        meQuestionMPCtrl.setImageViewPic1(points);
-                        gxQuestionMPCtrl.setImageViewPic1(points);
-                        insteadOfQuestionMPCtrl.setImageViewPic1(points);
-                        hmQuestionMPCtrl.setImageViewPic1(points);
+                        Platform.runLater(() -> setJokers(points));
                         break;
                     case 3:
                         Activity time = new Activity("Time.jpg",
                                 joker.getUserName(), 1);
-                        meQuestionMPCtrl.setImageViewPic1(time);
-                        gxQuestionMPCtrl.setImageViewPic1(time);
-                        insteadOfQuestionMPCtrl.setImageViewPic1(time);
-                        hmQuestionMPCtrl.setImageViewPic1(time);
+                        Platform.runLater(() -> setJokers(time));
                         meQuestionMPCtrl.halfTime();
                         gxQuestionMPCtrl.halfTime();
                         insteadOfQuestionMPCtrl.halfTime();
@@ -533,6 +524,13 @@ public class MainCtrl {
                 Platform.runLater(() -> decrementCounter());
             }
         });
+    }
+
+    public void setJokers(Activity jokers){
+        meQuestionMPCtrl.setImageViewPic1(jokers);
+        gxQuestionMPCtrl.setImageViewPic1(jokers);
+        insteadOfQuestionMPCtrl.setImageViewPic1(jokers);
+        hmQuestionMPCtrl.setImageViewPic1(jokers);
     }
 
     /**
