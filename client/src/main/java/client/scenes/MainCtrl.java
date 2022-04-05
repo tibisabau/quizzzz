@@ -349,7 +349,7 @@ public class MainCtrl {
             imageString = server.getImage(path);
         }
         catch (Exception e){
-            imageString = server.getImage("notFound/ImageNotFound.png");
+            imageString = server.getEmoji("ImageNotFound.png");
         }
         Base64.Decoder encoder = Base64.getDecoder();
         byte[] byteArray = encoder.decode(imageString);
