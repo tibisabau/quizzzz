@@ -10,9 +10,7 @@ Add your own name (do not add the names for others!) to the section below.
 
 | Profile Picture | Name | Email |
 |---|---|---|
-| ![](https://eu.ui-avatars.com/api/?name=OOPP&length=4&size=50&color=DDD&background=777&font-size=0.325) | Your Name Here | Y.NameHere@student.tudelft.nl |
 | <img src ="docs/profile_pictures/franciszek_latala.jpg" width = "80"> | Franciszek Latała | F.J.Latala@student.tudelft.nl |
-| <img src ="docs/profile_pictures/Kat_profile.jpg" width = "80"> | Kat Petkova | k.h.petkova@student.tudelft.nl |
 | <img src ="docs/profile_pictures/Bart_Coster.jpg" width = "80"> | Bart Coster | B.i.coster@student.tudelft.nl |
 | <img src ="docs/profile_pictures/tiberiu_sabau.jpg" width = "80"> | Tiberiu Sabău | T.Sabau@student.tudelft.nl |
 | <img src ="docs/profile_pictures/Alex_Dimakos.jpg" width = "80"> | Stavros Alexandros Dimakos | S.A.Dimakos@student.tudelft.nl |
@@ -26,7 +24,18 @@ Add your own name (do not add the names for others!) to the section below.
 <!-- - (please make sure the photos have the same size) --> 
 
 ## How to run it
+- Clone the repository-template from gitLab
+- Download the activity bank from gitLab
+- Create a new folder called "activity_bank" on "repository-template/server"
+- Extract all the files from step 2 inside the new folder from step 3
+- Open a terminal and run the command "cd " followed by the path to the repository-template
+- Run the command "gradlew bootrun"
+- Open a new terminal, repeat step 3 and run the command  "gradlew run"
+- You can play on you server or on a friends' server by typing the name and click on "try server"
+- Type you nickname press "ENTER"
+- Enjoy your game!
 
 ## How to contribute to it
-
-## Copyright / License (opt.)
+- Open the repository template on any IDE of your choice
+- You can find all the folders for the client and the server there
+- Enjoy your time developing!
