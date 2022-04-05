@@ -526,6 +526,10 @@ public class MainCtrl {
         });
     }
 
+    /**
+     * show jokers on the game screen
+     * @param jokers joker you want to show
+     */
     public void setJokers(Activity jokers){
         meQuestionMPCtrl.setImageViewPic1(jokers);
         gxQuestionMPCtrl.setImageViewPic1(jokers);
