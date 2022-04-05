@@ -153,6 +153,7 @@ public class LeaderboardSceneCtrl {
      * @throws IOException
      */
     public void playAgain() throws IOException {
+        mainCtrl.counter = 20;
         StartScreenCtrl.resetScore();
         startScreenCtrl.newGame();
         startScreenCtrl.goToGameScreen();
