@@ -531,7 +531,7 @@ public class GameScreenMPCtrl {
      * @param e the e
      */
     public void keyPressed(KeyEvent e) {
-        if  (e.getCode().getCode() < 91){
+        if  (e.getCode().getCode() < 91 && e.getCode().getCode() > 58){
             guessAnswer.setText(guessAnswer.getText().replaceAll("[^\\d]", ""));
         }
         switch (e.getCode()) {
