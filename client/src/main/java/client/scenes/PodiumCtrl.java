@@ -110,6 +110,7 @@ public class PodiumCtrl {
      * Play Again
      */
     public void playAgain(){
+        StartScreenCtrl.resetScore();
         mainCtrl.showWaitingRoom();
     }
 }
