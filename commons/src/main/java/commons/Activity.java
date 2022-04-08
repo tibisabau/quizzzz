@@ -23,6 +23,10 @@ public class Activity {
 
     public long consumptionInWh;
 
+    /**
+     * empty constructor for
+     * object mapper
+     */
     public Activity(){
 
     }

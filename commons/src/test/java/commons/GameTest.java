@@ -32,6 +32,7 @@ class GameTest {
     questions.add(o1);
 
     game = new Game(20, 0);
+    Game emptyGame = new Game();
     game.setCurrentQuestion(o1);
     game.updateScore(score);
     }
@@ -67,5 +68,53 @@ class GameTest {
     @Test
     void getID() {
         assertEquals(20, game.getID());
+    }
+
+    @Test
+    public void usePointJoker(){
+        Game game1 = new Game(1, 2);
+        game1.usePointJoker();
+        assertFalse(game1.isPointsJoker());
+    }
+
+    @Test
+    public void useAnswerJoker(){
+        Game game1 = new Game(1, 2);
+        game1.useAnswerJoker();
+        assertFalse(game1.isAnswerJoker());
+    }
+
+    @Test
+    public void useTimeJoker(){
+        Game game1 = new Game(1, 2);
+        game1.useTimeJoker();
+        assertFalse(game1.isTimeJoker());
+    }
+
+    @Test
+    public void isPointsJoker(){
+        Game game1 = new Game(1, 2);
+        boolean pointsJoker = game1.isPointsJoker();
+        assertTrue(pointsJoker);
+    }
+
+    @Test
+    public void isAnswerJoker(){
+        Game game1 = new Game(1, 2);
+        boolean pointsJoker = game1.isAnswerJoker();
+        assertTrue(pointsJoker);
+    }
+
+    @Test
+    public void isTimeJoker(){
+        Game game1 = new Game(1, 2);
+        boolean pointsJoker = game1.isTimeJoker();
+        assertTrue(pointsJoker);
+    }
+
+    @Test
+    public void getPlayerCount() {
+        Game game1 = new Game(1, 2);
+        assertEquals(game1.getPlayerCount(), 2);
     }
 }

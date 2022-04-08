@@ -68,10 +68,6 @@ public class ActivityParse {
         return title;
     }
 
-    public String getImage_path() {
-        return image_path;
-    }
-
     public String getSource() {
         return source;
     }
