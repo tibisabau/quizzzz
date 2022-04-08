@@ -33,7 +33,7 @@ public class Score {
     private int game;
 
     @SuppressWarnings("unused")
-    private Score() {
+    public Score() {
         // for object mapper
     }
 

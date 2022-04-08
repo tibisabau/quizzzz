@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ScoreTest {
 
+
     @Test
     public void checkConstructor() {
         var s = new Score("User", 10);
@@ -54,6 +55,14 @@ public class ScoreTest {
         var a = new Score("a", 10);
         a.setScore(2);
         assertEquals(a.getScore(), 2);
+    }
+
+    @Test
+    public void setUserIDTest() {
+        var b = new Score();
+        var a = new Score("a", 10);
+        a.setUserId(231231);
+        assertEquals(a.getUserId(), 231231);
     }
 
     @Test

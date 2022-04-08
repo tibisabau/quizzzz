@@ -28,6 +28,7 @@ class InsteadOfQuestionTest {
         activity3 = new Activity("path3","title3",1003);
         activity4 = new Activity("path4","title4",1004);
         activity5 = new Activity("path5","title5",1005);
+        InsteadOfQuestion i = new InsteadOfQuestion();
         insteadOfQuestion = new InsteadOfQuestion(activity1,
                 activity2, activity3, activity4, activity5);
     }
