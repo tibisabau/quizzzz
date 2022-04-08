@@ -31,6 +31,46 @@ public class ScoreTest {
     }
 
     @Test
+    public void getGameTest() {
+        var a = new Score("a", 10);
+        assertEquals(a.getGame(), 0);
+    }
+
+    @Test
+    public void setGameTest() {
+        var a = new Score("a", 10);
+        a.setGame(2);
+        assertEquals(a.getGame(), 2);
+    }
+
+    @Test
+    public void getScoreText() {
+        var a = new Score("a", 10);
+        assertEquals(a.getScore(), 10);
+    }
+
+    @Test
+    public void setScoreText() {
+        var a = new Score("a", 10);
+        a.setScore(2);
+        assertEquals(a.getScore(), 2);
+    }
+
+    @Test
+    public void setUserNameTest() {
+        var a = new Score("bob", 10);
+        a.setUserName("a");
+        assertEquals(a.getUserName(), "a");
+    }
+
+    @Test
+    public void equalsTest() {
+        var a = new Score("bob", 10);
+        Object b = null;
+        assertFalse(a.equals(b));
+    }
+
+    @Test
     public void hasToString() {
         var actual = new Score("a", 10).toString();
         assertTrue(actual.contains(Score.class.getSimpleName()));
