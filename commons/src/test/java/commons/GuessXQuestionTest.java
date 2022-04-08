@@ -16,7 +16,9 @@ class GuessXQuestionTest {
 
     @Test
     public void checkConstructor() {
+        GuessXQuestion x = new GuessXQuestion();
         assertNotNull(p);
+        assertNotNull(x);
     }
 
     @Test
@@ -25,6 +27,13 @@ class GuessXQuestionTest {
         GuessXQuestion me = new GuessXQuestion(e1);
         assertEquals(me, p);
         assertEquals(p.hashCode(), me.hashCode());
+    }
+
+    @Test
+    public void setCorrectOptionTest() {
+        Activity a = new Activity();
+        p.setCorrectOption(a);
+        assertEquals(p.getCorrectOption(), a);
     }
 
     @Test
